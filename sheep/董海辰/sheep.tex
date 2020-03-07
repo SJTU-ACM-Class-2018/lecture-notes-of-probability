@@ -1,0 +1,121 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+% \input{/home/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{施了魔法的羊}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\subsection*{题目}
+
+草原上有$2000$只黑羊和$2000$只白羊，它们不会死亡和新生。每天都有一只羊被随机选中，该随机选择与以前的选择无关。 这只被选中的羊会找到一只与之异色的羊（如果还有的话）并对其鸣叫。一只黑羊对准一只白羊鸣叫会使白羊以概率$p$发生变色（变为黑羊）；一只白羊对准一只黑羊鸣叫会使黑羊以概率$q$发生变色（变为白羊）。管理者每天可以在神奇的羊变色现象发生前进场移走任意数量的白羊。管理者的目标是使得最后所剩黑羊数量的期望值尽可能大。譬如，头天就移走所有白羊，可以保证最后保住$2000$只黑羊。试针对一些不同的$p$, $q$取值来给管理者建议管理策略以及对最好可能的黑羊遗留数量做出估计。
+
+\subsection*{无干预的情况}
+
+一般地，设共有$N$只羊，初始时其中有$n=\frac{N}{2}$只黑羊，我想讨论在不进行干预的情况下，足够长的时间后黑羊数量$k$的分布情况。
+
+设$p_k^d$为在$d$天后，黑羊数量为$k$的概率，根据题目描述可以列出
+\begin{align*}
+    p_k^{d+1} = p \frac{\max(k-1, 0)}{N} \cdot p_{\max(k-1, 0)}^d + q \frac{N-\min(k+1,n)}{N} \cdot p_{\min(k+1,n)}^d + (1-p \frac{k}{N} - q \frac{N-k}{N})p_k^d
+.\end{align*}
+
+可以写出转移矩阵
+$$P = \begin{bmatrix}
+    1 & & & \cdots & & & \\
+    q \frac{N-1}{N} & (1 - p \frac{1}{N} - q \frac{N-1}{N}) & p \frac{1}{N} & \cdots & & & \\
+    \vdots & \vdots & \vdots & & \vdots & \vdots & \vdots\\
+           & & &\cdots  & q \frac{1}{N} & (1 - p \frac{N-1}{N} - q \frac{1}{N}) & p \frac{N-1}{N} \\
+           & & & \cdots & & & 1
+\end{bmatrix}$$
+
+经查阅资料\footnote{https://en.wikipedia.org/wiki/Absorbing\_Markov\_chain}，此类转移矩阵可以写成标准形式
+\begin{align*}
+    P = 
+    \begin{bmatrix} 
+        Q & R \\ 0 & I_r
+    \end{bmatrix} = 
+    \begin{bmatrix} 
+        (1 - p \frac{1}{N} - q \frac{N-1}{N}) & p \frac{1}{N} & \cdots & & & q \frac{N-1}{N} & \\
+        \vdots & \vdots & & \vdots & \vdots & \vdots\\
+               & &\cdots  & q \frac{1}{N} & (1 - p \frac{N-1}{N} - q \frac{1}{N}) & &  p \frac{N-1}{N} \\
+               & & \cdots & & & 1 & \\
+         & & \cdots & & & & 1
+    \end{bmatrix} 
+.\end{align*}
+其中$Q$描述了从中间态到另一中间态的转移过程，$R$描述了从中间态到吸收态的转移。
+
+如$N=4$时，
+\begin{align*}
+    Q = 
+    \begin{bmatrix} 
+         -\frac{p}{4}-\frac{3 q}{4}+1 & \frac{p}{4} & 0 \\
+         \frac{q}{2} & -\frac{p}{2}-\frac{q}{2}+1 & \frac{p}{2} \\
+         0 & \frac{q}{4} & -\frac{3 p}{4}-\frac{q}{4}+1 \\
+    \end{bmatrix} ,
+    R = 
+    \begin{bmatrix} 
+         \frac{3 q}{4} & 0 \\
+         0 & 0 \\
+         0 & \frac{3 p}{4} \\
+    \end{bmatrix} 
+.\end{align*}
+
+于是可以用$N = \sum_{k=0}^{+\infty} Q^k = (I-Q)\v$来表示两个中间态之间的期望转移次数。$B = NR$即为从某个中间态转移到吸收态的概率。
+
+经Mathematica计算可得：
+\begin{align*}
+    B = NR = (I - Q)\v R = 
+    \begin{bmatrix} 
+         1-\frac{p^3}{(p+q)^3} & \frac{p^3}{(p+q)^3} \\
+         \frac{q^2 (3 p+q)}{(p+q)^3} & \frac{p^2 (p+3 q)}{(p+q)^3} \\
+         \frac{q^3}{(p+q)^3} & \frac{p \left(p^2+3 p q+3 q^2\right)}{(p+q)^3} \\
+    \end{bmatrix} 
+.\end{align*}
+
+即从$n=2$的状态出发，有$\fr{q^2(3p+q)}{(p+q)^3}$的概率最终达到全为白羊的状态，
+有$\fr{p^2(p+3q)}{(p+q)^3}$的概率最终达到全为黑羊的状态。
+
+此时的黑色羊数量期望
+\begin{align*}
+    E = \fr{p^2(p+3q)}{(p+q)^3}N
+.\end{align*}
+
+为检验结果，令$p=\frac{2}{3}$，$q=\frac{1}{2}$，此时$E = \fr{208}{343} \times 4 \approx 2.4257$.
+
+编程进行模拟，共模拟$10000$次，每次模拟$1000$天，最终得到的期望值$E' = 2.4242$，与计算结果一致。
+
+同理，当$N=6$时：
+\begin{align*}
+    B =
+    \begin{bmatrix} 
+         \frac{p^5}{(p+q)^5} & 1-\frac{p^5}{(p+q)^5} \\
+         \frac{p^4 (p+5 q)}{(p+q)^5} & 1-\frac{p^4 (p+5 q)}{(p+q)^5} \\
+         \frac{p^3 \left(p^2+5 p q+10 q^2\right)}{(p+q)^5} & \frac{q^3 \left(10 p^2+5 p q+q^2\right)}{(p+q)^5} \\
+         \frac{p^2 \left(p^3+5 p^2 q+10 p q^2+10 q^3\right)}{(p+q)^5} & \frac{q^4 (5 p+q)}{(p+q)^5} \\
+         \frac{p \left(p^4+5 p^3 q+10 p^2 q^2+10 p q^3+5 q^4\right)}{(p+q)^5} & \frac{q^5}{(p+q)^5} \\
+    \end{bmatrix} 
+.\end{align*}
+
+观察化简后的形式，我猜测初始有$n$只黑羊时，到达全部为黑羊的概率$f$为
+\begin{align*}
+    f &=\frac{(p+q)^{N-1}\text{的展开式中所有}p\text{的幂次大于等于}n\text{的项}}{(p+q)^{N-1}} \\
+      &= \frac{\sum_{i=n}^M \binom M i t^i}{(t+1)^M} (\text{令}t=\frac{p}{q}, M = N - 1)
+.\end{align*}
+
+对于任意$t > 1$，当$N \to +\infty, n = \frac{N}{2}$时，
+\begin{align*}
+    f &= \frac{\sum_{i=n}^M \binom M i t^i}{\sum_{i=0}^{n-1} \binom M i t^i + \sum_{i=n}^M \binom M i t^i} \\
+      &= \frac{1}{\frac{\sum_{i=0}^{n-1} \binom M i t^i}{\sum_{i=n}^M \binom M i t^i} + 1} \to 1
+.\end{align*}
+
+因此，在$p>q$且绵羊数量$N$较大时，什么都不需要做即可以期望全部变成黑羊。
+
+事实上，当$N = 2000, p = 0.52, q = 0.5$时，$f \approx 0.8097$，与模拟结果$0.801$基本一致。
+
+进行了许多次模拟均与理论值一致，此结果可以在一定程度上说明该猜想的正确性，但仍然缺乏数学推导的支持，需要补充。由于矩阵化简求逆较为繁琐，我没能找到方法来证明这个等式。
+
+在承认该猜想正确的前提下，可以得出结论：当$p>q$且$N$较大时，采取什么都不做的策略已经可以取得较好结果。
+
+\end{document}
