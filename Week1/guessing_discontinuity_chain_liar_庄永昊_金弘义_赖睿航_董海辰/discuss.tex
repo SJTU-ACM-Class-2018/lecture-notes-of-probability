@@ -1,0 +1,141 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings, algorithm, minted, algorithmic}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb, xeCJK}
+\usepackage{nameref, hyperref}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{Discussion on some exercises of Basic Probability Theory}
+\date{\today}
+\author{庄永昊 518030910440 \\ 金弘义 518030910333 \\ 赖睿航 518030910422 \\ 董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{Exercise 21. Number Guessing}{}
+A person writes two distinct integers on two cards, one per card,
+and puts them on the table face down. Pick either of the two, look at it, and then guess
+whether the other number is larger or smaller. Suppose that you have a good random number
+generator. Prove that you have a strategy to make a correct guess with probability strictly
+greater than $\frac{1}{2}$.
+\end{thm}
+
+\begin{proof}[Proof]
+    Let the two distinct integers on cards be $p, q \in \mathbb{Z} $.
+
+    The strategy exists if we can generate a random number on $\mathbb{Z} $. Let this random number be $n$.
+    Our strategy is as follow: If $n > p$, we make the guess that the other number is greater.
+
+    Suppose $p < q$, there will be six situations:
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{lll}
+            Seen number   & $p$     & $q$     \\
+            $n < p$         & Wrong   & Correct \\
+            $p < n < q$ & Correct & Correct \\
+            $q < n$     & Correct & Wrong
+        \end{tabular}
+    \end{table}
+
+    And we have the same probability to see $p$ and $q$. Thus the probability to guess correctly is
+    $$p = \frac{1}{2} + \frac{P(p < n < q)}{2}$$
+
+    , which is strictly greater that $\frac{1}{2}$.
+
+    For example, if we can get a random angle $\theta \in [0,2\pi)$, and generate by $n = \cot \frac{\theta}{2}$. Then $$p = \frac{1}{2} + \frac{\cot^{-1} q - \cot^{-1} p}{2\pi}.$$
+
+    And if we only have a coin, we can toss it for $k$ times to generate a random angle $k \in [0, 2\pi]$ by
+    $k = \frac{\text{ integer represented by the sequence }}{2^k} \cdot 2\pi$. Then apply the procedure above.
+\end{proof}
+
+\begin{thm}{Exercise 22. Countable Discontinuous Point}{}
+	 Let $f$ be a monotone function on $\mathbb{R}$ and let $A$ be the set of real numbers $x$ at which $f$ is discontinuous. Show that $|A| \le |\mathbb{N}|$
+\end{thm}
+
+\begin{proof}
+	Without loss of generality, assume $f$ increases monotonically. Then for any $x \in A$, there should be $ f_+(x) > f_-(x)$. Because $f$ is increasing, for any $x_1 < x_2$, $ f_+(x_1) < f_-(x_2)$. Then we can construct a set $E=\{(f_-(x),f_+(x)) | x\in A\}$, whose elements are intervals that do not intersect with each other. Obviously, $|E|=|A|$. Due to the density of rational numbers, there are infinite rational numbers in each interval. Using the axiom of choice, we can bind each interval with a rational number in the interval, which forms a injection from $E$ to $\mathbb{Q}$. So $|A|=|E|\le|\mathbb{Q}|=|\mathbb{N}|$.
+\end{proof}
+
+\begin{thm}{Exercise 24. Chain \& Antichain}{}
+   A chain in $2^\mathbb{N} $ is a subset of $2^\mathbb{N} $ of which any two elements are comparable. An antichain in $2^\mathbb{N} $ is a subset of $2^\mathbb{N} $ of which any two elements are incomparable. Can there be a chain whose length is $|2^\mathbb{N} |$? Can there be an antichain whose size is $|2^\mathbb{N} |$? 
+\end{thm}
+1. chain:
+
+For each chain $\mathfrak C$, since each two elements in $\mathfrak C$ are comparable, they cannot have same size.
+So we can have a function $f:\mathfrak C\rightarrow\mathbb N:f(C)=$ the size of $C$, which is an injection.
+
+So there is $\mid\mathfrak C\mid\leq\mid\mathbb N\mid<\mid 2^{\mathbb N}\mid$.
+
+2: antichain:
+
+Construct an antichain $\mathfrak A$ by the following step:
+
+Devide numbers by pairs: $(0, 1);(2, 3);\dots (2n, 2n - 1);\dots$. Denote the pair $(2i, 2i + 1)$ by $p_i$.
+
+Each set $A\in\mathfrak A$ contains one and only one element in each pair, making them different with each other:
+
+For each two set, they contians different number at least in one pair, so they are uncomparable.
+So $\mathfrak A$ is an antichain.
+
+Now prove that $\mid\mathfrak A\mid=\mid2^{\mathbb N}\mid$:
+
+We construct such a function $f:\mathfrak A\rightarrow 2^{\mathbb N}$
+$$f(A)=\{\text{if $A$ contains $2i$, $i$ is in the set, otherwise(contains $2i+1$) $i$ is not in the set}\}$$
+
+It is apparently that $f$ is a bijection between $\mathfrak A$ and $2^{\mathbb N}$.
+
+
+\begin{thm}{Exercise 26. Liar Paradox}{}
+    We came across two islanders A and B on Crete Island. "All Cretans are liars.", A said. "I'm lying", B said. Which statement is a paradox?
+\end{thm}
+
+\begin{proof}
+    For the first statement, assume what A said is correct. Then all Cretans are liars, and what A said should be wrong. This cannot happen since we assume A didn't lie. However, if we assume what A said was wrong(i.e A is a liar), it follows that at least one Cretan who is not a liar. This doesn't contradict with the hypothesis. \textbf{Thus, from what A said, we can conclude that A is a liar. And A's statement is not a paradox.}
+
+    For the second statement, if we assume B told the truth, then from the former analysis we know that B is a liar, which leads to a contradiction. Likewise, if we assume what B said is wrong, it follows that B didn't lies, which also leads to a contradiction. \textbf{So B's statement is a paradox.}
+
+    The famous "liar paradox" is exactly the statement which B said. It is one of the self-referential paradoxes.
+\end{proof}
+
+\end{document}
+
