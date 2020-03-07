@@ -1,0 +1,82 @@
+
+\documentclass[11pt]{article}
+% This is a template for homework of Abstract Algebra.
+\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\usepackage{listings}
+\usepackage{graphics}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{texlogos}
+\geometry{a4paper,left = 3cm, right = 3cm}
+
+\newcommand \cpp{C\raisebox{0.5ex}{\tiny\textbf{++}}}
+
+\title{问题讨论\\魔法羊(The Mabinogion sheep problem)}
+\author{毛昕渝}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{tcolorbox}
+\textbf{问题描述}
+
+草原上有$N$只黑羊和$N$只白羊，它们不会死亡和新生。每天都有一只羊被随机选中，该随机选择与以前的选择无关。 这只被选中的羊会找到一只与之异色的羊（如果还有的话）并对其鸣叫。一只黑羊对准一只白羊鸣叫会使白羊以概率$p$发生变色（变为黑羊）；一只白羊对准一只黑羊鸣叫会使黑羊以概率$q$发生变色（变为白羊）。管理者每天可以在神奇的羊变色现象发生前进场移走任意数量的白羊。管理者的目标是使得最后所剩黑羊数量的期望值尽可能大。试针对一些不同的$p,q$ 取值来给管理者建议管理策略以及对最好可能的黑羊遗留数量做出估计。
+\end{tcolorbox}
+
+首先$p = 0$或$q = 0$的情形, 最优策略是显然的:
+\begin{itemize}
+  \item $p = 0$. 移走所有白羊, 剩下$N$只黑羊.
+  \item $q = 0$. 什么也不做,最后得到$2N$只黑羊.
+\end{itemize}
+
+以下讨论$p \neq 0, q \neq 0$的情形. 我们从一个简单问题开始: 如果某一天有$w$ 只白羊和$b$只黑羊, 魔法变色发生后黑羊的期望数量是多少? 记黑羊的期望数量为$E$, 容易得出,
+\begin{equation}
+E = b + \frac{b}{w+b} p - \frac{w}{w + b}q.
+\end{equation}
+根据规则, 我们可以任意减少白羊的数量$w$; 从(1)可以看出, 如果我们想要黑羊的数量增加, 就需要
+\begin{equation}
+E > b \iff w < \frac{p}{q}b.
+\end{equation}
+于是我们可以得到如下的策略:
+\vspace{0.5cm}
+\begin{tcolorbox}
+\textbf{策略A}
+
+  为了让最后的黑羊尽可能多, 我们在(2)的条件下让$w$尽可能大. 换言之, 在变色发生前将白羊的数量变为$min(w,\left \lceil \frac{p}{q}b\right \rceil - 1)$.
+\end{tcolorbox}
+这个策略可以看作是\textbf{局部的贪心}, 并不一定就是问题的最优解. 幸运的是, 对于$p = q = 1$ 的情况, 策略A 就是最优解. 《概率与鞅》一书中给出了证明, 并且指出在这一策略下, 最终黑羊的期望数量满足
+\begin{equation}
+  V(N,N,1,1) \to 2N + \frac{\pi}{4} - \sqrt{\pi N}, \text{ as } N \to \infty,
+\end{equation}
+其中$V(N,M,p,q)$表示采用策略A, 从$N$只黑羊$M$ 只白羊的局面开始, 最终得到黑羊的数量; $p$是白羊变色的概率, $q$是黑羊变色的概率. 例如, $N = 10000$时, 最终大约得到19824只黑羊.
+
+对于一般的情形, 假设$p < q < 1$, 我们只需要考虑一个新的问题: 白羊变色的概率为$p' := \frac{p}{q}$, 黑羊变色的概率为$q' := 1$, 但\textbf{每天变色事件发生的概率仅为}$q$. 在这个新的问题中(1)式仍然成立, 而且\textbf{变色以一定概率发生不会对策略造成影响}, 所以这两个问题应该有相同的答案(最终黑羊的数量). 换言之,
+\begin{equation}
+V(N,M,p,q) = V(N,M,\frac{p}{q},1).
+\end{equation}
+因此, 我们只研究$q = 1$的情况就足够了.
+类似地, 如果$q < p < 1$, 研究$p = 1$的情形也足够了.
+
+对$p < q$的过程，我写了一个\cpluspluslogo 程序模拟这个过程, 结果符合(3) 和(4) 的预测. 此外, 对$p$的不同取值进行模拟并用MATLAB分析发现, $V(N,N,p,1)$ 与$p$ 呈\textbf{线性关系}. 显然, $V(N,N,0,1) = N$, 再结合(3) 的结果, 可以得出
+\begin{equation}
+V(N,N,p,1) \to p(N + \frac{\pi}{4} - \sqrt{\pi N}) + N, \text{ as } N \to \infty.
+\end{equation}
+但是我不会证明这个线性关系.
+\vspace{0.5cm}
+\begin{tcolorbox}
+\textbf{结论}
+
+记$OP(N,N,p,q)$表示最优策略下最终黑羊的数量,(4)和(5)给出了一个下界, 即
+\begin{equation}
+OP(N,N,p,q) \geq \frac{p}{q}(N + \frac{\pi}{4} - \sqrt{\pi N}) + N, \text{ as } N \to \infty.
+\end{equation}
+特别地, 当$p = q$时, (6)中的等号成立.
+这表明, 当$p,q$比较接近时, 策略A是一个优秀的策略. (5)给出了使用A策略的结果估计, 但没有严格证明.
+\end{tcolorbox}
+\end{document}
