@@ -1,0 +1,130 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+
+\DeclareMathOperator{\range}{range}   
+
+\title{A proof of $|A^A| = |2^A| $ using Zorn's Lemma}
+\author{Xinyu Mao}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}
+\begin{theorem} \label{main}
+    Let $A$ be an infinite set, then $|A^A| = |2^A|$.
+\end{theorem}
+\end{tcolorbox}
+To validate \cref{main}, the following theorem is of great importance.
+
+\begin{tcolorbox}
+\begin{theorem} \label{helper}
+    Let $A$ be an infinite set, then $|A \times A| = A$. 
+\end{theorem}  
+\end{tcolorbox}
+\begin{proof}[Proof]   
+    Let 
+    $$
+    \ff = \{f \in (X \times X)^X : X \subseteq A, f \text{ is a bijection}\}.
+    $$
+    Note that a function from $A$ to $B$ can be viewed as 
+    a subset of $A \times B$, and thus $\ff \subset \pp(A \times A \times A)$,
+    where $\pp(\cdot)$ is the power set of some set. 
+    In the following argument, for function $f$, $\range(f) := \{y:\exists x f(x) = y\}$
+    
+    Now we check that the poset $(\ff, \subset)$ satisfies
+    the condition of \textit{Zorn's lemma}. 
+    First, $\ff \neq \emptyset$ since $\emptyset \in \ff$,
+    and it remains to show that \textit{all chains in $\ff$ are closed}.
+    Let $\cc$ be a chain in $\ff$. 
+    Clearly, $\phi := \bigcup_{f \in \cc} f$ is also a
+    function. Since every $f \in \cc$ is bijection by definition, 
+    say $Y := \range(\phi) \subseteq A$, $\phi$ is a bijection from $Y \times Y$ to $Y$,
+    and thus $\phi \in \ff$.
+    In another word, $\phi$ is a upper bound of $\cc$ in $\ff$. 
+
+    By \textit{Zorn's lemma} ,there is a maximal element in $\ff$,
+    which is denoted by $\psi$. Let $U = \range(\psi)$, we shall
+    show that $A\setminus U$ is finite. Assume that $A\setminus U$
+    is infinite, then there is a countable subset of $A\setminus U$,
+    say $V$. We know that there is a bijection $\sigma : V \times V \to V$.
+    By definition, $\sigma \in \ff$. 
+    Note that the domains of $\psi$ and $\sigma$ have no intersection, 
+    and hence $\psi \subset \psi \cup \sigma \in \ff$, 
+    which is in contradiction with the maximality of $\psi$.
+    Since $\psi$ is a bijection from $U \times U \to U$,
+    we conclude that $|A \times A| = |U \times U| = |U| = |A|$.
+\end{proof}     
+
+\begin{proof}[Proof of \cref{main}]
+By \cref{helper} we establish $|A \times A| = |A|$,
+and hence 
+$$
+|A^A| \leq |\pp(A \times A)| = |\pp(A)| = |2^A|.
+$$
+One the other hand, choose $a,b \in A$ arbitrarily, then a injection 
+from $2^A$ to $A^A$ is given by 
+$$
+\phi : 2^A \to A^A, f \mapsto f' \text{ where }
+f'(x) = \begin{cases}
+    a, \text{ if $f(x) = 0$,} \\
+    b, \text{ if $f(x) = 1$.}
+\end{cases}
+$$
+Hence, $|2^A| \leq |A^A|$, completing the proof.
+\end{proof}
+
+\begin{remark}
+    The main idea of the first proof comes from \cite{Dong88}.
+    I love this proof for it only uses \textit{Zorn's lemma}
+    and the basic conception of set. 
+    Other proofs of \cref{helper} is based on the rigorous definition of 
+    \textit{ordinal} and \textit{cardinality}, such 
+    as the one in \cite{Li19}.
+     
+\end{remark}
+\bibliographystyle{alphaurl}
+\bibliography{ref}
+\end{document}
