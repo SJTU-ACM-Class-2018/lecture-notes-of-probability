@@ -1,0 +1,71 @@
+\documentclass{ximera}
+\usepackage[UTF8]{ctex}
+
+\title{Basic Probability Theory}
+\author{刘成锴}
+
+\begin{document}
+	
+\begin{abstract}
+	Week 1
+	
+	刘成锴
+	
+	学号：518030910425
+\end{abstract}
+\maketitle
+
+\section{Exercises}
+
+\subsection{Exercise 3}
+	
+\begin{solution}
+	$$
+	f(x) = \tan({x - \frac{1}{2}})\pi
+	$$
+	
+	$f:[0, 1] \rightarrow \mathbb{R}$ is a simple injection.
+	
+	$$
+	g(x)=\left\{
+	\begin{array}{lc}
+	0 & x = -\infty \\ 
+	\frac{\arctan(x)}{\pi} + \frac{1}{2} & -\infty < x < \infty \\ 
+	1 & x = \infty
+	\end{array}\right.
+	$$
+	
+	$g:\mathbb{R} \rightarrow [0, 1]$ is a simple injection.
+	
+	Hence, we find an explicit bijection from [0, 1] to $\mathbb{R}$
+\end{solution}
+
+\subsection{Exercise 4}
+\begin{solution}
+	I would like to prove $ |\mathbb{R}| = |\mathbb{R}^2| $.
+	$$
+	|\mathbb{R}| \rightarrow |\mathbb{R}^2|
+	$$
+	For any $a \in \mathbb{R}$, there is $(a, a) \in \mathbb{R}^2$. It's an injection.
+	
+	$$
+	|\mathbb{R}^2| \rightarrow |\mathbb{R}|
+	$$
+	利用Exercise 3 中的$g$，我们可以将一个属于$\mathbb{R}$中的数映射到区间[0, 1]上。
+	
+	Then, for any $(a, b) \in \mathbb{R}^2$, 我们可以通过映射，得到$(g(a), g(b))$。
+	
+	将$g(a), g(b)$分别表示为：$0.a_1a_2a_3...$ 和 $0.b_1b_2b_3...$。
+	
+	然后我们再找一个映射，得到一个实数$c$,且$c \in [0, 1]$。$c = 0.a_1b_1a_2b_2a_3b_3...$。
+	
+	综合以上映射，we get an injection from $\mathbb{R}^2$ to $\mathbb{R}$。
+	
+	Hence, there is an bijection from $\mathbb{R}^2$ to $\mathbb{R}$.
+	
+	That is, $ |\mathbb{R}| = |\mathbb{R}^2|$.
+	
+\end{solution}
+	
+
+\end{document}
