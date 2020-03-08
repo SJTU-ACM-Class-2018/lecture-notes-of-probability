@@ -1,0 +1,90 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{olymp,clrscode3e}
+\usepackage{amsmath,graphicx,epigraph,bnf,enumerate,comment,listings,fontspec,color,indentfirst}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{ctex}
+\usepackage{CJK}
+
+\newcommand{\chr}[1]{\mbox{`\texttt{#1}'}}
+\newcommand{\txt}[1]{\mbox{``\texttt{#1}''}}
+
+\renewcommand{\contestname}{
+Magical Sheep (2), MS107 Probability Homework, Yang Zonghan, \today
+}
+
+\lstset{
+    breaklines=true,  %代码过长则换行
+    numbers=left, %行号在左侧显示
+	basicstyle = \fontspec{Consolas},
+    commentstyle=\color{gray}, %注释颜色
+    frame=shadowbox%用方框框住代码块
+}
+\setCJKmainfont[BoldFont={黑体}, ItalicFont={华文楷体}, BoldItalicFont={黑体}]{华文中宋}
+\begin{document}
+\title{\textbf{Magical Sheep(2)}}
+\author{Yang Zonghan(518030910435)}
+\date{\today}
+\setlength{\parindent}{2em}
+
+吴润哲哥哥说得非常对，我来补充几句。
+
+\section{$O(n)$ solving Markov Chain}
+首先，$O(n ^ 3)$ 的高斯消元是可以优化的。本质上，消元解决的是 Markov 链问题，可以抽象为 $$
+\begin{cases}
+    x_1 = L \\
+    x_n = R \\
+    x_i = a_i x_{i- 1} + b_i x_{i + 1}, &i \in (1, n)
+\end{cases}
+$$ 而消元方程组的系数是形如下的，只有 $O(n)$ 个：
+$$\begin{bmatrix}
+     1 & 0 & 0 & 0 &\cdots & 0 & L\\
+     a_2 & -1 & b_2 & 0 & \cdots & 0 & 0 \\
+     0 & a_3 & -1 & b_3 &\cdots 0& & 0 \\
+     \vdots & \vdots & \vdots  & \vdots  & \vdots & \ddots & \vdots \\
+     0 & 0 & \cdots & a_{n - 1} & -1 & b_{n - 1} & 0\\
+     0 & 0 & \cdots & 0 & 0 & 1 & R
+\end{bmatrix}$$ 因此，这个矩阵消元复杂度可以减少为 $O(n ^ 2)$
+
+但是其实我们可以做到 $O(n)$。对于方程 $$
+x_i = a_i x_{i- 1} + b_i x_{i + 1}
+$$ 可以变形为 $$
+x_{i + 1} = \frac {x_i - a_i x_{i - 1}} {b_{i}}
+$$
+
+因此对于这样的 Markov 链我们可以用 $O(n)$ 的时间递推，用 $x_1, x_2$ 将所有项表达出来。算出 $x_n$ 的表达我们就能带入计算得到 $x_2$，进而得到所有值了。
+
+\section{About monotonicity}
+
+如果我们承认了决策意义上的单调性，也即，承认了 $i + j = \text{const}$ 时，在 $i$ 由小到大时 $f_{i, j}$ 的决策存在一个分割点，前半段决策为取 $\max$，后半段决策为取 Markov 链更新，那么我们可以一层更新做到 $O(n)$，即用上述更新方法倒着维护值，直到取 $\max$ 更优为止。总复杂度 $O(n ^ 2)$。（当然其实不承认这种单调性也是能 $O(n ^ 2)$ 做的，随时维护随时取 $\max$ 即可，正确性应该不依赖于这个单调性）
+
+但是这个单调性，直觉上很对，并且实践证明很对，但囿于我的水平不行，没法给出一个完整的解释。
+
+尽管这个 $f_{i, j}$ 的本身的单调性非常优秀,
+\begin{gather*}
+    f_{i, j} \leq f_{i + 1, j} \\
+    f_{i, j} \leq f_{i, j + 1} 
+\end{gather*}
+\begin{center}
+	\includegraphics[width=100mm]{sheepsheet.jpg}
+\end{center}
+
+并且我们可以在 $\frac i {i + j}$ 充分小时，可以知道某个前缀必然是取 $\max$：对于上图的表格中的任意一列，即 $i = \text{const}$ 时，当 $p, q > 0$ 时，取 $i + j \rightarrow \infty$，有
+\begin{gather*}
+    \frac {ip} {ip + jq} \rightarrow 0 \\
+    \frac {jq} {ip + jq} \rightarrow 1
+\end{gather*}
+如果 $f_{i, j}$ 的决策为取 $\max$ 而 $f_{i + 1, j - 1}$ 取 Markov 链更新，那么
+$$ f_{i + 1, j - 1} \rightarrow f_{i, j} = f_{i, j - 1} \leq f_{i + 1, j - 2}$$
+
+这是一个矛盾，因此每一列充分高的位置都是取 $\max$ 的。同理可证充分高的每一列充分右的位置是取 Markov 链更新的。这两种情况对应白羊太多和黑羊太多的情况。
+
+但我，我还是不会证明决策点对于每一行每一列唯一。
+
+而且，根据吴润哲哥哥的结果，这样的分割点\emph{大概}就是 $ip - jq \leq 0$——和直觉分析相符的结果。但其中存在几个畸变点。这几个畸变点我想了很久，也没有办法给出解释。
+
+也许只好寄希望于吴老师或其他助教、同学来解答这些疑惑了。或者我想，学习了本学期的内容或许我就能说出其中的道理了吧。
+\end{document}
