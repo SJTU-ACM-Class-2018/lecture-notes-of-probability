@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\geometry{a4paper, left = 2cm, right = 2cm, top = 2cm}
+
+\newcommand\problem[1]{\section*{Problem #1}}
+
+\newcommand\bE{\mathbb{E}}
+\newcommand\bF{\mathbb{F}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\fC{\mathbf{C}}
+\newcommand\fN{\mathbf{N}}
+\newcommand\fQ{\mathbf{Q}}
+\newcommand\fR{\mathbf{R}}
+\newcommand\fZ{\mathbf{Z}}
+\newcommand\cU{\mathcal{U}}
+
+\newcommand\lproof{\item ``$\Leftarrow$'' :}
+\newcommand\rproof{\item ``$\Rightarrow$'' :}
+
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+
+\title{A proof of $|A^A|=|2^A|$ for any infinite set $A$}
+\author{WU Runzhe\\
+	Student ID : 518030910432\\
+	\textsc{Shanghai Jiao Tong University}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	This paper will mainly introduce proof of the following theorem on equinumerosity.
+	
+	\begin{theorem}
+		Let $A$ be an infinite set. Then $|A^A|=|2^A|$.
+	\end{theorem}
+	
+	I will first introduce some necessary lemmas for my proof. 
+	
+	\begin{lemma}
+		For any two sets $A, B$, it happens $|2^{A\times B}|=|(2^A)^B|$.
+	\end{lemma}
+	
+	\begin{proof}[Proof of Lemma 1]
+		As this lemma is trivial when $A,B$ are finite sets, our intuition tells us that it may still hold when $A,B$ are infinite. Anyway, let's construct a bijection between them to give a rigorous proof.
+		
+		We define a mapping $f$ from $2^{A\times B}$ to $(2^A)^B$ such that for any set $S\subseteq A\times B$, any element $a\in A$ and any element $b\in B$, $a\in(f(S))(b)$ if $(a,b)\in S$. 
+		
+		It looks a bit complicated. Note that $f(S)$ is a mapping from $B$ to $2^A$, and $(f(S))(b)$ just maps $b$ to some element in $2^A$.
+		
+		Observing the definition of $f$, it is easy to see that it give a one-to-one correspondence between all subsets of $A\times B$ and all mappings from $B$ to $2^A$. In other words, $f$ is a bijection. Therefore, $|2^{A\times B}|=|(2^A)^B|$.
+		
+	\end{proof}
+	
+	From Lemma 1, clearly, we have the following corollary.
+	
+	\begin{corollary}
+		For any set $A$, $|2^{A\times A}|=|(2^A)^A|$.
+	\end{corollary}
+	
+	Now let's move on to another important lemma.
+	
+	\begin{lemma}
+		For any infinite set $A$, it happens $|2^A|=|2^{A\times A}|$.
+	\end{lemma}
+	
+	\begin{proof}[Proof of Lemma 2]
+		
+		The proof here depends on a famous theorem: for every infinite set $A$, we have $|A|=|A\times A|$. I won't give the proof of this theorem here as it is not our protagonist today and its proof can be found in some books and on the Internet. However, utilizing this theorem, we get a bijection $f$ from $A$ to $A\times A$.
+		
+		With the mapping $f$, everything is simple. We construct another mapping $g$ from $2^A$ to $2^{A\times A}$ such that for any subset $S\in A$, $g(A)=f(A)=\{f(a):a\in A\}$. Easy to see that $g$ is a bijection as well. Hence, $|2^A|=|2^{A\times A}|$.
+		
+	\end{proof}
+	
+	\begin{lemma}
+		For every infinite set $A$, it happens $|A^A|\le|(2^A)^A|$.
+	\end{lemma}
+	
+	\begin{proof}[Proof of Lemma 3]
+		In the class, we have seen the fact that for any set $A$, we have $|A|<|2^A|$ (its proof is in the lecture handout).
+		
+		Anyway, as $A\in 2^A$, we can easily define a injection $h$ that maps a mapping $f:A\mapsto A$ to the mapping $f':A\mapsto 2^A$ if $f'$ has the property that if $f(a)=x$, then $f'(a)=\{x\}$. It's obviously an injection and we have finished the proof.
+	\end{proof}
+	
+	With all the above-mentioned lemmas, we can now go back to our topic today. First off, let's prove the relatively easy part of the desired theorem.
+	
+	\begin{lemma}
+		For every infinite set $A$, we have $|2^A|\le |A^A|$.
+	\end{lemma}
+	
+	\begin{proof}[Proof of Lemma 4]
+		
+		Let's build an injection $f$ from $2^A$ to $A^A$ to finish the proof. First of all, as $A$ is not empty, we can take two arbitrary elements, say, $a,b\in A$.
+		
+		The definition of $f$ comes here: for any subset $S\in A$, $f(S)$ is a mapping from $A$ to $A$ such that for any element $x$ in $A$
+		
+		$$ (f(S))(x)=\left\{
+		\begin{aligned}
+		a &\quad\text{if   } x\in S \\
+		b &\quad\text{otherwise}
+		\end{aligned}
+		\right.
+		$$
+		
+		Clearly, $f$ is an injection as it just expresses the relation of a subset in another form in $A^A$.
+		
+	\end{proof}
+	
+	Now let's give the final proof.
+	
+	\begin{proof}[Proof of theorem 1]
+		
+		Utilizing Corollary 1 and Lemma 2, we have
+		
+		$$|2^A|=|2^{A\times A}|=|(2^A)^ A|$$
+		
+		while Lemma 3 and Lemma 4 tell that
+		
+		$$|2^A|\le |A^A|\le |(2^A)^A|$$
+		
+		Merging the two formulas above, we conclude $2^A$ and $A^A$ are equinumerous. That is, 
+		
+		$$|2^A|=|A^A|$$
+		
+	\end{proof}
+	
+\end{document}
