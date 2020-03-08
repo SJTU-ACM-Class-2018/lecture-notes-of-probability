@@ -25,7 +25,7 @@
 \theoremstyle{mythm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem*{remark}{Remark}
@@ -43,7 +43,7 @@
 \newcommand\pp{\mathcal{P}}
 \newcommand\ff{\mathcal{F}}
 \renewcommand\refname{Reference}
-
+\renewcommand{\proofname}{Proof}
 \DeclareMathOperator{\range}{range}   
 
 \title{A proof of $|A^A| = |2^A| $ using Zorn's Lemma}
@@ -57,20 +57,21 @@
     Let $A$ be an infinite set, then $|A^A| = |2^A|$.
 \end{theorem}
 \end{tcolorbox}
-To validate \cref{main}, the following theorem is of great importance.
+To validate \cref{main}, we will develop some useful the theorems concerning 
+the cardinality of infinite sets.
 
-\begin{tcolorbox}
-\begin{theorem} \label{helper}
-    Let $A$ be an infinite set, then $|A \times A| = A$. 
+\begin{theorem} \label{helper1}
+    Let $A$ be an infinite sets, then $|A + A| = |A|$,
+    where $A + B := \{(x,0):x \in A\} \cup \{(0,y) : y \in B\}$.
 \end{theorem}  
-\end{tcolorbox}
-\begin{proof}[Proof]   
+
+\begin{proof}
     Let 
     $$
-    \ff = \{f \in X^{(X \times X)} : X \subseteq A, f \text{ is a bijection}\}.
+    \ff = \{f \in X^{(X + X)} : X \subseteq A, f \text{ is a bijection}\}.
     $$
     Note that a function from $A$ to $B$ can be viewed as 
-    a subset of $A \times B$, and thus $\ff \subset \pp(A \times A \times A)$,
+    a subset of $A \times B$, and thus $\ff \subset \pp(A \times \{0,1\}\times A)$,
     where $\pp(\cdot)$ is the power set of some set. 
     In the following argument, for function $f$, $\range(f) := \{y:\exists x f(x) = y\}$
     
@@ -81,7 +82,7 @@ To validate \cref{main}, the following theorem is of great importance.
     Let $\cc$ be a chain in $\ff$. 
     Clearly, $\phi := \bigcup_{f \in \cc} f$ is also a
     function. Since every $f \in \cc$ is bijection by definition, 
-    say $Y := \range(\phi) \subseteq A$, $\phi$ is a bijection from $Y \times Y$ to $Y$,
+    say $Y := \range(\phi) \subseteq A$, $\phi$ is a bijection from $Y + Y$ to $Y$,
     and thus $\phi \in \ff$.
     In another word, $\phi$ is an upper bound of $\cc$ in $\ff$. 
 
@@ -89,17 +90,61 @@ To validate \cref{main}, the following theorem is of great importance.
     which is denoted by $\psi$. Let $U = \range(\psi)$, we shall
     show that $A\setminus U$ is finite. Assume that $A\setminus U$
     is infinite, then there is a countable subset of $A\setminus U$,
-    say $V$. We know that there is a bijection $\sigma : V \times V \to V$.
+    say $V$. We know that there is a bijection $\sigma : V + V \to V$.
     By definition, $\sigma \in \ff$. 
     Note that the domains of $\psi$ and $\sigma$ have no intersection, 
-    and hence $\psi \subset \psi \cup \sigma \in \ff$, 
+    and hence $\psi \cup \sigma$ is a bijection from $(U \cup V) + (U \cup V)$ to $U \cup V$, 
     which is in contradiction with the maximality of $\psi$.
-    Since $\psi$ is a bijection from $U \times U $ to $U$,
-    we conclude that $|A \times A| = |U \times U| = |U| = |A|$.
+    Since $\psi$ is a bijection from $U + U $ to $U$,
+    we conclude that $|A + A| = |U + U| = |U| = |A|$.
 \end{proof}     
 
+
+\begin{theorem} \label{helper2}
+    Let $A$ be an infinite set, then $|A \times A| = |A|$. 
+\end{theorem}  
+
+\begin{proof}
+    The proof is similar to the proof of \cref{helper1}. Let
+    $$
+    \ff = \{f \in X^{(X \times X)} : X \subseteq A, f \text{ is a bijection}\}.
+    $$
+    An analogical argument tells us $\ff$ satisfies the condition of \textit{Zorn's lemma}
+    and thus it contains a maximal element, which is denoted by $\psi$. 
+    Let $U = \range(\psi)$ and $V = A \setminus U$. 
+    
+    We shall show that 
+    $|V| \leq |U|$. Assume that $|V| > |U|$, then there is an isomorphic copy of 
+    $|U|$ in $|V|$, say $W$. Clearly, there is also a bijection 
+    $\sigma : W \times W \to W$ corresponding to $\psi$.
+    Since $W \cap U = \emptyset$, we can equate $W + U$ and $W \cup U$. 
+    With the help of \cref{helper1}, we have 
+    $$
+    |(U \times U) + (W \times U) + (U \times W)| = |U \times U|.
+    $$
+    Let $\tau : (U \times U) + (W \times U) + (W \times U) \to U \times U$ be a bijection.
+    We define 
+    $$
+        \pi : (W\cup U) \times (W \cup U) \to (W \times W) \cup (U \times U), 
+        x \mapsto \begin{cases}
+            x ,  \text{if $x \in W \times W$}, \\
+            \tau(x), \text{otherwise}.
+        \end{cases}
+    $$
+    Meanwhile, $\phi := \psi \cup \sigma$ is a bijection from 
+    $(W \times W) \cup (U \times U)$ to $W \cup U$. Therefore, 
+    $\phi \circ \pi : (W\cup U) \times (W \cup U) \to W \cup U$ is 
+    also a bijection, which is in contradiction with the maximality of $\psi$.
+
+    Finally, $|A| \leq |A \times A|$ is trivial and
+    $$
+    |A \times A| = |(U+V) \times (U+V)| \leq |(U+U) \times (U+U)| = |U \times U| = |U| \leq |A|,
+    $$
+    completing the proof.
+\end{proof}
+
 \begin{proof}[Proof of \cref{main}]
-By \cref{helper} we establish $|A \times A| = |A|$,
+By \cref{helper2} we establish $|A \times A| = |A|$,
 and hence 
 $$
 |A^A| \leq |\pp(A \times A)| = |\pp(A)| = |2^A|.
@@ -120,10 +165,9 @@ Hence, $|2^A| \leq |A^A|$, completing the proof.
     The main idea of the first proof comes from \cite{Dong88}.
     I love this proof for it only uses \textit{Zorn's lemma}
     and the basic conception of set. 
-    Other proofs of \cref{helper} is based on the rigorous definition of 
+    Other proofs of \cref{helper1} and \cref{helper2} is based on the rigorous definition of 
     \textit{ordinal} and \textit{cardinality}, such 
     as the one in \cite{Li19}.
-     
 \end{remark}
 \bibliographystyle{alphaurl}
 \bibliography{ref}
