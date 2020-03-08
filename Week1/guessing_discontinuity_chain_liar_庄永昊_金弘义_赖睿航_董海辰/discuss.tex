@@ -101,10 +101,28 @@ greater than $\frac{1}{2}$.
 \end{thm}
 1. chain:
 
-For each chain $\mathfrak C$, since each two elements in $\mathfrak C$ are comparable, they cannot have same size.
-So we can have a function $f:\mathfrak C\rightarrow\mathbb N:f(C)=$ the size of $C$, which is an injection.
+First we should claim that in all chains we consider, all elements have an immediate precursor. 
+This can
 
-So there is $\mid\mathfrak C\mid\leq\mid\mathbb N\mid<\mid 2^{\mathbb N}\mid$.
+We define max-chain $\mathfrak C$ on $\mathbb N$ be the following kind of chain: 
+
+It starts from $\{x_0\}(x_0\in\mathbb N)$, then each element$C_\alpha\in\mathfrak C$ of the chain has 
+exactly one element(which is a number) than the immediate precursor$C_\beta\in\mathfrak C$. 
+Moreover, every max-chain has maximum element $\mathbb N$. 
+
+For each max-chain$\mathfrak C$, we can construct a bijection $f$ that: $f(C_\alpha)=$the element newly 
+introduced into $C_\alpha$. Since in any two elements in a set are different, 
+an element can and can only be introduced once. So $f$ is a bijection, 
+which means the length of a max-chain equals $\mid\mathbb N\mid$. 
+
+The second step is to prove that any chain on $2^{\mathbb N}$ is a subchain of a max-chain. This is trivial: 
+
+If one element$C_\alpha$ in the chain has more than one element which its immediate precursor $C_\beta$ 
+does not have, we can put some more elements $C_\gamma, C_\theta\dots$between these two element, and 
+$C_\gamma$ has exactly one more element than $C_\beta$, $C_\theta$ has exactly one more element than $C_\gamma$...
+
+In the end, by adding new elements, a chain will be extended to a max-chain, whose length equals $\mid\mathbb N\mid$. 
+So the cardnality of the orginal chain is at most $\mid\mathbb N\mid$. 
 
 2: antichain:
 
