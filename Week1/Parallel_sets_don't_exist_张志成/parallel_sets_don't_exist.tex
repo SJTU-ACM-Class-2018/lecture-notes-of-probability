@@ -1,0 +1,79 @@
+\documentclass[UTF8, 12pt]{ctexart}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\setCJKmainfont{DENGL.TTF}
+\usepackage{eulervm}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\\\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Proof that parallel sets do not exist}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section{Problem}
+        Use AC or any of its equivalents to show that there do not exist parallel sets.
+        (Two sets $A$ and $B$ are called parallel if neither $|A| \leq |B|$ nor $|B| \leq |A|$ holds.)
+    \section{Proof}
+        Under the assumption of the \textbf{Well-order Principle}, every set is well-ordered.
+    \subsection{Initial Segment}
+        First we introduce a definition of \textbf{initial segment} of set $S$.
+        Define
+        $$ S(a) := \{b \in S | b \prec a \} $$ 
+        $S(a)$ is the strict lower closure of $a$. Thus $S(a)$ is called an initial segment.
+    \subsection{Lemma}
+        We now prove that for two well-ordered sets $A$ and $B$, one of the following must hold:
+        
+        (1). $A$ is isomorphic to an initial segment of $B$.
+
+        (2). $B$ is isomorphic to an initial segment of $A$.
+
+        Without loss of generality, we prove $(1)$ holds. \par
+        We use Transfinite Induction to define a mapping $f$ from $A$ to $B$ to be:
+        for any element $a \in A$, $$ f(a) = min\{b \in B\ |\ b \neq f(a'), a' \prec a \}$$
+
+        We can see that the mapping $f$ is defined for all $a \in A$. Because otherwise there will be a smallest element $a$
+        such that $f(a)$ is not defined, due to the fact that $A$ is well-ordered. Since $\forall a' \prec a$, $f(a')$ is defined,
+        by the definition of $f$, we can define $f(a)$ for $a$. 
+
+        Now we prove that $f(A) = \{f(a)\ |\ a \in A\}$ is an initial segment of $B$.
+        Consider $f(a) \in B$. For every $b \prec f(a)$, the following must hold: $b = f(b') \in f(A)$ and $b' \prec a$.
+        Thus $f(A)$ is a strict lower closure in $B$.
+        
+        Since $A$ is obviously isomorphic to $f(A)$, we have established \textit{(1)}, namely $A$ is isomorphic to an initial segment of $B$.
+        
+        Finally, we complete the proof by asserting that (1) and (2) cannot both be true unless $A = B$ \par
+        We prove by contradiction. If both are true, then WLOG, \par $A$ is isomorphic to an initial segment of $A$.
+        which is not possible unless the initial segment is $A$ itself, then in this case $A = B$.
+        $\hfill$ $\square$\par\noindent
+    \subsection{Final Proof}
+        By the \textbf{Lemma} we just proved, for any two sets $A$ and $B$, if $A$ is isomorphic to an initial segment of $B$, then it means there is an injection between
+        $A$ and $B$, thus $|A| \leq |B|$, or $|B| \leq |A|$ vice versa.
+
+        Therefore, no parallel sets exist under AC.
+    \subsection{About the assumption}
+        Since AC, well-ordering principle, Zorn’s Lemma, Tychonoff's Theorem are all equivalent to each other, taking any one of them as the assumption
+        will be feasible. However, here I have taken an easy approach by directly assuming the Well-order principle.
+    \section{Reference}
+    \begin{enumerate}
+        \item \[SV13\] \quad A. Shen and N.K. Vereshchagin. 集合论基础. 大学生数学图书馆. 高等教育出版社, 2013. 陈光还（译）.
+    \end{enumerate}
+
+\end{document}
