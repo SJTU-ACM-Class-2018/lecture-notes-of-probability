@@ -48,7 +48,27 @@
 
 \begin{document}
 	\maketitle
-	(dual Cantor-Bernstein theorem). Let $f \in Y^X$ and $g \in X^Y$ be two surjectve maps. Assuming AC, show that there is a bijection $h \in Y^X$ such that $h\subseteq f\cup g^{-1}$.
+	1. (Cantor-Bernstein theorem) Let $f \in Y^X$ and $g \in X^Y$ be two injective maps. Then there is a bijection $h \in Y^X$ such that $h\subseteq f\cup g^{-1}$.
+	\begin{myproof}
+		Let $C_0 = X \backslash g(Y)$, $C_{n+1} = g(f(C_n))$. And $$C = \bigcup_{n=0}^{\infty}C_n$$
+		
+		For every $x\in X$, define
+		$$h(x) = \left\{
+			\begin{array}{lr}
+				f(x),&x\in C\\
+				g^{-1}(x),&x\notin C
+			\end{array}\right.$$
+		
+		We can easily see $h\subseteq f\cup g^{-1}$ from the definition. Next, prove $h$ is bijective.
+		
+		$h$ is injective: Assume $a\neq b\wedge h(a)=h(b)$(h is not injective). If $a\in C \wedge b\in C$, $h(a) = f(a) \neq f(b) = h(b)$. If $a\notin C \wedge b\notin C$, $h(a) = g^{-1}(a) \neq g^{-1}(b) = h(b)$. If $a\in C \wedge b\notin C$, $g^{-1}(b) = f(a)\Rightarrow b = g(f(a))\Rightarrow b\in C$, contradicting to $b\notin C$. Otherwise is the same. All cases contradict to the premise. So $h$ is injective.
+		
+		$h$ is surjective: For any $y\in Y$, If $g(y)\in C$, there is a certion $n\geq 1$ such that $g(y)\in C_n$. Also, there is a $x\in C_{n-1}\subseteq X$ that $h(x) = f(x) = y$. If $g(y)\notin C$, there is $g(y)\in X$ that $h(g(y))=g^{-1}(g(y))=y$. Thus $h$ is surjective.
+		
+		Above all, $h\in Y^X$ is a bijection and $h\subseteq f\cup g^{-1}$.
+	\end{myproof}
+	
+	2. (dual Cantor-Bernstein theorem) Let $f \in Y^X$ and $g \in X^Y$ be two surjectve maps. Assuming AC, show that there is a bijection $h \in Y^X$ such that $h\subseteq f\cup g^{-1}$.
 	\begin{myproof}
 		Given any surjections $f\in Y^X$ and $g\in X^Y$, by AC (we can get a Right inverse of a surjective map) there are injections $u\subseteq f^{-1}$ and $v\subseteq g^{-1}$.
 		
