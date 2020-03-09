@@ -1,0 +1,96 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Construction of 4 sets to satisfies 3 rules}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section*{Exercise 8}
+\begin{tcolorbox}
+  Construct three sets A, B, C and a set E $\subseteq$ $A \times B \times C$ 
+  such that the following hold: 1) For every (a, b, c) $\in$ $A \times B \times C$, E has a matching which saturates {a, b, c}; 
+  2) E has an (A∪B)-saturated matching, a (B∪C)-saturated matching, and an (A∪C)-saturated matching; 3) E does not have any (A∪B∪C)-saturated matching.
+
+\end{tcolorbox}
+
+\begin{proof}[Answer]
+
+  Let me first give out the construction:
+  $$A = \{1, 0, 4, 7 \}$$
+  $$B = \{2, 0, 4, 7 \}$$
+  $$C = \{3, 0, 4, 7 \}$$
+  $$E = \bigcup\limits_{i=0}^5 \{e_i\}$$
+  $$e_0 = (1,7,4)$$
+  $$e_1 = (4,2,7)$$
+  $$e_2 = (7,4,3)$$
+  $$e_3 = (0,7,4)$$
+  $$e_4 = (4,0,7)$$
+  $$e_5 = (7,4,0)$$
+
+
+
+  First, we shall prove it satisfies 3). Assume there is such matching $E'$. 
+  Then $e_0$, $e_1$, $e_2$ must belong to $E'$ because only they have the elements 1,2,3. 
+  Then we know $e_3 \notin E'$ because it's not disjoint with $e_0$, and same as $e_4, e_5$. 
+  Thus there it no element which can cover 0. So such $E'$ doesn't exist.\\
+
+  Next, we shall prove it satisfies 2). For $A \cup B$, we just need to let $\{e_0,e_1,e_5\}$ be the matching. 
+  Beause of symmetry, we can know there are also $(B \cup C)$-saturated matching and $(C \cup A)$-saturated matching.\\
+
+  Finally, we need to prove 1). If the $a$ in the choosen $(a,b,c)$ doesn't equal to 1, then we can just use the $(B \cup C)$-saturated matching.
+  Same way if $b \neq 2$ or $c \neq 3$. So we just need to concern $(1,2,3)$. 
+  To saturate this, we can use the macthing $\{e_0,e_1,e_2\}$.\\
+
+  Hence, the construction is right. I thought for a long time and tried many constructions. 
+  This should be the most concise one.
+
+\end{proof}
+
+\end{document}
