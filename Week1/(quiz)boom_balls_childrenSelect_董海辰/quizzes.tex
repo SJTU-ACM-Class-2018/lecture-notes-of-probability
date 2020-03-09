@@ -1,0 +1,53 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+% \input{/home/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Discussion on some quizzes}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    中原大战，冯玉祥问士兵:空中飞机多还是乌鸦多?众人答:乌鸦多。冯再问:然则 乌鸦拉屎掉到你们头上没有?众人异口同声:没有。冯说:所以嘛，随着飞机投下的 炸弹的命中机会就更少了，大家莫怕!
+\end{thm}
+
+我认为这里「飞机数量」，「飞机出现」和「飞机投炸弹」这三者的关系与「乌鸦数量」，「乌鸦出现」和「乌鸦拉屎」三者的关系并不一致————飞机的数量分布并不如乌鸦一样是均匀的，而是在这一片区域的出现概率远大于其他区域。且由于飞机可能有瞄准，「飞机投弹」事件也并不与「飞机出现」的事件独立，而「乌鸦拉屎」与「乌鸦出现」却是独立的。
+
+设飞机总数为$N$，飞机经过为事件$X$，飞机投炸弹为$Y$，被炸弹命中的事件为$Y \cup X$，有$P(Y \cup X) \neq P(Y) P(X)$。反观乌鸦，乌鸦在任何区域内拉屎的概率是一定的，设乌鸦总数为$N'$，乌鸦经过为事件$X'$，乌鸦拉屎为$Y'$，有$P(Y' \cup  X') = P(Y') P(X')$。
+
+因此即使在这里冯玉祥说：$N' > N$，这样并不能得出$P(X') > P(X)$。即使是有$P(X') > P(X)$，也不能决定$P(Y \cup X)$和$P(Y' \cup X')$的大小关系。
+
+\begin{thm}{}{}
+    罐子里有$70$个黑球和$30$个白球。每次从中取一个球直到罐子中只含单色球为止。最后罐子中剩的都是白球的概率为多少?
+\end{thm}
+
+更一般地，设共有$N$个黑球和$M$个白球，$P_m$为最后恰好剩$m$个白球的概率，由于当共有$n$个黑球和$m$个白球时，选出一个黑球的概率为$\frac{n}{n+m}$，有
+\begin{align*}
+    P_m &= \frac{N! \cdot (M \cdot (M-1) \cdots (m+1))}{(N+M) \cdot (N+M-1) \cdots (m+1)} \cdot \binom {N-1+M-m} {M-m} \\
+        &= N! \cdot \frac{m!}{(N+M)!} \cdot \frac{M!}{m!} \cdot \frac{(N-1+M-m)!}{(M-m)!(N-1)!}\\
+        &= \frac{N \cdot M!}{(N+M)!}\cdot \frac{(N+M-1-m)!}{(M-m)!}
+.\end{align*}
+
+最后剩下白球的概率为
+\begin{align*}
+    p = \sum_{i=1}^{M} p_i &= \frac{N \cdot M!}{(N+M)!} \sum_{i=1}^{M} \frac{(N+M-1-m)!}{(M-m)!} \\
+                           &= \frac{N \cdot M!}{(N+M)!} \cdot \frac{(M+N-1)!}{N (M-1)!} \\
+                           &= \frac{M}{N + M}
+.\end{align*}
+
+可以发现，最后剩下白球的概率恰为白球在所有球里面的比例。
+
+\begin{thm}{}{}
+    对于生男生女，比如生男生女概率各 $50\%$，每个家庭都生到第一个男孩就不再生，那么产生的男女比例是多少?
+\end{thm}
+
+设$X$为每个家庭的孩子数量，有$$P(X=k) = \frac{1}{2^{k-1}} \cdot \frac{1}{2} = 2^{-k}.$$
+
+即前$k-1$次均为女孩，最后一次为男孩。
+
+则期望为$$E(X) = \sum_{k=1}^{\infty} k P(X=k) = 2.$$
+
+而每个家庭恰好有$1$个男孩，因此男女比为$1:1$。
+
+\end{document}
