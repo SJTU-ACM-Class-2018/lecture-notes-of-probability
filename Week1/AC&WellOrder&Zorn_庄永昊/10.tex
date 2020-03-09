@@ -45,66 +45,87 @@
 \begin{document}
 \maketitle
 
-1. The proof of AC $\leftrightarrow$ Well-order is easy: 
+\section{The proof of AC $\leftrightarrow$ Well-order principle} 
 \begin{myproof}
-The well-ordering principle can be constructed by choosing an element $x_S$ from the set $S$, 
+1. The well-ordering principle can be constructed by choosing an element $x_S$ from the set $S$, 
 then choolse $x_{S'}$ from $S'=S/\{x_S\}$...In this way, $x_S\leq x_{S'}\leq x_{S''}...$ is a well-order.
 (the check is too trivial to write, maybe someone can help me do this?) 
 
-And if the well-ordering principle is correct, in every set, simply choosing the minimum element can make AC proved. 
+2. And if the well-ordering principle is correct, in every set, simply choosing the minimum element can make AC proved. 
 \end{myproof}
 
-2. Here is the proof of Well-Ordering principle $\rightarrow$ Zorn's Lemma. It uses the General Principle of Recursive Definition, 
+\section{Well-order principle$\rightarrow$ Zorn's lemma}
+Here is the proof of Well-Ordering principle $\rightarrow$ Zorn's Lemma. It uses the General Principle of Recursive Definition, 
 which is also proved below. 
 
-\begin{myproof}
-    Denote $S_x$ be the set of all elements smaller than $x$ with respect to a well order of the set. 
+The Zorn's Lemma is represented by: 
 
+\begin{definition}
+Let $\mathscr U$ be a set. If for every chain $C\subseteq\mathscr U$ there is a maximum element, 
+Then $\mathscr U$ has a maximal element $T$. 
+\end{definition}
+\begin{myproof}
     Claim that the General Principle of Recursive Definition is correct.(which will be proved at the end)
 
-    Since in every set there is a well order, construct a well order $\leq$ in $\mathscr U$. 
-    Denote $S_\alpha=\{\beta|\beta\leq\alpha\}$, for every $\prec$
-    define a function $h:\mathscr U\rightarrow Pow(\mathscr U)$ that(By the General Principle of Recursive Definition): 
+    By well-order principle, we can construct a well order $\leq$ in $\mathscr U$. 
+    Denote $S_\alpha=\{\beta|\beta\leq\alpha\}$. 
+    
+    For the $\prec$ relation on the chain, define a function $h:\mathscr U\rightarrow Pow(\mathscr U)$ 
+    that: 
     \begin{equation}
         h(\alpha)=\left\{
         \begin{aligned}
-            &\alpha&\text{if $S_\alpha=\emptyset$}\\
+            &\{\alpha\}&\text{if $S_\alpha=\emptyset$}\\
             &h(S_\alpha)&\text{if for some $\beta$ in $S_\alpha$, there is neither $\alpha\prec\beta$ nor $\beta\prec\alpha$}\\
             &h(S_\alpha)\cup\alpha&\text{otherwise}
         \end{aligned}
         \right.
     \end{equation}
-    Now denote $$C=\bigcup_{\alpha\in\mathscr U}h(\alpha)$$, 
-    it is obvious that $C$ is a chain with respect to $\mathscr U$ and for every element in $\mathscr U$, 
-    it is either a member(named $\gamma$) of $C$ or an element that fits: 
+    By the General Principle of Recursive Definition the definition is avaliable. 
+    The initial step is the first condition in the definition. 
+
+    This is function aims to construct a chain long enough, so if any element can be added, 
+    simply add it. Otherwise do not add it, so keep the chain be the same. 
+
+    Now denote 
+    $$C=\bigcup_{\alpha\in\mathscr U}h(\alpha)$$ 
+    it is obvious that $C$ is a chain with respect to $\mathscr U$. We now prove it is a maximal element in $\mathscr U$: 
+
+    For every element $\gamma\in\mathscr U$, 
+    it is either a member of $C$ or an element that fits: 
     $$\exists \alpha\in C, (\neg\alpha\prec\gamma)\cap(\neg\gamma\prec\alpha)$$
-    Now denote $\prec$ with $\subset$, it is obvious that 
-    $$\forall \alpha\in C, \alpha\prec\bigcup C$$
-    If there is an element $\gamma\in\mathscr U-C$ that $\bigcup C\prec\gamma$, 
-    then $\forall\alpha\in C, \alpha\prec\gamma$, hence $\gamma\in C$, which is contradicted with $\gamma\in\mathscr U-C$.
 
-    So there is no element $\gamma$ that $\bigcup C\prec\gamma$, that is, $\bigcup C$ is a maximal element in $\mathscr U$.
+    Otherwise, by the definition of $h$, $\gamma\in h(\gamma)\subseteq C$. 
+
+    In this way, the maximum element of $C$ is a maximal element of $\mathscr U$
 \end{myproof}
-    Now prove the General Principle of Recursive Definition:
 
-    First prove the principle of transfinite induction that: if $J$ is a well-order set and $J_0$ is an inductive subset of $J$, there is $J_0=J$.
+\section{appendix about Well-Ordering principle$\rightarrow$Zorn's lemma}
 
+    This section prove the General Principle of Recursive Definition:
+
+    1. First prove the principle of transfinite induction. Its definition is: 
+\begin{definition}
+    if $J$ is a well-order set and $J_0$ is an inductive subset of $J$, there is $J_0=J$.
+\end{definition}
+\begin{myproof}
     This principle is proved by contradiction. Assume the set $J'=J-J_0$ is not empty, since $J$ is well-ordered, 
     there is a minimum element in $J'$(denote the element as $x$), as $x$ is the minimum one, $S_x\subset J_0$. 
     By the definition of the inductive set(if $S_x\subset J_0$, then $x\in J_0$), $x$ should be in $J_0$, 
     which is contradicted with $x\in J'$.
+\end{myproof}
 
-    Now give the detailed definition of the General Principle of Recursive Definition:
-
+    2. Now give the detailed definition of the General Principle of Recursive Definition:
+\begin{definition}
     Assume $J$ is a well-ordered set and $C$ is a set, 
     $\mathscr F$ is the set of all functions from $J$ or $S_\alpha(\alpha\in J)$ to $C$, 
     then for an unique function $\rho:\mathscr F\rightarrow C$, there is an unique $h:J\rightarrow C$, 
     which satisfies that $\forall \alpha\in J, h(\alpha)=\rho(h_{S\alpha})$. 
+\end{definition}
 
-    Now prove the principle:
-
+\begin{myproof}
     1)if $k$ and $g$ are in $dom(\rho)$, then for all $x\in dom(k)\cap dom(g)$, there is $k(x)=g(x)$. 
-    Otherwise, we can find a smallest $x$ by which $k(x)\neg g(x)$, and we can prove such $x$ actually satisfy $k(x)=g(x)$;
+    Otherwise, we can find a smallest $x$ by which $k(x)\neq g(x)$, and we can prove such $x$ actually satisfy $k(x)=g(x)$;
 
     2)if there is $k:S_\alpha\rightarrow C$ which is in $dom(\rho)$, then $k':S_\alpha\cup\{\alpha\}\rightarrow C$ is in $dom(\rho)$, 
     which can be defined by extending the $k$.(adding $\alpha$ by definition);
@@ -118,4 +139,6 @@ which is also proved below.
     This can be proved by selecting a minimum element not satisfying it, then using 2) and 3) to prove that it actually satisfies it. 
 
     5)then the General Principle of Recursive Definition is proved by the set of all elements do not satisfy it is empty. (still choose a minimum to prove it)
+\end{myproof}
+
 \end{document}
