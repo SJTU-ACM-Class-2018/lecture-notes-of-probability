@@ -34,9 +34,9 @@
     之和在2,...,12之间等概率分布？
 
     \section{Solution}
-    We have utilizfe the tool of Generative Function to represent the distribution of each roll. 
+    I utilize the tool of Generative Function to represent the distribution of each roll. 
     $$ P(x) = p_1x + p_2x^2 + p_3x^3 + p_4x^4 + p_5x^5 + p_6x^6 $$
-    Here, $q_i$ represent the probability of the dice roll being $i$.
+    Here, $p_i$ represents the probability of the dice roll being $i$.
     
     With 2 dices, we can simply multiply two generative functions.
     \begin{align*}
@@ -52,7 +52,7 @@
         \sum_{i = 1}^{6} p_i &= 1 \\
         \sum_{i = 1}^{6} q_i &= 1
     \end{align}
-    The is a set of equations. So I tried using mathematica to solve it but it only yields complex number answers, which is not accpetable.
+    The is a set of equations. So I tried using mathematica to solve it but it only yields complex number answers, which is not accpetable. Below is the code I use:
     \begin{figure}[htbp]
         \includegraphics{solve.png}
         \caption{Mathematica sucks}
