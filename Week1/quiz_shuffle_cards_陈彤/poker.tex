@@ -1,0 +1,65 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{An Analysis of Riffle Shuffles}
+\author{Tong Chen}
+\date{\today}
+
+\begin{document}
+    \maketitle
+\section{Definition}
+How many shuffles are required to bring a deck of cards close to random? Before talking about how to shuffle, how to definite a suit is random?
+\begin{definition}
+One suit is called \textbf{shuffled} if and only if the probability of every permutation is equal.
+\end{definition}
+And now we analyze the most commonly used method of shuffling cards called the ordinary riffle shuffle. This involves cutting the deck approximately in half, and interleaving the two halves together.
+In general, a permutation $\pi$ of n cards made by a riffle shuffle will have exactly 2 rising sequences unless it is the identity. Conversely, any permutation of n cards with 1 or 2 rising sequences can be obtained by a physical riffle. Thus the mathematical definition of a \textit{riffle shuffle} is ''a permutation with 1 or 2 rising sequences''. Suppose c cards are initially cut off the top. Then there are $n \choose c$ possible riffle shuffles(1 of which is the identity). Finally, the total number of possible riffle shuffles is
+$$1+\sum_{c=0}^n ({n\choose c}-1)=2^n-n$$
+The following model for random riffle shuffle, suggested by Gilbert and Shannon(1955) and Reeds(1981), is mathematically tractable and qualitatively similar to shuffles done by simple card players.
+\begin{definition}
+(1st description). Begin by choose an integer c from 0,1,...,n according to the binomial distribution $P\{C=c\}=\frac{1}{2^n} {n \choose c}$. Then, c cards are cut off and held in the left hand, and n-c cards are held in the right hand. The cards are dropped from a given hand with probability proportional to packet size. Thus, the chance that a card is first dropped from the left hand packet is c/n. If this happens, the chance that the next card is dropped from the left packet is (c-1)/(n-1).
+\end{definition}
+\section{Analysis}
+啊好，还没分析呢。
+%use \cref instead of \ref
+\end{document}
