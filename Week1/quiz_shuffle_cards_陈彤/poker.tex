@@ -59,7 +59,38 @@ The following model for random riffle shuffle, suggested by Gilbert and Shannon(
 \begin{definition}
 (1st description). Begin by choose an integer c from 0,1,...,n according to the binomial distribution $P\{C=c\}=\frac{1}{2^n} {n \choose c}$. Then, c cards are cut off and held in the left hand, and n-c cards are held in the right hand. The cards are dropped from a given hand with probability proportional to packet size. Thus, the chance that a card is first dropped from the left hand packet is c/n. If this happens, the chance that the next card is dropped from the left packet is (c-1)/(n-1).
 \end{definition}
+There are two other descriptions of this shuffling mechanism that are useful.
+
+\begin{definition}
+(2nd description). Cut an n card descriptions according to a binomial distribution. If c cards are cut off, pick one of the $n \choose c$ possible shuffles uniformly.
+\end{definition}
+\begin{definition}
+(3rd description). This generates $\pi^{-1}$ with the correct probability. Label the back of each card with the result of an independent, fair coin flip as 0 or 1. Remove all cards labelled 0 and place them on top of the deck, keeping them in the same relative order.
+\end{definition}
+
 \section{Analysis}
-啊好，还没分析呢。
+The idea here is to consider shuffling as inverse sorting. The argument works for any symmetric method of labelling the cards. We know that the worst case of sorting is $\Theta(n \log n)$. And the mininum operation for riffle shuffle is $\Theta(\log n)$.
+
+According to Trailing the Dovetail Shuffle to Its Lair written by Dave Bayer and Persi Diaconis, we can get the conclusion: 6-8 times shuffling make the suit random.
+ Here, if $S_n$ is the symmetric group, U the uniform probability [so $U(\pi) = l/n!$] and $Q^m$ the Gilbert-Shannon-Reeds probability after $m$ shuffles, then the total variation distance is defined as 
+ $$\lVert Q^m-U\rVert=\max_{A\subset S_n}\lvert Q^m(A)-U(A)\rvert$$
+Table 1 gives the total variation distance for 52 cards. Table 1 shows that the total variation distance stays essentially at its maximum of 1 up to 5 shuffles, when it begins to decrease sharply by factors of 2 each time. This is an example of the cutoff phenomena described by Aldous and Diaconis (1986). 
+\begin{table}[h]
+\caption{Total variation distance for m shufles of 52 cards}
+\label{tab:1}       % Give a unique label
+% For LaTeX tables use
+\begin{tabular}{ccccccccccc}
+\hline
+m & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+\hline
+$\lVert Q^m-U\rVert$ & 1.000 & 1.000 & 1.000 & 1.000 & 0.924 & 0.614 & 0.334 & 0.167 & 0.085 & 0.043  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section {Reference}
+1. Bayer D , Diaconis P . Trailing the Dovetail Shuffle to its Lair[J]. The Annals of Applied Probability, 1992, 2(2):294-313.
+
+2. David, Aldous, Persi, et al. Shuffling Cards and Stopping Times[J]. The American Mathematical Monthly, 1986.
 %use \cref instead of \ref
 \end{document}
