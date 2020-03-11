@@ -1,0 +1,135 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+\usepackage[a4paper, total={5.5in, 9in}]{geometry}
+
+\renewcommand*{\figurename}{Figure} 
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newmdtheoremenv{pro}[thm]{Problem}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\CTEXoptions[today=old]
+\title{Poset $\mathbb{R}^3$ Cannot Be Stuffed into $\mathbb{R}^2$}
+\author{Xun Zhiyang}
+
+\begin{document}
+
+\maketitle
+
+\begin{pro}
+    View $\mathbb{R}^{k}$ as a poset which $\left( x_1,x_2,\ldots x_{k}\right) \le 
+    \left( y_1,y_2,\ldots,y_{k} \right) $ if and only if
+    $y-x\ge 0$ namely $\forall i,y_i \ge  x_i$. Is there
+    a subposet of $\mathbb{R}^{2}$ poset which is isomorphic with $\mathbb{R}^{3}$?
+\end{pro}
+
+The answer is no.
+
+\section{A Naïve Discomfort}
+
+When we look at a cube drawn on a plane, we always feel there is something wrong. In Figure 1, we can see $A$ and $B$ are not comparable in $\mathbb{R}^3$ poset. However, as we draw them on a plane, it \textbf{seems} as if they were perfectly comparable. We'll prove this discomfort actually makes sense.
+
+\begin{figure}[ht]
+        \centering
+        \includegraphics[width=0.5\textwidth]{newcube.png}
+        \caption{Something goes wrong}
+\end{figure}
+
+\section{Proof}
+
+The proof is actually a formalization of the discomfort above.
+
+Assume there is an isomorphism between poset $\mathbb{R}^3$ and a subposet of $\mathbb{R}^2$. We denote this bijection as $\varphi$. Now we introduce the following notations:
+\begin{align*}
+    (1, 0, 0) = a &\stackrel{\varphi}{\longrightarrow} a' = (x_a, y_a) \\
+    (0, 1, 1) = b &\stackrel{\varphi}{\longrightarrow} b' = (x_b, y_b) \\
+    (0, 0, 1) = c &\stackrel{\varphi}{\longrightarrow} c' = (x_c, y_c) \\
+    (1, 1, 0) = d &\stackrel{\varphi}{\longrightarrow} d' = (x_d, y_d) \\
+    (1, 0, 1) = e &\stackrel{\varphi}{\longrightarrow} e' = (x_e, y_e) \\
+    (0, 1, 0) = f &\stackrel{\varphi}{\longrightarrow} f' = (x_f, y_f)
+\end{align*}
+
+Without loss of generality, we assume $x_a \geq x_b$ (the proof of the $x_a \leq x_b$ case is almost the same). Because $a$ and $b$ are not comparable, $a'$ and $b'$ are not as well. 
+Thus we know $y_a \leq y_b$.
+
+From $c \leq b$, we can see $x_c \leq x_b$. Similarly, $x_a \leq x_d$. Thus, $x_c \leq x_b \leq x_a \leq x_d$. Since $c'$ and $d'$ are not comparable, $y_c \geq y_d$.
+
+
+From $e \geq a$, we know $e' \geq a'$. Thus $x_e \geq x_a \geq x_b$.
+Also, $e \geq c$ and we can conclude $y_e \geq y_c \geq y_d$.
+In addition, $f \leq b$ indicates $x_f \leq x_b$ and $f \leq d$ leads to $y_f \leq y_d$.
+
+Here is the discomfort. We've proved $x_f \leq x_b \leq x_e$ and $y_f \leq y_d \leq y_e$. It immediately leads to $f' \leq e'$! However, we know $e$ and $f$ are not comparable. Our assumption that such bijection exists leads to a contradiction.
+
+Hence, a subposet of $\mathbb{R}^2$ cannot be isomorphic with $\mathbb{R}^3$.
+
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{labeled.png}
+    \caption{Some points on a cube}
+\end{figure}
+
+% The $x_a \leq x_b$ case is very similar,
+
+
+
+\end{document}
+
+ 
