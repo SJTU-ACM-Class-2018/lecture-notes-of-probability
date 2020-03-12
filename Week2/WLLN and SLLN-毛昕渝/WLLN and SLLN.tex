@@ -1,0 +1,169 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+%\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\nn{\mathcal{N}}
+\newcommand\ff{\mathcal{F}}
+\newcommand\one{\bm{1}}
+\newcommand\eps{\varepsilon}
+
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+\DeclareMathOperator{\diff}{d}   
+\title{Lecture Note 1 : Proof of WLLN and SLLN}
+\author{Xinyu Mao}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{definition}{Indicator function.}
+For $S \subset \Real$,  $\one_S(x) := \begin{cases}
+    1, \text{ if $x \in S$}, \\
+    0, \text{ otherwise.}
+\end{cases}    
+$
+\end{definition}
+
+\begin{theorem}[WLLN]\label{wlln}
+    For all $\eps > 0$, $\lim_{n \to \infty} P[\omega : |\frac{\sum_{i=1}^n d_i(\omega)}{n} - \frac{1}{2}| \geq \eps] = 0$.
+\end{theorem}
+\begin{proof}
+    Let $r_i(\omega) = 2d_i(\omega) - 1$. 
+    One can easily check that $\{r_i\}$ are orthogonal functions
+    on $\Omega := (0,1]$, that is,
+    \begin{equation} \label{ort}
+        \int_{\Omega} r_i(\omega)r_j(\omega) \diff \omega = \delta_{ij}.
+    \end{equation}
+    Let $s_n(\omega) := \sum_{i=1}^n r_i(\omega)$.
+    Note that 
+    \begin{equation} \label{eq1}
+        P[\omega : |\frac{\sum_{i=1}^n d_i(\omega)}{n} - \frac{1}{2}| \geq \eps]
+        = P[\omega : |s_n(\omega)| \ge n\eps']  
+        = \int_{\Omega} \one_{\Omega_2}(\omega) \diff \omega,
+    \end{equation}
+    where $\eps' = 2\eps, \Omega_2 = \{\omega : |s_n(\omega| \geq n\eps'\}$.
+    Since $\eps$ is arbitrary small,  we can equate $\eps$ and $\eps'$ for simplicity.
+    The key observation is that $\one_{\Omega_2}(x) \leq \frac{1}{n^2\eps^2}s_n^2(x)$ and thus
+    \begin{equation} \label{eq2}
+        \int_{\Omega} \one_{\Omega_2}(\omega) \diff \omega
+        \leq \frac{1}{n^2\eps^2} \int_0^1 s_n^2(\omega) \diff \omega
+        = \frac{1}{n\eps^2},
+    \end{equation}
+    where the last equality is obtained by \cref{ort} and the definition of $s_n$.
+    Combine \cref{eq1} and \cref{eq2}
+    and we get the desired result.
+\end{proof}
+
+\begin{definition}
+    A set $S \subset R$ is negligible if 
+    for all $\eps > 0$, there is a collection of intervals
+    $\{I_i\}_{i=1}^{\infty}$ such that $S \subset \bigcup_{i = 1}^{\infty} I_i$,
+    and $\sum_{i=1}^\infty |I_i| < \eps$,
+    where $|\cdot|$ is the length of the interval.
+\end{definition}
+\begin{theorem}[SLLN]
+   Let $\nn = \{\omega : \lim_{n \to \infty} \frac{s_n(\omega)}{n} = 0\}$,
+   $\nn^c$ is uncountable but negligible.
+\end{theorem}
+\begin{proof}
+    For $x \in (0,1]$, say $x = 0.b_1b_2\cdots$, 
+    let $f(x) = 0.11b_111b_211b_3\cdots.$ The set 
+    $S := \{f(x) : x\in(0,1]\}$ is uncountable, for $f$
+    is an injection, and $S \subset \nn^c$ since numbers in $S$
+    clearly violate the property of normal number. Hence, 
+    $\nn^c$ is uncountable.
+
+    By the same method used in the proof of \cref{wlln}, use $s_n^4$ instead of $s_n^2$,
+    we can establish 
+    \begin{equation} 
+        P[\omega : |s_n(\omega)| \ge n\eps]   \diff \omega
+        \leq \frac{1}{n^4\eps^4} \int_0^1 s_n^4(\omega) \diff \omega. 
+    \end{equation}
+    We rewrite $s_n^4(\omega)$ as 
+    \begin{equation}
+        s_n^4(\omega) = \sum_{1 \leq i,j,k,l \leq n} 
+        r_i(\omega)  r_j(\omega) r_k(\omega)  r_l(\omega). 
+    \end{equation}
+    We can figure out the integral value of each term 
+    by the orthogonality of $\{r_k\}$, which is 
+    shown in \cref{table}.
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c}
+            \toprule
+                Term & Interval value on $\Omega$\\
+            \midrule
+                $r_i^4$ & 1 \\
+                $r_i^2r_j^2$ & 1\\
+                $r_i^2r_jr_k (= r_jr_k)$ & 0 \\
+                $r_i^3r_j ( = r_ir_j)$ & 0 \\
+                $r_ir_jr_kr_l$   & 0  \\
+            \bottomrule
+        \end{tabular}
+        \caption{Interval value of terms in $s_n^4$.  In this table, $i,j,k,l$ are pairwise distinct.}
+        \label{table}
+    \end{table}
+    In $s_n^4$, $n$ terms are of the first kind, 
+    $3n(n-1)$ terms are of the second kind, and thus 
+    \begin{equation} \label{main}
+        P[\omega : |s_n(\omega)| \ge n\eps] \leq  
+        \frac{1}{n^4\eps^4} \int_0^1 s_n^4(\omega) \diff \omega 
+        =\frac{1}{n^4\eps^4} [n + 3n(n-1)] < \frac{3}{n^2\eps{^4}}.
+    \end{equation}
+
+    The key is we can find a decreasing sequence $\{\eps_n\}$ such that 
+    \begin{itemize}
+        \item $\sum_{n = 1}^\infty \frac{3}{n^2\eps_n^4}$ converges. 
+        \item $\{\eps_n\}$ decreases and $\lim_{n \to \infty} \eps_n= 0$.
+    \end{itemize}
+    Let $A_n := \{\omega : |s_n(\omega)| \geq \eps_n\}$.
+    Intuitively, numbers in $A_n$ violate the normal property at the $n^{\text{th}}$ digit.
+    Note that for all $m > 0$, $\bigcup_{j = m}^\infty A_j$ covers $\nn^c$, 
+    because if $\omega \notin A_j$ for all $j \geq m$, $\omega \in \nn$.
+    By \cref{main} and the proper choice of $\{\eps_n\}$, we have
+    \begin{equation}
+        \sum_{n=1}^\infty |A_n| < \sum_{n=1}^\infty \frac{3}{n^2\eps_n^4} < \infty.
+    \end{equation}
+    Hence, for $\eps > 0$, 
+    there is an $m$ such that $\sum_{j = m}^\infty |A_j| < \eps$.
+    Meanwhile, $\bigcup_{j = m}^\infty A_j$ covers $\nn^c$, 
+    which implies $\nn^c$ is negligible.
+\end{proof}
+
+\end{document}
