@@ -73,7 +73,7 @@ $
     Let $s_n(\omega) := \sum_{i=1}^n r_i(\omega)$.
     Note that 
     \begin{equation} \label{eq1}
-        P[\omega : |\frac{\sum_{i=1}^n d_i(\omega)}{n} - \frac{1}{2}| \geq \eps]
+        P\left[\omega : \left|\frac{\sum_{i=1}^n d_i(\omega)}{n} - \frac{1}{2}\right| \geq \eps\right]
         = P[\omega : |s_n(\omega)| \ge n\eps']  
         = \int_{\Omega} \one_{\Omega_2}(\omega) \diff \omega,
     \end{equation}
@@ -150,7 +150,7 @@ $
     The key is we can find a decreasing sequence $\{\eps_n\}$ such that 
     \begin{itemize}
         \item $\sum_{n = 1}^\infty \frac{3}{n^2\eps_n^4}$ converges. 
-        \item $\{\eps_n\}$ decreases and $\lim_{n \to \infty} \eps_n= 0$.
+        \item $\lim_{n \to \infty} \eps_n= 0$.
     \end{itemize}
     Let $A_n := \{\omega : |s_n(\omega)| \geq \eps_n\}$.
     Intuitively, numbers in $A_n$ violate the normal property at the $n^{\text{th}}$ digit.
