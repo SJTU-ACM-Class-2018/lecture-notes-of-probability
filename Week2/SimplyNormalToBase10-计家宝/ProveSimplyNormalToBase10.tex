@@ -1,0 +1,97 @@
+% This is a template for lecture notes.
+\documentclass{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{indentfirst}
+%\CTEXoptions[today=old]
+
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{0.012345678910... is simply normal to base 10}
+\author{Ji Jiabao}
+\date{\today}
+
+\begin{document}
+\maketitle
+I can only prove 0.123456789..., known as the Champernowne Constant is simply
+normal to base 10 now
+\footnote{I also found the 
+\href{https://londmathsoc.onlinelibrary.wiley.com/doi/abs/10.1112/jlms/s1-8.4.254}{original thesis} for Champernowne Constant, 
+but i totally don't understand it after some reading}, below is the proof.
+
+\begin{proof}
+    $  $ \\
+    \hspace*{1em} Let $N_n$ denotes the number of digits after we write the $a_n = 10^n (n \in \mathbb{Z})$th number 
+    in $\mathbb{Z}$.\\
+    \hspace*{1em} For $N_n$, we have a simple equation, by counting digits in different groups 
+    divided by the number's length
+    \begin{align*}
+        N_n &= \sum_{i = 1}^{i = n} i (10^i - 10^{i - 1}) \\
+            &= 9 \sum_{i = 1}^{i = n} i 10^{i - 1}\\
+            &= (n - \frac{1}{9})10^n + \frac{1}{9}
+    \end{align*}
+    \hspace*{1em} For the number of $1$s for example, (2...9 is the same as 1) in the number we write, denoted as 
+    $M_n$, we use induction.\\
+    \hspace*{1em} $Base:$ \\
+    \hspace*{2em} $n = 1$, $M_n = 1$\\
+    \hspace*{1em} $Induction:$ After writing $N_{n+1}$ digits\\
+    \hspace*{2em} In the first $N_n$ digits, we have $m_n$ 1s. As for the 1s between the $N_n + 1$ digit and $N_{n+1}$ digit,
+    we write the integer number beween $10^n + 1$ and $10^{n + 1}$. Actually we just write the first $10^n$ integer for another 9 times
+    and add $1, 2 ... 9$ to the highest digit.So we have.
+    \begin{align*}
+        M_{n + 1} & = 10M_n + 10^n
+    \end{align*}
+    \hspace*{1em} Based on the induction above, we can write the general formula of $M_n$ using high-school maths.
+    \begin{align*}
+        M_n = n10^{n - 1}
+    \end{align*}
+    
+    Based on above, we get 
+    \begin{align*}
+        \lim_{n = N_n \rightarrow \infty } \frac{|x_1x_2...x_n|_d}{n} & = \frac{M_n}{N_n}\\
+            &= \frac{n10^{n - 1}}{(n - \frac{1}{9})10^n + \frac{1}{9}}\\
+            &= \frac{1}{10}
+    \end{align*}
+    \hspace*{1em} To finish the proof, we need to prove $\frac{|x_1x_2...x_n|_d}{n}$ decreases with $n$ increases,
+    though not strictly, we can see the trend as $m$ is obviously much much smaller than $n$.\\
+    \hspace*{1em} In all, 0.12345... is simply normal to base 10.
+
+\end{proof}
+
+\end{document}

@@ -41,7 +41,7 @@
 %this is how we define operators.
 \DeclareMathOperator{\rank}{rank} % rank
 
-\title{Discussion on Exercise 3}
+\title{Bijection between [0, 1] and (0, 1) and $\mathbb{R}$}
 \author{Ji Jiabao}
 \date{\today}
 
@@ -53,7 +53,7 @@
     And from the reading of Was Cantor Surprised, we can take advantage of the injection
     Cantor constructed between [0,1] and [0, 1).\\
 
-    First the simple bijection $f = tan(\frac{\pi}{2} x - \frac{\pi}{2}) (x \in (0, 1))$ between (0, 1) and $\mathbb{R}$.\\
+    First we give the simple bijection $f = tan(\frac{\pi}{2} x - \frac{\pi}{2}) (x \in (0, 1))$ between (0, 1) and $\mathbb{R}$.\\
     Next construct the bijection between $(0, 1)$ and [0, 1].
 
     \begin{figure}[h]
@@ -61,10 +61,14 @@
         \includegraphics[scale = 0.5]{cantor.png}
         \caption{Cantor's bijection}
     \end{figure}
-    "The domain has been divided by a geometric progression, so $b = 1/2$,$ b_1 = 3/4$, and so on;
-    $a = (0, 1/2)$, $a' = (1/2, 3/4)$, etc. The point $C$ is (1, 1). The points $d' = (1/2, 1/2)$, $d^{''} = (3/4, 3/4)$, etc. 
-    give the corresponding subdivision of the main diagonal." ( I can't explain the curve in english clearly, so i quote the 
-    discription in Was Cantor Surprised here). We can slightly change this bijection by ignoring the endpoint C, by doint so, we get 
+    \begin{quote}
+        The domain has been divided by a geometric progression, so $b = 1/2$,$ b_1 = 3/4$, and so on;
+            $a = (0, 1/2)$, $a' = (1/2, 3/4)$, etc. The point $C$ is (1, 1). The points $d' = (1/2, 1/2)$, $d^{''} = (3/4, 3/4)$, etc. 
+            give the corresponding subdivision of the main diagonal.
+    \end{quote}
+    I can't explain the curve in english clearly, so i quote the 
+    discription in Was Cantor Surprised \footnote{I also add my notes on this article, see \url{WasCantorSurprised_AfterReading.md} } here. 
+    We can slightly change this bijection by ignoring the endpoint C, by doing so, we get 
     the desired bijection $g$.\\
     \hspace*{2em} Also, in a $'modern'$ way(as Cantor would say), we can construct the bijection like this.
     \begin{equation}
@@ -81,8 +85,6 @@
 
     To sum up, the bijection between [0, 1] and $\mathbb{R}$ is : $f \circ g$
     
-
-
 
 
 
