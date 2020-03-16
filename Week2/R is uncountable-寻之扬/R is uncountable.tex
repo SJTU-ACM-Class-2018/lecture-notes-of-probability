@@ -1,0 +1,27 @@
+\input{D:/template.tex}
+\author{Zhiyang Xun}
+\title{Prove $\R$ Is Uncountable Without Using $\text{AC}_\omega$}
+
+\begin{document}
+ 
+\maketitle
+
+\begin{tcolorbox}
+\begin{theorem*} 
+    $\R$ is an uncountable set and it doesn't rely on axiom of countable choice.
+\end{theorem*} 
+\end{tcolorbox}
+
+\begin{proof}
+Let $(a_i)$ be a sequence of reals.
+Let $b_1 = a_1 + 1$, $c_1 = a_1 + 2$, so $a_1 \notin [b_1, c_1]$.
+Then if $a_2 < \frac{1}{3}b + \frac{2}{3}c$, let $b_2 = b_1$ and $c_2 = \frac{2}{3}b_1 + \frac{1}{3}c_1$;
+else we let $b_2 = \frac{1}{3}b_1 + \frac{2}{3}c_1$ and $c_2 = c_1$. 
+In this way we guaranteed both $a_2 \notin [b_2, c_2]$ and $[b_2, c_2] \in [b_1, c_1]$.
+Repeat this step and we get countable intervals $[b_i, c_i]$, satifying $a_i \notin [b_i, c_i]$ and $[b_{i+1}, c_{i+1}] \subseteq [b_i, c_i]$.
+Finally, choose a point $a \in \cap_i[b_i, c_i]$ and we see that $a \notin \{a_i : i \in \N\}$.
+\end{proof} 
+
+This proof doesn't rely on the axiom of countable choice because we explictly gave a scheme to choose each $[a_i, b_i]$.
+
+\end{document}
