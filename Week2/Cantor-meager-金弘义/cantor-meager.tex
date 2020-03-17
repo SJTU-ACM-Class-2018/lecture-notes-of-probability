@@ -1,0 +1,132 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{Solution to Exercise 1 of March 13}
+    \author{金弘义\ 518030910333}
+    \date{\today}
+    \maketitle
+    
+    \begin{customex}{1}
+    	
+        1) Show that the Cantor Set C is nowhere dense in $[0, 1]$.
+        
+        2) Find a meager set $T$ in $\mathbb{R}$ such that $T+T=\mathbb{R}$.
+        
+        3) Show that every subset of the real line $\mathbb{R}$ can be partitioned into two sets, one being of first category and the other being negligible. 
+    \end{customex}
+	\begin{proof}
+		1) Recall the the explicit closed formulas for the Cantor set are:
+		\begin{align*}
+			C= [0,1]\setminus \bigcup\limits_{n=0}^\infty \bigcup\limits_{k=0}^{3^n-1}(\frac{3k+1}{3^{n+1}},\frac{3k+2}{3^{n+1}})
+		\end{align*}
+		
+		It's obvious that $(\frac{3k+1}{3^{n+1}},\frac{3k+2}{3^{n+1}})$ is an open set. Since the union of open sets is an open set, the complement of $C$ is also open, which leads to the fact that $C$ is a closed set. So $\bar{C}=C$.
+		
+		Note that Cantor set can also be characterized as the set of all number in $[0,1]$ whose base-3 expansion doesn't contain any 1s. Assume there exists an interior point $x$ of $C$, then 
+		there exists a ball $B$, with radius $r > 0$, which is contained in $C$. Since $C \subseteq [0,1]$, B is an interval, whose length is $2r$. Arbitarily choose $x_1 \in B$ and $x_2\in B$ such that $x_1<x_2$ and $x_2-x_1\ge r$. Let $n=\lceil\log_{\frac{1}{3}}r\rceil+2$.Consider $x_3=x_1+(\frac{1}{3})^n,x_4=x_1+2\cdot(\frac{1}{3})^n$. Since $(\frac{1}{3})^n<(\frac{1}{3})^{\log_\frac{1}{3}r+1}=\frac{1}{3}r$, $x_3,x_4\in B$.  It' s obvious that one of them conatins 1 in its base-3 expansion, which means one of them doesn't belong to Cantor set. This leads to a contradiction, or equivalently, that there is no interior point of $C$.
+		
+		Now we can safely conclude that $C$ is nowhere dense.
+		
+		2)Let 
+		\begin{align*}
+			T(n)&=\{a+n| a\in C\}\\ T&=\bigcup\limits_{n\in \mathbb{Z}}T(n)
+		\end{align*}
+		
+		
+		First We will prove $T$ is a meager set. Since $T(n)$ is constructed by translation of all points in $C$ by $n$, $T(n)$ is also nowhere dense. This leads to the fact that $T$ is a meager set, because $\mathbb{Z}$ is countable. 
+		
+		Then we prove $T+T=\mathbb{R}$. From $C+C=[0,2]$, we can similarly get $T(n)+T(n)=[2n,2n+2]$. Note that:
+		\begin{align*}
+			\bigcup\limits_{n\in\mathbb{Z}}(T(n)+T(n))\subseteq T+T \subseteq \mathbb{R}
+		\end{align*} 
+		However,
+		\begin{align*}
+			\bigcup\limits_{n\in\mathbb{Z}}(T(n)+T(n))=\bigcup\limits_{n\in\mathbb{Z}}[2n,2n+2]=\mathbb{R}
+		\end{align*}
+		Now we conclude that $T+T=\mathbb{R}$.
+		
+		3)
+		Pick an enumeration of $\mathbb{Q}$, named $q_n$. Let:
+		\begin{align*}
+			I_{i,j}&=(q_i-\frac{1}{2^{i+j+2}},q_i+\frac{1}{2^{i+j+2}})\\
+			A_j&=\bigcup\limits_{i\in \mathbb{N}}I_{i,j}\\
+			B&=\bigcap\limits_{j\in\mathbb{N}}A_j
+		\end{align*}
+		
+		For any $\epsilon>0$, exist $j_0>0$ such that $|\frac{1}{2^{j_0}}|<\epsilon$. So we have :
+		\begin{align*}
+			|A_j|\le \sum_{i=0}^{\infty} \frac{1}{2^{i+j+1}}=\frac{1}{2^j} \\
+			|B|\le|A_{j_0}|\le \frac{1}{2^{j_0}} < \epsilon
+		\end{align*}
+		
+		This leads to that B is negligible. Then we prove $B^C$ is a meager set.
+		\begin{align*}
+			B^C=\bigcup\limits_{j\in\mathbb{N}}A_j^C
+		\end{align*}
+		
+		Since $\mathbb{Q}\subseteq A_j$ and $\mathbb{Q}$ is dense, we can know that $A_j$ is dense. $A_j$ is also open because $A_j$ is the union of open intervals. These 2 properties of $A_j$ can lead to that $A_j^C$ is nowhere dense. So $B^C$ is a meager set, which finishes the proof.
+	\end{proof}
+	
+	
+    
+    
+\end{document}
