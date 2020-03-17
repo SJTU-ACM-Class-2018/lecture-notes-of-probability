@@ -1,0 +1,81 @@
+\documentclass[UTF8, 12pt]{ctexart}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\setCJKmainfont{DENGL.TTF}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{exercise*}{Exercise}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Liouville Number}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{exercise*} 
+        \begin{enumerate}[label=\arabic*)]
+            \item Show that $\sum_{j\in\mathbb{N}}\frac{1}{2^{j!}}$ is a Liouville number.
+            \item Show that every Liouville number must be transcendental.
+        \end{enumerate}
+    \end{exercise*}
+
+    \begin{solution}
+        \begin{enumerate}[label=\arabic*)]
+            \item I present here a constructive proof. \\
+                Since  $\sum_{j\in\mathbb{N}}\frac{1}{2^{j!}}$ is a sum of infinite series, we can choose, for every $n$, $\frac{p_n}{q_n}$ to be the prefix sum of $\frac{1}{2^{j!}}$. \par
+                With this intuition, we let $$ \frac{p_n}{q_n} = \sum_{j = 1}^{n}\frac{1}{2^{j!}} $$
+                Then, 
+                \begin{align*}
+                    |\sum_{j\in\mathbb{N}}\frac{1}{2^{j!}} - \frac{p_n}{q_n}| &= \sum_{j\in\mathbb{N}}\frac{1}{2^{j!}} - \sum_{j = 1}^{n}\frac{1}{2^{j!}} \\
+                    &= \sum_{j = n + 1}^{\infty} \frac{1}{2^{j!}} \\
+                    &< \sum_{j = (n + 1)!}^{\infty} \frac{1}{2^{j}} = \frac{1}{2^{(n+1)!-1}} \\
+                    &< \frac{1}{(2^{n!})^n}\quad (n!\cdot n < n! \cdot (n+1) < (n+1)!)
+                \end{align*}
+                Thus, we choose $q_n$ to be $2^{n!}$, and $p_n$ to be $q_n * \sum_{j = 1}^{n}\frac{1}{2^{j!}} = 2^{n!} * \sum_{j = 1}^{n}\frac{1}{2^{j!}}$
+            \item We prove by contradiction. \\
+                Assume that there is a Liouville number $z$ that is not transcendental, then it must be a algebraic number of degree $n$.
+                We know from the \textit{lecture notes} that, there exists a positive integer $M$ such that for all integers $p$ and $q$, 
+                \begin{equation}
+                |z - \frac{p}{q}| > \frac{1}{M\cdot q^n}
+                \end{equation}
+                It also holds for Liouville number $z$ that for every integer $n$ there exists integers $p$ and $q$ such that
+                \begin{equation}
+                |z - \frac{p}{q}| < \frac{1}{q^n}
+                \end{equation}
+                Notice that \textit{(1)} and \textit{(2)} are inequalities of opposite signs, in order to induce a contradiction, it must be the case that
+                for some $n'$(not to be confused with the degree $n$),
+                $$
+                \frac{1}{q^{n'}} < \frac{1}{M\cdot q^n} \Longleftrightarrow M\cdot q^n < q^{n'}
+                $$
+                This could easily be achieved by setting
+                $$
+                n' = \lceil n + log_qM\rceil
+                $$
+                Thus a contradiction! \\ 
+                Therefore, every Liouville number must be transcendental.
+        \end{enumerate}
+    \end{solution}
+\end{document}
