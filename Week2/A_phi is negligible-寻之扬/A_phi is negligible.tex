@@ -1,0 +1,44 @@
+% !TEX program = xelatex
+\input{D:/template}
+ 
+\author{Zhiyang Xun}
+\title{Reals Allowing Rational Approximation of Too High Order Are Negligible}
+
+\begin{document}     
+\maketitle
+
+\begin{definition}
+    $A_\phi$ is the set of reals $x$ in $(0, 1]$ such that 
+    \[ \abs{x - \frac{p}{q}} < \frac{1}{q^2\phi(q)} \] 
+    has infinitely many irreduciple rational solutions $(p, q)$, that is, $(p, q) \in \Z^2$, $q > 0$ and $\gcd(p, q) = 1$. 
+\end{definition}
+
+\begin{theorem}
+    Suppose that $\phi$ is positive. If $\sum_q \frac{1}{q\phi(q)} < \infty$, then $P (A_\phi) = 0$.
+\end{theorem}     
+
+\begin{proof}
+    For each $(p, q) \in \Z^+ \times \Z^+$ satisfying $p \leq q$, we define interval 
+    $I_{(p, q)} = [\frac{p}{q} - \frac{1}{q^2\phi(q)}, \frac{p}{q} + \frac{1}{q^2\phi(q)}]$.
+    Clearly, $A_\phi \subseteq \bigcup I_{(p, q)}$.
+    Because each element $x \in A_\phi$ has infinitely many solutions to $\abs{x - \frac{p}{q}} < \frac{1}{q^2\phi(q)}$, and for each $k \geq 1$, only finite $(p, q)$ satisfying $p \leq q < k$, we can see that \[
+        A_\phi \subseteq \bigcup_{q=k}^\infty \bigcup_{p=1}^{q} I_{(p, q)} 
+    \]
+
+    Now we only need to prove for each $\epsilon > 0$, there is a positive integer $k$ satisfying $\sum_{q=k}^\infty \sum_{p=1}^{q} \abs{I_{(p, q)}} < \epsilon$ to illustrate $P (A_\phi) = 0$.
+
+    We can see
+    \begin{align*}
+         &\sum_{q=k}^\infty \sum_{p=1}^{q} \abs{I_{(p, q)}} \\
+        =&\sum_{q=k}^\infty \sum_{p=1}^{q} \frac{2}{q^2\phi(q)} \\
+        =&\sum_{q=k}^\infty \frac{2}{q\phi(q)} \\
+        =&2\sum_{q=k}^\infty \frac{1}{q\phi(q)} \\
+    \end{align*}
+
+    Since $\sum_q \frac{1}{q\phi(q)} < \infty$, for each $\epsilon > 0$, there is a $k \geq 1$ satisfying $\sum_{q=k}^\infty \frac{1}{q\phi(q)} < \frac{\epsilon}{2}$. It implies $\sum_{q=k}^\infty \sum_{p=1}^{q} \abs{I_{(p, q)}} = 2\sum_{q=k}^\infty \frac{1}{q\phi(q)} < \epsilon$.
+
+    Hence, $P(A_\phi) = 0$.
+    
+\end{proof}
+
+\end{document}
