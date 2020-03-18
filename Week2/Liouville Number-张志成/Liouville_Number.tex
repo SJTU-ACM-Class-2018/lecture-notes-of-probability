@@ -29,12 +29,13 @@
 
 \newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
 
-\title{Liouville Number}
+\title{Liouville Number and $\pi$}
 \author{张志成 518030910439}
 \date{\today}
 
 \begin{document}
     \maketitle
+    \section{Liouville Number}
     \begin{exercise*} 
         \begin{enumerate}[label=\arabic*)]
             \item Show that $\sum_{j\in\mathbb{N}}\frac{1}{2^{j!}}$ is a Liouville number.
@@ -78,4 +79,23 @@
                 Therefore, every Liouville number must be transcendental.
         \end{enumerate}
     \end{solution}
+
+    \section{Irrationality of $\pi$}
+    We define the \textbf{irrationality measure} of a number as the smallest $\mu$ such that
+    $$
+    |x - \frac{p}{q}| > \frac{1}{q^{\mu + \epsilon}}
+    $$
+    holds for any $\epsilon$ and all integer $p$, $q$ sufficiently large. \par
+    For any Liouville number $L$, $\mu(L) = \infty$. \par
+    Now we are interested in the value of $\mu(\pi)$. Unfortunately, we cannot say for sure, best proven bounds are as follows:
+    \begin{enumerate}
+        \item In 2008, Salikhov proved that $\mu(\pi) < 7.606308$ \textcolor{blue}{$\cite{ref1}$}. To the best of my ability, I can only find the russian version.
+        \item In 2019, Zeilberger and Zudlin inproved the previous bound to 7.10320533413$\cdots$ \textcolor{blue}{$\cite{ref2}$}
+    \end{enumerate}
+    
+    \begin{thebibliography}{99}
+        \bibitem{ref1}{Salikhov, V. Kh. "On the Irrationality Measure of pi." http://www.mathnet.ru/links/2590a72a2a7cbffb697b42a0056ed58a/rm9175.pdf}
+        \bibitem{ref2}{Zeilberger, D. and Zudlin, W. "The Irrationality Measure of pi is at Most 7.103205334137...." 13 Dec 2019. https://arxiv.org/pdf/1912.06345.pdf }
+    \end{thebibliography}
+
 \end{document}
