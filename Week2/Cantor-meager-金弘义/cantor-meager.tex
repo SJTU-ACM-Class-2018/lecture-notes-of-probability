@@ -82,7 +82,7 @@
 		It's obvious that $(\frac{3k+1}{3^{n+1}},\frac{3k+2}{3^{n+1}})$ is an open set. Since the union of open sets is an open set, the complement of $C$ is also open, which leads to the fact that $C$ is a closed set. So $\bar{C}=C$.
 		
 		Note that Cantor set can also be characterized as the set of all number in $[0,1]$ whose base-3 expansion doesn't contain any 1s. Assume there exists an interior point $x$ of $C$, then 
-		there exists a ball $B$, with radius $r > 0$, which is contained in $C$. Since $C \subseteq [0,1]$, B is an interval, whose length is $2r$. Arbitarily choose $x_1 \in B$ and $x_2\in B$ such that $x_1<x_2$ and $x_2-x_1\ge r$. Let $n=\lceil\log_{\frac{1}{3}}r\rceil+2$.Consider $x_3=x_1+(\frac{1}{3})^n,x_4=x_1+2\cdot(\frac{1}{3})^n$. Since $(\frac{1}{3})^n<(\frac{1}{3})^{\log_\frac{1}{3}r+1}=\frac{1}{3}r$, $x_3,x_4\in B$.  It' s obvious that one of them conatins 1 in its base-3 expansion, which means one of them doesn't belong to Cantor set. This leads to a contradiction, or equivalently, that there is no interior point of $C$.
+		there exists a ball $B$, with radius $r > 0$, which is contained in $C$. Since $C \subseteq [0,1]$, B is an interval, whose length is $2r$. Arbitarily choose $x_1 \in B$ and $x_2\in B$ such that $x_1<x_2$ and $x_2-x_1\ge r$. Let $n=\lceil\log_{\frac{1}{3}}r\rceil+2$.Consider $x_3=x_1+(\frac{1}{3})^n,x_4=x_1+2\cdot(\frac{1}{3})^n$. Since $(\frac{1}{3})^n<(\frac{1}{3})^{(\log_\frac{1}{3}r) +1}=\frac{1}{3}\cdot(\frac{1}{3})^{(\log_\frac{1}{3}r)}=\frac{1}{3}r$, $x_3,x_4\in B$.  It' s obvious that one of them conatins 1 in its base-3 expansion, which means one of them doesn't belong to Cantor set. This leads to a contradiction, or equivalently, that there is no interior point of $C$.
 		
 		Now we can safely conclude that $C$ is nowhere dense.
 		
@@ -138,6 +138,20 @@
 		By construction,$C_n$ contains no intervals and therefore has empty interior, or equivalently, $C_n$ is nowhere dense in $[0,1]$. So $C$ is a meager set in $[0,1]$. 
 		
 		We can easily extend this conclusion to $\mathbb{R}$. Let $C'(i)=\{i+c | c\in C, i\in\mathbb{Z}\}$, $C'=\bigcup\limits_{i\in\mathbb{Z}}C'(i)$. It's easy to see that $C'$ is a meager set in $\mathbb{R}$ and $C'^C$ is negligible in $\mathbb{R}$.
+		
+		Method 3:
+		Let $L$ be the set of Liouville numbers.
+		Recall the first claim of Theorem 3 from notes on March 10, which is:
+		Suppose that $\phi$ is positive. If $\sum_{q}\frac{1}{q\phi(q)}<\infty$, then $P(A_\phi)=0$. $A_\phi$ is the set of reals $x$ in $(0,1]$ such that $|x-\frac{p}{q}| < \frac{1}{q^2\phi(q)}$. Let $\phi(q)=q$, then $L \subseteq A_\phi$.
+		Since $\sum_{q}\frac{1}{q^2}<\infty$, $P(A_\phi)=0$,which leads to that $P(L)=0$. Equivalently, $L$ is negligible. 
+		
+		Select an enumeration of $\mathbb{Q}$, named $q_n$.Let
+		\begin{align*}
+			U_n&=\bigcup\limits_{i=0}^{\infty}\{x :  q_i=\frac{p}{q},0<|x-\frac{p}{q}| < \frac{1}{q^n}\}\\
+			L&=\bigcap\limits_{n=1}^{\infty}U_n
+		\end{align*}
+		
+		$U_n$ is open, because it's the union of open sets. Since any open set that contains $\frac{p}{q}$ must intersect with $\{x :  0<|x-\frac{p}{q}| < \frac{1}{q^n}\}$ and $\mathbb{Q}$ is dense, it's easy to see that $U_n$ is dense according to the definition of "dense". So $U_n^C$ is nowhere dense, which means $L^C=\bigcup\limits_{n=1}^{\infty}U_n^C$ is a meager set. This finishes the proof.
 	\end{proof}
 	
 	
