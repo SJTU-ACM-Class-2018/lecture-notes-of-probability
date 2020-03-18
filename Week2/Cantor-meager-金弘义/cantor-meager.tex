@@ -60,7 +60,7 @@
 \newcommand{\nth}[1]{#1\textsuperscript{th}}
 
 \begin{document}
-    \title{Solution to Exercise 1 of March 13}
+    \title{Properties of Cantor Set}
     \author{金弘义\ 518030910333}
     \date{\today}
     \maketitle
@@ -104,7 +104,8 @@
 		\end{align*}
 		Now we conclude that $T+T=\mathbb{R}$.
 		
-		3)
+		3) Method 1:
+		
 		Pick an enumeration of $\mathbb{Q}$, named $q_n$. Let:
 		\begin{align*}
 			I_{i,j}&=(q_i-\frac{1}{2^{i+j+2}},q_i+\frac{1}{2^{i+j+2}})\\
@@ -124,6 +125,19 @@
 		\end{align*}
 		
 		Since $\mathbb{Q}\subseteq A_j$ and $\mathbb{Q}$ is dense, we can know that $A_j$ is dense. $A_j$ is also open because $A_j$ is the union of open intervals. These 2 properties of $A_j$ can lead to that $A_j^C$ is nowhere dense. So $B^C$ is a meager set, which finishes the proof.
+		
+		Method 2:
+		Construct a sequence of fat cantor set by the following steps: To construct $C_n$($n\ge2$), first remove the middle $\frac{1}{2n}$ from the interval $[0,1]$. Then in the $i^{th}$ step(i starts from 2), remove subintervals of width $\frac{1}{2n\cdot4^{i-1}}$ from the middle of each of the $2^{i-1}$ remaining intervals. We can then calculate 
+		\begin{align*}
+			|C_n|&=1-\sum_{i=1}^{\infty}{\frac{1}{2n\cdot4^{i-1}}\cdot2^{i-1}=1-\frac{1}{n}}\\
+			|C_n^C|&=\frac{1}{n}
+		\end{align*}
+		
+		For any $\epsilon>0$, there exists $n_0>0$ such that $\frac{1}{n_0}<\epsilon$. Let $C= \bigcup\limits_{n=2}^{\infty}C_n$, then $C^C=\bigcap\limits_{n=2}^{\infty}C_n$. Note that $|C^C|\le|C_{n_0}^C|=\frac{1}{n_0}<\epsilon$, which leads to that $C^C$ is negligible in $[0,1]$.
+		
+		By construction,$C_n$ contains no intervals and therefore has empty interior, or equivalently, $C_n$ is nowhere dense in $[0,1]$. So $C$ is a meager set in $[0,1]$. 
+		
+		We can easily extend this conclusion to $\mathbb{R}$. Let $C'(i)=\{i+c | c\in C, i\in\mathbb{Z}\}$, $C'=\bigcup\limits_{i\in\mathbb{Z}}C'(i)$. It's easy to see that $C'$ is a meager set in $\mathbb{R}$ and $C'^C$ is negligible in $\mathbb{R}$.
 	\end{proof}
 	
 	
