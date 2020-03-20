@@ -1,0 +1,66 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+% \input{/home/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Usual length function is countably additive}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    Let $S = (0, 1]$, let $\Sigma_0$ be the subsets of $S$ which are finite unions of disjoint left-open right-closed intervals. It is clear that $\Sigma_0$ is an algebra.
+
+    Let $\mu_0$ be the usual length function on $\Sigma_0$. Show that $\mu_0$ is countably additive.
+\end{thm}
+
+\begin{proof}[Proof]
+    Consider the disjoint sets $A_1, A_2,\cdots, A_n,\cdots  $ with $\forall i \in \mathbb{N} _+, A_i \in \Sigma_0$ and $A = \bigcup_{i \in \mathbb{N} _+} A_i \in \Sigma_0$.
+
+    We would like that to show that 
+    \begin{align*}
+        \mu_0(A) = \sum _{i\in\mathbb{N} _+} \mu_0(A_i)
+    .\end{align*}
+
+    By the definition of $\Sigma_0$, we have $A_i = \bigcup_{j=1}^{n_i} I_{ij}$ where $I_{ij}$ are left-open right-closed intervals and are disjoint.
+
+    Then $A = \bigcup_{i\in\mathbb{N} _+} A_i = \bigcup_{i\in\mathbb{N} _+}\bigcup_{j=1}^{n_i} I_{ij}$, that is a countable union of finite union of sets, which is also countable. By renaming, let $A = \bigcup_{i\in\mathbb{N} _+} I_i$, where $I_i$ are left-open right-closed and disjoint.
+    
+    $\mu_0$ satisfies finite additivity. Thus for all $N \in \mathbb{N} _+$,
+    \begin{align*}
+        \sum_{i=1}^N \mu_0(I_i) = \mu_0(\bigcup_{i=1}^N I_i)
+    .\end{align*}
+
+    And we have $\mu_0(\bigcup_{i=1}^{N+1} I_i) = \mu_0(\bigcup_{i=1}^N I_i) = \mu_0(I_{N+1}) \ge  \mu_0(\bigcup_{i=1}^N I_i)$, this implies
+    \begin{align*}
+        \sum_{i=1}^\infty \mu_0(I_i) \le \mu_0(A)
+    .\end{align*}
+
+    On the other hand, note that $\forall I_i \neq \varnothing, \mu_0(I_i) = \mu_0((a_i,b_i]) = b_i - a_i > 0$. That is, 
+    \begin{align*}
+        \forall \varepsilon > 0, \exists I_i' := (a_i, b_i + \frac{\varepsilon}{2} ) \in \Sigma_0, I_i \subseteq I_i', \mu_0(I_i') - \mu_0(I_i) = \frac{\varepsilon}{2} < \varepsilon
+    .\end{align*}
+
+    Also, we have $A \in \Sigma_0$, similarly, for a fixed $\varepsilon >0$, we can have $[l, r] \subseteq A$ with $\mu_0(A) - \mu_0([l, r]) < \varepsilon $.
+
+    From this we can get a infinite open cover of $[l, r]$. By the property of $\mathbb{R} $, there exists a finite open cover $I_{k_1}', I_{k_2}',\cdots I_{k_M}'$ such that $M \subseteq \bigcup_{i=1}^M I_{k_i}'$. Then by the elementary inequality, 
+    \begin{align*}
+        \mu_0(A) - \varepsilon < \mu_0([l, r]) &= \mu_0(\bigcup_{i=1}^M I_{k_i}) \\
+                                               &\le \sum_{i=1}^M \mu_0(I_{k_i}')  \\
+                                               &\le \sum_{i=1}^M (\mu_0(I_{k_i}) + \varepsilon_i)  \\
+                                               &\le \sum_{i=1}^\infty \mu_0(I_i) + \sum_{i=1}^M \varepsilon_i
+   .\end{align*}
+
+   Let $\varepsilon _i = \frac{\varepsilon}{2^i}$, finally We get $\mu_0(A) \le \sum _{i=1}^\infty \mu_0(I_i) + 2\varepsilon $ for all $\varepsilon > 0$.
+
+   Combine the two sides, resulting in 
+    \begin{align*}
+        \mu_0(A) = \sum _{i\in\mathbb{N} _+} \mu_0(A_i)
+    .\end{align*}
+
+    That finished the proof for the countable additivity of $\mu_0$.
+
+\end{proof}
+
+
+\end{document}
