@@ -41,17 +41,17 @@
         \forall \varepsilon > 0, \exists I_i' := (a_i, b_i + \frac{\varepsilon}{2} ) \in \Sigma_0, I_i \subseteq I_i', \mu_0(I_i') - \mu_0(I_i) = \frac{\varepsilon}{2} < \varepsilon
     .\end{align*}
 
-    Also, we have $A \in \Sigma_0$, similarly, for a fixed $\varepsilon >0$, we can have $[l, r] \subseteq A$ with $\mu_0(A) - \mu_0([l, r]) < \varepsilon $.
+    Also, we have $A \in \Sigma_0$, which means $A = \bigcup_{t=1}^{r} A_t$. Similarly, for a fixed $\varepsilon >0$, for each $A_t$, we can have $[l_t, r_t] \subseteq A_t$ with $\mu_0(A_t) - \mu_0([l_t, r_t]) < \frac{\varepsilon}{r} $.
 
-    From this we can get a infinite open cover of $[l, r]$. By the property of $\mathbb{R} $, there exists a finite open cover $I_{k_1}', I_{k_2}',\cdots I_{k_M}'$ such that $M \subseteq \bigcup_{i=1}^M I_{k_i}'$. Then by the elementary inequality, 
+    From this we can get a infinite open cover of $[l_t, r_t]$. By the property of $\mathbb{R} $, there exists a finite open cover $I_{tk_1}', I_{tk_2}',\cdots I_{tk_M}'$ such that $A_t \subseteq \bigcup_{i=1}^M I_{tk_i}'$. Then by the elementary inequality, 
     \begin{align*}
-        \mu_0(A) - \varepsilon < \mu_0([l, r]) &= \mu_0(\bigcup_{i=1}^M I_{k_i}) \\
-                                               &\le \sum_{i=1}^M \mu_0(I_{k_i}')  \\
-                                               &\le \sum_{i=1}^M (\mu_0(I_{k_i}) + \varepsilon_i)  \\
-                                               &\le \sum_{i=1}^\infty \mu_0(I_i) + \sum_{i=1}^M \varepsilon_i
+        \mu_0(A) = \sum_{t=1}^r \mu_0(A_t) < \varepsilon + \sum_{t=1}^r \mu_0([l_t, r_t]) &= \varepsilon + \sum_{t=1}^r \mu_0(\bigcup_{i=1}^M I_{tk_i}) \\
+                                                                                          &\le \varepsilon + \sum_{t=1}^r \sum_{i=1}^M \mu_0(I_{tk_i}')  \\
+                                                                                          &\le \varepsilon + \sum_{t=1}^r \sum_{i=1}^M (\mu_0(I_{tk_i}) + \varepsilon_i)  \\
+                                                                                          &\le \varepsilon + \sum_{i=1}^\infty \mu_0(I_i) + r\sum_{i=1}^M \varepsilon_i
    .\end{align*}
 
-   Let $\varepsilon _i = \frac{\varepsilon}{2^i}$, finally We get $\mu_0(A) \le \sum _{i=1}^\infty \mu_0(I_i) + 2\varepsilon $ for all $\varepsilon > 0$.
+   Let $\varepsilon _i = \frac{\varepsilon}{r2^i}$, finally We get $\mu_0(A) \le \sum _{i=1}^\infty \mu_0(I_i) + 2\varepsilon $ for all $\varepsilon > 0$.
 
    Combine the two sides, resulting in 
     \begin{align*}
