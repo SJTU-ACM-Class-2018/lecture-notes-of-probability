@@ -1,0 +1,56 @@
+\input{/Users/fulingyue/Desktop/def.tex}
+\newtheorem{theorem}{Theorem}
+\title{Trival Proofs of Inclusion-exclusion Principle}
+\author{Fu Lingyue}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{theorem}
+  Let $A_1, \dots, A_k$ be k finite sets. We have 
+  $$|\cup_{i=1}^k A_i |=\sum_i|A_i|-\sum_{i<j}|A_i \cap A_j|+\cdots+(-1)^{k-1}|A_1 \cap \cdots \cap A_k|.$$
+\end{theorem}
+
+Here I will give the second way to proof it. Another proof has been given by Chen Tong.
+\begin{proof}
+  Choose an arbitrary point $x\in\bigcup_{k=1}^n A_k$, and let $A_{l_1},A_{l_2},\dots,A_{l_t}$ ($t<n$) be the subsets that $x\in A_{l_k}$ ($1\leq k\leq t$).
+  
+  $x$ is counted for one time on the left hand side of the equation. And the number that $x$  be counted  on the right hand side is 
+  \begin{equation}
+  \nonumber
+    \begin{aligned}
+    \text{Num\_right} &=
+      \Sigma_{k=1}^n(-1)^{k+1} |\{\bigcap_{p=1}^k A_{m_p}:1\leq m_1\leq m_2\dots m_k\leq t\} \\
+      &= \Sigma_{k=1}^n(-1)^{k+1}C(t,k)\\
+      & = 1. & \text{(by Binomial Theorem)}
+    \end{aligned}
+  \end{equation}
+  Thus $x$ is counted for equal times on left and right. Therefore, lhs=rhs.
+  
+\end{proof}
+
+
+\begin{theorem}
+  Let $(X,\mu)$ be a finite measure space. For any finite numbers of measurable sets $A_1,A_2,\dots,A_n\subseteq X$, we have
+  $$\mu(\bigcup_{k=1}^n A_k) = \Sigma_{\varnothing \not= S\subseteq1,2,\dots,n}^n  (-1)^{|S|-1}\mu(\bigcap_{k\in S}A_k)$$
+\end{theorem}
+\begin{proof}
+  Let $A$ denote the union $\bigcup_{k=1}^n A_k$. We have to verify the identity
+  \begin{equation}
+    1_A = \Sigma_{k=1}^n(-1)^{k-1} \Sigma_{I\subseteq \{1,2,\dots,n\}, |I| = k} 1_{A_I}.
+  \end{equation}
+  Here we denote $A_I = \bigcap_{k\in I} A_k$.
+  
+  We can write an equation
+  \begin{equation}
+    (1_A - 1_{A_1})(1_A - 1_{A_2})\dots (1_A - 1_{A_n}) = 0.
+  \end{equation}
+
+If $x\notin A,$ then all the factors are $0-0 = 0$;  If  $x\in A$, then $x$ must in some subset $A_j$, thus the  factor $1_A -  1_{A_j} = 0$. Thus the equation (2) holds. Expand the left hand side of the equation(2), we get the equation (1).
+
+Using equation (1), we have proved the theorem.
+  
+  
+\end{proof}
+\paragraph{A question} Why the sets should be finite in theorem 1? Why the Inclusion-exclusion Principle need the measure space finite?
+
+\end{document}
