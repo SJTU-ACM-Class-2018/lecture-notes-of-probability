@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+
+%\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{hyperref} 
+\usepackage{tcolorbox}
+
+\geometry{a4paper, left = 2cm, right = 2cm, top = 2cm}
+
+\newcommand\problem[1]{\section*{Problem #1}}
+
+\newcommand\bE{\mathbb{E}}
+\newcommand\bF{\mathbb{F}}
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\fC{\mathbf{C}}
+\newcommand\fF{\mathbf{F}}
+\newcommand\fN{\mathbf{N}}
+\newcommand\fQ{\mathbf{Q}}
+\newcommand\fR{\mathbf{R}}
+\newcommand\fZ{\mathbf{Z}}
+\newcommand\cU{\mathcal{U}}
+
+\newcommand\ce{\coloneqq}
+\newcommand\lproof{\item ``$\Leftarrow$'' :}
+\newcommand\rproof{\item ``$\Rightarrow$'' :}
+
+\newcommand{\leb}{\text{Leb}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand\ord{\text{ord}}
+\newcommand{\floor}[1]{\lfloor {#1}\rfloor}
+
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+
+\title{A Non-Lebesgue-Measurable Set in $\bR^n$}
+\author{WU Runzhe\\
+	Student ID : 518030910432\\
+	\textsc{Shanghai Jiao Tong University}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	Our goal here is to construct a non-Lebesgue-measurable set in $\bR^n$ for $n\in \bZ_+$. I have to say that the desired set constructed here is quite similar to Vitali set on $\bR$.
+	
+	Let's consider the collection of cosets $A\ce\bR^n/\bQ^n$. And we limit the elements in $A$ on $[0,1]^n$, that is, we define $B\ce \{S\cap[0,1]^n:S\in A \} $.
+	
+	Using axiom of choice, we can obtain a choice function $ f : B \rightarrow [0,1]^n $, and we define $V\ce \{f(S):S \in B\}$. Undoubtedly, $V \subseteq [0,1]^n$.
+	
+	Furthermore, we construct a new set $W$ by translating $V$ in all directions with some limitations, namely, 
+	\begin{equation}\label{w}
+		W\ce \bigcup_{v\in  \bQ^n\cap[-1,1]^n} (V+v)
+	\end{equation}
+	
+	\begin{lemma}\label{l0}
+		For $u,v\in  \bQ^n\cap[-1,1]^n$ with $u\not=v$, $(V+v)\cap (V+u)=\emptyset$.
+	\end{lemma}
+
+	\begin{proof}[Proof of lemma \ref{l0}]
+		Assume not, say, $z\in (V+v)\cap (V+u)$. Then  for some $x,y\in V$, we have
+		$$x+v=y+u=z$$
+		which means
+		$$x-y=u-v.$$
+		As $u-v\in \bQ^n$, we have $x-y\in \bQ^n$, which means $x,y\in \bQ^n+t$ for some $t\in \bR^n$. Therefore, by the definition of $V$, it is impossible for both $x$ and $y$ to be in $V$. It contracts our assumption.
+	\end{proof}
+	
+	\begin{lemma}\label{l1}
+		$[0,1]^n\subseteq W$.
+	\end{lemma}
+
+	\begin{proof}[Proof of lemma \ref{l1}]
+		For each $x\in [0,1]^n$, we know that $x\in \bQ^n+t$ for some $t\in \bR$ as $\bQ^n$ is a subgroup of $\bR^n$. Consider the choice on $\bQ^n+t$, say, $y=f(\bQ^n+t)\in\bQ^n+t$. It is clear that $y-x\in \bQ^n$. And since $x,y\in[0,1]^n$, $y-x\in \bQ^n\cap[-1,1]^n$, which completes the proof.
+	\end{proof}
+	
+	\begin{lemma}\label{l2}
+		$W\subseteq [-1,2]^n$.
+	\end{lemma}
+
+	\begin{proof}[Proof of lemma \ref{l2}]
+		This is quite obvious as we have $x\in[0,1]^n$ for each $x\in V$, and of course, $x+v\in [-1,2]^n$ since $v\in [-1,1]^n$.
+	\end{proof}
+
+	The following corollary is a direct result by combining lemma \ref{l1} and lemma \ref{l2}.
+	\begin{corollary}\label{c1}
+		$[0,1]^n\subseteq W\subseteq [-1,2]^n$
+	\end{corollary}
+	
+	We assume all elements in $\bR^n$ is Lebesgue-measurable. By the properties of measure and corollary \ref{c1}, we have
+	
+	\begin{equation}\label{eq1}
+		\leb([0,1]^n) \le \leb(W) \le \leb([-1,2]^n)
+	\end{equation}
+	
+	Combining Eq.\ref{w} and lemma \ref{l0}, we have 
+	
+	$$\leb(W)=\leb(\bigcup_{v\in  \bQ^n\cap[-1,1]^n} (V+v))=\sum_{\bQ^n\cap[-1,1]^n}\leb(V+v)$$.
+	
+	According to the translation invariant of Lebesgue measure
+	\footnote{Lebesgue measure can also be obtained by limiting the Lebesgue outer measure on Lebesgue $\sigma-$algebra, and we can easily tell from the definition of Lebesgue outer measure that it has the property of translation invariant.},
+	we know that $\leb(V+v)=\leb(V+u)$ for $u,v\in\bQ^n\cap[-1,1]^n$. 
+	
+	Now we pick an arbitrary $v\in\bQ^n\cap[-1,1]^n$. If $\leb(V+v)=0$, then $\leb(W)=0$, too. And by Eq.\ref{eq1}, we have $\leb([0,1]^n)=0$, which is not Lebesgue measure means to do. On the other hand, if $\leb(V+v)>0$, it implies $\leb(W)=\infty$, which means $\leb([-1,2]^n)=\infty$. This also contradicts the definition of Lebesgue measure.
+	
+	In conclusion, $W$ is not a Lebesgue-measurable set in $\bR^n$.
+	
+\end{document}
