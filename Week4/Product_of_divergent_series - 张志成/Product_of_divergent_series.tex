@@ -1,0 +1,74 @@
+\documentclass[UTF8, 12pt]{ctexart}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\setCJKmainfont{DENGL.TTF}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newtheorem{claim}{Claim}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{problem*}{Problem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Product of A Divergent Series \\ \large An application of Borel-Cantelli Theorem}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{problem*}
+        Let $(y_n)_{n\in\mathbb{N}}$ be a sequence of reals from $[0,1]$ such that $\sum_{n\in\mathbb{N}}y_n = \infty$.
+        Show that $\prod_{n\in\mathbb{N}}(1-y_n) = 0$.
+    \end{problem*}
+
+    \begin{proof}
+        Recall \textbf{the second Borel-Cantelli Lemma(BC2)} we learned in class: 
+        \begin{lemma*}
+            If the events $E_n$ are pairwisely independent, then $$ \sum_n P(E_n) = \infty \Longrightarrow P(lim sup E_n) = 1 $$
+        \end{lemma*} \par
+        We observe that this problem is very similar to this Lemma, in particular $y_n$ is analogous to $P(E_n)$. Suppose we can find
+        for each $y_n$ an event $E_n$ such that $y_n = P(E_n)$, then $\sum_n P(E_n) = \infty$.
+        
+        Then by the BC2 lemma, 
+        \begin{align*}
+            &\quad\quad\quad P(\text{lim}\ \text{sup} E_n) = P(\bigcap_{m\in\mathbb{N}}\bigcup_{n\geq m} E_n) = 1 \\
+            &\Longrightarrow P(\bigcup_{n\geq 1} E_n) = 1 \\
+            &\Longrightarrow P((\bigcup_{n\geq 1} E_n)^c) = P(\bigcap_{n\geq 1} E_n^c) = 0
+        \end{align*}
+
+        Now we can prove the statement in the problem,
+        \begin{align*}
+            \prod_{n\in\mathbb{N}}(1-y_n) &= \prod_{n\in\mathbb{N}}P(E_n^c)\\
+            &= P(\bigcap_{n\geq 1} E_n^c) \\
+            &= 0
+        \end{align*}
+
+        The only thing left is an explicit expression for $E_n$ such that $P(E_n) = y_n$.
+        Consider a probaility space $(\Omega, \mathcal{F}, P)$.
+        Define $X_n: \Omega \rightarrow [0,1]$ to be a \textbf{equally distributed} random variable, namely
+        $$ \forall \omega \in \Omega\ \forall i\in[0,1]\ \forall j\in[0,1],\ P(X_n(\omega) = i) = P(X_n(\omega) = j) $$
+
+        Then we can simply let $$ E_n = \{\omega\ |\ X_n(\omega) \leq y_n \} $$
+
+        Thus, we have shown that $\prod_{n\in\mathbb{N}}(1-y_n) = 0$.
+    \end{proof}
+\end{document}
