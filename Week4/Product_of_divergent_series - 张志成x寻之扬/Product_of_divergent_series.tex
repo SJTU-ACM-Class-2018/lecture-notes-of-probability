@@ -30,7 +30,7 @@
 \newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
 
 \title{Product of A Divergent Series \\ \large An application of Borel-Cantelli Theorem}
-\author{张志成 518030910439}
+\author{张志成\ 寻之扬}
 \date{\today}
 
 \begin{document}
@@ -63,11 +63,9 @@
         \end{align*}
 
         The only thing left is an explicit expression for $E_n$ such that $P(E_n) = y_n$.
-        Consider a probaility space $(\Omega, \mathcal{F}, P)$.
-        Define $X_n: \Omega \rightarrow [0,1]$ to be a \textbf{equally distributed} random variable, namely
-        $$ \forall \omega \in \Omega\ \forall i\in[0,1]\ \forall j\in[0,1],\ P(X_n(\omega) = i) = P(X_n(\omega) = j) $$
-
-        Then we can simply let $$ E_n = \{\omega\ |\ X_n(\omega) \leq y_n \} $$
+        Consider a probaility space $([0,1], \mathcal{B}, Leb)$.
+        Then we can simply let $$ E_n = \{\omega\ |\ \omega \in [0, y_n] \} $$
+        We have $P(E_n) = y_n$.
 
         Thus, we have shown that $\prod_{n\in\mathbb{N}}(1-y_n) = 0$.
     \end{proof}
