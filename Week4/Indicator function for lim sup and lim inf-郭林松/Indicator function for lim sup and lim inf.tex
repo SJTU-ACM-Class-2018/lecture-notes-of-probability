@@ -1,0 +1,141 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+%\usepackage[left=0.8in,right=0.8in,top=1in,bottom=1in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{conclusion}[theorem]{Conclusion}
+
+%\newtheorem{proof}[theorem]{Proof}
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{Indicator function for lim sup and lim inf}
+\author{Guo Linsong~~518030910419}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+\begin{question}\label{main}
+\textbf{$(E_n,n\in\mathbb{N})$ is a sequence of events.Show that $$\forall \omega\in \Omega,\lim\sup1_{E_n}(\omega)=1_{\lim\sup E_n}(\omega)
+\text{ and }\lim\inf1_{E_n}(\omega)=1_{\lim \inf E_n}(\omega)$$}
+\end{question}
+
+\begin{proof}\label{pf1}
+    $~$\\
+    By definition $(2.5(a))$ in textbook, $\lim\sup1_{E_n}(\omega)=\downarrow\lim_m \{\sup_{n\geq m}1_{E_n}(\omega)\}$.\\
+    Let us consider $\sup_{n\geq m}1_{E_n}(\omega)$ firstly.
+    \begin{equation}
+        \sup_{n\geq m}1_{E_n}(\omega)
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\bigcup_{n\geq m}E_n(\text{i.e. }\exists n\geq m \text{ s.t. }\omega\in E_n) \\
+            0 & \text{otherwise}
+        \end{array}
+        \right.
+    \end{equation}
+    Thus
+    \begin{equation}
+        \downarrow\lim_m \{\sup_{n\geq m}1_{E_n}(\omega)\}
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\bigcap_{m}\bigcup_{n\geq m}E_n(\text{i.e. } \forall m \exists n\geq m \text{ s.t. }\omega\in E_n) \\
+            0 & \text{otherwise}
+        \end{array}
+        \right.
+    \end{equation}
+    According to the definition $(2.6(a))$, $\lim\sup E_n=\bigcap_m\bigcup_{n\geq m}E_n$
+    \begin{equation}
+        \downarrow\lim_m \{\sup_{n\geq m}1_{E_n}(\omega)\}
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\lim\sup E_n \\
+            0 & \text{otherwise}
+        \end{array}=1_{\lim\sup E_n}(\omega)
+        \right.
+    \end{equation}
+    Therefore
+    $$\forall \omega\in \Omega,\lim\sup1_{E_n}(\omega)=\downarrow\lim_m \{\sup_{n\geq m}1_{E_n}(\omega)\}=1_{\lim\sup E_n}(\omega)$$
+\end{proof}
+
+Next we establish the corresponding result for lim infs.
+
+\begin{proof}\label{pf2}
+    $~$\\
+    By definition $(2.5(b))$ in textbook, $\lim\inf1_{E_n}(\omega)=\uparrow\lim_m \{\inf_{n\geq m}1_{E_n}(\omega)\}$.
+    \begin{equation}
+        \inf_{n\geq m}1_{E_n}(\omega)
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\bigcap_{n\geq m}E_n(\text{i.e. }\forall n\geq m, \omega\in E_n) \\
+            0 & \text{otherwise}
+        \end{array}
+        \right.
+    \end{equation}
+    Thus
+    \begin{equation}
+        \uparrow\lim_m \{\inf_{n\geq m}1_{E_n}(\omega)\}
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\bigcup_{m}\bigcap_{n\geq m}E_n(\text{i.e. } \exists m \forall n\geq m, \omega\in E_n) \\
+            0 & \text{otherwise}
+        \end{array}
+        \right.
+    \end{equation}
+    According to the definition $(2.8(a))$, $\lim\inf E_n=\bigcup_m\bigcap_{n\geq m}E_n$
+    \begin{equation}
+        \uparrow\lim_m \{\inf_{n\geq m}1_{E_n}(\omega)\}
+        =
+        \left\{
+        \begin{array}{rl}
+            1 & \omega\in\lim\inf E_n \\
+            0 & \text{otherwise}
+        \end{array}=1_{\lim \inf E_n}(\omega)
+        \right.
+    \end{equation}
+    Therefore
+    $$\forall \omega\in \Omega, \lim\inf1_{E_n}(\omega)=\uparrow\lim_m \{\inf_{n\geq m}1_{E_n}(\omega)\}=1_{\lim \inf E_n}(\omega)$$
+\end{proof}
+
+\end{document}
