@@ -1,0 +1,178 @@
+\input{/Users/fulingyue/Desktop/def.tex}
+\author{Fu Lingyue}
+\title{Notes of Measure Space}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{Measure Theory and Topology}
+
+Space is often a set with a certain structure or operation, rather than a simple set.
+\paragraph{Topology} Topology deals with open sets. 
+
+We have a set T. T has some open subsets $O$.  If open sets satisfy some requirements in $U = \{O\}$, then $(T,U)$ is a topology space. T is the origin space. U is a subset of $2^T$(set consisting of subsets of T).
+
+U should satiafy:
+\begin{enumerate}
+  \item $T$ and $\varnothing$ is open set.
+  \item $\forall O_i \in U,  \bigcap_{i=1}^N O_i$ is open set (must be finite).
+  \item $\forall O_i \in U, \bigcup O_i$ is open set (arbitrary number).
+  
+\end{enumerate}
+
+We define \textbf{continuous function} $f$ on T as 
+$$\forall G \text{ is an open set}, f^{-1}(G) \text{ is an open set as well}.$$
+
+Measure Space has many similar definitions.
+\paragraph{Measurable Space} Similarly, measurable space is a dualistic group $(X,\mathcal F)$. $X$ is our origin discussion space, and $\mathcal F$ is a subset of $2^X$, which satisfies some conditions as follows: 
+\begin{enumerate}
+  \item $\varnothing, X \in \mathcal F$.
+  \item If $E\in \mathcal F$, then $E^C\in \mathcal F$.
+  \item If $E_i\in \mathcal F$, then $E_1 \cup E_2$ as well.
+\end{enumerate}
+
+Those elements in $\mathcal F$ is measurable. The measurable space $(X,\mathcal F)$ also can be described as "$\mathcal F$ is a $\sigma-$Algebra on $X$".
+
+\paragraph{Measure Space} Measure spaces define a measure $m$ on measurable space. Then measure space is a triple $(X,\mathcal F, m)$. 
+
+(if $\mathcal F$ is too big, we cannot find a measure function $m$ intuitively)
+
+The measure $m: \mathcal F\mapsto [0,\infty]$ has to satisfy:
+\begin{enumerate}
+\item $m(\varnothing) = 0.$
+\item If $F_i\cap F_j = \varnothing(i\not= j)$ and $F = \cup F_n \in \mathcal F$, then 
+$$m(F) = \Sigma m(F_n).$$  
+\end{enumerate}
+
+\begin{corollary}
+  (Additive) If $F,G \in \mathcal F,F \cap G = \varnothing$,  $m(F\cup G) = m(F) + m(G)$.
+\end{corollary}
+
+
+
+
+\section{$\sigma$-Algebra}
+$\sigma$-Algebra has three basic rules, and some properties are derived from them.
+\begin{corollary}
+  These two corollary is useful!
+  \begin{enumerate}
+  \item $\bigcup_{i=1}^n E_i\in \mathcal F(n\in \mathbb N)$ 
+  \item $\bigcap_{i=1}^n E_i = (\bigcup_{i=1}^n F_i^C)^C \in \mathcal F$.
+
+\end{enumerate}
+
+\end{corollary}
+
+Thus we conclude that $\sigma-$Algebra is a family of subsets closed to any countable number of operations.
+
+\begin{corollary}
+  \textbf{(Principle of Inclusion-exclusion)} For all $F_i\in \Sigma,$ we have 
+  \begin{equation}
+    \nonumber
+    \begin{aligned}
+      \mu(\bigcup_{i\leq n}F_i & = \Sigma_{i\leq n} \mu(F_i) - \Sigma\Sigma_{i < j\leq n}\mu(F_i\cap F_j) 
+    \\ & + \dots +(-1)^{n-1}\mu(F_1\cap F_2\cap\dots \cap F_n).
+    \end{aligned}  
+  \end{equation}
+\end{corollary}
+
+The proof of Corollary 3 has been written in Chen Tong's notes on github.
+
+\subsection{Borel $\sigma$-Algebra}
+$$ \mathcal B(S) := \sigma(\text{open subsets of } S) $$
+
+The most common Borel algebra is $\mathcal B := \mathcal B(\mathbb R)$. It consists of the open subsets in $\mathbb R$. But it is hard to find a subset of $\mathbb R$ but not in $\mathcal B$.
+
+\begin{theorem}
+Define $\pi(\mathbb R) := \{ (-\infty,x]\mid x\in \mathbb R\}$, then 
+$$\mathcal B = \sigma(\pi(\mathbb R)).$$
+\end{theorem}
+
+\begin{proof}
+  For all $x\in \mathbb R, $. $(-\infty,x] = \bigcap(-\infty,x+1/n)$. Use the property 2, $(-\infty,x]$ is measurable, i.e. $(-\infty,x]\in \mathcal B$.
+  
+  Then we just need to prove that $\forall a,b\in \mathbb R$, $(a,b)\in \sigma(\pi(\mathbb R))$. First, $(a,b)$ can be represented as $\bigcup_i^\infty (a,b-\epsilon/n]$, where $\epsilon = (b-a)/2$ (in facet it can be arbitrary small). Then we have 
+  $$(a,k] = (-\infty,k] \cap (a,\infty) = (-\infty,k] \cap (-\infty,a]^C \in \mathcal B,$$
+  thus $(a,b-\epsilon/n] \in \mathcal B$. In this way, $(a,b) = \bigcup_i^\infty (a,b-\epsilon/n] \in \mathcal B$. 
+\end{proof}
+
+\subsection{Finite and $\sigma$-finite}
+We have a measure space $(S,\Sigma,\mu)$.
+\paragraph{Finite} The measure space is finite iff $\mu(S) < \infty$.
+
+
+\paragraph{$\sigma-$finite} The measure space is $\sigma-$finite iff there exists a sequence $\{S_n\}(S_i\in \Sigma)$,s.t.
+$$\mu(S_n) < \infty (\forall n\in \mathbb N) \text{ and } \bigcup S_n = S.$$
+
+\subsection{Minimum $\sigma-$algebra} 
+Here  we introduce a signal $\sigma(A)$, which denote the minimum $\sigma$-algebra including $A$.
+
+\section{$\pi$-System}
+We have a set S and $\mathcal I \subseteq 2^S$. $(S,\mathcal I)$ is a $\pi$-System iff 
+$$I_1,I_2\in\mathcal I \Rightarrow I_1 \cap I_2 \in \mathcal I$$
+
+$\pi$-System is easier for us to research, for it is just closed on $\cap$ while $\sigma$-algebra is closed on both $\cap$ and $\cup$(in my opinion like a group to a ring in abstract algebra).
+
+\begin{theorem}
+  Define $\Sigma := \sigma(\mathcal I)$. If there exists two measures $\mu_1,\mu_2$ on $(S,\Sigma)$ satisfy:
+  $$\mu_1(S) = \mu_2(S) < \infty$$
+
+and
+$$\mu_1(x) = \mu_2(x), \forall x\in \mathcal I,$$
+
+then 
+$$\mu_1(x) = \mu_2(x), \forall x\in \Sigma.$$
+\end{theorem}
+
+\begin{proof}
+  The proof is in Appendix in our textbook, using Dynkin lemma.
+\end{proof}
+\begin{theorem}
+\textbf{(Carath\'eodory Expansion Theorem)} $S$ is a set, and $\Sigma_0$ is an algebra on S($\Sigma_0$ is a $\pi$-system as well). Define $$\Sigma := \sigma(\Sigma_0).$$
+
+ \textbf{(Existence)}  If $\mu_0:\Sigma_0 \mapsto [0,\infty]$ is a mapping satisfies the rule of measure function, then there \underline{exists} a $\mu$ on $\Sigma$ and satisfies 
+$$\mu(x) = \mu_0(x), \forall x\in \Sigma_0. $$
+
+\textbf{(Uniqueness)} Futhermore, if $\mu_0(S) < \infty$, then according to Theorem 2, the expansion $\mu$ is unique.
+
+\end{theorem}
+
+\subsection{Lebes\'gue Measure}
+Let $S = (0,1].$ Define
+$$F = (a_1,b_1] \cup \dots \cup (a_r,b_r] \subseteq S, \text{ where } 0 \leq a_1\leq b_1\leq \dots \leq a_r\leq b_r.$$
+
+And the union of $F$ is defined as $\pi$-System $\Sigma_0$. According to 2.3, we can define a minimum $\sigma$-algebra 
+$$\Sigma := \sigma(\Sigma_0) = \mathcal (0,1].$$
+
+Define the measure $\mu_0$ on $\Sigma_0$ as 
+$$\mu_0(F) = \Sigma_{k\leq r}(b_k-a_k).$$
+
+We can prove that $\mu_0$ satisfy the premise of theorem 3, thus we conclude that there exists a unique measure $\mu$ on $\Sigma$. We call this measure $\mu$ as Lebegue measure on $(0,1] (\text{Leb.} ([0,1],\mathcal B[0,1])).$
+
+* Note that we can simply define $\mu(\{0\}) = 0$ to obtain 
+$$\text{Leb.} ([0,1],\mathcal B[0,1]) = \text{Leb.} ((0,1],\mathcal B(0,1]).$$
+\section{Probability space} 
+A probability space is a special measure space where $\mu(S) = 1$. Then $\mu$ corresponds to the probability that we're familiar with. This concept will be used in the future.
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
