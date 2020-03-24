@@ -26,6 +26,7 @@
 \newtheorem*{lemma*}{Lemma}
 \newtheorem*{theorem*}{Theorem}
 \newtheorem*{problem*}{Problem}
+\newtheorem{remark}{Remark}
 
 \newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
 
@@ -63,10 +64,27 @@
         \end{align*}
 
         The only thing left is an explicit expression for $E_n$ such that $P(E_n) = y_n$.
-        Consider a probaility space $([0,1], \mathcal{B}, Leb)$.
-        Then we can simply let $$ E_n = \{\omega\ |\ \omega \in [0, y_n] \} $$
+        % Consider a probaility space $([0,1], \mathcal{B}, Leb)$.
+        
+        Define $X_n$ to be a random variable, $X_n: [0,1] \to [0,1]$ with distribution function $$ F_{X_n}(c) = P(\omega\ |\ X_n(\omega) \leq c) = c$$.
+        Then we can simply let $$ E_n = \{\omega\ |\ X_n(\omega) \leq y_n \} $$, where $E_n$ are pairwise and mutually independent.
+        % Another method is simpler, consider measure space $([0,1]^\mathbb{N}, \mathcal{B}, P)$ and letting $E_n = \{\omega_i\ |\ \\}
         We have $P(E_n) = y_n$.
 
         Thus, we have shown that $\prod_{n\in\mathbb{N}}(1-y_n) = 0$.
     \end{proof}
+
+    \begin{remark}
+        Actually, the proof of \textit{BC2 Lemma}(with a stronger assumption of mutually independence) is quite simple and similar to the previous proof.
+        \begin{align*}
+            P(\text{lim}\ \text{sup} E_n) &= P(\bigcap_{m\in\mathbb{N}}\bigcup_{n\geq m} E_n) = 1 - P(\bigcup_{m\in\mathbb{N}}\bigcap_{n\geq m} E_n^c)\ \\
+            &= 1 - \lim_{m\to\infty} P(\bigcap_{n\geq m} E_n^c)\quad (\text{observe that} \bigcap_{n\geq m} E_n^c \subseteq \bigcap_{n\geq m+1} E_n^c\ \ \text{for any m} )\\ 
+            &= 1 - \lim_{m\to\infty}\prod_{n\geq m}(1-P(E_n)) \geq 1 - \lim_{m\to\infty} e^{-\sum_{n\geq m}P(E_n)} = 1 - 0 = 1
+        \end{align*}
+        I think that the core of the aforementioned two proofs is the relation $$ (E_n, ev)^c = (E_n^c, i.o.) $$
+    \end{remark}
+
+    \begin{remark}
+        Thanks to the almighty 吴润哲 for pointing out loopholes in the proof.
+    \end{remark}
 \end{document}
