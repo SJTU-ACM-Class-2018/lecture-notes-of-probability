@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+
+%\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{hyperref} 
+\usepackage{tcolorbox}
+
+\geometry{a4paper, left = 2cm, right = 2cm, top = 2cm}
+
+\newcommand\problem[1]{\section*{Problem #1}}
+
+\newcommand\bE{\mathbb{E}}
+\newcommand\bF{\mathbb{F}}
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\fC{\mathbf{C}}
+\newcommand\fF{\mathbf{F}}
+\newcommand\fN{\mathbf{N}}
+\newcommand\fQ{\mathbf{Q}}
+\newcommand\fR{\mathbf{R}}
+\newcommand\fZ{\mathbf{Z}}
+\newcommand\cU{\mathcal{U}}
+
+\newcommand\ce{\coloneqq}
+\newcommand\lproof{\item ``$\Leftarrow$'' :}
+\newcommand\rproof{\item ``$\Rightarrow$'' :}
+
+\newcommand{\leb}{\text{Leb}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand\ord{\text{ord}}
+\newcommand{\floor}[1]{\lfloor {#1}\rfloor}
+
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+
+\title{The Convergence of Summation and Product}
+\author{WU Runzhe\\
+	Student ID : 518030910432\\
+	\textsc{Shanghai Jiao Tong University}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\begin{tcolorbox}
+		\begin{theorem}\label{t1}
+			Let $(y_n)_{n\in \bN}$ be a sequence of reals from [0,1] such that $$\sum_{n\in\bN}y_n=\infty.$$ Show that $$\prod_{n\in\bN}(1-y_{n})=0.$$
+		\end{theorem}
+	\end{tcolorbox}
+
+	\begin{lemma}\label{l1}
+		$e^{-x}\ge1-x$ for every $x\in \bR$.
+	\end{lemma}
+	
+	\begin{proof}[Proof of \ref{l1}]
+		Let $f(x)=e^{-x}-(1-x)$. Then, $f'(x)=-e^{-x}+1$, and $f'(x)=0$ iff $x=0$. It is easy to check that $f(x)\ge f(0)=0$.
+	\end{proof}
+
+	\begin{proof}[Proof of theorem \ref{t1}]
+
+		Using lemma \ref{l1}, we have
+		\begin{align*}
+			&\prod_{n\in\bN}(1-y_n))\\
+			\le& \prod_{n\in\bN} e^{-y_n}\\
+			\le& e^{-\sum_{n\in\bN}y_n}\\
+			=&0
+		\end{align*}\
+		
+	\end{proof}
+	
+	Similarly, we can also prove the following complementary theorem.
+	
+	\begin{tcolorbox}
+		\begin{theorem}\label{t2}
+			Let $(y_n)_{n\in \bN}$ be a sequence of reals from [0,1) such that $$\sum_{n\in\bN}y_n<\infty.$$ Show that $$\prod_{n\in\bN}(1-y_{n})>0.$$
+		\end{theorem}
+	\end{tcolorbox}
+
+	\begin{lemma}\label{l2}
+		$x\ge -\ln(1-x)$ for each $x\in [0,1)$.
+	\end{lemma}
+	
+	It is easy to check the above lemma. Just do what we did in the proof of lemma \ref{l1}.
+	
+	\begin{proof}[Proof of theorem \ref{t2}]
+		
+		Using lemma \ref{l2}, we have
+		$$\infty>\sum_{n\in\bN}y_n \ge -\sum_{n\in\bN}\ln(1-y_n).$$
+		It means $\sum_{n\in\bN}\ln(1-y_n)$ converges. Let $\sum_{n\in\bN}\ln(1-y_n)=C$.
+		
+		Then,
+		$$\prod_{n\in\bN}(1-y_n)=e^{\sum_{n\in\bN}\ln(1-y_n)}=e^C>0.$$
+		
+	\end{proof}
+	
+	
+\end{document}
