@@ -1,0 +1,96 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{Proof of Discrete Poincar\'{e}'s Recurrence Theorem}
+    \author{赖睿航\ 518030910422}
+    \date{\today}
+    \maketitle
+    
+    \begin{theorem}[Discrete Poincar\'{e}'s Recurrence Theorem]
+        Let $T$ be a measure-preserving transformation on $(\Omega, \mathcal{F}, P)$. Then, for any $E \in \mathcal{F}$ with $P(E) > 0$, almost all points of $E$ returns to $E$ infinitely often under positive iterations by $T$.
+    \end{theorem}
+    
+    \begin{proof}
+        For all $n \geqslant 1$, let
+        \begin{align*}
+            A_n &:= \{x \in E | x \notin T^{-kn}(E), \forall k \geqslant 1\} \\
+            &= E \backslash \bigcup_{k \geqslant 1} T^{-kn}(E).
+        \end{align*}
+        Since $T$ is a measure-preserving transformation and $E \in \mathcal{F}$, it is obvious that $A_n \in \mathcal{F}$ and hence $A_n$ is an event.
+        
+        Consider a sequence of events $\{A_n, T^{-n}(A_n), T^{-2n}(A_n), \ldots, T^{-kn}(A_n), \ldots\}$. Assume that for two integers $p, q$ with $0 \leqslant p < q$, $T^{-pn}(A_n) \cap T^{-qn}(A_n) \neq \emptyset$. Then we have $A_n \cap T^{-(q - p)n} \neq \emptyset$, which is contrary to $A_n = E \backslash \bigcup_{k \geqslant 1} T^{-kn}(E)$. Therefore, the events $A_n, T^{-n}(A_n), T^{-2n}(A_n),$ $ \ldots, T^{-kn}(A_n), \ldots$ are pairwise distinct. Since $T$ is measure-preserving, we know that $P(A_n) = P(T^{-n}(A_n)) = P(T^{-2n}(A_n)) = \ldots$, and hence $P(A_n) = 0 < \infty$ for all $n \geqslant 1$.
+        
+        By the First Borel-Cantelli Lemma we discussed in class, immediately we have $P(\lim \sup A_n) = 0$, and $P(E \backslash \lim \sup A_n) = P(E) > 0$.
+        
+        So by definition of $A_n$, for any $x$,
+        \begin{align*}
+            x \in E \backslash \lim \sup A_n &\Longrightarrow x \in E \mathrm{\ and\ } x \notin \lim \sup A_n \\
+            &\Longrightarrow x \in E \mathrm{\ and\ } x \notin \bigcap_{m \in \Natural}\bigcup_{n \geqslant m} A_n \\
+            &\Longrightarrow \mathrm{There\ exist\ infinite\ numbers\ of\ increasing}\\&\qquad\ \mathrm{positive\ integers\ } \{n_k\} \mathrm{\ such\ that\ } T^{n_k}(x) \in E. \\
+            &\Longrightarrow x \mathrm{\ returns\ to\ } E \mathrm{\ infinitely\ often\ under\ positive}\\&\qquad\ \mathrm{iterations\ by\ } T.
+        \end{align*}
+        
+        Since $P(\lim \sup A_n) = 0$, we can say that almost all points of $E$ returns to $E$ infinitely often under positive iterations by $T$.
+    \end{proof}
+    
+\end{document}
