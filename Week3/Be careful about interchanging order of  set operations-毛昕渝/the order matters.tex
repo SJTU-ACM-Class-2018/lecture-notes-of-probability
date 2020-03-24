@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+%\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\N{\mathbb{N}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\bb{\mathcal{B}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\nn{\mathcal{N}}
+\newcommand\ff{\mathcal{F}}
+\newcommand\one{\bm{1}}
+\newcommand\eps{\varepsilon}
+
+\DeclareMathOperator{\leb}{Leb}   
+\DeclareMathOperator{\diff}{d}   
+
+\title{Be careful about interchanging orders of set operations}
+\author{Xinyu Mao}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}
+\begin{paragraph}{Introduction}
+    This is a solution for the last exercise of
+    lecture note on March 20.
+    \textit{Baire category theorem} is applied here 
+    and the result reminds us that 
+    we cannot interchange the order of set operations freely.
+\end{paragraph}
+\end{tcolorbox}
+
+We first recall \text{Baire category theorem}.
+A set $A$ is nowhere dense if the interior set of its closure is empty.
+\begin{theorem}[Baire category theorem]\label{baire}
+In a complete metric space, any set of first category,
+namely any countable union of nowhere dense subsets, has empty interior. Equivalently,
+any countable intersection of open and dense subsets is still dense.
+\end{theorem}   
+
+We now consider the measure space $([0,1],\bb[0,1],\leb)$.
+Let $(\eps_k)_{k \in \N}$ be a sequence of strictly positive reals 
+such that $\lim_{k \to \infty} \eps_k = 0$. Enumerate 
+elements of $\Q \cap [0,1]$ as $(v_n)_{n \in \N}$, and let 
+$$
+    I_{n,k} := [0,1] \cap [v_n - \frac{\eps_k}{2^n}, v_n + \frac{\eps_k}{2^n}].
+$$
+Clearly, $\bigcup_n \bigcap_k I_{n,k} = \Q \cap [0,1]$
+is a countable set of measure zero. 
+And we shall prove:
+
+\begin{proposition}
+    The set $T:= \bigcap_k \bigcup_n I_{n,k}$ is an uncountable set of measure zero.
+\end{proposition}
+\begin{proof}
+Let $G_k := \bigcup_n I_{n,k}$, we have 
+$\leb(G_k) \leq \sum_{n \in \N} \leb(I_{n,k}) \leq 
+\sum_{n \in \N} \frac{\eps_k}{2^{n-1}} = 4\eps_{k}$.
+
+Since $G_{k+1} \subseteq G_k$, we have
+$$
+\leb(T) = \leb(\bigcap_{k \in \N} G_k) 
+= \lim_{k \to \infty} \leb(G_k) \leq \lim_{k \to \infty} 4\eps_{k} = 0,
+$$ 
+which implies $\leb(T) = 0$.
+
+It remains to show that $T$ is uncountable.
+Assume that $T$ is countable for contradiction 
+and enumerate it as $(t_n)_{n \in \N}$.
+The key observation is that the complement of $G_k$ is nowhere dense.
+Indeed, if the closure of $G_k^c$ has non-empty interior,
+it must contain some rational number since $\Q$ is dense,
+but $\Q \cap G_k^c = \emptyset$.
+
+Note that 
+$$
+    [0,1] = T \cup T^c = \bigcup_{n \in \N}\{t_n\} \bigcup_{k \in \N} G_k^c. 
+$$
+Each one of $\{t_n\}$ is nowhere dense without doubt, and so is $G_k^c$,
+and we can conclude that $[0,1]$ is has empty interior according to
+\cref{baire}, which is ridiculous.
+\end{proof}
+Since $T$ is uncountable, we have
+ $\bigcap_k \bigcup_n I_{n,k} \neq \bigcup_n \bigcap_k I_{n,k}$,
+ but they are both of measure zero.
+
+
+Moreover, consider the sets
+$$
+    J_{n,k} := [v_n - \eps_k,v_n + \eps_k] \cap [0,1].
+$$
+One can easily see that $\bigcup_n \bigcap_k J_{n,k} = \Q \cap [0,1]$.
+We now take a closer look at $A := \bigcap_k \bigcup_n J_{n,k}$.
+Take $x \in [0,1]$. For all $k \in \N$, since $\Q$ is dense, 
+there is some $v_i \in \Q$ such that $|x - v_i| \leq \eps_k$,
+that is, $x \in \bigcup_n J_{n,k}$. 
+It follows that $[0,1] \subseteq A$, which means $A = [0,1]$.
+Therefore,
+$$
+   \leb(A) = \leb(\bigcap_k \bigcup_n J_{n,k}) = 1
+   \neq 0 = \leb(\bigcup_n \bigcap_k J_{n,k}).
+$$
+This again tells us that the orders of operations do matter a lot!
+\end{document}
