@@ -1,0 +1,72 @@
+\input{../preamble.tex}
+\title{How  $A_{n}$ is constructed in the proof of Poincare' Recurrence Theorem}
+\begin{document}
+\maketitle
+The construction of $A_{n}$ in the proof given by Mr. Wu is really tricky when 
+I take the first look. 
+\[
+		A_{n} = \{x\in E  \mid  x \not \in T^{-kn}\left( E \right) , \forall k\} 
+.\] 
+And now I try to give some intuition behind the construction. 
+First let us take a look at another version of Poincare' Recurrence Theorem:
+\begin{pro}
+		Let $\left( \Omega,\mathcal{F},P \right) $ be a probability space, and 
+		let $T$ be a map from $\Omega$ to itself with the property 
+		that $T\left( F \right) \in \mathcal{F}, \forall F\in \mathcal{ F}$. Plus
+		$P\left( T\left( F \right)  \right) = P\left( F \right)$. 
+
+		For $\forall E \in \mathcal{F}$, prove that $P\left( E \setminus
+		\limsup_{n \to \infty}T^{n}\left( E \right)  \right) =0$
+\end{pro}
+\begin{proof}
+		First we use a simple trick in set operation 
+		\[
+				E \setminus \bigcap_{n\ge 1} R_{n} = \bigcup_{n\ge 1} \left( E\setminus 
+				R_{n} \right) 
+		.\] 
+		to simpify the problem. Applying the equation above, our goal as
+		\[
+				P\left( \bigcup_{k\ge 1} \left( 
+				E \setminus \bigcup_{n\ge k} T^{n}(E) \right)  \right) = 0
+		.\] 
+		Otherwise we assume 
+		\[
+				\exists k\ge 1, s.t. \  P\left( E \setminus \bigcup_{n\ge k} 
+				T^{n}\left( E \right) \right)  > 0
+		.\] 
+		Therefore this problem is equivalent to prove 
+		\[
+				P\left( A_k \right) =0,\text{ in which }  A_k = \{ x \in E| x \not\in \bigcup_{n\ge k} 
+				T^{n}\left( E \right) \} 
+		.\] 
+		Notice that \textbf{this is exactly what the original form has proved}. 
+		Here we give a direct proof for it. Since $P\left( X \right) \le \infty$, we
+		have 
+		\[
+				P\left( E \cup \bigcup_{n\ge k} T^{n}\left( E \right)  \right)  > 
+				P\left( \bigcup_{n\ge k} T^{n}\left( E \right)  \right) 
+		.\] 
+		Applying $T$ to the set above $k$ times, there is
+		\begin{align*}
+				P\left( T^{k}\left( E \right) \cup 
+				\bigcup_{n\ge 2k} T^{n}\left( E \right) \right) &= 
+				P \left( T^{k}\left( E \cup \bigcup_{n\ge k}T^{n}\left( E \right)   \right)  \right) \\ 
+			&=  P\left(
+		E \cup \bigcup_{n\ge k} T^{n}\left( E \right) \right)  \\
+& > P\left(
+			\bigcup_{n\ge k} T^{n}\left( E \right)  \right) 
+		.\end{align*}
+		This leads to a contradiction since 
+		\[
+				T^{k}\left( E \right) \cup \bigcup_{n\ge 2k} T^{n}(E) 
+				\subset  \bigcup_{n\ge k} T^{n}(E)
+		.\] 
+		Which completes our proof.
+\end{proof}
+
+\noindent \textbf{Remark} : what this proof tells us is that the construction 
+of $A_{n}$ in the original proof \textbf{does not come from nowhere}.
+It is exactly something derived from the objective equation, which reveals 
+that the original proof is somewhat natural.
+
+\end{document}
