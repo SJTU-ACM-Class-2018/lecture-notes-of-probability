@@ -1,0 +1,45 @@
+\input{../preamble.tex}
+\title{\textsc{Poincaré’s Recurrence Theorem for Incompressible
+Transformations}}
+\begin{document}
+\maketitle
+        
+\begin{pro}
+		Let $\left( \Omega ,\mathcal{F},P \right) $ be a probability space and let $T$ be
+an incompressible transformation on it, namely it is measurable and
+there is no $F \in \mathcal{F}$ such that $F\subset T^{-1}(F)$ and $P\left( F \right) < P\left( T^{-1}(F) \right) $.
+Prove that $\forall E\in \mathcal{F}$ with $P\left( E \right) >0$, almost all points of $E$ return
+to $E$ infinitely often under positive iterations by $T$.
+\end{pro}
+\begin{proof}
+This problem is almost the same as the last one with some slight changes. 
+Our goal is to prove 
+\[
+		P\left( E \setminus \limsup_{n \to \infty} T^{-n}(E) \right) = 0 
+.\] 
+The same as the proof of another version of PR theorem, the above is equivalent to prove
+\[
+		P\left( A_{k} \right) =0, \text{ in which } A_{k} = E \setminus \bigcup_{n\ge k} 
+		T^{-n}(E)
+.\] 
+We will prove by making contradiction. Assume $P\left( A_{k} \right) > 0$, we have
+\[
+		P\left( B_{k} \right) =	P\left( E \cup \bigcup_{n\ge k} T^{-n}(E) \right) > 
+		P\left( \bigcup_{n\ge k} T^{-n}(E)\right) = P\left( C_{k} \right) 
+.\] 
+Here $B_{k},C_{k}$ are notations for simplicity. Notice that the definition of incompressible 
+transformation is exactly
+\[
+		F\subset T^{-1}\left( F \right)  \implies P(F) = P( T^{-1}(F))
+.\]
+Hence by $T^{-1}\left( C_{k-1} \right) = C_{k} $ we have 
+\[
+		P\left( C_{k} \right)  = P\left( C_{k-1} \right) 
+.\] 
+Similarly, as $T^{-1}\left( B_{k} \right) \subset C_{1}$ we derive that 
+\[
+		P\left( B_{k} \right)  = P\left( C_{1} \right) = P\left( C_{k} \right) 
+.\]
+Which leads to a contradiction.
+\end{proof}
+\end{document}
