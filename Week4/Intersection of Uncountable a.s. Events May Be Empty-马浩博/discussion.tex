@@ -1,0 +1,84 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Intersection of Uncountable a.s. Events May Be Empty}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section*{Exercise 4}
+
+  This exercise is going to say that intersection of uncountable events may be empty.
+  We already know that for the countable situation, things are different:
+  \begin{theorem}
+  $$If \ F_n \in \mathcal{F} \ (n \in N) \ and \ P(F_n) = 1,\ \forall n, \ then $$
+  $$P(\bigcap\limits_{n} F_n) = 1 $$
+  \end{theorem}
+  Now the number of $\alpha$ is obviously uncountable, so the theorem above is not working anymore.
+  And we can get an opposite conclusion that
+  $$\bigcap\limits_{\alpha} F_\alpha = \emptyset $$
+\begin{proof}
+
+  For any given $\omega$, we just need to find an $\alpha$ with $\omega \notin F_\alpha$.
+  Then we can easily get the result that $\bigcap\limits_{\alpha} F_\alpha = \emptyset $.
+  Thus the only thing to concern about is to find the $\alpha$.\\
+
+  For $\omega = (\omega_1,\omega_2,\dots)$, we can assume without losing generality that 
+  $$\forall m,\ \exists n > m \ \omega_n = H \ (n \in N)$$
+  If $\omega$ doesn't satisify this proposition, then because $\omega = \{H,T\}$, we have $\forall m,\ \exists n > m \ \omega_n = T$.
+  These two cases are just the same, so we only consider the first one.
+
+  In this case, we can generate $\alpha$ in this way: For $m=0$, we can find $a_1>m$ with $\omega_{a_1} = H$.
+  So we let $\alpha(1)=a_1$. Next, let $m=a_1$, find $a_2$ in the same way and also let $\alpha(2)=a_2$, and so on $\dots$ 
+  Eventually, we get a map $\alpha$ with $\alpha(1)<\alpha(2)< \dots $ Obviously, 
+  $$\frac{\#\{ k \le n: \ \omega_{\alpha(k)} = H \}}{n} \to 1$$
+  Therefore we know that $\omega \notin F_\alpha$ and finish the proof.
+\end{proof} 
+
+\end{document}
