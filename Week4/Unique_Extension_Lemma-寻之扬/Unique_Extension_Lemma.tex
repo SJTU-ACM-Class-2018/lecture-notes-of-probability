@@ -1,0 +1,114 @@
+% !TEX program = xelatex
+\input{D:/template.tex}
+
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\Leb}{\operatorname{Leb}}
+% \operatorname
+\newcommand{\ds}{$d$-system}
+
+\title{The $\sigma$-Finite Constraint on Uniqueness of Extension Lemma}
+\author{Zhiyang Xun}
+
+\begin{document}
+
+\maketitle      
+\begin{tcolorbox}
+    \begin{lemma}
+        \label{main}
+        Let $I$ be a $\pi$-system on a set $S$ and let $\Sigma = \sigma(I)$.
+        Suppose that $\mu_1$ and $\mu_2$ are two measures on $(S, \Sigma)$ such that $\mu_1 =\mu_2$ on $I$. If there is a sequence $A_n \in I$ with $ \bigcup_{n = 1}^{\infty} A_n = S$ and
+        $\mu_(A_n) < \infty$,
+        then $\mu_1 = \mu_2$.
+    \end{lemma}    
+\end{tcolorbox}
+
+We will give a proof for this lemma and show the reason that we need to add the $\sigma$-finite constraint.
+
+% This article was intended to show that the ``$\mu_1(S) = \mu_2(S) < \infty$'' constraint can be relaxed to ``$\mu_1$ and $\mu_2$ are $\sigma$-finite and $\mu_1(S) = \mu_2(S)$''. However, while I was trying to prove that, I found that the conclusion does not hold when $\mu_1$ or $\mu_2$ is not finite.
+
+First we need to introduce the definition of a $d$-system \footnote{The word ``$d$-system'' is an abbreviation of Dynkin System to honor Eugene Dynkin. It is sometimes referred to as $\lambda$-system (Dynkin himself used this term).}.
+\begin{definition}
+    Let $S$ be a set, and let $\D$ be a collection of subsets of $S$. Then $\D$ is called a $d$-system (on $S$) if
+    \begin{enumerate}[label=(\alph*), topsep=0pt]
+        \setlength{\itemsep}{0pt}
+        \item $S \in \D$,
+        \item if $A, B \in \D$ and $A \subseteq B$ then $B \setminus A \in \D$,
+        \item if $A_1, A_2, A_3, ...$ is a sequence of subsets in $\D$ and $A_n \subseteq A_{n+1}$ for all $n \geq 1$, then $ \bigcup _{n=1}^{\infty }A_{n}\in \D$.
+    \end{enumerate}
+\end{definition}
+
+   It's easy to verify the intersection of {\ds}s is still a \ds. Thus similar to the definition of $\sigma(C)$, for $C \subseteq 2^S$ we denote the smallest \ds\ containing $C$ by $d(C)$.  We present Dynkin's lemma here without proof.
+\begin{lemma}
+    (Dynkin's Lemma) If $\I$ is a $\pi$-system, then $d(\I) = \sigma(\I)$.
+\end{lemma}
+
+Now we will give a proof for the finite case of \cref{main}: ``If $\mu_1(S) = \mu_2(S) < \infty$, then $\mu_1 = \mu_2$''. Define
+\[ \D = \{F \in \Sigma : \mu_1(F) = \mu_2(F)\} \]
+Evidently $I \subseteq \D$. Thus we simply need to verify $\D$ is a \ds\ on $S$. Then according to Dynkin's Lemma, we can see 
+\[ \Sigma = \sigma(\I) = d(\I) \subseteq \mathcal{D}\]
+which implies $\mu_1 = \mu_2$ on $\Sigma$.
+ 
+First, the fact that $S \in \D$ is given. Then, if $A, B \in \D$ and $A \subseteq B$,  
+\begin{equation}
+    % \tag{*}
+    \label{t}
+    \mu_1(B \setminus A) = \mu_1(B) - \mu_1(A) = \mu_2(B) - \mu_2(A) = \mu_2(B \setminus A)
+\end{equation}
+so that $B \setminus A \in \D$. Finally, if $A_n \in \mathcal{D}$ and $A_n \subseteq A_{n+1}$. Due to the monotone-convergence properties of measures, 
+\[\mu_1(\bigcup _{n=1}^{\infty }A_{n}) = \lim_{n \to \infty}\mu_1(A_n) = \lim_{n \to \infty}\mu_2(A_n) = \mu_2(\bigcup _{n=1}^{\infty }A_{n})\] 
+Hence, $\D$ is a \ds.
+
+This proof is only valid for the finite case because correctness of \cref{t} may cause problem. We need to notice whether $\infty - \infty = \infty - \infty$ is uncertain. Thus we can see why \cref{ex4} has two extensions.
+% \begin{tcolorbox}
+\begin{example}
+    \label{ex4}
+    Let $S = (0, 1]$, and let $\Sigma_0$ be the subsets of $S$ which are finite unions of
+    disjoint left-open right-closed intervals. Obviously, $\Sigma_0$ is a $\pi$-system. Define 
+    \[
+        \mu_0(F) = \left\{ 
+            \begin{array}{lcl}
+                0 & & \text{if } F = \emptyset \\
+                \infty & & \text{if } F \neq \emptyset
+            \end{array}
+        \right.
+    \]
+    We find two ways to extend $\mu_0$ to $\mathcal{B} (0, 1]$: $\mu_1$ and $\mu_2$:
+    \begin{align*}
+        \mu_1(F) &= \left\{ 
+            \begin{array}{lcl}
+                0 & & \text{if } F = \emptyset \\
+                \infty & & \text{if } F \neq \emptyset
+            \end{array}
+        \right. \\
+        \mu_2(F) &= \text{number of elements in } F.
+    \end{align*}
+   It's easy to check they are both correct. However, we notice that 
+   \[\mu_1(\{1\}) = \infty \neq 1 = \mu_2(\{1\})\]
+   That's because 
+   $\{1\} = (0, 1] \setminus \bigcup_{n = 1}^{\infty }(0, 1 - \frac{1}{2^n}]$, but $\mu(\{1\})$ cannot be determined by $\infty - \infty$.
+\end{example}
+% \end{tcolorbox}
+
+Now let us consider the $\sigma$-finite case. For any arbitrary set $A \in \Sigma$ satisfying $\mu_1(A) = \mu_2(A) < \infty$, it's easy to see $ \D = \{F \in \Sigma : \mu_1(F \cap A) = \mu_2(F \cap A)\} = \Sigma$ by repeating the argument above, because for any $F \in \Sigma$, $\mu_i(F \cap A) \leq \mu_i(A) < \infty$. 
+
+By assumption, there exists a sequence $A_n \in I$ with $ \bigcup_{n = 1}^{\infty} A_n = S$. Define $B_n = A_n \setminus \bigcup_{k = 1}^{n - 1} A_k$. Since $B_n$ is pairwise distinct and $\bigcup_{n = 1}^{\infty} B_n = S$, for $F \in \Sigma$, 
+\[\mu_1(F) = \mu_1(F \cap \bigcup_{n = 1}^{\infty} B_n ) = \mu_1(\bigcup_{n = 1}^{\infty} (F \cap B_n)) = \sum_{n=1}^\infty \mu_1(F \cap B_n)\]
+\[\mu_2(F) = \mu_2(F \cap \bigcup_{n = 1}^{\infty} B_n ) = \mu_2(\bigcup_{n = 1}^{\infty} (F \cap B_n)) = \sum_{n=1}^\infty \mu_2(F \cap B_n)\]
+
+Because $B_n \in \Sigma$, we have 
+\[\mu_1(B_n) = \mu_1(B_n \cap A_n) = \mu_2(B_n \cap A_n) = \mu_2(B_n) < \infty\]
+Now we can see that $\mu_1(F \cap B_n) = \mu_2(F \cap B_n)$. Hence, $\mu_1(F) = \mu_2(F)$ for any $F \in \Sigma$. This finishes the proof.
+
+Notice that the so-called ``$\sigma$-finite'' constraint in this lemma is a stronger constraint than ``$\mu_1$ and $\mu_2$ are $\sigma$-finite''. Here we provide a counterexample for the latter condition.
+
+\begin{example}
+
+Let $S = \R$, and let $I = \{[0, u] | u \in [0, +\infty)\} \cup \R$. Obviously $I$ is a $\pi$-system on $\R$. Furthermore, $\sigma(I) \subset \mathcal{B}(\R)$. We use $\mu_1$ to denote Lebesgue measure on $\sigma(I)$. Thus
+ $(\R, \sigma(I), \mu_1)$ is a $\sigma$-finite measure space.
+
+We can construct another $\sigma$-finite measure $(\R, \sigma(I), \mu_2)$ where $\mu_2(F) = \Leb(F \cap [0, +\infty))$. Clearly $\mu_1 = \mu_2$ on $I$, but $\mu_1((-\infty, 1]) = \infty \neq 1 = \Leb([0, 1]) = \mu_2((-\infty, 1])$.
+ 
+\end{example}
+
+\end{document}
