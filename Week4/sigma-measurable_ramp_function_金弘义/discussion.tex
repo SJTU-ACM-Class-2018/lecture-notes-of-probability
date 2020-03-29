@@ -39,13 +39,13 @@
 \newtheorem{innercustom}{\customname}
 \providecommand{\customname}{}
 \newcommand{\newcustomtheorem}[2]{
-	\newenvironment{#1}[1]
-	{
-		\renewcommand\customname{#2}
-		\renewcommand\theinnercustom{##1}
-		\innercustom
-	}
-	{\endinnercustom}
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
 }
 \newcustomtheorem{customthm}{Theorem}
 \newcustomtheorem{customprop}{Proposition}
@@ -60,28 +60,52 @@
 \newcommand{\nth}[1]{#1\textsuperscript{th}}
 
 \begin{document}
-	\title{Distribution function may not be left-continuous}
-	\author{金弘义\ 518030910333}
-	\date{\today}
-	\maketitle
-	
-	\begin{customex}{8}
-		
-	Construct an example to show that the distribution function of a random variable may not be left-continuous.
-	\end{customex}
+    \title{ $\Sigma$-measurable ramp function}
+    \author{金弘义\ 518030910333}
+    \date{\today}
+    \maketitle
+    
+    \begin{customex}{9}
+    	Let $(S,\Sigma)$ be a measurable space and take $h\in \mathbb{R}^{S} $.Let $h^{+}=max(h,0)$ and $h^{-}=max(-h,0)$. Show that $h\in m\Sigma$ if and only if $h^{+},h^{-}\in m\Sigma$.
+        
+    \end{customex}
 	\begin{proof}[Solution]
-	Let X be a random variable on $([0,1],\mathcal{B}[0,1],Leb)$. 
-	\begin{equation}
-	X(a):=
-	\begin{cases}
-	0& \mbox{if $a>\frac{1}{2}$}\\
-	1& \mbox{if $a\le\frac{1}{2}$}
-	\end{cases}
-	\end{equation}
-	Then  $F_X(1)=P(X\le 1)=P([0,1])=1$, while $\lim\limits_{a\to1^{-}}F_X(a)=P(X<1)=P([0,\frac{1}{2}))=\frac{1}{2}\ne F_X(1)$. So $F_X$ is not left-continuous.
+		
+		Observe that \begin{align*}
+			h^{+}&=\begin{cases}
+			0&h<0 \\
+			h&h\ge 0
+			\end{cases}\\
+			h^{-}&=\begin{cases}
+			-h& h<0\\
+			0 & h\ge 0
+			\end{cases}
+		\end{align*}
+		
+		So we have
+		 
+		\begin{align*}
+		h=h^{+}-h^{-}
+		\end{align*}
+		
+		Since $m\Sigma$ is closed under taking sum and scalar multiplication, if $h^{+},h^{-}\in m\Sigma$, $h\in m\Sigma$. 
+		
+		Then we'll focus on another side. Assume $h\in m\Sigma$. Consider
+		\begin{align*}
+			\{h^{+}\le c\}=\begin{cases}
+			\emptyset & c<0 \\
+			\{h\le c\} & c\ge 0
+			\end{cases}
+		\end{align*}
+		
+		By the definition of $\sigma$-algebra, $\emptyset \in \Sigma$. $\{h\le c\}=h^{-1}(-\infty,c] \in \Sigma$. So $\{h^{+}\le c\}\in \Sigma$ $(\forall c\in \mathbb{R})$. We can derive that $h^{+}\in m\Sigma$.
+		
+		 $h^{-} \in m\Sigma$ can be derived similarly.
+		
+		In conclusion, $h\in m\Sigma$ if and only if $h^{+},h^{-}\in m\Sigma$.
 	\end{proof}
 	
 	
-	
-	
+    
+    
 \end{document}
