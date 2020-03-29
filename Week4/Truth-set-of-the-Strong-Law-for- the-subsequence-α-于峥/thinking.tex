@@ -1,0 +1,130 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{2ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+
+\title{Truth set of the Strong Law for the subsequence $\alpha$}
+\author{于峥 518030910437}
+\date{\today}
+\maketitle
+
+\begin{problem}
+    Toss a fair coin infinitely often. The outcome of each toss
+is either head (H) or tail (T) with equal probability. Take $\Omega = \{H,T\}^{\mathbb{N}}$.
+which is the set of all possible outcomes of our infinitely many tosses.
+A typical point $\omega \in \Omega$ is a sequence
+$$
+    \omega = (\omega_1, \omega_2, \dots), \omega_n \in \{ H,T\}.
+$$
+For any increasing sequence $(\alpha_n)$ of positive integers, let
+$$
+    F_{\alpha} = \{\omega : \frac {\#(k \leq n : \omega_{\alpha(k)}=H)} {n} \rightarrow \frac 1 2 \}
+$$
+Show that $\bigcap_\alpha F_\alpha = \emptyset$. \newline
+
+\begin{sol}
+    
+
+We can think the $\alpha$ is a subsequence, and the $F_\alpha$ is the truth 
+set of the Strong Law for the subsequence $\alpha$. 
+If $\bigcap_\alpha F_\alpha \not= \emptyset$, it means that exists a $\omega$, its any subsequence satisfy
+SLLN. But in fact for any $\omega$, we can construct a $\alpha$, make it unsatisfactory. 
+
+For any 
+$$
+    \omega = (\omega_1, \omega_2, \dots), \omega_n \in \{ H,T\}.
+$$
+
+Define $A = \{ k : \omega_k = H \}$, $B = \{ k : \omega_k = T \}$. If A is 
+infinite, we construct $\alpha$ from $A$. Because $A$ is well-ordered set, so we can let
+ \begin{equation*}
+    \alpha(n) = \left\{
+    \begin{aligned}
+        \min (A) && n = 1 \\
+        \min(A \cap \bigcup_{k<n}\{\alpha(k)\} ) && n > 1
+    \end{aligned}
+    \right.
+ \end{equation*}
+
+Obviously, $alpha$ is a increasing sequence, and $\omega_{\alpha(n)} = H$ for 
+all $n > 0$. So 
+
+$$
+    \frac {\#(k \leq n : \omega_{\alpha(k)}=H)} {n} \rightarrow 1
+$$
+
+and if $A$ is finite, we must have $B$ is infinite. Construct the function with the same way. 
+We can get
+
+$$
+    \frac {\#(k \leq n : \omega_{\alpha(k)}=H)} {n} \rightarrow 0
+$$
+So $\forall \omega, \exists \alpha, s.t. \omega \not\in F_\alpha$. If $\bigcap_\alpha F_\alpha \not= \emptyset$, 
+it means $\exists \omega, \forall \alpha \omega \in F_\alpha$. It is contradictory. Therefore
+
+$$
+\bigcap_\alpha F_\alpha = \emptyset
+$$
+
+\end{sol}
+\end{problem}
+
+
+
+\end{document}
