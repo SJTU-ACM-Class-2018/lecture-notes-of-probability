@@ -1,0 +1,120 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{Distrubution Function Cannot be Left-Continuous\\\&\\$h\in m\Sigma$ iff $h^+, h^- \in m\Sigma$}
+    \author{赖睿航\ 518030910422}
+    \date{\today}
+    \maketitle
+
+    \begin{exercise}[Distrubution Function Cannot be Left-Continuous]
+        Construct an example to show that the distribution function of a random variable may not be left-continuous.
+    \end{exercise}
+
+    \begin{proof}[Solution]
+        Consider the probability space $(\Omega, \mathcal{F}, P) = ([0, 1], B[0, 1], Leb)$. And let $X(\omega)$ be a random variable which always takes $0$ for any real $\omega \in [0, 1]$. Now we try to calculate the distribution function $F_X(c)$ for $c \in \Real$. There are three cases:
+        
+        \begin{enumerate}
+            \item If $c < 0$, then $F_X(c) = P(X \leqslant c) = P(\{\omega | X(\omega) \leqslant c\}) = P(\emptyset) = 0$ since there is no such $\omega$ with $X(\omega) < 0$.
+            \item If $c = 0$, then $F_X(c) = F_X(0) = P(X \leqslant 0) = P(\{\omega | X(\omega) \leqslant 0\}) = P([0, 1]) = 1$ since for any $\omega \in [0, 1]$, $X(\omega) = 1$.
+            \item If $c > 0$, then $F_X(c) = P(X \leqslant c) = P(\{\omega | X(\omega) \leqslant c\}) = P([0, 1]) = 1$ since for any $\omega \in [0, 1]$, $X(\omega) = 1$.
+        \end{enumerate}
+        
+        Hence we have
+        $$
+        F_X(c) = \left\{
+        \begin{aligned}
+            0, c < 0, \\
+            1, c \geqslant 0.
+        \end{aligned}
+        \right.
+        $$
+        It is clear that $F_X(c)$ is right-continuous but not left-continuous at $c = 0$, which finishes our proof.
+    \end{proof}
+    \vspace{5mm}
+    
+    \begin{exercise}[$h\in m\Sigma$ iff $h^+, h^- \in m\Sigma$]
+        Let $(S, \Sigma)$ be a measurable space and take $h \in \Real^S$. Let $h^+ = \max(h, 0)$ and $h^- = \max(-h, 0)$. Show that $h \in m\Sigma$ if and only if $h^+, h^- \in m\Sigma$.
+    \end{exercise}
+
+    \begin{proof}
+        We first prove from left to right. To show that $h^+, h^- \in m\Sigma$, we only need to show that $\{h^+ \leqslant c_1\} \in \Sigma$ for $\forall c_1 \in \Real$ and $\{h^- \geqslant c_2\} \in \Sigma$ for $\forall c_2 \in \Real$. There are two cases for each:
+        \begin{enumerate}
+            \item If $c_1 < 0$, $\{h^+ \leqslant c_1\} = \emptyset \in \Sigma$ since $h^+ \geqslant 0$ always holds.
+            \item If $c_1 \geqslant 0$, $\{h^+ \leqslant c_1\} = \{h \leqslant c_1\} \in \Sigma$ since $h \leqslant c_1$ implies $h^+ = \max(h, 0) \leqslant c_1$.
+            \item If $c_2 < 0$, $\{h^- \geqslant c_2\} = \emptyset \in \Sigma$ since $h^+ \geqslant 0$ always holds, too.
+            \item If $c_2 \geqslant 0$, $\{h^- \geqslant c_2\} = \{h \geqslant -c_2\} \in \Sigma$ since $h \geqslant -c_2$ implies $h^- = \max(-h, 0) \leqslant c_2$.
+        \end{enumerate}
+        Hence we have $\{h^+ \leqslant c_1\} \in \Sigma$ for $\forall c_1 \in \Real$ and $\{h^- \geqslant c_2\} \in \Sigma$ for $\forall c_2 \in \Real$. So from $h \in m\Sigma$ we can know that $h^+, h^- \in m\Sigma$.
+        
+        Then we prove from right to left. Observe that:
+        $$
+        \begin{aligned}
+            & h \geqslant 0 \Rightarrow h^+ = h, h^- = 0, \textrm{and} \\
+            & h < 0 \Rightarrow h^+ = 0, h^- = -h.
+        \end{aligned}
+        $$
+        So $h = h^+ - h^-$. Since $h^+, h^- \in m\Sigma$, we can conclude that $h \in m\Sigma$.
+        
+        Therefore, $h \in m\Sigma$ if and only if $h^+, h^- \in m\Sigma$.
+    \end{proof}
+\end{document}
