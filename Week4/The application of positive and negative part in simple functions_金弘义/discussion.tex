@@ -60,7 +60,7 @@
 \newcommand{\nth}[1]{#1\textsuperscript{th}}
 
 \begin{document}
-    \title{ $\Sigma$-measurable ramp function}
+    \title{ The application of positive and negative part in constructing simple functions }
     \author{金弘义\ 518030910333}
     \date{\today}
     \maketitle
@@ -104,8 +104,65 @@
 		
 		In conclusion, $h\in m\Sigma$ if and only if $h^{+},h^{-}\in m\Sigma$.
 	\end{proof}
-	
-	
-    
+	\begin{definition}
+		Let $(S,\Sigma)$ be a measurable space. A function $f\in \mathbb{R}^S$ is a simple function with respect to $(S,\Sigma)$ provided it falls into the linear subspace of $\mathbb{R}^S$ spanned by  $\{\mathbf{1}_{A}:A\in \Sigma\}$. Note that every simple function is $\Sigma$-measurable. For each positive integer $n$, define the dyadic function $d_n\in \mathbb{R}^\mathbb{R}$ to be 
+		\begin{align*}
+			\sum\limits_{k=1}^{n2^n}\frac{k-1}{2^n}\mathbf{1}_{[\frac{k-1}{2^n},\frac{k}{2^n})}+n\mathbf{1}_{[n,\infty)}
+		\end{align*}
+	\end{definition}
+	\begin{customex}{10}
+		Take $f\in m\Sigma$. For each $n \in \mathbb{N}$, show that $f_{n}=d_{n}\circ f^{+}-d_{n}\circ f^{-}$ is a simple function with respect to $(S,\Sigma)$. Then illustrate that f is the limit of a sequence of simple functions.
+	\end{customex}
+    \begin{proof}[Solution]
+    	Observe that
+    	\begin{align*}
+    		f_n(s)=\begin{cases}
+    		\frac{k-1}{2^n}& f(s)\in [\frac{k-1}{2^n},\frac{k}{2^n}), k\in \mathbb{N}, 1\le k \le n2^n \\
+    		n& f(s)\in [n,+\infty) \\
+    		-n& f(s)\in (-\infty,-n] \\
+    		-\frac{k-1}{2^n}& f(s)\in (-\frac{k}{2^n},-\frac{k-1}{2^n}], k\in \mathbb{N}, 1\le k \le n2^n
+    		\end{cases}
+    	\end{align*}
+    	
+    	which is equal to:
+    	
+    	\begin{align*}
+   			f_n(s)=\begin{cases}
+    		\frac{k-1}{2^n}& s\in f^{-1}[\frac{k-1}{2^n},\frac{k}{2^n}), k\in \mathbb{N}, 1\le k \le n2^n \\
+    		n& s\in f^{-1}[n,+\infty) \\
+    		-n&  s\in f^{-1}(-\infty,-n] \\
+    		-\frac{k-1}{2^n}& s\in f^{-1} (-\frac{k}{2^n},-\frac{k-1}{2^n}], k\in \mathbb{N}, 1\le k \le n2^n
+    		\end{cases}
+    	\end{align*}
+    	
+    	Now we construct 
+    	\begin{align*}
+    		f_n=n\mathbf{1}_{f^{-1}[n,+\infty)}
+    		-n\mathbf{1}_{f^{-1}(-\infty,-n]}
+    		+\sum\limits_{k=1}^{n2^n}\frac{k-1}{2^n}\mathbf{1}_{f^{-1}[\frac{k-1}{2^n},\frac{k}{2^n})}
+    		-\sum\limits_{k=1}^{n2^n}\frac{k-1}{2^n}\mathbf{1}_{f^{-1} (-\frac{k}{2^n},-\frac{k-1}{2^n}]}
+    	\end{align*}
+    	
+    	Since 
+    	\begin{align*}
+    		f^{-1}[n,+\infty)&\in \Sigma \\
+    		f^{-1}(-\infty,-n] &\in \Sigma \\
+    		f^{-1}[\frac{k-1}{2^n},\frac{k}{2^n}) &\in \Sigma\\
+    		f^{-1} (-\frac{k}{2^n},-\frac{k-1}{2^n}] &\in \Sigma
+    	\end{align*}
+    	
+    	we can derive that $f_n$ is a simple function with respect to $(S,\Sigma)$.
+    	
+    	Without loss of generality, assume $f\ge0$.
+    	Suppose $f<2^n$, then there exists $k\in\mathbb{N}$ and $1\le k \le n2^n$ such that $f \in[\frac{k-1}{2^n},\frac{k}{2^n}) $. We can then find that
+    	\begin{align*}
+    		f_n&=\frac{k-1}{2^n}\\
+    		\forall \epsilon>0,\exists n_0=\lceil max(\log_{2}f,\log_{2}\frac{1}{\epsilon})\rceil+1&>0,\forall n>n_0,|f_n-f|<\frac{k}{2^k}-\frac{k-1}{2^n}=\frac{1}{2^n}<\epsilon
+    	\end{align*}
+    	
+    	So $f$ is the limit of a sequence of simple functions $f_n$.
+    	
+    	
+    \end{proof}
     
 \end{document}
