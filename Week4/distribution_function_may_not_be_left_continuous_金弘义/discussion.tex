@@ -1,0 +1,87 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+	\newenvironment{#1}[1]
+	{
+		\renewcommand\customname{#2}
+		\renewcommand\theinnercustom{##1}
+		\innercustom
+	}
+	{\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+	\title{Distribution function may not be left-continuous}
+	\author{金弘义\ 518030910333}
+	\date{\today}
+	\maketitle
+	
+	\begin{customex}{1}
+		
+	Construct an example to show that the distribution function of a random variable may not be left-continuous.
+	\end{customex}
+	\begin{proof}[Solution]
+	Let X be a random variable on $([0,1],\mathcal{B}[0,1],Leb)$. 
+	\begin{equation}
+	X(a):=
+	\begin{cases}
+	0& \mbox{if $a>\frac{1}{2}$}\\
+	1& \mbox{if $a\le\frac{1}{2}$}
+	\end{cases}
+	\end{equation}
+	Then  $F_X(1)=P(X\le 1)=P([0,1])=1$, while $\lim\limits_{a\to1^{-}}F_X(a)=P(X<1)=P([0,\frac{1}{2}))=\frac{1}{2}\ne F_X(1)$. So $F_X$ is not left-continuous.
+	\end{proof}
+	
+	
+	
+	
+\end{document}
