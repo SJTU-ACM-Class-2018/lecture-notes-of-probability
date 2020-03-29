@@ -1,0 +1,72 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{graphicx,amsmath,amssymb,amsthm, boxedminipage}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\scalar}[2]{\ensuremath{\langle #1, #2\rangle}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\pfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+% \newcommand{\nth}[1]{#1\textsuperscript{th}}
+\newcommand{\E}{\mathop{\mathbb{E\/}}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\R}{\mathbb{R}}
+
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{exerciseD}[theorem]{*Exercise}
+\newtheorem{exerciseDD}[theorem]{**Exercise}
+
+\let\oldexercise\exercise
+\renewcommand{\exercise}{\oldexercise\normalfont}
+
+\let\oldexerciseD\exerciseD
+\renewcommand{\exerciseD}{\oldexerciseD\normalfont}
+
+\let\oldexerciseDD\exerciseDD
+\renewcommand{\exerciseDD}{\oldexerciseDD\normalfont}
+
+
+ 
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+\begin{document}
+
+\author{郭睿涵}
+\date{\today}
+
+\title{Can an event space be a countably infinite set?\\
+  \vspace{3mm}
+{\large	Shanghai Jiaotong University, Spring 2020\\
+}
+}
+\maketitle
+
+\paragraph{Exercise 2.}Can an event space be a countably infinite set?
+\paragraph{Solution}First of all, event space in measure theory based probability, it is required to be a sigma-algebra. Then we need to proof a sigma-algebra that contains infinitely many sets must be uncountable.\\
+Assume we have a set $\mathbb{X}$, and an infinite sigma-algebra $\mathbb{S}$ on it. I want to proof that $\mathbb{S}$ is uncountable by contradiction.\\
+\paragraph{Assumption} $\mathbb{S}=\{A_{i}\}_{i=1}^{\infty}$,$B_{x} =\cap_{x\in A_{i}}A_{i}$. Due to $\mathbb{S}$ is countable, $B_{x}$ is made of countable intersection, which means it belongs to $\mathbb{S}$.\\
+\paragraph{Lemma} $c \in B_x \cap B_y \rightarrow B_x = B_y$
+\paragraph{Proof} If $x \notin B_c$, $B_x \backslash B_c \subset S$ with $x \in B_x \backslash B_c$. But $B_x$ is the intersection of all the intervals containing x. Therefore $B_x \backslash B_c = B_x$, which means,$B_x = B_c$.\\
+Analogouly, we have $B_y = B_c$. So we've got $B_x = B_y$ when $c \in B_x \cap B_y$.
+\\\\
+If there are finite sets of the form $B_x$, then: $\mathbb{S}$ is a union of a finite number of disjoint sets, which leads to $\mathbb{S}$ is finite.
+\\\\
+If there are countable-infinite sets of the form $B_x$, then suppose $G=\{B_x\}_{x\in X}$.By taking all the possible disjoint unions from G you can form $\|P(G)\|$ new different sets(P means power set), hense an uncountable number of different sets.(G is countably infinite, then P(G) is uncountable)
+\\\\
+Notice that every possible union of sets in G is a set that belongs to S, since $B_x \in S$ and S is a sigma-algebra. This means that S should be uncountable in order to contain this uncountable number of all possible different unions of the sets in the family G.
+\\\\
+In conclusion, an event space can't be a countably infinite set.
+\end{document}
