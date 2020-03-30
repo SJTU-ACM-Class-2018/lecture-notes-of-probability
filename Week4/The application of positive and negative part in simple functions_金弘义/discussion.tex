@@ -153,12 +153,14 @@
     	
     	we can derive that $f_n$ is a simple function with respect to $(S,\Sigma)$.
     	
-    	Without loss of generality, assume $f\ge0$.
+    	To prove the second statement, first let's focus on the part where $f>=0$.
     	Suppose $f<2^n$, then there exists $k\in\mathbb{N}$ and $1\le k \le n2^n$ such that $f \in[\frac{k-1}{2^n},\frac{k}{2^n}) $. We can then find that
     	\begin{align*}
     		f_n&=\frac{k-1}{2^n}\\
     		\forall \epsilon>0,\exists n_0=\lceil max(\log_{2}f,\log_{2}\frac{1}{\epsilon})\rceil+1&>0,\forall n>n_0,|f_n-f|<\frac{k}{2^k}-\frac{k-1}{2^n}=\frac{1}{2^n}<\epsilon
     	\end{align*}
+    	
+    	It's similar for the part where $f<0$.
     	
     	So $f$ is the limit of a sequence of simple functions $f_n$.
     	
