@@ -1,0 +1,100 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\BorelSet}{\mathcal{B}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{Show that $\BorelSet([a, b]) = \sigma(\pi[a, b])$}
+    \author{赖睿航\ 518030910422}
+    \date{\today}
+    \maketitle
+    
+    \begin{proof}
+        According to the definition of $\pi(\Real)$ and $\pi[a, b]$, we have:
+        \begin{align*}
+            \pi[a, b] &= \{A \cap [a, b] \mid A \in \pi(\Real)\} \\
+            &= \{(-\infty, x] \cap [a, b] \mid x \in \Real \} \\
+            &= \{[a, x] \mid x \in [a, b]\}.
+        \end{align*}
+        Let $\tau$ be all the open sets on $\Real$. By the definition of subspace topology, we have
+        \begin{align*}
+        \BorelSet([a, b]) &= \sigma(\{\textrm{all open sets on } [a, b]\}) \\
+        &= \sigma(\{[a, b] \cap U \mid U \in \tau \}).
+        \end{align*}
+        Hence intervals such as $[a, b], [a, x), (x, b], x \in (a, b)$ are all open intervals on $[a, b]$.
+        
+        We first show that $\sigma(\pi[a, b]) \subseteq \BorelSet([a, b])$. By definition of $\sigma$-algebra, we only need to show that $\pi[a, b] \subseteq \BorelSet([a, b])$. For any interval $[a, x] \in \pi[a, b]$ with $x \in [a, b]$, there are two cases:
+        \begin{enumerate}
+            \item If $x \in [a, b)$, then $[a, x] = \bigcap_{n \in \Natural} [a, x + \frac{b - x}{2n}) \in \BorelSet([a, b])$.
+            \item If $x = b$, then $[a, x] = [a, b] \in \BorelSet([a, b])$ since $[a, b]$ is an open set.
+        \end{enumerate}
+        Thus $\pi[a, b] \subseteq \BorelSet([a, b])$.
+        
+        Then we show that $\BorelSet([a, b]) \subseteq \sigma(\pi[a, b])$. Equivalently we show that every open set on $[a, b]$ is contained in $\sigma(\pi[a, b])$. Every open set on $\sigma(\pi[a, b])$ is a countable union of open intervals. So we only need to show that every open interval on $[a, b]$ belongs to $\sigma(\pi[a, b])$. For any open interval $I$, there are four cases:
+        \begin{enumerate}
+            \item If $I = [a, b]$, then $I = [a, b] \in \sigma(\pi[a, b])$ is trivial.
+            \item If $I = [a, y), y \in (a, b]$, then $I = [a, y) = \bigcup_{n \in \Natural} [a, y - \frac{y - a}{2n}] \in \sigma(\pi[a, b])$.
+            \item If $I = (x, b], x \in [a, b)$, then $I = (x, b] = [a, b] \setminus [a, x] \in \sigma(\pi[a, b])$.
+            \item If $I = (x, y), a \leqslant x < y \leqslant b$, then $I = (x, y) = [a, y) \setminus [a, x] = (\bigcup_{n \in \Natural} [a, y - \frac{y - a}{2n}]) \setminus [a, x] \in \sigma(\pi[a, b])$.
+        \end{enumerate}
+        Hence every open interval on $[a, b]$ belongs to $\sigma(\pi[a, b])$. So every open set on $[a, b]$ belongs to $\sigma(\pi[a, b])$. And therefore $\BorelSet([a, b]) = \sigma(\pi[a, b])$.
+    \end{proof}
+\end{document}
