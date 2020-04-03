@@ -1,0 +1,66 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Independence of coin tossing events}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    In probability triple $(\Omega , \mathcal{F}, P) = ([0,1),\mathcal{B}[0,1), \mathrm{Leb})$.
+    Let event
+    \begin{math}
+        A_n = [0, \frac{1}{2^n}) \cup [\frac{2}{2^n}, \frac{3}{2^n}) \cup \cdots \cup [\frac{2^n-2}{2^n}, \frac{2^n-1}{2^n})
+    .\end{math}
+
+    Then $(A_n: n \in \mathbb{N}_+)$ are independent.
+\end{thm}
+
+\begin{proof}[Proof]
+    By definition, we should show that 
+    \begin{math}
+        \mathcal{A}_i := \{\varnothing, A_n, \Omega \backslash A_n, \Omega \}, i \in \mathbb{N} _+
+    .\end{math}
+    are independent $\sigma $-algebras.
+
+    Consider any $B_i \in \mathcal{A}_i$ and distinct $i_1, i_2, \cdots ,i_n$. For some $l \in [n]$,
+    \begin{itemize}
+        \item If $B_{i_l} = \varnothing$, then $\bigcap_{k=1}^n B_{i_k} = \varnothing$ and $P(B_i) = 0$ thus $\prod_{k=1}^nP(B_{i_k}) = 0$. The equation holds for any other $B_{i_k}$.
+        \item If $B_{i_l} = \Omega $, then $\bigcap_{k \in [n]}B_{i_k} = \bigcap_{k \in [n] \backslash \{l\} }B_{i_k}$ and $P(B_{i_l}) = 1$. Thus
+            \begin{math}
+                P(\bigcap_{k \in [n]}B_{i_k}) = \prod_{k \in [n]}P(B_{i_k}) \iff
+                P(\bigcap_{k \in [n] \backslash \{l\} }B_{i_k}) = \prod_{k \in [n] \backslash \{l\} }P(B_{i_k})
+            .\end{math}
+    \end{itemize}
+
+    So we can assume that either $B_{i_k} = A_{i_k}$ or $B_{i_k} = \Omega \backslash A_{i_k}$.
+
+    Let $N = \max_{k \in [n]} i_k $ and $L_i = [\frac{i}{2^N}, \frac{i+1}{2^N}) $. $(L_i)$ are disjoint. Then
+    \begin{math}
+        A_{i_k} &= \bigcup_{s=0}^{2^{i_k} - 1} [\frac{2s}{2^{i_k}}, \frac{2s+1}{2^{i_k}}) \\
+                &= \bigcup_{s=0}^{2^{i_k} - 1} \bigcup_{i=2^{N-i_k}\cdot 2s}^{2^{N-i_k}(2s+1)-1} L_i \\
+                &=\bigcup_{\{i\in \{0,1,\cdots ,2^N-1\} : \left\lfloor \frac{i}{2^{i_k}} \right\rfloor\} \equiv 0(\bmod 2)\}} L_i
+    .\end{math}
+
+Similarly, $\Omega \setminus A_{i_k} =\bigcup_{\{i \in \{0,1,\cdots ,2^N-1\} : \left\lfloor \frac{i}{2^{i_k}} \right\rfloor\} \equiv 1(\bmod 2)\}} L_i$.
+
+    Thus
+    \begin{math}
+        P(\bigcap_{k \in [n]} B_{i_k}) = P(\bigcup_{\{i \in \{0,1,\cdots ,2^N-1\}: \forall k \in [n], \left\lfloor \frac{i}{2^{i_k}} \right\rfloor \equiv a_k(\bmod 2) \} }L_i) = 2^{-k}
+    \end{math}
+    ,where $a_k = \begin{cases}
+        0, B_{i_k} = A_{i_k} \\
+        1, B_{i_k} = \Omega \setminus A_{i_k}
+    \end{cases}$.
+
+    We also have $\forall k, P(\Omega \setminus A_{i_k}) = P(A_{i_k}) = 2^{i_k - 1} \cdot 2^{N-i_k} \cdot 2^{-N} = 2^{-1}$. Therefore
+    \begin{math}
+        P(\bigcap_{k \in [n]}B_{i_k}) = \prod_{k \in [n]}P(B_{i_k}) = 2^{-k}
+    .\end{math}
+
+    This implies that $(\mathcal{A}_i)$ are independent $\sigma $-algebras, and then $(A_n)$ are independent events.
+
+\end{proof}
+
+\end{document}
