@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+
+%\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{hyperref} 
+\usepackage{tcolorbox}
+
+\geometry{a4paper, left = 2cm, right = 2cm, top = 2cm}
+
+\newcommand\problem[1]{\section*{Problem #1}}
+
+\newcommand\bE{\mathbb{E}}
+\newcommand\bF{\mathbb{F}}
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\fC{\mathbf{C}}
+\newcommand\fF{\mathbf{F}}
+\newcommand\fN{\mathbf{N}}
+\newcommand\fQ{\mathbf{Q}}
+\newcommand\fR{\mathbf{R}}
+\newcommand\fZ{\mathbf{Z}}
+\newcommand\cU{\mathcal{U}}
+
+\newcommand\ce{\coloneqq}
+\newcommand\lproof{\item ``$\Leftarrow$'' :}
+\newcommand\rproof{\item ``$\Rightarrow$'' :}
+
+\newcommand{\leb}{\text{Leb}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\ord}{\text{ord}}
+\newcommand{\floor}[1]{\lfloor {#1}\rfloor}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+
+\newtheorem{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+
+\title{A Proof of Doob-Dynkin Lemma}
+\author{WU Runzhe\\
+	Student ID : 518030910432\\
+	\textsc{Shanghai Jiao Tong University}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\begin{tcolorbox}
+		\textbf{Doob-Dynkin Lemma.}
+			Let $X,Y:S\rightarrow \bR$ be random variables. Then $\sigma(Y)\subseteq\sigma(X)$ implies there exists a $\mathcal{B}/\mathcal{B}$-measurable function $f$ such that $f\circ X=Y$.
+	\end{tcolorbox}
+
+	It seems that there is a common technology to prove the validity of a certain property for some functions that breaks proof to four easier steps as follows
+	
+	\begin{enumerate}[(1)]
+		\item Prove the property for indicator functions.
+		\item Using linearity, extend the proof to simple functions.\footnote{A simple function is a finite linear combination of indicator functions of measurable sets.}
+		\item Using monotone approximation, extend the property to non-negative functions.
+		\item Extend the property to some real-valued functions $f$ by writing $f=f^+-f^-$.
+	\end{enumerate}
+
+	It's called \textit{Standard Machine}. Anyway, the following proof will follow this idea.
+	
+	Let's do the first step---show the validity of Doob-Dynkin Lemma for indicator functions.
+
+	\begin{lemma}\label{indic_func}
+		Doob-Dynkin Lemma holds when $Y$ is an indicator function.
+	\end{lemma}
+
+	\begin{proof}[Proof of Lemma \ref{indic_func}]
+		Suppose $Y=\ind{A}$ where $A\in S$. Then we have  $\sigma(Y)=\{\emptyset,S,A,A^C\}\subseteq\sigma(X)$. Clearly, $f=\ind{B}$ where $X^{-1}(B)=A$ will suffice, and trivially, $f$ is $\mathcal{B}/\mathcal{B}$-measurable.
+	\end{proof}
+
+	Then we extend it to some simple functions.
+
+	\begin{lemma}\label{sim}
+		Doob-Dynkin Lemma holds when $Y$ is a finite linear combination of disjoint indicator functions in $\bR$. Formally, 
+		$$Y=\sum_{i\in I}\lambda_i\ind{A_i}$$
+		where $\lambda_i\in\bR$ and $A_i\cap A_j=\emptyset$ for any $i,j\in I$ with $i\not=j$.
+	\end{lemma}
+
+	\begin{proof}[Proof of Lemma \ref{sim}]
+		Without loss of generality, we assume all $\lambda_i$ are pairwise distinct. It's easy to see that $\sigma(\ind{A_i})\subseteq\sigma(Y)\subseteq \sigma(X)$, so by \textit{Lemma \ref{indic_func}}, we can obtain some measurable functions $f_i,i\in I$. And $f=\sum_{i\in I} \lambda_i f(i)$ will suffice.
+	\end{proof}
+
+	\begin{remark}
+		Note that \textit{Lemma \ref{sim}} is true only for \textbf{finite} combination of indicator functions. Otherwise, the measurability of $f$ won't be guaranteed.
+	\end{remark}
+
+	Let's define the dyadic function $d_n\in\bR^{\bR}$ for $n\in \bN$ as follows.
+	$$d_n=\sum_{k=1}^{n2^n}\frac{k-1}{2^n}\ind{[\frac{k-1}{n^2},\frac{k}{2^n})}+n\ind{[n,+\infty)}$$
+	
+	\begin{lemma}[Monotone Approximation]\label{ma}
+		Let $f$ be a non-negative measurable function. Then there exists a sequence $\{f_n\}_{n=1}^\infty$ of non-negative simple functions such that $f_n\uparrow f$.
+	\end{lemma}
+
+	\begin{proof}[Proof of Lemma \ref{ma}]
+		Let $f_n=d_n\circ f$. The proof of why $f_n\uparrow f$ has been shown in previous work by other students (maybe in folder \textit{week 3} in our course website), so I won't repeat it here.
+	\end{proof}
+
+	By letting $f=f^+-f^-$, we obtain the following corollary.
+
+	\begin{corollary}[Approximation]\label{app}
+		Let $f$ be a measurable function. Then there exists a sequence $\{f_n\}_{n=1}^\infty$ of simple functions such that $f_n\rightarrow f$.
+	\end{corollary}
+
+	Now we can prove the Doob-Dynkin Lemma. Let $X,Y$ be random variables, and by \textit{corollary \ref{app}}, there exits a sequence of simple function $\{Y_n\}_{n=1}^\infty$ where $Y_n=d_n\circ Y^+-d_n\circ Y^-$ such that $Y_n\rightarrow Y$. Now we should prove $\sigma(Y_n)\subseteq\sigma(Y)$ in order to use \textit{Lemma \ref{sim}}. By definition, if $A\in \sigma(Y_n)$, then there exits $B\in \mathcal{B}$ such that $A=Y_n^{-1}B$. As $Y_n$ is a simple function, We can somehow extend $B$ by finite number of subset in $\bR$ to $B'$, formally, $B'=B\cup B_1\cup B_2\cup\cdots \cup B_k$ such that $A=Y^{-1}B$. That means $\sigma(Y_n)\subseteq\sigma(Y)\subseteq\sigma(X)$. By \textit{Lemma 2}, each $Y_n$ has one associated $f_n$ to satisfy the Doob-Dynkin Lemma. Then $f=\lim\sup f_n$ is again measurable by property of measurable functions. And $f\circ X=(\lim\sup f_n)\circ X=\lim\sup(f_n\circ X)=\lim \sup Y_n=\lim Y_n=Y$.
+	
+	
+	
+\end{document}
