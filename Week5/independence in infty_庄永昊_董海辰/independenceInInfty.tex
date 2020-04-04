@@ -1,0 +1,129 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, amsmath, enumerate, indentfirst}
+\usepackage{color, bm, extarrows, ulem}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\renewcommand{\proofname}{\indent \textbf {proof}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\usepackage{environ}
+\RenewEnviron{math}{%
+\begin{align*}
+\BODY
+\end{align*}
+}
+
+\title{Independence in infty}
+\date{\today}
+\author{庄永昊 董海辰}
+
+\begin{document}
+\maketitle
+\begin{thm}{}{1}
+    If sub-$\sigma$-algebras $\mathcal G_1,\mathcal G_2\dots$ are independent, then whenever 
+    $G_i\in\mathcal G_i(i\in \mathbb N)$ and $C\subseteq\mathbb N$ is a countable set, there is 
+    $$P(\cap_{c_i\in C}G_{c_i})=\prod_{c_i\in C}P(G_{c_i})$$
+\end{thm}
+\begin{proof}[Proof]
+    \begin{align*}
+        P(\cap_{c_i\in C}G_{c_i}) &= P(\cap_{i\in\mathbb N}G_{c_i})\\
+        &= P(\cup_{t\in\mathbb N}\cap_{0\leq i\leq t}G_{c_i})
+    \end{align*}
+    Let $E_i=\cap_{0\leq i\leq t}G_{c_i}$, and $E=\cup_{t\in\mathbb N}\cap_{0\leq i\leq t}G_{c_i}$, 
+    then there is $E_i\downarrow E$. Since $P(E_i)\in[0,1)$, there is $P(E_i)\downarrow P(E)$.
+    
+    By definition of independence, there is 
+    $$P(E_i)=P(\cap_{0\leq i\leq t}G_{c_i})=\prod_{0\leq i\leq t}P(G_{c_i})$$
+    So there is: 
+    $$P(E)=\lim_{t\rightarrow \infty} P(E_i)=\lim_{t\rightarrow\infty}\prod_{0\leq i\leq t}P(G_{c_i})=\prod_{c_i\in C}P(G_{c_i})$$
+\end{proof}
+
+But things are different in the uncountable case. To consider this problem, we define independence in uncountable set be that all countable subsets are independent:
+\begin{thm}{}{}
+    Consider sub-$\sigma$-algebras $(\mathcal{G}_\alpha :\alpha \in A)$ where $A$ is uncountable, even if
+    for all countable $N \subseteq A$, $(\mathcal G_i: i \in N)$ are independent(so they are independent in our definition), 
+    $$P(\cap_{\gamma\in C}G_\gamma)=\prod_{c_i\in C}P(G_{c_i})$$
+    does not hold for some $G_\alpha \in\mathcal G_\alpha(\alpha \in A) $ and uncountable $C\subseteq A$.
+\end{thm}
+\begin{proof}[Proof]
+    Consider $\sigma $-algebras in probability triple $(\Omega ,\mathcal F, P)$ be $([0,1), \mathcal B[0,1), \text{Leb})$:
+    $$\mathcal G_\alpha = \{\varnothing, \{\alpha \}, \Omega \setminus \{\alpha \} , \Omega  \}(\alpha \in \Omega )$$
+
+    For all countable $N \subseteq A$, for $i \in N$:
+
+    If $G_i = \varnothing$ or $G_i = \{i \} $, and $P(G_i) = 0$. We have 
+    $$\bigcap_{i \in N} G_i \subseteq G_i \implies P(\bigcap_{i \in N} G_i) = 0.$$
+
+    If $G_i = \Omega \setminus\{i\}$ or $G_i = \Omega$, and $P(G_i) = 1$ for all $i \in N$. 
+    $$\Omega \setminus N \subseteq \bigcap_{i\in N} G_i \implies P(\bigcap_{i \in N} G_i) = 1.$$
+
+    This shows that for every countable subset $N$ of $A$, $(\mathcal G_i: i \in N)$ are independent.
+
+    But if we take $A = \Omega $, then consider $(\mathcal G_\alpha : \alpha \in A)$ and the intersection of $(G_\alpha :\alpha \in A)$ where $G_\alpha \in \mathcal G_\alpha$.
+
+    Let $G_\alpha  = \Omega \setminus \{\alpha \} $, we have $P(G_\alpha ) = 1$, but
+    $$\bigcap_{\alpha \in A}G_\alpha = \Omega \setminus A = \varnothing \implies P(\bigcap_{\alpha \in A } G_\alpha ) = 0 \neq 1 = \prod_{\alpha \in A} P(G_\alpha)  $$
+
+    This implies that even if every countable subset of $(\mathcal G_\alpha :\alpha \in A)$ are independent, we cannot say that for all $B \subseteq A$, $G_\alpha  \in \mathcal G_\alpha$:
+    $$P(\bigcap_{\alpha \in B} G_\alpha ) = \prod_{\alpha \in B} P(G_\alpha).$$
+
+\end{proof}
+\end{document}
