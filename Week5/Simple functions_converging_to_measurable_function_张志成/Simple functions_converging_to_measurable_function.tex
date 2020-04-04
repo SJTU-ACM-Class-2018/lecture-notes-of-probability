@@ -38,7 +38,7 @@
     \maketitle
     \begin{theorem*}
         Let $$ d_n = \sum_{k=1}^{n2^n} \frac{k-1}{2^n}\textbf{1}_{[\frac{k-1}{2^n}, \frac{k}{2^n})} + n\textbf{1}_{[n,\infty)} \in \mathbb{R}^\mathbb{R} $$
-        Then $f_n = d_n \circ f^+ - d_n \circ f^-$ is a simple function and $\{f_n\}$ monotonically converges to $f$.
+        Then $f_n = d_n \circ f^+ - d_n \circ f^-$ is a simple function and $\{f_n\}$ converges to $f$.
     \end{theorem*}
 
     \begin{proof}
@@ -53,7 +53,7 @@
 
         $f_n$ is obviously a simple function because it falls into the linear space of $\mathbb{R}^\mathbb{R}$ spanned by $\{\textbf{1}_{f^{-1}([\frac{k-1}{2^n}, \frac{k}{2^n})}\ |\ k \leq n2^n\}  \cup \textbf{1}_{[n,\infty)} $. 
 
-        What this construction does intuitively is that it partitions $[0, \infty]$ to $n2^n$ intervals of length $\frac{1}{2^n}$ and another interval of $[n,\infty]$, which together constitutes $[0, \infty)$. 
+        What this construction does intuitively is that it partitions $[0, \infty)$ to $n2^n$ intervals of length $\frac{1}{2^n}$ and another interval of $[n,\infty)$, which together constitutes $[0, \infty)$. 
 
         Explicitly, 
         \[
