@@ -1,0 +1,95 @@
+\documentclass[UTF8, 12pt]{article}
+\fontfamily{DENGL.TTF}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\topmargin -.5in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{remark*}{Remark}
+
+\title{A simple way of understanding the construction of simple functions converging to a measurable function}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \begin{theorem*}
+        Let $$ d_n = \sum_{k=1}^{n2^n} \frac{k-1}{2^n}\textbf{1}_{[\frac{k-1}{2^n}, \frac{k}{2^n})} + n\textbf{1}_{[n,\infty)} \in \mathbb{R}^\mathbb{R} $$
+        Then $f_n = d_n \circ f^+ - d_n \circ f^-$ is a simple function and $\{f_n\}$ monotonically converges to $f$.
+    \end{theorem*}
+
+    \begin{proof}
+
+        For simplicity, it suffices to prove the case when $f$ is nonnegative. Because $f = f^+ - f^-$, the same proof would also work if applied to $f^+$ and $f^-$.
+        
+        Then
+        \begin{align*} 
+            f_n &= d_n \circ f \\
+            & = \sum_{k=1}^{n2^n} \frac{k-1}{2^n}\textbf{1}_{f^{-1}([\frac{k-1}{2^n}, \frac{k}{2^n}))} + n\textbf{1}_{f^{-1}({[n,\infty)})} \in \mathbb{R}^\mathbb{R}
+        \end{align*}
+
+        $f_n$ is obviously a simple function because it falls into the linear space of $\mathbb{R}^\mathbb{R}$ spanned by $\{\textbf{1}_{f^{-1}([\frac{k-1}{2^n}, \frac{k}{2^n})}\ |\ k \leq n2^n\}  \cup \textbf{1}_{[n,\infty)} $. 
+
+        What this construction does intuitively is that it partitions $[0, \infty]$ to $n2^n$ intervals of length $\frac{1}{2^n}$ and another interval of $[n,\infty]$, which together constitutes $[0, \infty)$. 
+
+        Explicitly, 
+        \[
+        f_n(x) =  
+            \begin{cases}
+                \frac{k-1}{2^n}, \quad \ f(x) \in [\frac{k-1}{2^n}, \frac{k}{2^n}) \\
+                n, \quad \  f(x) \in [n, \infty)
+            \end{cases}
+        \]
+
+        This construction of $f_n$ makes sure that $\forall x\ f_n(x) \leq f(x)$.
+        It also makes sure that $f_n(x)$ is monotonically increasing, 
+        $$
+        [\frac{k-1}{2^n}, \frac{k}{2^n}) = [\frac{2k-2}{2^{n+1}}, \frac{2k-1}{2^{n+1}}) \cup [\frac{2k-1}{2^{n+1}}, \frac{2k}{2^{n+1}})
+        $$
+        Thus, if $f(x) \in [\frac{k-1}{2^n}, \frac{k}{2^n})$, 
+        \begin{align*}
+            f_{n+1}(x) &\geq \text{min}(\frac{2k-2}{2^{n+1}}, \frac{2k-1}{2^{n+1}}) = \frac{2k-2}{2^{n+1}} = f_n(x)
+        \end{align*}
+        Finally, convergence to $f$ is guaranteed by $$ f_n(x) - f(x) \leq \frac{k}{2^n} - \frac{k-1}{2^n} = \frac{1}{2^n} $$
+    
+        Therefore, we have proved that $f_n \uparrow f$. 
+    \end{proof}
+
+    \begin{remark*}
+        In fact, the essense of this construction is that for any intervals $(I_{n,k} = [\frac{k-1}{2^n}, \frac{k}{2^n}))$, it satisifes:
+        \begin{enumerate}
+            \item  
+                $
+                f_n(x) = \text{inf}\ \{f(x)\ |\ f(x) \in I_{n,k}\} \leq f(x)
+                $
+            \item $\exists t\ I_{n+1,k} \subset I_{n,t}$
+        \end{enumerate}
+        These are not difficult to achieve, for example we can partition $[0,\infty)$ to intervals of length $\frac{1}{n}$, 
+        $$
+            f_n = \sum_{k=1}^{n^2-1} \frac{k}{n}\textbf{1}_{f^{-1}([\frac{k}{n}, \frac{k + 1}{n}))} + n\textbf{1}_{f^{-1}({[n,\infty)})}
+        $$
+    \end{remark*}
+\end{document}
