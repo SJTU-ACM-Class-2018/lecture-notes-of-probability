@@ -23,6 +23,7 @@
 
 \newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
 \newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+\newenvironment{definition}{\noindent\ignorespaces\textbf{Definition:}}{\hfill \noindent}
 
 \newtheorem{claim}{Claim}
 \newtheorem{problem}{Problem}
@@ -36,6 +37,15 @@
 
 \begin{document}
     \maketitle
+    \begin{definition} \\
+        Given function $f$, we define
+        \begin{align*}
+            f^+(x) &= max(f(x), 0) \\
+            f^-(x) &= max(-f(x), 0)
+        \end{align*}
+        $f$ is a simple function with respect to $(S,\Sigma)$ provided it falls into the linear subspace
+        of $\mathbb{R}^S$ spanned by $\{\textbf{1}_A\ |\ A \in \Sigma \}$. 
+    \end{definition}
     \begin{theorem*}
         Let $$ d_n = \sum_{k=1}^{n2^n} \frac{k-1}{2^n}\textbf{1}_{[\frac{k-1}{2^n}, \frac{k}{2^n})} + n\textbf{1}_{[n,\infty)} \in \mathbb{R}^\mathbb{R} $$
         Then $f_n = d_n \circ f^+ - d_n \circ f^-$ is a simple function and $\{f_n\}$ converges to $f$.
@@ -79,7 +89,7 @@
     \end{proof}
 
     \begin{remark*}
-        In fact, the essense of this construction is that for any intervals $(I_{n,k} = [\frac{k-1}{2^n}, \frac{k}{2^n}))$, it satisifes:
+        In fact, the essense of this construction is that for any interval $(I_{n,k} = [\frac{k-1}{2^n}, \frac{k}{2^n}))$, it satisfies:
         \begin{enumerate}
             \item  
                 $
