@@ -1,0 +1,129 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\BorelSet}{\mathcal{B}}
+\newcommand{\IndicatorFunc}[1]{\mathbf{1}_{#1}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{$\Sigma$-measurable Functions and Simple Functions}
+    \author{赖睿航 518030910422}
+    \date{\today}
+    \maketitle
+
+    \begin{exercise}
+        Let $(S, \Sigma)$ be a measurable space. Take $f \in m\Sigma$. Let $f^+ = \max(f, 0)$ and $f^- = \max(-h, 0)$. A function $g \in \Real^S$ is a simple function with respect to $(S, \Sigma)$ provided it falls into the linear subspace of $\Real^S$ spanned by $\{\IndicatorFunc{A} \mid A \in \Sigma\}$. For each positive integer $n$, define the dyadic function $d_n \in \Real^{\Real}$ to be
+        $$
+        \sum_{k = 1}^{n 2^n} \frac{k - 1}{2^n}\IndicatorFunc{[\frac{k - 1}{2^n}, \frac{k}{2^n}]} + n\IndicatorFunc{[n, +\infty]}.
+        $$
+        For each $n \in \Natural$, show that $f_n \.{=} d_n \circ f^+ - d_n \circ f^-$ is a simple function with respect to $(S, \Sigma)$. Then illustrate that $f$ is the limit of a sequence of simple functions.
+    \end{exercise}
+
+    \begin{proof}
+        Let $x \in \Real$, $x \geqslant 0$. We can rewrite the definition of $d_n$ as a step function
+        \begin{align*}
+            d_n(x) = \left\{
+            \def\arraystretch{1.5}
+            \begin{array}{ll}
+                0, &\frac{0}{2^n} \leqslant x < \frac{1}{2^n} \\
+                \frac{1}{2^n}, & \frac{1}{2^n} \leqslant x < \frac{2}{2^n} \\
+                \vdots & \\
+                \frac{n \cdot 2^n - 1}{2^n}, & \frac{n \cdot 2^n - 1}{2^n} \leqslant x < \frac{n \cdot 2^n}{2^n} \\
+                \frac{n \cdot 2^n}{2^n}, & x \geqslant \frac{n \cdot 2^n}{2^n}.
+            \end{array}
+            \right.
+        \end{align*}
+        Then we can write down $d_n \circ f^+(s)$ explicitly:
+        \begin{align*}
+            d_n \circ f^+(s) = \left\{
+            \def\arraystretch{1.5}
+            \begin{array}{ll}
+                0, & s \in f^{-1}((-\infty, \frac{1}{2^n})) \\
+                \frac{1}{2^n}, & s \in f^{-1}([\frac{1}{2^n},  \frac{2}{2^n})) \\
+                \vdots & \\
+                \frac{n \cdot 2^n - 1}{2^n}, & s \in f^{-1}([\frac{n \cdot 2^n - 1}{2^n}, \frac{n \cdot 2^n}{2^n})) \\
+                \frac{n \cdot 2^n}{2^n}, & s \in f^{-1}([\frac{n \cdot 2^n}{2^n}, +\infty)).
+            \end{array}
+            \right.
+        \end{align*}
+        Let $A_0 = (-\infty, \frac{1}{2^n}), A_1 = [\frac{1}{2^n}, \frac{2}{2^n}), \ldots, A_{n \cdot 2^n - 1} = [\frac{n \cdot 2^n - 1}{2^n}, \frac{n \cdot 2^n}{2^n}), A_{n \cdot 2^n} = [\frac{n \cdot 2^n}{2^n}, +\infty)$. We now can write $d_n \circ f^+$ as
+        $$
+        d_n \circ f^+ = 0\IndicatorFunc{A_0} + \frac{1}{2^n}\IndicatorFunc{A_1} + \ldots + \frac{n \cdot 2^n - 1}{2^n}\IndicatorFunc{n \cdot 2^n - 1} + \frac{n \cdot 2^n}{2^n}\IndicatorFunc{n \cdot 2^n}.
+        $$
+        By the definition of simple function, it follows that $d_n \circ f^+$ is a simple function. Similarly, $d_n \circ f^-$ is also a simple function. And then we have $f_n = d_n \circ f^+ - d_n \circ f^-$ is a simple function. Moreover, we have
+        \begin{align*}
+            f_n(s) = d_n \circ f^+(s) - d_n \circ f^-(s) = \left\{
+            \def\arraystretch{1.5}
+            \begin{array}{ll}
+                -\frac{n \cdot 2^n}{2^n}, & s \in f^{-1}((-\infty, \frac{n \cdot 2^n}{2^n})) \\
+                -\frac{n \cdot 2^n - 1}{2^n}, & s \in f^{-1}(-\frac{n \cdot 2^n}{2^n}, -\frac{n \cdot 2^n - 1}{2^n}] \\
+                \vdots & \\
+                -\frac{1}{2^n}, & s \in f^{-1}((-\frac{2}{2^n}, \frac{1}{2^n}]) \\
+                0, & s \in f^{-1}((-\frac{1}{2^n}, \frac{1}{2^n})) \\
+                \frac{1}{2^n}, & s \in f^{-1}([\frac{1}{2^n},  \frac{2}{2^n})) \\
+                \vdots & \\
+                \frac{n \cdot 2^n - 1}{2^n}, & s \in f^{-1}([\frac{n \cdot 2^n - 1}{2^n}, \frac{n \cdot 2^n}{2^n})) \\
+                \frac{n \cdot 2^n}{2^n}, & s \in f^{-1}([\frac{n \cdot 2^n}{2^n}, +\infty)).
+            \end{array}
+            \right.
+        \end{align*}
+        So for any $s \in S$ and any $\varepsilon > 0$, let $N = \lceil\max\{|f(s)|, \log_{2}\varepsilon\}\rceil$. For any $n$ such that $n > N$, we have $|f(s) - f_n(s)| < \varepsilon$. So we can say that $f$ is the limit of a sequence of simple functions.
+    \end{proof}
+\end{document}
