@@ -78,7 +78,7 @@
 	\end{lemma}
 
 	\begin{proof}[Proof of Lemma \ref{indic_func}]
-		Suppose $Y=\ind{A}$ where $A\in S$. Then we have  $\sigma(Y)=\{\emptyset,S,A,A^C\}\subseteq\sigma(X)$. Clearly, $f=\ind{B}$ where $X^{-1}(B)=A$ will suffice, and trivially, $f$ is $\mathcal{B}/\mathcal{B}$-measurable.
+		Suppose $Y=\ind{A}$ where $A\subseteq S$. Then we have  $\sigma(Y)=\{\emptyset,S,A,A^C\}\subseteq\sigma(X)$. Clearly, $f=\ind{B}$ where $X^{-1}(B)=A$ will suffice, and trivially, $f$ is $\mathcal{B}/\mathcal{B}$-measurable.
 	\end{proof}
 
 	Then we extend it to some simple functions.
@@ -90,7 +90,7 @@
 	\end{lemma}
 
 	\begin{proof}[Proof of Lemma \ref{sim}]
-		Without loss of generality, we assume all $\lambda_i$ are pairwise distinct. It's easy to see that $\sigma(\ind{A_i})\subseteq\sigma(Y)\subseteq \sigma(X)$, so by \textit{Lemma \ref{indic_func}}, we can obtain some measurable functions $f_i,i\in I$. And $f=\sum_{i\in I} \lambda_i f(i)$ will suffice.
+		Without loss of generality, we assume all $\lambda_i$ are pairwise distinct. It's easy to see that $\sigma(\ind{A_i})\subseteq\sigma(Y)\subseteq \sigma(X)$, so by \textit{Lemma \ref{indic_func}}, we can obtain some measurable functions $f_i,i\in I$. And $f=\sum_{i\in I} \lambda_i f_i$ will suffice.
 	\end{proof}
 
 	\begin{remark}
@@ -105,7 +105,7 @@
 	\end{lemma}
 
 	\begin{proof}[Proof of Lemma \ref{ma}]
-		Let $f_n=d_n\circ f$. The proof of why $f_n\uparrow f$ has been shown in previous work by other students (maybe in folder \textit{week 3} in our course website), so I won't repeat it here.
+		Let $f_n=d_n\circ f$. The proof of why $f_n\uparrow f$ has been shown in previous work by other students (maybe in folder \textit{week 4 or 5} in our course website), so I won't repeat it here.
 	\end{proof}
 
 	By letting $f=f^+-f^-$, we obtain the following corollary.
@@ -114,7 +114,7 @@
 		Let $f$ be a measurable function. Then there exists a sequence $\{f_n\}_{n=1}^\infty$ of simple functions such that $f_n\rightarrow f$.
 	\end{corollary}
 
-	Now we can prove the Doob-Dynkin Lemma. Let $X,Y$ be random variables, and by \textit{corollary \ref{app}}, there exits a sequence of simple function $\{Y_n\}_{n=1}^\infty$ where $Y_n=d_n\circ Y^+-d_n\circ Y^-$ such that $Y_n\rightarrow Y$. Now we should prove $\sigma(Y_n)\subseteq\sigma(Y)$ in order to use \textit{Lemma \ref{sim}}. By definition, if $A\in \sigma(Y_n)$, then there exits $B\in \mathcal{B}$ such that $A=Y_n^{-1}B$. As $Y_n$ is a simple function, We can somehow extend $B$ by finite number of subset in $\bR$ to $B'$, formally, $B'=B\cup B_1\cup B_2\cup\cdots \cup B_k$ such that $A=Y^{-1}B$. That means $\sigma(Y_n)\subseteq\sigma(Y)\subseteq\sigma(X)$. By \textit{Lemma 2}, each $Y_n$ has one associated $f_n$ to satisfy the Doob-Dynkin Lemma. Then $f=\lim\sup f_n$ is again measurable by property of measurable functions. And $f\circ X=(\lim\sup f_n)\circ X=\lim\sup(f_n\circ X)=\lim \sup Y_n=\lim Y_n=Y$.
+	Now we can prove the Doob-Dynkin Lemma. Let $X,Y$ be random variables, and by \textit{corollary \ref{app}}, there exists a sequence of simple function $\{Y_n\}_{n=1}^\infty$ where $Y_n=d_n\circ Y^+-d_n\circ Y^-$ such that $Y_n\rightarrow Y$. Now we should prove $\sigma(Y_n)\subseteq\sigma(Y)$ in order to use \textit{Lemma \ref{sim}}. By definition, if $A\in \sigma(Y_n)$, then there exists $B\in \mathcal{B}$ such that $A=Y_n^{-1}B$. As $Y_n$ is a simple function, we can somehow extend $B$ by finite number of subset in $\bR$ to $B'$, formally, $B'=B\cup B_1\cup B_2\cup\cdots \cup B_k$ such that $A=Y^{-1}B'$. That means $\sigma(Y_n)\subseteq\sigma(Y)\subseteq\sigma(X)$. By \textit{Lemma 2}, each $Y_n$ has one associated $f_n$ to satisfy the Doob-Dynkin Lemma. Then $f=\lim\sup f_n$ is again measurable by property of measurable functions. And $f\circ X=(\lim\sup f_n)\circ X=\lim\sup(f_n\circ X)=\lim \sup Y_n=\lim Y_n=Y$.
 	
 	
 	
