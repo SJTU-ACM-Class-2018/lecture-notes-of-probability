@@ -1,0 +1,207 @@
+\input{/Users/fulingyue/Desktop/def.tex}
+\author{Fu Lingyue}
+\title{Events and Basic Properties}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Events}
+We have a probability space $(\Omega,\mathcal F, P).$
+
+\paragraph{$\Omega$} The origin set,  called sample space.
+\paragraph{$\omega\in \Omega$}  $\omega$ is the element in  sample space, called sample.
+
+\paragraph{Event} $\mathcal F$  is the events on the space $\Omega$. Every event $E\in \mathcal F$ is a $\mathcal F$-measurable subset of $\Omega$.
+
+\subsection{Intuitive Understanding}
+$\Omega$ is the biggest set, we choose an arbitrary element $\omega$ in it. Then $P(\mathcal F)$ is the probability that $\omega$ is in $\mathcal F$.
+That is to say, we can consider $\Omega$ as the all possible cases, and $\mathcal F$ is the set of those cases we have to calculate their probability. The way to calculate probability is the mapping $P: \mathcal F\mapsto [0,+\infty)$.
+
+\section{Monotone convergence of measure}
+ 
+\paragraph{$F_n \uparrow F$} Let $\{F_n\}$ as a sequence of sets which satisfy 
+
+$$F_n\subseteq F_{n+1}(\forall n\in \mathbb N),\bigcup F_n = F.$$
+
+\paragraph{$f_n \uparrow f$} Let $f_n$ as a sequence of real numbers which satisfy
+$$f_n \leq f_{n+1}(\forall n\in \mathbb N), \lim_{n\rightarrow\infty} f_n = f. $$
+
+
+
+\begin{theorem}
+  (a) If $F_n \in \Sigma(n\in \mathbb N)$ and $F_n\uparrow F$,  then $\mu(F_n) \uparrow\mu(F)$.
+  
+  (b) If $G_n \in \Sigma(n\in \mathbb N),\mu(G_k) < \infty$ for some $k$ and $G_n\downarrow G$,  then $\mu(G_n) \downarrow \mu(G)$.
+
+\end{theorem}
+\begin{proof}
+  (a) Denote $G_1 := F_1,G_n := F_n\setminus F_{n-1}(n\geq 2)$, then $G_n$ mutually disjoint. And we have 
+  $$\mu(F_n) = \mu(G_1\cup G_2 \cup \dots \cup G_n )= \Sigma_{k \leq n} \mu(G_n) $$  
+  
+  Consider the sequence $\{\Sigma_{k\leq n} \mu(G_k)\},$ we have 
+  $$\Sigma_{k\leq n} \mu(G_k) \leq \Sigma_{k\leq n+1} \mu(G_k), \text{ and } \lim_{n\rightarrow \infty} \Sigma_{k\leq n} \mu(G_k) = \Sigma_{k <\infty} \mu(G_k).$$
+  
+  Thus we can get
+  $$\mu(F_n) = \Sigma_{k \leq n} \mu(G_n) \uparrow \Sigma_{k <\infty} \mu(G_k) = \mu(F).$$
+  
+  
+  (b) Define $F_n = G_k \setminus G_{k+n}$, then use (a) to prove it.
+\end{proof}
+ 
+ \begin{corollary}
+   \textbf{(Continuity from below)} If $F_n\in \Sigma$, $F_n \subseteq F_{n+1}, n\in \mathbb N,$ then 
+   $$\lim_{n\to \infty}\mu(F_n) = \mu(\bigcup_{n\to \infty} F_n) = \mu(\lim_{n\to \infty} F_n).$$
+  \end{corollary}
+  \begin{corollary} 
+   \textbf{(Continuity from above)} If $G_n\in \Sigma$, $G_n \supseteq G_{n+1}, n\in \mathbb N,$ then 
+   $$\lim_{n\to \infty}\mu(G_n) = \mu(\bigcap_{n\to \infty} G_n) = \mu(\lim_{n\to \infty} G_n)$$ provided there exists a k with $\mu(G_k) < \infty.$
+
+ \end{corollary}
+ 
+ 
+\begin{theorem}
+  If $\mu(F_n) = 0$, then $\mu(\bigcup_{n=1}^\infty F_n) = 0$.
+\end{theorem}
+
+\subsection{lim,sup/inf and $\downarrow,\uparrow$}
+Discuss the real number sequence $\{ x_n\}$ here.
+
+Denote 
+$$\lim\sup x_n := \inf_m\{ \sup_{n\geq m}x_n\} = \downarrow \lim_m\{\sup_{n\geq m}x_n\}\in [-\infty,\infty].$$
+
+It is clear that the sequence $\sup_{n\geq m} x_n$  satisfy:
+$$\sup_{n\geq m} x_n \geq \sup_{n\geq m+1} x_n.$$
+
+Thus the limit of it exists.
+
+Similarly, denote
+$$\lim\inf x_n := \sup_m\{ \inf_{n\geq m}x_n\} = \uparrow \lim_m\{\inf_{n\geq m}x_n\}\in [-\infty,\infty].$$
+
+\begin{theorem}
+  $x_n$ converge to $[-\infty,\infty] \Leftrightarrow \lim\sup x_n = \lim\inf x_n.$ 
+\end{theorem}
+
+In order to describe probability in the future, we discuss the relation between a real number $z$ with $\lim\sup x_n$.
+
+\begin{enumerate}
+  \item If $z > \lim\sup x_n$, then $x_n$ will \textbf{eventually} less than z, i.e., $x_n < z$ when $n > N.$
+  \item If $z < \lim\sup. x_n$, then $x_n$ will \textbf{infinitely often} times greater than $z$, i.e., $x_n > z$ for infinite $n$.
+\end{enumerate}
+\section{a.s.  and  i.o.}
+\paragraph{a.s.} If 
+$$F := \{\omega:S(\omega) \text{is true}\} \in \mathcal F, P(F) = 1,$$
+
+then the statement $S$ is almost sure.
+
+\begin{lemma}
+  Set $S $ and $S^C$ are both in $\mathcal F$, then $P(S) + P(S^C) = 1$.
+  \begin{proof}
+    For $P(\mathcal F) = 1, S$ and $S^C$ are disjoint, then $P(S) + P(S^C) = P(S\cup S^C) = 1.$
+  \end{proof}
+\end{lemma}
+\begin{theorem}
+  If $F_n\in \mathcal F$ and $\forall n P(F_n) = 1$,  then $P(\bigcap_n F_n) = 1.$
+  
+  \begin{proof}
+    For $P(F_n)^C = 0$, we have 
+    $$P(\bigcap_n F_n) = P((\bigcup_n F_n^C)^C) = 1-P(\bigcup_n F_n^C) = 1.$$
+  \end{proof}
+\end{theorem}
+
+Consider the event sequence $E_n$.
+\paragraph{i.o.} We define 
+\begin{equation}
+  \nonumber
+  \begin{aligned}
+    (E_n,\text{i.o.}) &= (\text{events that happen in infinite }E_n) \\
+    & := \lim \sup E_n \\
+    & := \bigcap_m\bigcup_{n\geq m} E_n \\
+    & = \{ \omega \mid \forall m,\exists k \geq m,s.t. \omega\in E_k\}\\
+    & = \{ \omega \mid \omega\in E_n \text{ for infinite n}\}
+  \end{aligned}
+\end{equation}
+
+\begin{theorem}
+  $$P(\lim \sup E_n) \geq \lim\sup P(E_n).$$
+  \begin{proof}
+    Define $G_m := \bigcup_{n\geq m} E_n,$ and $G_m\downarrow G := \lim\sup E_n$. According to continuity from below, 
+    $$P(G) = \downarrow\lim_{m\to \infty} P(G_m) = \downarrow\lim_{m\to \infty} P(\bigcup_{n\geq m} E_n).$$
+    
+    It is clear that $P(\bigcup_{n\geq m} E_n) \geq \sup P(E_n),$ thus 
+    $$P(\lim \sup E_n)  = P(G) \geq \lim \sup P(E_n).$$
+  \end{proof}
+\end{theorem}
+
+
+
+\paragraph{ev} We write $(E_n,ev)$ as 
+\begin{equation}
+  \nonumber
+  \begin{aligned}
+    (E_n,ev) & := (E_n \text{ will eventually happens}) \\
+    & := \lim\inf E_n \\
+    & := \bigcup_m \bigcap_{n\geq m} E_n \\
+    & = \{\omega \mid \text{for some m, } \omega \in E_n \text{ for every } n\geq m\}. \\
+  \end{aligned}
+\end{equation}
+\begin{theorem}
+  $$P(\lim\inf E_n) \leq \lim\inf P(E_n).$$
+\end{theorem}
+\begin{proof}
+  Similar to Theorem 5.
+\end{proof}
+
+\section{BC1}
+\begin{theorem}
+  \textbf{(BC1)} The event sequence $E_n$ satisfies $\Sigma_n P(E_n) < \infty.$ Then 
+  $$P(\lim \sup E_n) = P(E_n,i.o.) = 0.$$
+
+\end{theorem}
+\begin{proof}
+  Let $G_m = \bigcup_{n\geq m} E_n$ and $G_m\downarrow G = \bigcap_m G_m.$ Then we have 
+  $$P(\lim\sup E_n) = P(G) \leq P(G_m) = P(\bigcup_{n\geq m} E_n) \leq \Sigma_n P(E_n).$$
+  
+  When $m \to \infty$,  $\Sigma_{n\geq m} P(E_n) = 0.$
+\end{proof}
+
+\subsection{Aplication}
+Use BC1 to prove Discrete-time Poincar\'e's Recurence Theorem.
+\begin{theorem}
+  Let T be a measure-preserving transformation on a probability space $(\Omega,\mathcal F, P).$ Then. for any $E\in \mathcal F$ with $P(E) > 0,$ almost all points of $E$ returns to $E$ infinitely often under positive iterations by $T$.
+\end{theorem}
+\begin{proof}
+  For each $n\in \mathbb N$, let $A_n := \{x\in E\mid x\notin T^{-kn}(E),\forall k\in \mathbb N\} = E\backslash \bigcup
+_{k\ge 1}T^{-kn}(E).$ $T^{-kn}(E)$ is an event for E is an event and $T$ is measure-preserving. Thus $A_n$ is an event as well.
+
+
+$A_n, T^{-1}(A_n)\dots$  are pairwise disjoint. And for $T$ is measure-preserving
+$$P(A_n) = P(T^{-1}(A_n) = \dots = 0.$$
+
+And for $P(\lim\sup A_n) \leq P(\bigcup A_n) \leq \Sigma P(A_n) = 0,$ $P(\lim \sup A_n)$ obtains 0. It  is clear that $\forall x\in E\backslash \lim\sup A_n,x$ visits $E$ infinitely often under positive iterations by $T$. For $|(E\backslash \lim\sup A_n)|= P(E) = 1,$ we can conclude that almost surely all points in E are returning to $E$ infinitely often. 
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
