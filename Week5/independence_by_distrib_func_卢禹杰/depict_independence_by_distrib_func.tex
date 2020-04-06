@@ -1,0 +1,81 @@
+\input{../preamble.tex}
+\linespread{1.5} \selectfont
+\title{\textsc{Depicting Independence of Random Variables by Their Distribution Functions} }
+\begin{document}
+\maketitle
+First we give a definition for distribution for multiple random variables
+\begin{defi}[Joint distribution function]
+		For $n$ random variables $X_1,\ldots,X_{n}$, the joint cumulative distribution function $F_{X_1,X_2\ldots,X_{n}}$ is given by
+		\[
+				F_{X_1,\ldots,X_{n}} = P\left( X_1\le x_1,\ldots,
+				X_{n} \le  x_{n}\right) 
+		.\] 
+		Interpreting the $n$ random variables as a random vector 
+		$\bm{X} = \left( X_1,\ldots,X_{n} \right) ^{\top }$ yields a shorter
+		notation 
+		\[
+				F_{\bm{X}}\left( \bm{x} \right)  = 
+				P\left( X_1\le x_1,\ldots,X_{n}\le x_{n} \right) 
+		.\] 
+\end{defi}
+And we also need the lemma for independence of sigma algebra, which is proved 
+in class. Here I give a generalization form of it.
+\begin{lemma}
+		Suppose $\mathcal{A}_{1}, \ldots, \mathcal{A}_{n}$ are independent 
+		and each $\mathcal{A}_{i}$ is a $\pi$-system, then 
+		$\sigma\left( \mathcal{A}_{1} \right) , \ldots, 
+		\sigma\left( \mathcal{A}_{n} \right) $ are independent.
+\end{lemma}
+		The essence is the same with the case of 2 sigma algebras.
+
+With the preparation done, we can depict the independence of 
+random variables by their distribution functions as follows
+\begin{thm}
+		Random variables $X_1,X_2,\ldots,X_{n}$ are independent, if and only if
+		$\forall \bm{x}=\left( x_1,\ldots,x_{n} \right) \in \R^{n}$ 
+		\[
+			 P\left( X_1\le x_1,\ldots,X_{n}\le x_{n} \right) 
+				= \prod_{i=1}^{n} F_{i}\left( x_{i} \right)  
+		.\] 
+\end{thm}
+\begin{proof}
+		Using the definition of joint distribution function, the 
+		formula above is equivalent with 
+	\[
+			F_{\bm{X}}\left( \bm{x} \right) = \prod_{i=1}^{n} F_{i}\left( x_{i} \right)  
+	.\] 
+	Which is clean and beautiful. First we prove $\implies$, the result 
+	is obvious by definition. Since 
+	\[
+	\forall i \le n, B_{i} :=\{X_i | X_i \le  x_i\} \subset \mathcal{B}
+	.\] 
+	By definition, we obtain that 
+	\[
+			P\left( \bigcap_{i\in [n] } B_{i}  \right) = 
+			\prod_{i=1}^{n} P\left( B_{i} \right)  
+	.\] 
+
+	Now we prove $\impliedby$. Consider $\mathcal{A}_{i} $ be the set of form 
+	$\{X_{i} \le  x_{i}\} $. Hence by
+\[
+		\{ X_{i} \le r \} \cap \{X_{i} \le  s\} = \{ X_{i} \le  \min\left( r,s \right) \} 
+.\] 
+	We know that $\mathcal{A}_{i}$ is a $\pi$-system plus we 
+	can write it as $X^{-1}\left( \pi\left( \R \right)  \right) $, and they are 
+	independent (from the definition of independence).
+	Moreover by the conclusion (the second half) proved by Ruihang Lai,
+we have
+\[
+		\sigma\left( \mathcal{A}_{i} \right)= \sigma\left(
+		X_{i}^{-1}\left( \pi\left( \R \right)  \right)\right)  =X_{i}^{-1}\left( \mathcal{B} \right)  =  \sigma\left( X_{i} \right) 
+.\]
+	It's obvious that the independence of random variables 
+	is equivalent with the independence of the sigma algebra they generated.
+	So by \textbf{Lemma 1}  we know that $\sigma\left( \mathcal{A}_1 \right) , 
+	\ldots, \sigma\left( \mathcal{A}_{n} \right) $ are independent, which 
+	means $\sigma\left( X_1 \right) ,\ldots,\sigma\left( X_{n} \right) $ are
+	independent,
+	hence $X_1,\ldots,X_{n}$ are independent.
+\end{proof}
+
+\end{document}
