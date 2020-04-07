@@ -1,0 +1,208 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage{cite}
+% \usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+% \CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbz}{\mathbb{Z}}
+\newcommand{\mbn}{\mathbb{N}}
+\newcommand{\mbp}{\mathbb{P}}
+\newcommand{\mbh}{\mathbb{H}}
+\newcommand{\mbq}{\mathbb{Q}}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\hp}{^\prime}
+\newcommand{\mca}{\mathcal{A}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcr}{\mathcal{R}}
+\newcommand{\mcf}{\mathcal{F}}
+\newcommand{\mfa}{\mathfrak{A}}
+\newcommand{\mfb}{\mathfrak{B}}
+\newcommand{\mfc}{\mathfrak{C}}
+\newcommand{\mfi}{\mathfrak{I}}
+\newcommand{\Iff}{\mbox{iff }}
+\newcommand{\AND}{\mbox{ and }}
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{Notes on the Proof of Lovasz Local Lemma}
+\author{Lu Jiaxin\\
+Student ID: 518030910412}
+\date{\today}
+
+\begin{document}
+    \maketitle
+\begin{tcolorbox}
+\begin{lemma}[\textbf{Lovasz Local Lemma}\cite{MR0382050}]\label{LLL}
+For events $E_1, \ldots, E_n$ with a dependency graph $G$, suppose,
+\begin{enumerate}[(1)]
+\item $\forall i \exists p\in(0,1), P(E_i) \leq p$
+\item $\max \deg_G(V) \leq d$
+\item $4dp\leq 1$
+\end{enumerate}
+then,
+\[
+    P(\bigcap E_i^C) > 0
+\]
+\end{lemma}
+\end{tcolorbox}
+
+\begin{proof}
+To prove the lemma, we need to first introduce two statements.
+
+For $s=0,1,\ldots,N-1$, $\forall |S| \leq s$,
+\begin{enumerate}[(a)]
+    \item $$P(\bigcap_{j\in S}E_j^C) > 0$$
+    \item $$\forall k\in[N]\backslash S, P(E_k \cap \bigcap_{j\in S}E_j^C) \leq 2p P(\bigcap_{j\in S}E_j^C)$$
+\end{enumerate}
+
+We first prove two statements by induction.
+
+\textbf{$s = 0$ :} When $s = 0$, we have $S = \emptyset$, so,
+\begin{enumerate}[(a)]
+    \item \[
+        P(\bigcap_{j\in S=\emptyset} E_j^C) = 1 > 0
+    \]
+    \item \[
+        \frac{P(E_k \cap \bigcap_{j\in S}E_j^C)}{P(\bigcap_{j\in S}E_j^C)} = P(E_k) \leq p \leq 2p
+    \]
+\end{enumerate}
+
+\textbf{$s > 0$ :} Suppose two statements holds for $0,\ldots,s-1$.
+
+For $s$,
+
+\begin{enumerate}[(a)]
+    \item
+    \begin{align}\label{eq1}
+        P(\bigcap_{j\in S}E_j^C) = 
+        \frac{P(\bigcap_{j\in[s]}E_j^C)}{P(\bigcap_{j\in[s-1]}E_j^c)} \times
+        \frac{P(\bigcap_{j\in[s-1]}E_j^c)}{P(\bigcap_{j\in[s-2]}E_j^c)} \times
+        \cdots \times
+        \frac{P(\bigcap_{j\in[2]}E_j^c)}{P(\bigcap_{j\in[1]}E_j^c)}\times
+        \frac{P(\bigcap_{j\in[1]}E_j^c)}{1}
+    \end{align}
+    Since statements (b) holds for $0, \ldots, s-1$, $\forall 1 \leq s'\leq s$,
+    \[
+        \frac{P(\bigcap_{j\in[s']} E_j^C)}{P(\bigcap_{j\in[s'-1]} E_j^C)} \geq 1-2p
+    \]
+    So,
+    \[
+        P(\bigcap_{j\in S}E_j^C) \geq (1-2p)^n
+    \]
+    Since we have $4dp\leq 1$, we can derive $2p \leq \frac{1}{2d} \leq \frac{1}{2}$, so, $1-2p\geq \frac{1}{2}$.
+    
+    Thus, \[
+        P(\bigcap_{j\in S}E_j^C) > 0
+    \]
+
+    \item We need to prove \[
+        \frac{P(E_k \cap \bigcap_{j\in S}E_j^C)}{P(\bigcap_{j\in S}E_j^C)} = P(E_k \mid \bigcap_{j\in S}E_j^C) \leq 2p
+    \]
+
+    Let $S_1 = {j\in S : j \sim k \mbox{ in } G}, S_2 = S \backslash S_1$.
+
+    When $S_1 = \emptyset$, $P(E_k \mid \bigcap_{j\in S}E_j^C) = P(E_k) \leq p < 2p$.
+
+    Otherwise, $S_1 \not = \emptyset, |S_2| < S$.
+    
+    Let $F_{S_1} := \bigcap_{j\in S_1}E_j^C, F_{S_2} := \bigcap_{j\in S_2} E_j^C$, we have,
+    \begin{align*}
+        P(E_k \cap F_{S_1} \mid F_{S_2}) &\leq P(E_k \mid F_{S_2}) \\
+        &=  P(E_k) \leq p
+    \end{align*}
+    and,
+    \begin{align*}
+        P(F_{S_1} \mid F_{S_2}) &= P(\bigcap_{i\in S_1}E_i^C \mid \bigcap_{j\in S_2} E_j^C) \\
+        &\geq 1 - \sum_{i\in S_1} P(E_i \mid \bigcap_{j \in S_2} E_j^C) \\
+        &\geq 1-2pd \geq \frac{1}{2}
+    \end{align*}
+
+    So, 
+    \begin{align*}
+        P(E_k \mid \bigcap_{j\in S}E_j^C) &= P(E_k \mid F_{S_1} \cap F_{S_2}) \\
+        &= \frac{P(E_k \cap F_{S_1} \mid F_{S_2})}{P(F_{S_1} \mid F_{S_2})} \\
+        &\leq \frac{p}{\frac{1}{2}} \leq 2p
+    \end{align*}
+\end{enumerate}
+
+Now we have both statements (a) and (b) stand, we substitute $N$ into $s$ in \cref{eq1}. We now can derive that all the denominators on the right hand side is larger than 0, and,
+\[
+    P(\bigcap E_i^C) = P(\bigcap_{i\in[N]}E_i^C) \geq (1-2p)^N \geq \left(\frac{1}{2}\right)^N > 0
+\]
+
+\end{proof}
+
+Here is an application of \cref{LLL}.
+
+\begin{tcolorbox}
+    \begin{definition}[Conjunctive Normal Form]\label{CNF}
+        A formula is said to be in Conjunctive Normal Form (CNF) if it consists of AND's of several clause. For instance, $(x\vee y)\wedge(y\vee \neg z \vee w)$ is a CNF formula.
+    \end{definition}
+
+    \begin{definition}[k-SAT]\label{ksat}
+        A k-SAT problem is that, given a CNF formula $f$, in which each clause has exactly $K$ literals, decide whether there is an assignment satisfying all the clauses in $f$.
+    \end{definition}
+
+    \begin{theorem}\label{satthm}
+        Suppose variables appear in a CNF formula $f$ are $\{x_1, \ldots, x_n\}$, and they can only be assigned by $0$ or $1$ with equal probability. If every variable appears in at most $\frac{2^k}{4k}$ clauses, there exists an assignment satisfying all the clauses in $f$.
+    \end{theorem}
+\end{tcolorbox}
+
+\begin{proof}[proof of \cref{satthm}]
+    Let $E_i$ be the event that the i-th clauses is wrong. Since every variable is assigned with equal probability, we have,
+    \[
+        P(E_i)\leq\frac{1}{2^k} =: p \mbox{ (in the Lovasz Local Lemma)}
+    \]
+    Consider the clauses as the vertices in a dependency graph, and two vertices have an edge only if they share a same variable. So in this dependency graph, we have, 
+    \[
+        \deg E_i \leq (\frac{2^k}{4k} - 1)k \leq \frac{2^k}{4} =: d \mbox{ (in the Lovasz Local Lemma)}
+    \]
+    Note that, \[4dp = 4 \frac{2^k}{4} \frac{1}{2^k} \leq 1
+        \]
+    So by \cref{LLL}, we have $P(\bigcap E_i^C) > 0$.
+    
+    Thus, there exists an assignment satisfying all the clauses in $f$.
+\end{proof}
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
