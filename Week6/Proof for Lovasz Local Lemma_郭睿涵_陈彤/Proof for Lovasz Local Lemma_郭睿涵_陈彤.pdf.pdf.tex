@@ -1,0 +1,102 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{Notes on Week 6}
+\author{Ruihan GUO and Tong CHEN}
+\date{\today}
+ 
+\begin{document}
+
+    \maketitle
+\section{}
+
+\begin{definition}
+Dependency graph for a sequence of events $E_1,\dots,E_n$ is a graph $G = (V,E)$ such that $V = \{1,\dots,N\}$.\par
+$E_i$ is independent with $\{E_j:i\sim j\notin E\}$ for all $i\in V$\par
+\end{definition}
+\paragraph{Lovasz Local Lemma}
+Presented in 1975 by Erd{\"o}s and Lovasz.\par
+For an event sequence $E_1,\dots,E_n$, and G is a dependency graph of it.\par
+\subparagraph{Premise}
+\begin{align*}
+&(1)\exists p \in (0,1) P(E_i) \leq p \qquad\forall i.\\
+&(2)\max deg_G(v) \leq d\\
+&(3)4dp \leq 1\\
+\end{align*}
+\subparagraph{Conclusion}$\qquad P\left(\cap E_{i}^{c}\right) > 0$\par
+\paragraph{Proof}Using inductive method\par
+for $s = 0,1,\dots,N-1$, $\forall \left|S\right| \leq s$\par
+$\left\{
+\begin{aligned}
+(a)& , & P\left(\bigcap_{j \in S}E_{j}^{c}\right)>0), \\
+(b)& , & \forall k \in [n]\setminus S, P(E_k\cap\bigcap_{j \in S} E_{j}^{c}) \leq 2pP\left(\bigcap_{j \in S}E_{j}^{c}\right).
+\end{aligned}\right.$\\\par
+Then let's start induction!\par
+\paragraph{s=0} It's easy to verify it.\par
+\paragraph{s$>$0}\par
+\subparagraph{For expression a}
+\begin{align*}
+  P\left(\bigcap_{j \in [n]}E_{j}^{c}\right) &= \frac{P\left(\bigcap_{j \in [n]}E_{j}^{c}\right)}{P\left(\bigcap_{j \in [n-1]}E_{j}^{c}\right)}\times\dots\times\frac{P\left(\bigcap_{j \in [1]}E_{j}^{c}\right)}{P\left(\bigcap_{j \in [0]}E_{j}^{c}\right)}\\
+  &\geq (1-2p)^n
+\end{align*}
+Due to $4dp\leq1$, $2p\leq \frac{1}{2d}$, so $1-2p \geq \frac{1}{2}$, which means the probability is correct.\par
+\subparagraph{For expression b}To prove $P\left(E_k\big|\bigcap_{j\in S}E_{j}^{c}\right)\leq 2p$ when $(|S| = s)$\par
+Separate the points in S into two parts:\par
+$S_1 = \{j\in S: j\sim k$ in $G\}$\par
+$S_2 = S \setminus S_1$\par
+When $S_1$ is an empty set, $P(E_k|\bigcap_{j\in S}E_j^{c})=P(E_k)\leq p < 2p$\par
+Otherwise, $S_1 \neq \emptyset \rightarrow |S_2|<s$\par
+Let $F_{S_1} = \bigcap_{j\in S_1} E_{j}^{c}$  $F_{S_2} = \bigcap_{j\in S_2} E_{j}^{c}$\par
+\begin{align*}
+P\left(E_k\Big|\bigcap_{j\in S}E_{j}^{c}\right) &= P\left(E_k|F_{S_1}\cap F_{S_2}\right)\\
+&=\frac{P\left(F_{S_1}\cap E_k|F_{S_2}\right)}{P\left(F_{S_1}|F_{S_2}\right)}\\
+P\left(F_{S_1}\cap E_k|F_{S_2}\right) &\leq P\left( E_k|F_{S_2}\right) \\= P\left( E_k\right)\leq p\\
+P\left(F_{S_1}|F_{S_2}\right)&=P\left(\bigcap_{i \in S_1}E_{i}^{c}\Big|\bigcap_{j \in S_2}E_{j}^{c}\right)\\
+&\geq 1-\sum_{i\in S_1}P\left(E_i\Big|\bigcap_{j \in S_2}E_{j}^{c}\right)\\
+&\geq1-2pd \geq \frac{1}{2}
+\end{align*}
+So that $\frac{P\left(F_{S_1}\cap E_k|F_{S_2}\right)}{P\left(F_{S_1}|F_{S_2}\right)} < 2p$$\hfill\blacksquare$ 
+\end{document}
