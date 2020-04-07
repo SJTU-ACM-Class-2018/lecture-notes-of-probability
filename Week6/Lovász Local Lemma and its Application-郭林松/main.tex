@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{observation}[theorem]{Observation}
+
+
+\title{Lovász Local Lemma and its Application}
+\author{Guo Linsong 518030910419}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{tcolorbox}
+    \begin{lemma}
+        Let $(E_1,E_2,\cdots,E_N)$ be a sequence of events. For each $E_i$, we have $P(E_i)\leq p$ and $E_i$ depends on at most $d$ other events. If $4dp\leq 1$, then
+        $$P\left(\bigcap_{i=1}^N E_i^c\right)\geq (1-2p)^N>0$$
+   \end{lemma}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{claim}
+    Let $S\subseteq \{1,2,\cdots,N\}$, then for every $i$, we have
+    $$P\left(E_i\Bigg| \bigcap_{j\in S}E_j^c\right)\leq 2p$$
+\end{claim}
+\end{tcolorbox}
+
+Assuming the claim, it's easy to prove the Lovász Local Lemma.
+
+$$P\left(\bigcap_{i=1}^N E_i^c\right)=\Pi_{i=1}^NP\left(E_i^c\Big| \bigcap_{j<i} E_j^c\right)=\Pi_{i=1}^N\left(1-P\left(E_i \Big| \bigcap_{j<i} E_j^c\right)\right)
+\geq \left(1-2p\right)^N>0$$
+
+Next we proof the claim.
+
+\begin{proof}
+We prove the claim by induction on $|S|$. If $|S|= 0$, the claim holds, because
+$$P\left(E_i\Bigg| \bigcap_{j\in S}E_j^c\right)=P\left(E_i\right)\leq p \leq 2p$$
+
+Assume that the claim holds when $|S|<s$. We will prove the claim for $|S|=s$. Suppose that $D$ be the set of all j such that $E_i$ depends on $E_j$. Here are two cases.
+
+\textbf{case 1.} $S \cap D = \emptyset$
+
+$$P\left(E_i\Bigg| \bigcap_{j\in S}E_j^c\right)=P(E_i)\leq p \leq 2p$$
+
+\textbf{case 2.} $S \cap D \neq \emptyset$
+
+Let $E_D = \bigcap_{j\in D}E_j^c$ and $E_{S\setminus D}=\bigcap_{j\in S\setminus D}E_j^c$
+\begin{equation}\label{eq1}
+    \begin{array}{rl}
+        P\left(E_i\Big| \cap_{j\in S}E_j^c\right) 
+        = &  P\left(E_i\Big| \left(E_D\bigcap E_{S\setminus D}\right)\right) \\
+        = &  \frac{P\left(E_i \bigcap E_D\bigcap E_{S\setminus D}\right)}
+        {P \left(E_D\bigcap E_{S\setminus D}\right)} \\
+        = &\frac{P\left(E_i \bigcap E_D\big| E_{S\setminus D}\right)P\left(E_{S\setminus D}\right)}
+        {P\left(E_D\big| E_{S\setminus D}\right)P\left(E_{S\setminus D}\right)} \\
+        = &\frac{P\left(E_i \bigcap E_D\big| E_{S\setminus D}\right)}
+        {P\left(E_D\big| E_{S\setminus D}\right)} \\
+    \end{array}    
+\end{equation}
+
+For the numerator, we have
+\begin{equation}\label{eq2}
+P\left(E_i \bigcap E_D\Big| E_{S\setminus D}\right) \leq P\left(E_i\Big| E_{S\setminus D}\right)=P\left(E_i\right)\leq p    
+\end{equation}
+
+Note that $S \cap D \neq \emptyset$, so $|S\setminus D|<|S|$. We can apply the inductive hypothesis, so for all $E_k\in E_D$, $P(E_k|E_{S\setminus D})\leq 2p$.  For the  denominator, we have
+\begin{equation}\label{eq3}
+   \begin{array}{rl}
+        P\left(E_D| E_{S\setminus D}\right)
+        = & P\left(\bigcap_{k\in D}E_k^c \Big| E_{S\setminus D}\right) \\
+        = & P\left(\left(\bigcup_{k\in D}E_k\right)^c\Big| E_{S\setminus D}\right) \\
+        = & 1-P\left(\bigcup_{k\in D}E_k\Big| E_{S\setminus D}\right) \\
+      \geq & 1-\sum\limits_{E_k\in E_D}P\left(E_k\Big| E_{S\setminus D}\right) \\
+      \geq & 1-d\times 2p \\
+      \geq & \frac{1}{2}  \\
+   \end{array}
+\end{equation}
+
+Combining (2) and $(3)$ , we have $ P\left(E_i\mid \cap_{j\in S}E_j^c\right) = \frac{P\left(E_i \bigcap E_D\mid E_{S\setminus D}\right)}
+        {P\left(E_D| E_{S\setminus D}\right)}\leq 2p$. We have proved the claim.
+\end{proof}
+
+\begin{tcolorbox}
+    \begin{example}
+       In a k-SAT formula like $(x_1 \vee \neg x_3 \vee x_5) \wedge (\neg x_2 \vee x_4) \wedge (x_3 \vee \neg x_4 \vee x_6)$, every variable $x_i=\{0, 1\}$ occurs in at most $\frac{2^k}{4k}$ different clauses. Then there exists an assignment satisfies all the clauses in the formula.
+   \end{example}
+\end{tcolorbox}
+
+\begin{proof}
+Let event $E_i$ be that the $i$-th clause is not satisfied. If the $i$-th clause has more than $k$ variables, we only need to care $k$ of them because of the feature of the operation $\vee$. Thus $P(E_i) \leq \frac{1}{2^k}$. Every variable occurs in at most $\frac{2^k}{4k}$ different clauses, so the $i$-th clause depends on at most other $(\frac{2^k}{4k}-1)\times k\leq \frac{2^k}{4}$ events. Note that $4\times\frac{2^k}{4}\times\frac{1}{2^k} = 1$, Lovász Local Lemma implies $P\left(\bigcap_{i=1}^N E_i^c\right)>0$, which means there exists an assignment satisfies all the clauses in the formula.
+\end{proof}
+
+\begin{tcolorbox}
+    \begin{example}
+       Let $G=(V,E)$ be a graph. For every vertex $v$, its color is $C_v=\{1,2,\cdots,k\}$ and its degree is at most $m$. If $m\leq \frac{k}{8}$, then there must exist an assignment of $\{C_v|v\in V\}$ such that every edge connects two vertexes of different colors.    
+   \end{example}
+\end{tcolorbox}
+
+\begin{proof}
+Let event $E_e(e=(u,v)\in E)$ be that $e$ connects two vertexes of the same color. Note that $P(E_e) = \frac{\sum_{C_u=1}^k\sum_{C_v=1}^k[C_u=C_v]}{k^2}=\frac{1}{k}$. Every vertex's degree is at most $m$, so the event $E_e$ depends on at most other $2(m -1)\leq 2m \leq \frac{k}{4}$ events. Node that $4\times\frac{k}{4}\times\frac{1}{k}=1$,  Lovász Local Lemma implies $P\left(\bigcap_{e\in E} E_e^c\right)>0$, which means there must exist an assignment  such that every edge connects two vertexes of different colors. 
+\end{proof}
+\end{document}
