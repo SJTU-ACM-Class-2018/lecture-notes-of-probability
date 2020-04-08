@@ -1,0 +1,125 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+\newenvironment{#1}[1]
+{
+\renewcommand\customname{#2}
+\renewcommand\theinnercustom{##1}
+\innercustom
+}
+{\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\begin{document}
+    \title{ The existence of independent and identically distributed random variables }
+    \author{金弘义\ 518030910333}
+    \date{\today}
+    \maketitle
+
+    Before we prove the theorem, let's first introduce the concept of generalized inverse distribution function.
+    \begin{definition}
+        the generalized inverse distribution function $F^{-1}(p)=\inf\{x\in\mathbb{R}:F(x)\ge p\}$
+    \end{definition}
+    Here are some of its properties:
+    \begin{itemize}
+        \item [1)] $F^{-1}$ is non-decreasing
+        \item [2)] $F^{-1}(F(x))\le x$
+        \item [3)] $F(F^{-1}(p))\ge p$
+        \item [4)] $F^{-1}(p)\le x$ if and only if $p\le F(x)$
+        \item [5)] If $Y$ has a $U[0,1]$ distribution then $F^{-1}(Y)$ is distributed as $F$
+    \end{itemize}
+    \begin{proof}
+        1.It comes obviously from the fact that $F$ is non-decreasing.
+
+        2.$F^{-1}(F(x))=\inf\{y\in\mathbb{R}:F(y)\ge F(x)\} \le x$
+
+        3.$F(F^{-1}(p))=F(\inf\{x\in\mathbb{R}:F(x)\ge p\}) \ge p$
+
+        4. Impose $F$ on both sides of $F^{-1}(p)\le x$ and we get $F(F^{-1}(p))\le F(x)$.
+            So $p\le F(F^{-1}(p))\le F(x)$ by property 3.
+            It's similar for another side.
+
+        5. We need to prove $P(F^{-1}(Y)\le x)=F(x)$.
+        From property 4, we know $P(F^{-1}(Y)\le x)=P(Y\le F(x))$.
+        Since Y is a uniform distribution, $P(Y\le F(x))=F(x)$.
+        In conclusion, $P(F^{-1}(Y)\le x)=F(x)$.
+    \end{proof}
+    With the help of Skorokhod representation of random variables and the property 5 of generalized inverse function, we can simplify the problem to finding a countable sequence of independent random variables on $([0,1],\mathcal{B},Leb)$ which are uniformly distributed.
+
+    \begin{customthm}{1}
+        Given a certain distribution function, there exists a countable sequence of independent and identically distributed random variables on $([0,1],\mathcal{B},Leb)$.
+    \end{customthm}
+    \begin{proof}
+        $\forall s\in [0,1]$, write it in 2-base (if there are multiple representation, choose the infinite one):
+        \begin{align}
+            s=\sum\limits_{i=1}^{+\infty}B_{i}(\frac{1}{2})^i
+        \end{align}
+        Claim $({B_i})_{i\ge 1}$ is independent.
+        This has been proved in previous work "Independence of coin tossing events" by Haichen Dong.
+
+        Let $p_n$ be the $n^{th}$ prime number and $I_n$ be $\{p_n^i:i\in\mathbb{N}\}$.
+        It's obvious that $(I_n)$ don't intersect with each other.
+        Denote $\phi_n(i)=p_n^i\in I_n$.
+        Now we define $X_n=\sum\limits_{i=1}^{+\infty}B_{\phi_n(i)}\cdot(\frac{1}{2})^i$.
+        $(X_n)$ is obviously independent.
+        \begin{align*}
+            \forall a\in [0,1] ,a&=\sum\limits_{i=1}^{+\infty}B_{i}'(\frac{1}{2})^i.\\
+            P(X_n\le a)&=P(B_{\phi_n(1)}<B_{1}')+P(B_{\phi_n(1)}=B_{1}'\cap B_{\phi_n(2)}<B_{2}')+...\\
+            &=\sum\limits_{i=1}^{+\infty}P(\bigcap\limits_{j=1}^{i-1}B_{\phi_n(j)}=B_{j}' \cap B_{\phi_n(i)}<B_{i}')\\
+            &=\sum\limits_{i=1}^{+\infty}(\frac{1}{2})^{i-1}\cdot\frac{1}{2}B_{i}'\\
+            &=a
+        \end{align*}
+        So $X_n$ has a uniform distribution on $[0,1]$.
+        We can now derive that $F^{-1}(X_n)$ is an independent sequence on $([0,1],\mathcal{B},Leb)$ with distribution F.
+    \end{proof}
+\end{document}
