@@ -1,0 +1,90 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK, geometry, amsmath, amssymb, amsthm}
+\usepackage{graphicx, keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float, ifthen, calc, ifplatform, fancyvrb}
+\usepackage{minted, hyperref, enumerate, multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+%\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm, algorithmic}
+
+%\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\BorelSet}{\mathcal{B}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+\newcommand{\IndicatorFunc}[1]{\mathbf{1}_{#1}}
+
+\begin{document}
+    \title{$P(A_n) \rightarrow 0$ and $\sum_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1} < \infty)$ \\ $\Rightarrow$ \\ $P(A_n, \textrm{i.o.}) = 0$}
+    \author{赖睿航 518030910422}
+    \date{\today}
+    \maketitle
+    
+    \textit{This note proves a extension of the First Borel-Cantelli Lemma(BC1).}
+
+    \medskip
+    
+    Let $(\Omega, \mathcal{F}, P)$ be a probability space and $(A_n \colon n \in \Natural) \subseteq \mathcal{F}$ be a sequence of events. We have the following proposition.
+    \begin{proposition}
+        If $\lim P(A_n) = 0$ and $\sum\limits_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$, then $P(A_n, \textrm{i.o.}) = 0$. \cite{Chandra2012}
+    \end{proposition}
+
+    \begin{proof}
+        For an arbitrary fixed $n \in \Natural$, we have
+        \begin{align*}
+            P(A_n, \textrm{i.o.}) &= P(\lim \sup A_n) \\
+            &= P(\bigcap_n \bigcup_{m \geqslant n} A_m) \\
+            &\leqslant P(\bigcup_{m \geqslant n} A_n) \\
+            &= P(A_n \sqcup \bigsqcup_{m > n}(A_m \setminus \bigcup_{n \leqslant i < m}A_i)) \\
+            &= P(A_n) + \sum_{m > n} P(A_m \setminus \bigcup_{n \leqslant i < m}A_i) \\
+            &= P(A_n) + \sum_{m > n} P(A_m \cap \bigcap_{n \leqslant i < m} A_i^c) \\
+            &\leqslant P(A_n) + \sum_{m > n} P(A_m \cap A_{m - 1}^c) \\
+            &= P(A_n) + \sum_{m \geqslant n} P(A_{m + 1} \cap A_m^c).
+        \end{align*}
+        Since it is given that $\lim P(A_n) = 0$ and $\sum\limits_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$, we know that $\lim\limits_{n \rightarrow \infty} \sum\limits_{m \geqslant n} P(A_{m + 1} \cap A_m^c) = 0$. If we let $n \rightarrow \infty$, immediately we get
+        \begin{align*}
+            P(A_n, \textrm{i.o.}) &\leqslant \lim_{n \rightarrow \infty} P(A_n) + \lim_{n \rightarrow \infty} \sum_{m \geqslant n} P(A_{m + 1} \cap A_m^c) \\
+            &= 0 + 0 = 0.
+        \end{align*}
+        As $P(A_n, \textrm{i.o.}) \geqslant 0$ always holds, it follows that $P(A_n, \textrm{i.o.}) = 0$.
+    \end{proof}
+
+    \bibliography{bc1-extension}
+    \bibliographystyle{abbrv}
+\end{document}
