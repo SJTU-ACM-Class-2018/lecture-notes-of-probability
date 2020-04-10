@@ -1,0 +1,70 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Proof of Extended BC1}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+  \begin{theorem}
+  If $\lim_{n\to \infty}A_n=0$ and $\sum_{n = 1}^{\infty}P(A_n^c\cap A_{n+1})<\infty$ , then $P(A_n\ i.o.)=0$
+  \end{theorem}
+    
+\begin{proof}
+Let $G_m=\cup_{n>m} A_n$ and $G_m \downarrow G$, where $G := lim sup A_n$
+By the proof of BC1, we know that: 
+$$P(A_n i.o.)=P(G) \leq \lim_{m\to \infty}P(G_m)$$
+Because $\sum_{n = 1}^{\infty}P(A_n^c\cap A_{n+1})<\infty$, we know that $\lim_{m\to \infty}\sum_{m}^{\infty}P(A_n^c\cap A_{n+1})=0$.
+And by $\cup_{n\geq m} (A_n^c\cap A_{n+1})=G_m/(A_m\cap A_{m+1})$, we can get that:
+$$\lim_{m\to \infty}P(G_m) \leq \lim_{m\to \infty}P(\cup_{n\geq m} (A_n^c\cap A_{n+1}))+\lim_{n\to \infty}A_n \leq \lim_{m\to \infty}\sum_{m}^{\infty}P(A_n^c\cap A_{n+1})=0$$
+
+So $P(A_n i.o.)=0$.
+\end{proof} 
+
+\end{document}
