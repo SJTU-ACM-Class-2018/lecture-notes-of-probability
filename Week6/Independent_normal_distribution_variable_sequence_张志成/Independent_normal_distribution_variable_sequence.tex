@@ -63,13 +63,13 @@
                 P(G > x) &= \frac{1}{\sqrt{2\pi}}\int_{x}^{\infty}e^{-\frac{1}{2}y^2}dy \\
                 &\leq \frac{1}{\sqrt{2\pi}} \cdot \frac{1}{x} \cdot \int_{x}^{\infty}e^{-\frac{1}{2}y^2}\cdot y \cdot dy \\
                 &= \frac{1}{x\sqrt{2\pi}} \int_{\frac{1}{2}x^2}^{\infty}e^{-y}\cdot dy \\
-                &= \frac{1}{x\sqrt{2\pi}} e^{-y}\bigm|^{\infty}_{\frac{1}{2}x^2} \\
+                &= \frac{1}{x\sqrt{2\pi}} (-e^{-y})\bigm|^{\infty}_{\frac{1}{2}x^2} \\
                 &= \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2}
             \end{align*}
 
             \item Let $E_n$ denote the event that $\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}$.
             \begin{align*}
-                \sum_{i \in \mathbb{N}} P(E_i) &= \sum_{i \in \mathbb{N}} P(\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}) \sum_{i \in \mathbb{N}} P(X_n > (\sqrt{1 + \epsilon})\sqrt{2logn})\\
+                \sum_{i \in \mathbb{N}} P(E_i) &= \sum_{i \in \mathbb{N}} P(\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}) = \sum_{i \in \mathbb{N}} P(X_n > (\sqrt{1 + \epsilon})\sqrt{2logn})\\
                 &= \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\int_{ (\sqrt{1 + \epsilon})\sqrt{2logn} }^{\infty}e^{-\frac{1}{2}y^2}dy \\
                 &\leq \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-\frac{1}{2}((\sqrt{1 + \epsilon})\sqrt{2logn})^2} \\
                 &= \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-(1 + \epsilon)logn} \\
