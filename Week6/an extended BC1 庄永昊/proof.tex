@@ -1,0 +1,103 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, amsmath, enumerate, indentfirst}
+\usepackage{color, bm, extarrows, ulem}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\renewcommand{\proofname}{\indent \textbf {proof}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\usepackage{environ}
+\RenewEnviron{math}{%
+\begin{align*}
+\BODY
+\end{align*}
+}
+
+\title{Extended BC1}
+\date{\today}
+\author{庄永昊}
+
+\begin{document}
+\maketitle
+\begin{thm}{}{}
+    For a sequence of events $\{E_n\}_{n\in\mathbb N}$ with respect to probability measure $p$, 
+    if there is $p(E_n^c\cap E_{n+1})<\infty$ and $\lim_{n\to \infty}E_n=0$, then $p(E_n\ i.o.)=1$
+\end{thm}
+\begin{proof}[Proof]
+    Let $G_m=\cup_{n>m} E_n$ and $G_m'=\cup_{n\geq m} (E_n^c\cap E_{n+1})$. Then there is: 
+    $$G_m'=\cup_{n\geq m} (E_n^c\cap E_{n+1})=(\cup_{n>m} E_n)/(E_m\cap E_{m+1})=G_m/(E_m\cap E_{m+1})$$
+    Then use (1.9,b) and (1.10,a) in textbook there is: 
+    $$p(E_n i.o.)=p(\cap_{m\in\mathbb Z^+}G_m)\leq p(G_m)\leq p(G_m')+p(E_m)$$
+    As $p(G_m')\leq\sum_{n\geq m}(E_n^c\cap E_{n+1})$, let $m\uparrow\infty$ there is $\lim_{m\to\infty}p(G_m')=0$. 
+    By assumption there is $\lim_{m\to\infty}p(E_m)=0$. 
+
+    Combining the two result, let $m\uparrow\infty$ there is 
+    $$0\leq p(E_n i.o.)\leq \lim{m\to\infty}p(G_m')+p(E_m)=0$$
+\end{proof}
+
+    Now construct a condition that does not fit the condition of normal BC1 but fit this condition: 
+
+    For a point $x$ on $[0,1]$, 
+    $E_n$ is that $x$ is smaller than $\frac{1}{n}$, so $p(E_n)=\frac{1}{n}$(thus $p(E_n)\downarrow 0$) and 
+    $p(E_{n-1}^c\cap E_n)=0$(thus the sum is $0<\infty$), while $\sum_{n}p(E_n)=\infty$. 
+
+    It is obvious that $p(E_n\ i.o.)=0$(only $x=0$ makes it infinitely often). 
+\end{document}
