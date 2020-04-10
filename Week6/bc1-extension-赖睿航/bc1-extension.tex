@@ -53,16 +53,23 @@
 \newcommand{\IndicatorFunc}[1]{\mathbf{1}_{#1}}
 
 \begin{document}
-    \title{$P(A_n) \rightarrow 0$ and $\sum_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1} < \infty)$ \\ $\Rightarrow$ \\ $P(A_n, \textrm{i.o.}) = 0$}
+    \title{$P(A_n) \rightarrow 0$ and $\sum_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$ \\ $\Rightarrow$ \\ $P(A_n, \textrm{i.o.}) = 0$}
     \author{赖睿航 518030910422}
     \date{\today}
     \maketitle
     
     \textit{This note proves a extension of the First Borel-Cantelli Lemma(BC1).}
-
-    \medskip
     
-    Let $(\Omega, \mathcal{F}, P)$ be a probability space and $(A_n \colon n \in \Natural) \subseteq \mathcal{F}$ be a sequence of events. We have the following proposition.
+    \bigskip
+    
+    Let $(\Omega, \mathcal{F}, P)$ be a probability space and $(A_n \colon n \in \Natural) \subseteq \mathcal{F}$ be a sequence of events. Recall BC1 which was discussed in class.
+    \begin{theorem}[The First Borel-Cantelli Lemma]
+        If $\sum\limits_{n \in \Natural} P(A_n) < \infty$, then
+        $$
+        P(\lim \sup A_n) = P(A_n, \textrm{i.o.}) = 0.
+        $$
+    \end{theorem}
+    And we have the following extension proposition of BC1.
     \begin{proposition}
         If $\lim P(A_n) = 0$ and $\sum\limits_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$, then $P(A_n, \textrm{i.o.}) = 0$. \cite{Chandra2012}
     \end{proposition}
@@ -79,7 +86,7 @@
             &\leqslant P(A_n) + \sum_{m > n} P(A_m \cap A_{m - 1}^c) \\
             &= P(A_n) + \sum_{m \geqslant n} P(A_{m + 1} \cap A_m^c).
         \end{align*}
-        Since it is given that $\lim P(A_n) = 0$ and $\sum\limits_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$, we know that $\lim\limits_{n \rightarrow \infty} \sum\limits_{m \geqslant n} P(A_{m + 1} \cap A_m^c) = 0$. If we let $n \rightarrow \infty$, immediately we get
+        Since it is given that $\lim P(A_n) = 0$ and $\sum\limits_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \infty$, we know that $\lim\limits_{n \rightarrow \infty} \sum\limits_{m \geqslant n} P(A_{m + 1} \cap A_m^c) = 0$. By letting $n \rightarrow \infty$, immediately we get
         \begin{align*}
             P(A_n, \textrm{i.o.}) &\leqslant \lim_{n \rightarrow \infty} P(A_n) + \lim_{n \rightarrow \infty} \sum_{m \geqslant n} P(A_{m + 1} \cap A_m^c) \\
             &= 0 + 0 = 0.
@@ -99,8 +106,18 @@
     $$
     is divergent. So BC1 cannot be applied to this example. However, observe that $A_n^c \cap A_{n + 1} = [\frac{1}{n}, 1] \cap (0, \frac{1}{n + 1}) = \emptyset$. So $P(A_n^c \cap A_{n + 1}) = 0$ hence $\sum\limits_{n \in \Natural} P(A_n^c \cap A_{n + 1}) = 0 < \infty$. By the extension proposition of BC1 above, it follows that $P(A_n, \textrm{i.o.}) = 0$.
     
-    Therefore, in the above example, the extension proposition can be applied while BC1 cannot. But can we conclude that ``the usage of this proposition is wider than BC1''? It depends on whether we can show that the premise of the proposition implies the premise of BC1. I'm thinking this problem, and I hope someone can help me.
+    Therefore, in the above example, the extension proposition can be applied while BC1 cannot. But can we conclude that ``the usage of this proposition is wider than BC1''? \sout{It depends on whether we can show that the premise of BC1 implies the premise of the extension proposition. I'm thinking this problem, and I hope someone can help me.} Here is the proof that the premise of BC1 implies the premise of the proposition.
+    \begin{proof}
+        Let $(A_n \colon n \in \Natural)$ be a sequence of events which satisfies the premise of BC1, i.e., $\sum_{n \in \Natural} P(A_n) < \infty$. By one of the basic properties of convergent series, $\lim\limits_{n \rightarrow \infty} P(A_n) = 0$ holds. And
+        $$
+        \sum_{n = 1}^{\infty} P(A_n^c \cap A_{n + 1}) < \sum_{n = 1}^{\infty} P(A_{n + 1}) < \infty.
+        $$
+        Thus the premise of the extension proposition holds, which means the extension has a wider usage than BC1.
+    \end{proof}
 
+    \section*{Acknowledgement}
+    Thanks to 庄永昊 and 金弘义 for helping me improve my notes.
+    
     \bibliography{bc1-extension}
     \bibliographystyle{abbrv}
 \end{document}
