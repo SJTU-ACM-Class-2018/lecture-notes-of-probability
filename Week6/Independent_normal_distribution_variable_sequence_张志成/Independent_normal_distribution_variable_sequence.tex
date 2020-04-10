@@ -1,0 +1,92 @@
+\documentclass[UTF8, 12pt]{article}
+\fontfamily{DENGL.TTF}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+\usepackage{lipsum}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\theoremstyle{break}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Independent Normal Distribution Variable Sequence}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}[\textbf{Exercise 4.5} of \textit{Chapter E}]
+        \textit{Background: } \par
+        A random variable $G$ has a normal $N(0,1)$ distribution, then for $x > 0$,
+        $$
+        P(G > x) = \frac{1}{\sqrt{2\pi}}\int_{x}^{\infty}e^{-\frac{1}{2}y^2}dy
+        $$
+        \textbf{Note that this property only is all we need regarding random variable with normal distribution in this problem.}
+        \begin{enumerate}
+            \item Prove that  $$ P(G > x) \leq \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2} $$
+            \item
+                Let $X_1,X_2,...$ be a sequence of independent $N(0,1)$ variables. Prove that with probability $1$, $L \leq 1$, where
+                $$
+                L := lim\ sup(\frac{X_n}{\sqrt{2logn}})
+                $$
+        \end{enumerate}
+    \end{problem}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item This is proven by manipulating the integral.
+            \begin{align*}
+                P(G > x) &= \frac{1}{\sqrt{2\pi}}\int_{x}^{\infty}e^{-\frac{1}{2}y^2}dy \\
+                &\leq \frac{1}{\sqrt{2\pi}} \cdot \frac{1}{x} \cdot \int_{x}^{\infty}e^{-\frac{1}{2}y^2}\cdot y \cdot dy \\
+                &= \frac{1}{x\sqrt{2\pi}} \int_{\frac{1}{2}x^2}^{\infty}e^{-y}\cdot dy \\
+                &= \frac{1}{x\sqrt{2\pi}} e^{-y}\bigm|^{\infty}_{\frac{1}{2}x^2} \\
+                &= \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2}
+            \end{align*}
+
+            \item Let $E_n$ denote the event that $\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}$.
+            \begin{align*}
+                \sum_{i \in \mathbb{N}} P(E_i) &= \sum_{i \in \mathbb{N}} P(\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}) \sum_{i \in \mathbb{N}} P(X_n > (\sqrt{1 + \epsilon})\sqrt{2logn})\\
+                &= \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\int_{ (\sqrt{1 + \epsilon})\sqrt{2logn} }^{\infty}e^{-\frac{1}{2}y^2}dy \\
+                &\leq \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-\frac{1}{2}((\sqrt{1 + \epsilon})\sqrt{2logn})^2} \\
+                &= \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-(1 + \epsilon)logn} \\
+                &< \sum_{i \in \mathbb{N}} \frac{1}{ 2\sqrt{(1 + \epsilon)\pi}} \cdot \frac{1}{n ^ {1 + \epsilon}} \\
+            \end{align*}
+            $\sum_{i \in \mathbb{N}} \frac{1}{n ^ {1 + \epsilon}}$ converges, thus $$  \sum_{i \in \mathbb{N}} P(E_i) < \infty $$
+
+            By \textbf{First Borel-Cantelli Lemma(BC1)}, we have $$ P(E_n, i.o.) = 0 $$ ,
+            thus $$ P(E_n^c,ev) = P(\frac{X_n}{\sqrt{2logn}} \leq \sqrt{1 + \epsilon}, ev) = 1 $$
+            
+            Finally,
+            \begin{align*}
+                P(L \leq 1) &= P( lim\ sup(\frac{X_n}{\sqrt{2logn}}) \leq 1) = P(\frac{X_n}{\sqrt{2logn}} \leq 1, ev) \\
+                % &\geq P(\frac{X_n}{\sqrt{2logn}} \leq 1, ev) \\
+                &= \lim_{\epsilon\to 0} P(\frac{X_n}{\sqrt{2logn}} \leq \sqrt{1 + \epsilon}, ev) \\
+                &= 1
+            \end{align*}
+        \end{enumerate}
+    \end{proof}
+\end{document}
