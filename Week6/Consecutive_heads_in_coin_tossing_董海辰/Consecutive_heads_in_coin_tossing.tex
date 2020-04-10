@@ -1,0 +1,69 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Consecutive heads in coin tossing}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    Suppose that a coin with probability $p$ of heads is tossed repeatedly.
+
+    Let $A_k$ be the event that a sequence of $k$ (or more) consecutive heads occurs amongst tosses numbered $2^k, 2^k + 1,2^k+ 2,..., 2^{k+1} - 1$. Prove that
+    \begin{math}
+        P(A_k, \io) = \begin{cases}
+            1, \text{ if } p \ge \frac{1}{2} \\
+            0, \text{ if } p < \frac{1}{2}
+        \end{cases}
+    .\end{math}
+\end{thm}
+
+\begin{proof}[Proof]
+    Let $E_{ki}$ be the event that there are $k$ consecutive heads beginning at toss numbered $2^k+i$. There is $P(E_{ki}) = p^k$ for all $i$. We have
+    \begin{math}
+        A_k = \bigcup_{i=0}^{2^k-k} E_{ki}
+    .\end{math}
+
+    By inclusion-exclusion formula, 
+    \begin{math}
+        P(A_k) \le \sum _{i=0}^{2^k-k} P(E_{ki}) = (2^k-k+1) p^k
+    .\end{math}
+
+    And if we consider the disjoint blocks from $2^k + ik$ to $2^k + (i+1)k -1$for $i = 0,1,\cdots ,\left\lfloor \frac{2^k}{k} \right\rfloor$, namely $E_{k0}, E_{kk}, \cdots $.
+
+    We have $\bigcup_{j=0}^{\left\lfloor \frac{2^k}{k} \right\rfloor} E_{k(jk)} \subseteq  A_k$, thus
+    \begin{math}
+        P(A_k^c) \le P((\bigcup _{j=0}^{\left\lfloor \frac{2^k}{k} \right\rfloor} E_{k(jk)})^c) = (1-p^k)^{\left\lfloor \frac{2^k}{k} \right\rfloor}
+    .\end{math}
+
+    Therefore,
+    \begin{math}
+        1 - (1-p^k)^{\left\lfloor \frac{2^k}{k} \right\rfloor} \le 
+        P(A_k) \le 
+        (2^k-k+1)p^k
+    .\end{math}
+
+    If $p < \frac{1}{2}$, $\sum _k P(A_k) \le \sum _k(2p)^k < \infty$. By BC1, we know that $P(A_k, \io) = 0$.
+
+    If $p \ge \frac{1}{2}$, 
+    \begin{math}
+        \sum _k P(A_k) &\ge \sum _k (1-(1-p^k)^{\frac{2^k}{k}}) \\
+                       &= \sum _k (1 -\exp (\frac{2^k}{k} \ln (1-p^k))) \\
+                       &= \sum _k (1 -\exp(- \frac{2^k}{k} p^k)) \\
+                       &\ge \sum _k (1-\exp (-\frac{1}{k})) \\
+                       &\ge \sum _k \frac{1}{k} \to \infty
+    .\end{math}
+    And apparently all events $A_k, k \in \mathbb{N} $ are independent. By BC2, $P(A_k, \io) = 1$.
+
+    As a conclusion, 
+    \begin{math}
+        P(A_k, \io) = \begin{cases}
+            1, \text{ if } p \ge \frac{1}{2} \\
+            0, \text{ if } p < \frac{1}{2}
+        \end{cases}
+    .\end{math}
+
+\end{proof}
+
+\end{document}
