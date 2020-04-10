@@ -1,5 +1,4 @@
 \documentclass[UTF8, 12pt]{article}
-\fontfamily{DENGL.TTF}
 \usepackage{xeCJK}
 \usepackage{enumitem}
 \usepackage{amsmath}
@@ -89,7 +88,8 @@
                 &= 1.
             \end{align*}
             
-            \item We only need to prove that $ P(L \geq 1) = 1$, then $ P(L \geq 1) = P(L \leq 1) = 1 \Longrightarrow P(L = 1) = 1 $.
+            \item We have already proven that $P(L \leq 1) = 1$. Since $ P(L \geq 1) = P(L \leq 1) = 1$ implies $P(L = 1) = 1$, we only need to prove that $ P(L \geq 1) = 1$.
+            
             We have
             \begin{align*}
                 P(L \geq 1) = P(lim\ sup(\frac{X_n}{\sqrt{2logn}}) \geq 1) = P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.). \\ 
