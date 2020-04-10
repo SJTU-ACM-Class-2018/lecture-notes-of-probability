@@ -100,14 +100,14 @@
             \begin{align*}
                 \sum_{i \in \mathbb{N}} P(E_i) = \sum_{i \in \mathbb{N}} P(\frac{X_n}{\sqrt{2logn}} \geq 1) = \sum_{i \in \mathbb{N}} P(X_n \geq \sqrt{2logn}).
             \end{align*}
-            Similarly to \textit{(1)}, we can deduce that $$ P(G \geq x) \geq \frac{1}{\sqrt{2\pi}}\cdot \frac{x}{x^2+1} \cdot e^{-\frac{1}{2}x^2}. $$
+            Similarly to \textit{(1),(2)}, we first show that $$ P(G \geq x) \geq \frac{1}{\sqrt{2\pi}}\cdot \frac{x}{x^2+1} \cdot e^{-\frac{1}{2}x^2}. $$
             Thus,
             \begin{align*}
                 \sum_{i \in \mathbb{N}} P(E_i) &\geq \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\cdot \frac{\sqrt{2logn}}{(\sqrt{2logn})^2+1} \cdot e^{-\frac{1}{2}(\sqrt{2logn})^2} \\
                 &= \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\cdot \frac{\sqrt{2logn}}{2logn+1} \cdot e^{-logn} \\
                 &\geq \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}} \cdot \frac{1}{n \cdot \sqrt{2logn}} = \infty.
             \end{align*}
-            Therefore, by \textbf{First Borel-Cantelli Lemma(BC2)}, we have $$ P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.) = P(E_n, i.o.) = 1, $$ which finishes the proof.
+            Therefore, by \textbf{Second Borel-Cantelli Lemma(BC2)}, we have $$ P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.) = P(E_n, i.o.) = 1, $$ which finishes the proof.
         \end{enumerate}
     \end{proof}
 \end{document}
