@@ -43,16 +43,17 @@
         \textit{Background: } \par
         A random variable $G$ has a normal $N(0,1)$ distribution, then for $x > 0$,
         $$
-        P(G > x) = \frac{1}{\sqrt{2\pi}}\int_{x}^{\infty}e^{-\frac{1}{2}y^2}dy
+        P(G > x) = \frac{1}{\sqrt{2\pi}}\int_{x}^{\infty}e^{-\frac{1}{2}y^2}dy.
         $$
         \textbf{Note that this property only is all we need regarding random variable with normal distribution in this problem.}
         \begin{enumerate}
-            \item Prove that  $$ P(G > x) \leq \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2} $$
+            \item Prove that  $$ P(G > x) \leq \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2}. $$
             \item
                 Let $X_1,X_2,...$ be a sequence of independent $N(0,1)$ variables. Prove that with probability $1$, $L \leq 1$, where
                 $$
-                L := lim\ sup(\frac{X_n}{\sqrt{2logn}})
+                L := lim\ sup(\frac{X_n}{\sqrt{2logn}}).
                 $$
+            \item Prove that $$ P(L = 1) = 1.$$
         \end{enumerate}
     \end{problem}
 
@@ -64,7 +65,7 @@
                 &\leq \frac{1}{\sqrt{2\pi}} \cdot \frac{1}{x} \cdot \int_{x}^{\infty}e^{-\frac{1}{2}y^2}\cdot y \cdot dy \\
                 &= \frac{1}{x\sqrt{2\pi}} \int_{\frac{1}{2}x^2}^{\infty}e^{-y}\cdot dy \\
                 &= \frac{1}{x\sqrt{2\pi}} (-e^{-y})\bigm|^{\infty}_{\frac{1}{2}x^2} \\
-                &= \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2}
+                &= \frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}x^2}.
             \end{align*}
 
             \item Let $E_n$ denote the event that $\frac{X_n}{\sqrt{2logn}} > \sqrt{1 + \epsilon}$.
@@ -73,20 +74,40 @@
                 &= \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\int_{ (\sqrt{1 + \epsilon})\sqrt{2logn} }^{\infty}e^{-\frac{1}{2}y^2}dy \\
                 &\leq \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-\frac{1}{2}((\sqrt{1 + \epsilon})\sqrt{2logn})^2} \\
                 &= \sum_{i \in \mathbb{N}} \frac{1}{ (\sqrt{1 + \epsilon})\sqrt{2logn} \sqrt{2\pi}} e^{-(1 + \epsilon)logn} \\
-                &< \sum_{i \in \mathbb{N}} \frac{1}{ 2\sqrt{(1 + \epsilon)\pi}} \cdot \frac{1}{n ^ {1 + \epsilon}} \\
+                &< \sum_{i \in \mathbb{N}} \frac{1}{ 2\sqrt{(1 + \epsilon)\pi}} \cdot \frac{1}{n ^ {1 + \epsilon}}. \\
             \end{align*}
-            $\sum_{i \in \mathbb{N}} \frac{1}{n ^ {1 + \epsilon}}$ converges, thus $$  \sum_{i \in \mathbb{N}} P(E_i) < \infty $$
+            $\sum_{i \in \mathbb{N}} \frac{1}{n ^ {1 + \epsilon}}$ converges, thus $$  \sum_{i \in \mathbb{N}} P(E_i) < \infty. $$
 
-            By \textbf{First Borel-Cantelli Lemma(BC1)}, we have $$ P(E_n, i.o.) = 0 $$ ,
-            thus $$ P(E_n^c,ev) = P(\frac{X_n}{\sqrt{2logn}} \leq \sqrt{1 + \epsilon}, ev) = 1 $$
+            By \textbf{First Borel-Cantelli Lemma(BC1)}, we have $$ P(E_n, i.o.) = 0, $$
+            thus $$ P(E_n^c,ev) = P(\frac{X_n}{\sqrt{2logn}} \leq \sqrt{1 + \epsilon}, ev) = 1. $$
             
             Finally,
             \begin{align*}
                 P(L \leq 1) &= P( lim\ sup(\frac{X_n}{\sqrt{2logn}}) \leq 1) = P(\frac{X_n}{\sqrt{2logn}} \leq 1, ev) \\
                 % &\geq P(\frac{X_n}{\sqrt{2logn}} \leq 1, ev) \\
                 &= \lim_{\epsilon\to 0} P(\frac{X_n}{\sqrt{2logn}} \leq \sqrt{1 + \epsilon}, ev) \\
-                &= 1
+                &= 1.
             \end{align*}
+            
+            \item We only need to prove that $ P(L \geq 1) = 1$, then $ P(L \geq 1) = P(L \leq 1) = 1 \Longrightarrow P(L = 1) = 1 $.
+            We have
+            \begin{align*}
+                P(L \geq 1) = P(lim\ sup(\frac{X_n}{\sqrt{2logn}}) \geq 1) = P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.). \\ 
+            \end{align*}
+            Thus we need to prove that $P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.) = 1$.
+
+            Let $E_n$ denote the event that $\frac{X_n}{\sqrt{2logn}} \geq 1$. It is easy to verify that $(E_n)$ are independent events since $(X_n)$ are independent random variables.
+            \begin{align*}
+                \sum_{i \in \mathbb{N}} P(E_i) = \sum_{i \in \mathbb{N}} P(\frac{X_n}{\sqrt{2logn}} \geq 1) = \sum_{i \in \mathbb{N}} P(X_n \geq \sqrt{2logn}).
+            \end{align*}
+            Similarly to \textit{(1)}, we can deduce that $$ P(G \geq x) \geq \frac{1}{\sqrt{2\pi}}\cdot \frac{x}{x^2+1} \cdot e^{-\frac{1}{2}x^2}. $$
+            Thus,
+            \begin{align*}
+                \sum_{i \in \mathbb{N}} P(E_i) &\geq \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\cdot \frac{\sqrt{2logn}}{(\sqrt{2logn})^2+1} \cdot e^{-\frac{1}{2}(\sqrt{2logn})^2} \\
+                &= \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}}\cdot \frac{\sqrt{2logn}}{2logn+1} \cdot e^{-logn} \\
+                &\geq \sum_{i \in \mathbb{N}} \frac{1}{\sqrt{2\pi}} \cdot \frac{1}{n \cdot \sqrt{2logn}} = \infty.
+            \end{align*}
+            Therefore, by \textbf{First Borel-Cantelli Lemma(BC2)}, we have $$ P(\frac{X_n}{\sqrt{2logn}} \geq 1, i.o.) = P(E_n, i.o.) = 1, $$ which finishes the proof.
         \end{enumerate}
     \end{proof}
 \end{document}
