@@ -23,6 +23,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
 
 \newtheorem{innercustom}{\customname}
 \providecommand{\customname}{}
@@ -42,6 +43,7 @@
 \newcustomtheorem{customdef}{Definition}
 \newcustomtheorem{customex}{Exercise}
 \newcustomtheorem{customremark}{Remark}
+\newcustomtheorem{customexample}{Example}
 
 \newcommand{\Natural}{\mathbb{N}}
 \newcommand{\Real}{\mathbb{R}}
@@ -84,6 +86,20 @@
         \end{align*}
         As $P(A_n, \textrm{i.o.}) \geqslant 0$ always holds, it follows that $P(A_n, \textrm{i.o.}) = 0$.
     \end{proof}
+
+    \medskip
+    
+    Here is an example of a sequence of events to which BC1 cannot be applied but the extension proposition can be applied.
+    \begin{example}
+        Let the probability space $(\Omega, \mathcal{F}, P)$ be $([0, 1], \BorelSet[0, 1], \textrm{Leb})$ and $A_n := (0, \frac{1}{n}) \in \BorelSet[0, 1]$.
+    \end{example}
+    Obviously
+    $$
+    \sum_{n \in \Natural} P(A_n) = \sum_{n \in \Natural} \frac{1}{n}
+    $$
+    is divergent. So BC1 cannot be applied to this example. However, observe that $A_n^c \cap A_{n + 1} = [\frac{1}{n}, 1] \cap (0, \frac{1}{n + 1}) = \emptyset$. So $P(A_n^c \cap A_{n + 1}) = 0$ hence $\sum\limits_{n \in \Natural} P(A_n^c \cap A_{n + 1}) = 0 < \infty$. By the extension proposition of BC1 above, it follows that $P(A_n, \textrm{i.o.}) = 0$.
+    
+    Therefore, in the above example, the extension proposition can be applied while BC1 cannot. But can we conclude that ``the usage of this proposition is wider than BC1''? It depends on whether we can show that the premise of the proposition implies the premise of BC1. I'm thinking this problem, and I hope someone can help me.
 
     \bibliography{bc1-extension}
     \bibliographystyle{abbrv}
