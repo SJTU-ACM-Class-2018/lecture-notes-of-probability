@@ -1,0 +1,122 @@
+\documentclass[UTF8, 12pt]{article}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+\usepackage{lipsum}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\theoremstyle{break}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Converse to SLLN}
+\author{于峥 518030910437}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}[\textbf{Exercise 4.6} of \textit{Chapter E}]
+        
+        Let $Z$ be a non-negative RV. Let $Y$ be the integer part of $Z$ . Show that
+        
+        $$
+        Y = \sum_{n\in \mathbb{N}} I_{\{Z\geq n\}}
+        $$
+        and deduce that
+        $$
+        \sum_{n\in \mathbb{N}}P[Z\geq n]\leq E(Z) \leq 1 + \sum_{n\in\mathbb{N}}P[Z\geq n]
+        $$
+
+        Let $(X_n)$ be a sequence of IID RVs (independent, identically distributed random variables) with
+        $E(|X_n|)=\infty, \forall n$. Prove that
+
+        $$
+        \sum_n P[|X_n|>kn] = \infty (k \in \mathbb{N}) \text{     and     } 
+        \lim \sup \frac {|X_n|} n = \infty (a.s.)
+        $$
+
+        Deduce that if $S_n = X_1 + X_2 + \dots + X_n$, then
+        $$
+        \lim \sup \frac {|S_n|} n = \infty (a.s.)
+        $$
+    \end{problem}
+
+    \begin{proof}
+        The proof of the first equality is trivial， and
+        \begin{align*}
+            E(Z) 
+            &= E(Y) + E(Z - Y) \\
+            &= E\left(\sum_{n\in \mathbb{N}} I_{\{Z\geq n\}}\right) + E(Z-Y) \\
+            &= \sum_{n\in \mathbb{N}} P[Z \geq n] +  E(Z-Y) \\
+            &= \sum_{n\in \mathbb{N}} P[Z \geq n] + \frac 1 2
+        \end{align*}
+
+        So $$
+        \sum_{n\in \mathbb{N}}P[Z\geq n]\leq E(Z) \leq 1 + \sum_{n\in\mathbb{N}}P[Z\geq n]
+        $$
+
+        Let 
+        $E_n^k = \left\{ \frac {X_n} n > k \right\}$. Then 
+
+        \begin{align*}
+            \sum_n P(E_n^k) 
+            &\geq \sum_n P\left(\frac {|X_n|} n \geq k + 1 \right) \\
+            &= \sum_n P\left(\frac {|X_n|} {k+1} \geq n \right) \\
+            &\geq E\left(\frac {|X_n|} {k+1}\right) - 1 \\
+            &= \infty
+        \end{align*}
+
+        by BC2
+        $$
+        P(E_n^k,i.o.) = P(\lim\sup E_n^k) = 1
+        $$
+
+        Hence 
+        $$
+        P(\lim \sup \frac {|X_n|} n = \infty) = 1 \Rightarrow \lim \sup \frac {|X_n|} n = \infty (a.s.)
+        $$
+
+        At last, consider
+        $$
+        \frac {X_n} n = \frac {S_n} n - \left(\frac {n-1} n\right) \frac {S_{n-1}} {n-1}
+        $$
+        
+        we can know
+        $$
+        \frac {|X_n|} n \leq \frac {|S_n|} n + \left(\frac {n-1} n\right) \frac {|S_{n-1}|} {n-1}
+        $$
+        
+        then
+        $$
+        \lim\sup\frac {|X_n|}{n} \leq 2 \lim\sup \frac{|S_n|}n
+        $$
+
+        Hence
+        $$
+        P(\lim \sup \frac {|S_n|} n = \infty) = 1 \Rightarrow \lim \sup \frac {|S_n|} n = \infty (a.s.)
+        $$
+    \end{proof}
+\end{document}
