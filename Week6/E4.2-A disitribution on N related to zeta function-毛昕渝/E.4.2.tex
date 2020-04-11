@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+%\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\N{\mathbb{N}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\bb{\mathcal{B}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\nn{\mathcal{N}}
+\newcommand\ff{\mathcal{F}}
+\newcommand\one{\bm{1}}
+\newcommand\eps{\varepsilon}
+\newcommand\pr[1]{\mathcal{P} \left( #1\right)}
+\DeclareMathOperator{\leb}{Leb}   
+\DeclareMathOperator{\diff}{d}   
+
+\title{E4.2: A distribution on $\N$ related to zeta function}
+\author{Xinyu Mao}
+\date{\today}
+\begin{document}
+\maketitle
+
+Let $s > 1$, and define $\zeta(s) := \sum_{n \in \N} \frac{1}{n^s}$, as usual. 
+Let $X$ and $Y$ be independent $\N$-valued random variables with
+$$
+    \pp(X = n) = \pp(Y = n) = \frac{n^{-s}}{\zeta(s)}.
+$$
+Define events $E_n := \{ \text{$X$ is divisible by $n$}\}$.
+One can easily see that 
+\begin{equation} \label{factor}
+    \pp(E_n) = \sum_{i \in \N} \pp(X = ni) 
+    = \sum_{i \in \N} \frac{(ni)^{-s}}{\zeta(s)}
+    = \frac{n^{-s}}{\zeta(s)} \sum_{i \in \N} i^{-s}= n^{-s}.
+\end{equation}
+Everything is set up now, and we shall explore some interesting properties of 
+$X$ and $Y$.
+
+\begin{proposition} \label{ind}
+    $(E_p : p \in \PP)$ are independent with $\PP$ denoting all prime numbers.
+\end{proposition}
+\begin{proof}
+    Let $S := \{p_1,p_2,\dots,p_m\}$ be a finite subset of $\PP$.
+    By definition of $E_n$ and \cref{factor}, we immediately have 
+    $$
+        \pr{\bigcap_{i = 1}^m E_i} = \pr{E_{p_1p_2\cdots p_m}}
+        = (p_1p_2\cdots p_m)^{-s} = \prod_{i = 1}^m\pp(E_i),
+    $$
+    which implies  $(E_p : p \in \PP)$ are independent.
+\end{proof}
+
+We can use this observation to cast light on \textbf{Euler's formula}
+\begin{equation} \label{euler}
+    \frac{1}{\zeta(s)} = \prod_{p \in \PP} (1 - \frac{1}{p^s}).
+\end{equation}
+The LHS of \cref{euler} is obviously $\pp(X = 1)$. 
+The event that $X = 1$ can also be described as 
+$E := \{p \not{|} X, \forall p \in \PP\} = \bigcap_{p \in \PP}E_p^c$.
+Combining \cref{factor} and \cref{ind}, 
+we have $\pp(E) = \prod_{p\in \PP} \pp(E_p^c) = 
+\prod_{p \in \PP} (1 - \frac{1}{p^s})$.
+
+Clearly, $(E_{p^2},p \in \PP)$ is independent as well(the argument is similar to \cref{ind}).
+Hence,
+$$
+    \pp(\text{no square other than 1 divides $X$}) 
+    = \pr{\bigcap_{p \in \PP} E_{p^2}^c} 
+    = \prod_{p \in \PP} (1 - \frac{1}{p^{2s}}) = \frac{1}{\zeta(2s)},
+$$ 
+where the last equality follows from \cref{euler}.
+
+Define r.v. $H := \gcd(X,Y)$, and we shall show that
+\begin{proposition} \label{gcd}
+    $\pp(H = n) = \frac{n^{-2s}}{\zeta(2s)}$.
+\end{proposition}
+\begin{proof}
+    We need the concept of conditional probability 
+    from elementary theory. Note that 
+    $$
+        \pr{X/n = k| E_n}
+        = \frac{(nk)^{-s}}{\sum_{i \geq 1}(ni)^{-s}} 
+        = \frac{k^{-s}}{\zeta(s)}.
+    $$
+    Hence, $(X/n | E_n)$ has the same distribution as $X$.
+    Let $F_n$ be the event that $n$ divides $Y$, 
+    then $(Y/n|E_n)$ also has the same distribution.
+    Thus,
+    \begin{equation} \label{main}
+    \begin{aligned}
+        \pp(H = n) &= \pr{E_n \cap F_n \cap {\gcd (\frac{X}{n},\frac{Y}{n}) = 1}} \\
+         &= \pp(E_n) \pp(F_n) \pr{\gcd (\frac{X}{n},\frac{Y}{n}) = 1 | E_n \cap F_n} \\
+         &= n^{-s} \cdot n^{-s} \cdot \pp(\gcd(X,Y) = 1).
+    \end{aligned}
+    \end{equation}
+    Since $(E_p,F_p: p\in\PP)$ is independent, 
+    $$
+        \pp(\gcd(X,Y) = 1) = \pp(\bigcap_{p \in \PP}(E_p \cap F_p)^c)
+        = \prod_{p\in \PP} (1 - \frac{1}{p^{2s}}) = \frac{1}{\zeta(2s)}.
+    $$
+    Plugging this into \cref{main}, we get the desired result.
+\end{proof}
+
+However, we have not rigorously defined conditional probability yet.
+Can we avoid using conditional probability?
+The answer is yes, but we need a useful tool, \textbf{Möbius function},
+which is defined as 
+\begin{align*}
+    &\mu : \N \to \{-1,0,1\} \\
+     &n \mapsto \begin{cases}
+        (-1)^{m}, \text{if $n = p_1p_2\cdots p_m$, where $(p_i)_{i \in [m]}$ are distinct prime numbers};\\
+        0, \text{otherwise}.
+    \end{cases}
+\end{align*}
+
+Here we list two facts about $\mu$ without giving detailed proof
+\footnote{This kind of technique is called \textbf{Möbius inversion}.
+More information can be found at 
+\url{https://math.berkeley.edu/~stankova/MathCircle/Multiplicative.pdf}}.
+\begin{proposition} \label{mu} 
+    \begin{enumerate}[(i)]
+        \item $\sum_{d|n} \mu(d) = [n = 1]$.
+        \item $\sum_{n \in \N} \frac{\mu(n)}{n^s} 
+        = \prod_{p \in \PP} \frac{1}{(1 - p^{s})} = \frac{1}{\zeta(s)}$.
+    \end{enumerate}
+\end{proposition} 
+\begin{proof}
+    (i) can be proved by counting the number of $-1$ and $+1$
+    among all $\mu(d)$. (ii) is simply expansion of the product.
+\end{proof}
+
+Now we are well-equipped to give the coup de grace. 
+\begin{proof}[Another proof of \cref{gcd}]
+    Let $G_n$ be the event that $X,Y$ are both divisible by $n$,
+    which is equivalent to $n | H$.
+    Clearly, $\pp(G_n) = n^{-2s}$.
+    By \cref{mu} (i), 
+    \begin{equation}
+        \tag{*}
+        \pp(H = n) = \sum_{k = 1}^\infty \pp(H = kn) \sum_{d | k} \mu(d) 
+        = \sum_{d = 1}^{\infty} \mu(d) \sum_{i = 1}^{\infty} \pp(H = idn).    
+    \end{equation}
+    Note that $\sum_{i = 1}^{\infty} \pp(H = in) = \pp(G_n)$ for all $n \in \N$.
+    Hence, 
+    \begin{align*}
+        (*) = \sum_{d = 1}^{\infty} \mu(d) \pp(G_{dn}) 
+        &= \sum_{d = 1}^{\infty} \mu(d) (dn)^{-2s} \\
+        &= n^{-2s} \sum_{d = 1}^{\infty}  \mu(d) d^{-2s} \\
+        &= \frac{n^{-2s}}{\zeta(2s)},
+    \end{align*}
+    where the last equality follows from \cref{mu} (ii).
+\end{proof}
+
+\begin{remark}
+    If we take $s = 1$(this makes no sense) in \cref{gcd}, we get 
+    the probability that $X,Y$ are relatively prime is $\frac{1}{\zeta(2)}$.
+    In fact, the \textbf{natural density} of relatively prime pairs 
+    among $\N^2$ is $\frac{1}{\zeta(2)}$! Formally, 
+    $$
+        \lim_{N \to \infty} \frac{\sum_{i,j \in [N]}[\gcd(i,j) = 1]}{N^2} = \frac{1}{\zeta(2)}.
+    $$    
+    This is not just a coincidence. Let $A$ be a subset of $\N$, the \textbf{analytic density} of $A$
+    is defined as 
+    $$
+        \bm{d}(A) = \lim_{s \to 1^{+}} \frac{1}{\zeta(s)} \sum_{n \in A} n^{-s}.
+    $$
+    If natural density exists, then analytic density exists and they are equal.
+\end{remark}
+\end{document}
