@@ -92,11 +92,14 @@ we have $\pp(E) = \prod_{p\in \PP} \pp(E_p^c) =
 
 Clearly, $(E_{p^2},p \in \PP)$ is independent as well(the argument is similar to \cref{ind}).
 Hence,
-$$
+\begin{equation} \label{squarefree}
+    \begin{aligned}
     \pp(\text{no square other than 1 divides $X$}) 
-    = \pr{\bigcap_{p \in \PP} E_{p^2}^c} 
-    = \prod_{p \in \PP} (1 - \frac{1}{p^{2s}}) = \frac{1}{\zeta(2s)},
-$$ 
+        &= \pr{\bigcap_{p \in \PP} E_{p^2}^c}  \\
+        &= \prod_{p \in \PP} (1 - \frac{1}{p^{2s}}) = \frac{1}{\zeta(2s)},          
+    \end{aligned}
+\end{equation}
+
 where the last equality follows from \cref{euler}.
 
 Define r.v. $H := \gcd(X,Y)$, and we shall show that
@@ -180,19 +183,28 @@ Now we are well-equipped to give the coup de grace.
     where the last equality follows from \cref{mu} (ii).
 \end{proof}
 
-\begin{remark}
-    If we take $s = 1$(this makes no sense) in \cref{gcd}, we get 
-    the probability that $X,Y$ are relatively prime is $\frac{1}{\zeta(2)}$.
-    In fact, the \textbf{natural density} of relatively prime pairs 
-    among $\N^2$ is $\frac{1}{\zeta(2)}$! Formally, 
+\begin{paragraph}{Remark.}
+    If we take $s = 1$(this makes no sense) in \cref{squarefree}, we get 
+    the probability that $X$ is square-free is $\frac{1}{\zeta(2)}$.
+    In fact, the \textbf{natural density} of square-free numbers in $\N$ 
+    is exactly $\frac{1}{\zeta(2)}$! This is not just a coincidence. 
+    Formally, let $A$ be a subset of $\N$, 
+    we define the natural density of $A$ by the limit
     $$
-        \lim_{N \to \infty} \frac{\sum_{i,j \in [N]}[\gcd(i,j) = 1]}{N^2} = \frac{1}{\zeta(2)}.
+        \bm{d}(A) := \lim_{n \to \infty}\frac{|A \cap [n]|}{n},
     $$    
-    This is not just a coincidence. Let $A$ be a subset of $\N$, the \textbf{analytic density} of $A$
-    is defined as 
+    and \textbf{analytic density} of $A$
+    by the limit
     $$
-        \bm{d}(A) = \lim_{s \to 1^{+}} \frac{1}{\zeta(s)} \sum_{n \in A} n^{-s}.
+        \lim_{s \to 1^{+}} \frac{1}{\zeta(s)} \sum_{n \in A} n^{-s}.
     $$
-    If natural density exists, then analytic density exists and they are equal.
-\end{remark}
+    Then we have 
+    \begin{theorem}
+        If natural density exists, then analytic density exists and they are equal.
+    \end{theorem}
+    A proof can be found in \cite{tenenbaum2015introduction} Chapter III.
+\end{paragraph}
+
+\bibliographystyle{unsrt}
+\bibliography{ref.bib}
 \end{document}
