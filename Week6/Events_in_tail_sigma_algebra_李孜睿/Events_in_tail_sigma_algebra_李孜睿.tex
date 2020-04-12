@@ -1,0 +1,104 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newenvironment{myproof}{\ignorespaces\paragraph{Proof:}}{\hfill $\square$\par\noindent}
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{Events in tail $\sigma$-algebra}
+\author{李孜睿 518030910424}
+\date{\today}
+
+
+\begin{document}
+	\maketitle
+	$X_1,X_2,\cdots$ are random variables. Define
+	
+	$$
+	\mathcal{T}_n\doteq\sigma(X_{n+1},X_{n+2},\cdots),\mathcal{T}\doteq\bigcup_n\mathcal{T}_n.
+	$$
+	
+	$\sigma$-algebra $\mathcal{T}$ is called the tail $\sigma$-algebra of sequence$(X_n:n\in\mathbb{N})$.
+	
+	$\mathcal{T}$ contains many important events, such as:
+	
+	$$
+	\begin{aligned}
+		F_1&\doteq(\lim X_k\text{ exists})\doteq\{\omega:\lim_kX_k(\omega)\text{ exists}\}.&(1)\\
+		F_2&\doteq\left(\sum X_k \text{ converges}\right).&(2)\\
+		F_3&\doteq\left(\lim\frac{X_1+X_2+\cdots+X_k}{k}\text{ exists}\right).&(3)
+	\end{aligned}
+	$$
+	
+	Prove $F_1,F_2\text{ and }F_3\in\mathcal{T}$.
+	
+	\begin{myproof}
+		For an arbitrary $n\in\mathbb{N}$, $\mathcal{T}_n\doteq\sigma(X_{n+1},X_{n+2},\cdots)$.
+		
+		As $X_{n+1},X_{n+2},\cdots$ are all $\mathcal{T}_n$-measurable, $\{\omega:\lim_{k\rightarrow\infty\wedge k>n} X_k(\omega)\text{ exists}\}\in\mathcal{T}_n$.
+		
+		In other words, $\{\omega:\lim_{k\rightarrow\infty} X_k(\omega)\text{ exists}\}\in\mathcal{T}_n$.
+		
+		Thus $\{\omega:\lim_{k\rightarrow\infty} X_k(\omega)\text{ exists}\}\in\bigcap_n\mathcal{T}_n=\mathcal{T}$ and $F_1\in\mathcal{T}$ follows.
+		
+		Also, for an arbitrary $n\in\mathbb{N}$, define $$A_n\doteq\{\omega:\sum_{k>n}X_k(\omega)\text{ converges}\}.$$
+		
+		Define $S_{n+1}=X_{n+1}$ and $S_{n+k}=S_{n+k-1}+X_{n+k}\text{ for }k>1$.
+		
+		Notice that $A_n=\{\omega:\lim_{k>n}S_k(\omega)\text{ exists}\}$
+		
+		$X_{n+1},X_{n+2},\cdots$ are $\mathcal{T}_n$-measurable $\Rightarrow$ $S_{n+1},S_{n+2},\cdots$ are $\mathcal{T}_n$-measurable.
+		
+		$\Rightarrow\{\omega:\lim_{k>n}S_k(\omega)\text{ exists}\}\in\mathcal{T}_n\Rightarrow A_n\in\mathcal{T}_n$.
+		
+		Now look back at $A_n$, we find that $A_0=A_n$ because the sum from $X_1$ to $X_n$ are finite.
+		
+		So $A_0=A_n\in\mathcal{T}_n\Rightarrow A_0\in\bigcap\mathcal{T}_n=\mathcal{T}$, and $F_2=A_0\in\mathcal{T}$ follows.
+		
+		Again, for a fixed $n\in\mathbb{N}$, define
+		
+		$$B_n\doteq\{\omega:\lim_{k>n}\frac{X_{n+1}(\omega)+X_{n+2}(\omega)+\cdots+X_k(\omega)}{k}\text{ exists}\}.$$
+		
+		As $\frac{X_{n+1}}{n+1},\frac{X_{n+1}+X_{n+2}}{n+2},\cdots$ are $\mathcal{T}_n$-measurable, $B_n\in\mathcal{T}_n$.
+		
+		$\omega\in B_0\Leftrightarrow\lim_{k>0}\frac{X_1(\omega)+X_2(\omega)+\cdots+X_k(\omega)}{k}\text{ exists}\\\Leftrightarrow\lim_{k>0}\frac{X_1(\omega)+X_2(\omega)+\cdots+X_k(\omega)}{k}-\lim_{k>0}\frac{X_1(\omega)+X_2(\omega)+\cdots+X_n(\omega)}{k}\text{ exists}\\\Leftrightarrow\lim_{k>0}\frac{X_{n+1}(\omega)+X_{n+2}(\omega)+\cdots+X_k(\omega)}{k}\text{ exists}\Leftrightarrow w\in B_n$.
+		
+		So $B_0=B_n\in\mathcal{T}_n\Rightarrow B_0\in\bigcap\mathcal{T}_n=\mathcal{T}$, and $F_3=B_0\in\mathcal{T}$ follows.
+	\end{myproof}
+\end{document}
