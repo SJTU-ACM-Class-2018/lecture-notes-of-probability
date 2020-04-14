@@ -260,9 +260,9 @@ could not be applied to this problem directly.
 		\hfill$\square$
 
 \paragraph{Proof 2:}
-	Consider events $E_n = \{X_n = n^2+1\}$, we can know
+	Consider events $E_n = \{X_n = n^2-1\}$, we can know
 	$$
-	\sum_n P(E_n) = \sum_n P(X_n = n^2+1)=\sum_n \frac 1 {n^2} \leq \infty
+	\sum_n P(E_n) = \sum_n P(X_n = n^2-1)=\sum_n \frac 1 {n^2} < \infty
 	$$
 	by BC1, get $P(E_n.i.o)=0$. So $\exists N$, $\forall n > N$, $s.t.$
 	$$
@@ -279,6 +279,11 @@ could not be applied to this problem directly.
 	Hence
 	$$
 	P(S_n \leq -n + N + \sum_{i=1}^N {i^2-1})=1
+	$$
+	And event $E_n^c = \{ X_n = -1 \}$,
+	Let $F = \{ \lim_{n \rightarrow \infty} \frac {S_n} n = -1\}$. We can know $(E_n^c. e.v) \in F$。
+	$$
+	P(F) \geq P(E_n^c, ev) = 1
 	$$
 	Finally, we conlude
 	$$
