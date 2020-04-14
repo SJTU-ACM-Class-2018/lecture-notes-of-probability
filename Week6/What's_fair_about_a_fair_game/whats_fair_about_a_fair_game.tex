@@ -1,0 +1,108 @@
+\input{../preamble.tex}
+\title{\textsc{What's Fair about a Fair Game?}}
+\begin{document}
+\maketitle
+        
+\begin{pro}[E4.7]
+Let $X_1,X_2\ldots$ be independent RVs such that 
+\[
+X_{n} = \begin{cases}
+		 n^2-1 \quad \text{ with probability } n^{-2} \\
+		 -1 \quad \text{ with probability } 1- n^{-2}  
+\end{cases}
+.\]  
+Prove that $\mathbb{E} \left( X_{n} \right) = 0, \forall n$. But that if $S_{n} = \sum_{i=1}^{n} X_{n}$, then 
+\[
+\frac{S_n}{n} \to  -1 , \quad \text{a.s.}
+.\] 
+\end{pro}
+\begin{proof}
+		By definition, it's obvious that $\mathbb{E} \left( X_{i} \right) = 0,\forall i$.
+		Notice that 
+		\[
+				\frac{S_n}{n}+1 =  \frac{S_n + n}{n} = 
+				\frac{1}{n}\left( \sum_{i=1}^{n} Y_{i} \right) 
+		.\] 
+		In which $Y_{i} = 1 + X_{i}$. Then 
+		$\mathbb{E}\left( Y_{i} \right) = 1$. We only need to prove
+		\[
+		\frac{1}{n} \sum_{i=1}^{n} Y_{i}= \frac{1}{n}S'_{n} \to 0 \quad \text{a.s. }
+		.\] 
+		My first attempt is using \textbf{Chebyshev's Inequality}, 
+		take $\phi=x^{\alpha }$, here 
+		$\alpha $ is a constant we may decide later, we have 
+		\[
+				P\left( \frac{1}{n} S'_{n} > \ep \right) 
+				\le \frac{\mathbb{E} \left( \left( S'_{n} \right) ^{\alpha } \right)  }{ \left( n\ep \right) ^{ \alpha  } }
+		.\] 
+		And we try to prove that $\mathbb{E} \left( \left( S'_{n} \right) ^{\alpha } \right) $ is really small, at least smaller that $n^{\alpha }$. 
+However, it's impossible to prove the result this way, whatever $\alpha $ we choose.
+
+		Which means this bound is too tight to use Chebyshev. Hence I try another
+		method in the proof of \textbf{Chernoff Bounds}\footnote{For more details, 
+refer to wiki \texttt{https://en.wikipedia.org/wiki/Chernoff\_bound} }, 
+		\begin{thm}[Chernoff bound]
+				Let $X_1,\ldots$ be independent Bernoulli random variables, 
+				then 
+				\[
+						P\left( \frac{S_n}{n} \ge \mathbb{E}\left[ S_n \right] + \ep \right) \le \exp\left( -D\left( p+\ep \parallel p \right) n \right) 
+				.\] 
+		\end{thm}
+The bound is exactly what we want to have. However, the method used in the theorem 
+could not be applied to this problem directly.
+
+		Finally I tried the technique used in the proof of weak law for triangular arrays, 
+		Let $\overline{Y_{i}}= Y_{i} \cdot 1_{Y_{i} \le  n}$. Hence we have 
+		\[
+				\sum_{i=1}^{n} P\left( Y_{i} > n \right) = 
+				\sum_{i^2 > n}^{n} \frac{1}{i^2} < \frac{1}{\sqrt{n} } - \frac{1}{n}
+				\to  0
+		.\]
+		Plus 
+		\[
+		n^{-2} \sum_{i=1}^{n} \mathbb{E} \overline{Y_i}^2 < 
+		\frac{1}{n^2} \cdot \left\lceil \sqrt{n}  \right\rceil \to  0 
+		.\] 
+		Let $\overline{S}_n = \sum_{i=1}^{n} \overline{Y_i}$, it follows 
+		that $a_n = \mathbb{E} \left( \overline{S}_n \right) = \left\lfloor \sqrt{n}  \right\rfloor$. We now prove a stronger result: 
+		\[
+				\frac{ S'_n -a_n }{n} \to  0  
+		.\] 
+		Clearly
+		\[
+				P\left( \left| \frac{S_n-a_n}{n} \right| > \ep \right) \le 
+				P\left( S'_n \neq \overline{S}_n \right) + 
+				P \left( \left| \frac{\overline{S}_n-a_n}{n} \right| > \ep  \right) 
+		.\] 
+		To estimate the first term, notice that 
+		\[
+				P\left( S_n \neq \overline{S}_n \right) \le  
+				P \left( \bigcup_{i=1}^{n} \{ \overline{Y}_i\neq Y_i\}   \right) 
+				\le \sum_{i=1}^{n} P\left( Y_i > n \right) \to 0
+		.\] 
+		For the second term, we use \textbf{Chebyshev's inequality} which is a 
+		common trick
+		\[
+				P \left( \left| \frac{\overline{S}_n-a_n}{n} \right| > \ep  \right) 
+				\le  \frac{ \mathrm{var}\left( \overline{S}_n \right)   }{ n^2\ep^2}
+				\le \frac{1}{n^2\ep^2} \cdot \sum_{i=1}^{n} \mathbb{E} \left( \overline{Y}_i \right) ^2 \to 0
+		.\] 
+		Therefore 
+		\[
+				\frac{S'_n }{n} - \frac{1}{\sqrt{n} } \to 0 
+		.\] 
+		As $\frac{1}{\sqrt{n} }\to 0$, our proof is completed.
+
+		\noindent \textbf{Remark:}
+
+		The construction of $\overline{Y}_i$ might be a bit tricky. But it's also somewhat natural. When I try the first 2 methods, I found that $n^2$ is just too big for 
+		me to use some inequality tricks on the whole $Y_i,1\le i\le n$. 
+		which prevents me estimating the size, that's why we need to do some truncation.
+
+		And back to the title, the result of this problem reveals that even if the 
+		expectation of profit in every term of a game you play is 0, which seams 
+		fair. The average of your profit
+		can be negative if you play it for too much terms. It tells us don't always take 
+		risks in such games.
+\end{proof}
+\end{document}
