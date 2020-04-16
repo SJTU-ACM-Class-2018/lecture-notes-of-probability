@@ -1,0 +1,131 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{2ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+\title{The Uniqueness Theorem of Measure Expansion from $(X,\bm{A})$ to $(X,\sigma(\bm{A}\cap\{C\}))$}
+\date{Mar. 08, 2020}
+
+\maketitle
+\paragraph{Labels} In the following proof, we suppose
+\begin{align*}
+	\mu^{*}(C) = inf\{\mu(A): C\subset A, \bm{A}\}\text{  (outer measure)}\\
+	\mu_{*}(C) = sup\{\mu(A): C\supset A, \bm{A}\}\text{  (inner measure)}
+\end{align*}
+\paragraph{Theorem} Suppose $\mu$ is a sigma-finite measure on $(X,\bm{A})$, $C\subset X$. If $\mu_1$ and $\mu_2$ are two expanding measure of $\mu$ from $(X,\bm{A})$ to $(X,\sigma(\bm{A}\cap\{C\}))$, which also satisfing
+\begin{align*}
+	\mu_i(C) = \mu^{*}(C) < +\infty,i=1,2
+\end{align*}
+Then $\mu_1=\mu_2$ on $\sigma(\bm{A}\cap\{C\})$
+\paragraph{Proof} If $v$ is any expanding measure of $\mu$ from $(X,\bm{A})$ to $(X,\sigma(\bm{A}\cap\{C\}))$, and $v(C) = \mu^{*}(C) < +\infty$, there will be a $C_1 \in \bm{A}$, with both $C\subset C_1$, and 
+\begin{align}
+	\forall A\in \bm{A},v(A\cap C) = v(A\cap C_1)
+\end{align}
+Due to $\mu$ is finite on $\bm{A}$, there exists a measurable cover of $C$. Now we select any one of them, take it as $C_1$. In this way, $C\subset C_1,C_1\in\bm{A}$, and also $(C_1\setminus C)=0$. At the same time, refering to $v$ is an expanding measure of $\mu$, $v=\mu$ on $\bm{A}$. Then we get to know
+\begin{align*}
+	v(C_1) &= \mu(C_1) = \mu_{*}(C \cup (C_1 \setminus C))\notag\\
+	&\leq \mu^{*}(C) + \mu_{*}(C_1 \setminus C) = \mu^{*}(C)\notag\\
+	&\leq \mu(C_1) = v(C_1) 
+\end{align*}
+So we've got $\mu^{*}(C) = v(C_1)$ and so that $v(C) = v(C_1)$\\
+Considering $v(C) = \mu^{*}(C) < +\infty$, we now know that
+\begin{align*}
+	v(A\cap C) &\leq v(A\cap C_1) = v(A\cap C) + v(A\cap(C_1\subset C))\\         &\leq v(A\cap C) + v(C_1\subset C) = v(A\cap C)
+\end{align*}
+So formula (1) is correct.\\
+\subparagraph{Due} to $\mu_1$ and $\mu_2$ are two expanding measure of $\mu$ from $(X,\bm{A})$ to $(X,\sigma(\bm{A}\cap\{C\}))$ which satisfying $\mu_i(C) = \mu^{*}(C) < +\infty,i=1,2$, we can get the following formula :
+\begin{align}
+	\forall A\in \bm{A},\mu_1(A\cap C) = \mu_1(A\cap C_1)\\
+	\forall A\in \bm{A},\mu_2(A\cap C) = \mu_2(A\cap C_1)
+\end{align}
+Because of $\mu_1 = \mu_2 = \mu$ on $\bm{A}$, $A\cap C_1 \in \bm{A}$
+\begin{align}
+	\mu_1(A\cap C_1) = \mu_2(A\cap C_1)
+\end{align}
+According formula (2),(3) and (4), we've got
+\begin{align}
+	\mu_1(A\cap C) = \mu_2(A\cap C)
+\end{align}
+Besides that, we also know
+\begin{align*}
+	\mu_1(A\cap C) \leq \mu_1(C) = \mu^{*}(C) < +\infty,i=1,2
+\end{align*}
+So that,
+\begin{align}
+	\mu_1(A\cap C^{c})=\mu_2(A\cap C^{c})
+\end{align}
+So there exists $A_1,A_2 \in \bm{A}$, such that
+\begin{align*}
+	A = (A_1\cap C)\cup(A_2\cap C^{c})
+\end{align*}
+By considering formula (5) and (6), we know that
+\begin{align*}
+	\mu_1(A) &= \mu_1[(A_1\cap C)\cup(A_2\cap C^{c})]\\
+             &= \mu_1(A_1\cap C)+\mu_2(A_2\cap C^{c})\\
+             &= \mu_2(A_1\cap C)+\mu_2(A_2\cap C^{c})\\
+             &= \mu_2[(A_1\cap C)\cup(A_2\cap C^{c})]\\
+             &= \mu_2(A)
+\end{align*}
+Which means now we have proved that $\mu_1 = \mu_2$ on $\sigma(\bm{A}\cap\{C\})$
+\end{document}
+
