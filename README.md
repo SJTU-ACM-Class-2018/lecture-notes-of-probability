@@ -38,11 +38,18 @@ written for the course on probability theory.
   - Independence
 
 - Week 6
-    - Lovasz Local Lemma
-    - Product space
-    - BC 1 and BC 2
-    - Kolmogorov's 0-1 Law
-    - Hewitt-Savage's 0-1 law
+  - Lovasz Local Lemma
+  - Product space
+  - BC 1 and BC 2
+  - Kolmogorov's 0-1 Law
+  - Hewitt-Savage's 0-1 Law
 
 - Week 7
-   - coming soon
+  - Definition: Lebesgue integration for $(m\Sigma)^+$
+  - Monotone-Convergence Theorem(MON)
+  - The Fatou Lemmas for functions
+  - $\mu$-integrable functions: $\mathcal{L}^1(S,\Sigma, \mu)$
+  - Linearity of integration
+
+- Week 8
+  - coming soon
