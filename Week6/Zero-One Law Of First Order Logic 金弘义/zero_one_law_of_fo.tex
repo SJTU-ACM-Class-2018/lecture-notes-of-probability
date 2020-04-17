@@ -1,0 +1,187 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+% Document
+\begin{document}
+    \title{ Zero-One Law For First Order Logic }
+    \author{金弘义\ 518030910333}
+    \date{\today}
+    \maketitle
+
+    \begin{customdef}{1}
+        Erdős–Rényi random graph $G(n, p)$ model is a model where a n-vertex graph is constructed by connecting nodes randomly.
+        Each edge is included in the graph with probability p (a function of n) independent from every other edge.
+    \end{customdef}
+    \textbf{Problem 1.} Suppose we want to know which values of p are likely to produce graphs with isolated vertices and which are not when $n\to \infty$.
+    \begin{proof}[Solution]
+        Define X to be the number of isolated vertices in a n-vertex graph.
+        Obviously X is a random variable.
+
+        Let's introduce the first moment method: For a non-negative, integer-valued random variable $X$, if $E[X]$ tends to 0, then the value of X tends to 0.
+        This can be directly derived from Markov's inequality:
+        \begin{align}
+            P[X\ge a]\le \frac{E[X]}{a}
+        \end{align}
+        Let $a=1$, then $P[X>0]=P[X\ge 1]\le E[X]$.
+        So if $E[X]\to 0$, then $X=0$ almost surely.
+
+        Now focus on the problem.
+        \begin{align}
+            E[X]=E[\sum\limits_{i=1}^{n}X_i]=\sum\limits_{i=1}^{n}E[X_i]
+        \end{align}
+        where $X_i$ is 1 if node $i$ is isolated, and 0 otherwise.
+        So
+        \begin{align*}
+            E[X_i]&=P(\text{node i is isolated})=(1-p)^{n-1}\\
+            E[X]&=n(1-p)^{n-1}<ne^{-p(n-1)}
+        \end{align*}
+        If $\forall \epsilon>0, p>\frac{(1+\epsilon)\log (n)}{n}$, then $E[X]\to 0$.
+        $P[\text{Graph has no isolated vertex}]=1-P[X>0]=1$
+
+        To deal with the opposite part where graph has isolated vertex almost surely, we'll use the second moment method.
+        The Chebeshev Inequality tells us:
+        \begin{align}
+            P[|X-E[X]|\ge c]\le \frac{Var[X]}{c^2}
+        \end{align}
+        Let $c=E[X]$,then
+        \begin{align}
+            P[X=0]\le P[|X-E[X]|\ge E[X]]\le \frac{Var[X]}{E[X]^2}
+        \end{align}
+        Now we compute $Var[X]$ and $E[X]^2$.
+        \begin{align*}
+            E[X]^2&=n^2(1-p)^{2n-2}\\
+            Var[X]&=E[X^2]-E[X]^2=E[X^2]-n^2(1-p)^{2n-2}
+        \end{align*}
+        Then expand $X=\sum\limits_{i=1}^{n}X_i$.
+        \begin{align*}
+            E[X^2]&=E[\sum\limits_{i=0}^{n}X_i^2]+E[\sum\limits_{i\ne j}X_i X_j]\\
+                  &=\sum\limits_{i=0}^{n}E[X_i^2]+\sum\limits_{i\ne j}E[X_i X_j]
+        \end{align*}
+        We find that $X_i$ are indicators (only have value of 0 and 1), so $X_i^2=X_i$.
+        So it can simplified to
+        \begin{align*}
+            E[X^2]&=\sum\limits_{i=0}^{n}E[X_i]+\sum\limits_{i\ne j}E[X_i X]\\
+                  &=n(1-p)^{n-1}+n(n-1)(1-p)^{2n-3}
+        \end{align*}
+        Now we can get
+        \begin{align*}
+            Var[X]&=n(1-p)^{n-1}+n(n-1)(1-p)^{2n-3}-n^2(1-p)^{2n-2}\\
+            \frac{Var[X]}{E[X]^2}&=n^{-1}(1-p)^{-n+1}+\frac{n-1}{n}(1-p)^{-1}-1
+        \end{align*}
+        If $\forall \epsilon>0, p<\frac{(1-\epsilon)\log (n)}{n}$, then $ \frac{Var[X]}{E[X]^2}=o(1)$.
+        Then $P[\text{Graph has isolated vertex}]=1-P[X=0]=1$
+    \end{proof}
+    Now we discover an interesting fact that the probability that $G(n,p)$ has isolated vertices is asymptotically either 0 or 1.(not exactly because we haven't discussed the situation of $p=\frac{\log n}{n}$, but that situation is much harder ).
+    Actually many properties of graph have similar phenomenon.
+
+    To study this phenomenon in general, we'll introduce sentences about graphs in first order logic.
+    We have studied what a sentence in first order logic is in Mathematical Logic.
+    For graphs, similarly, a sentence uses existential and universal quantifiers over variables, but the only relation is $(u,v)$, which means that there is an edge between u and v.
+
+    \textbf{Example.}  the condition that a graph does not have any isolated vertices may be expressed by the sentence $\forall u \exists v e(u,v)$.
+    Now we state the formal Zero One Law for First Order Logic.
+    \begin{customthm}{1}
+        let $S$ be a fixed first-order sentence, and choose a random n-vertex graph $G_n$ uniformly at random among all graphs on a set of n labeled vertices.
+        Then in the limit as n tends to infinity the probability that $G_n$ models $S$ will tend either to zero or to one
+    \end{customthm}
+    \begin{proof}
+        The idea is to define a set of "basic sentences" that "spans" the space of all first-logic sentences.
+
+        Define $\phi_{k,l}$ as: for every set of k vertices and every set of l vertices, there is some other vertex adjacent to the k vertices but not the l vertices.
+        Or in math languange,
+        \begin{align*}
+             \forall x_1,x_2,\dots,x_k,y_1,y_2,\dots,y_l \exists z (e(x_1,z)\lor e(x_2,z)\lor \cdots \lor e(x_k,z))\land \neg(e(y_1,z)\lor e(y_2,z)\lor \cdots \lor e(y_l,z))
+        \end{align*}
+        Claim $P(G_n\models \phi_{k,l})\to 1$.
+        The proof is as follows:We have $\binom{n}{k}\binom{n-k}{n-k-l}$ choices to select these 2 sets.
+        For each selection and each vertex z, the probability of z not satisfying the condition is $1-p^k (1-p)^l$.
+        So the total probability of $\phi_{k,l}$ being false is
+        \begin{align*}
+            \binom{n}{k}\binom{n-k}{n-k-l}(1-p^k (1-p)^l)^{n-k-l}\le \binom{n}{k}\binom{n-k}{n-k-l}(1-(\frac{k}{k+l})^k (1-\frac{k}{k+l})^l)^{n-k-l}\to 0
+        \end{align*}
+        We now finish the proof of the claim.
+
+        Let $\Phi=\{\phi_{k,l}:k,l\in\mathbb{N}\}$.
+        Then $\Phi^{\models} =\{\phi : \Phi \models \phi\}$ is a theory in perspective of logic.
+        To prove it, we just need to prove that $\Phi $ is consistent.
+        From graph theory, we know the Rado Graph is the unique countable model that models $\Phi$ .
+        So $\Phi^\models$ is consistent because it's satisfiable.
+        Furthermore, we'll prove $\Phi^\models$ is complete.
+        Assume $\Phi^\models$ is not complete, which means there exists $\psi$ that neither $\psi$ nor $\neg \psi$ is the consequence of $\Phi$.
+        This is equivalent to $\Phi \cup \{\psi\}$ and $\Phi \cup \{\neg\psi\}$ are consistent.
+        If we extend $\Phi$ by adding $\psi$ and $\neg\psi$ respectively, both new theories are countable.
+        Then by Lowenheim-Skolem Theorem, they have countable models.
+        Since the new models is still the model of $\Phi$, they can only be the Rado Graph.
+        This yields a contradiction.
+
+        Now given a property $\phi$ that can be expressed in first order logic.
+        Then either $\phi$ or $\neg\phi$ is in $\Phi^\models$.
+        Without loss of generality, suppose $\phi$ is in $\Phi^\models$.
+        Then $\Phi \vdash \phi$.
+        Since there are only finite assumptions in sequent calculus, we only have finite $\phi_{k,l}$ as assumptions.
+        We've proved that $P(G_n\models \phi_{k,l})\to 1$, so $P(G_n\models \phi)\to 1$.
+        If $\neg\phi$ is in $\Phi^\models$, we can similarly derive that $P(G_n\models \neg\phi)\to 1$.
+        This finishes the proof.
+
+
+    \end{proof}
+\end{document}
