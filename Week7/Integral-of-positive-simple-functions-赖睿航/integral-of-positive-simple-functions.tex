@@ -1,0 +1,150 @@
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK, geometry, amsmath, amssymb, amsthm}
+\usepackage{graphicx, keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float, ifthen, calc, ifplatform, fancyvrb}
+\usepackage{minted, hyperref, enumerate, multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+%\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm, algorithmic}
+
+%\setlength{\parskip}{0.2\baselineskip}
+%\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{property}[theorem]{Property}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\BorelSet}{\mathcal{B}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+\newcommand{\IndicatorFunc}[1]{\mathbf{1}_{#1}}
+
+\begin{document}
+    \title{Integral of Positive Simple Functions($SF^+$)}
+    \author{赖睿航 518030910422}
+    \date{\today}
+    \maketitle
+    
+    Let $(S, \Sigma, \mu)$ be a measure space. A function $f \in (m\Sigma)^+$ is called {\it simple} provided $f$ can be written as a finite sum
+    $$
+    f = \sum_{k = 1}^{m} a_k \IndicatorFunc{A_k},
+    $$
+    where $a_k \in [0, \infty]$, $A_k \in \Sigma$. We write $f \in SF^+$. Then we define the \textit{Lebesgue integral} of $f$ as
+    $$
+    \mu(f) = \sum_{k = 1}^{m} a_k \mu(A_k) \leqslant \infty.
+    $$
+    
+    \bigskip
+    
+    \section{Lebesgue Integral of Simple Function is {\it Well-Defined}}
+        We first show that the $\mu(f)$ is well-defined.
+        \begin{property}[Well-definition]
+            Let $\sum_{i = 1}^n a_i\IndicatorFunc{A_i} = \sum_{j = 1}^m b_j\IndicatorFunc{B_j}$ be two representations of the same simple function $f \in SF^+$ with $A_i, B_j \in [0, \infty]$. Then
+            $$
+            \sum_{i = 1}^n a_i\mu(A_i) = \sum_{j = 1}^{m} b_j\mu(B_j).
+            $$
+        \end{property}
+
+        \begin{proof}
+            Note that for $p, q \in [n]$ with $p \neq q$, $A_p$ and $A_q$ may have \textit{non-empty intersection}, which is not what we want. So we construct some {\it pairwise disjoint} sets from $(A_i)$: let $(r_{t_1}r_{t_2}\ldots r_{t_n})_2$ be the binary representation of $t \in \{0, 1, \ldots 2^n - 1\}$, where $r_{t_k}$ is either $0$ or $1$. Then we define set $C_t$ as
+            $$
+            C_t := \bigcap_{k = 1}^n R_{t_k},\ \textrm{where } R_{t_k} = \left\{
+            \begin{aligned}
+            A_k, \textrm{ if } r_{t_k} = 1 \\
+            A_k^c, \textrm{ if } r_{t_k} = 0
+            \end{aligned}
+            \right.
+            $$
+            For example let $n = 3$, and then we have
+            \begin{align*}
+                C_0 &= A_1^c \cap A_2^c \cap A_3^c,\ C_1 = A_1 \cap A_2^c \cap A_3^c \\
+                C_2 &= A_1^c \cap A_2 \cap A_3^c,\ C_3 = A_1 \cap A_2 \cap A_3^c \\
+                C_4 &= A_1^c \cap A_2^c \cap A_3,\ C_5 = A_1 \cap A_2^c \cap A_3 \\
+                C_6 &= A_1^c \cap A_2 \cap A_3,\ C_7 = A_1 \cap A_2 \cap A_3.
+            \end{align*}
+            Obviously the sets in $(C_t)$ are pairwise disjoint. Then let
+            $$
+            c_i := \sum_{j = 1}^n [A_j \cap C_i \neq \emptyset]a_j
+            $$
+            where $[x] = 1$ provided $x$ is true, and $[x] = 0$ otherwise. Hence we have
+            $$
+            f = \sum_{i = 1}^n a_i\IndicatorFunc{A_i} = \sum_{i = 0}^{2^n - 1} c_i\IndicatorFunc{C_i},\ \sum_{i = 1}^n a_i\mu(A_i) = \sum_{i = 0}^{2^n - 1} c_i\mu(C_i).
+            $$
+            Note that for some $i \in \{0, 1, \ldots 2^n - 1\}$, $c_i$ may be $0$, which means $c_i\IndicatorFunc{C_i} = 0$. We remove such terms from the representation of $f$ and finally we will obtain
+            $$
+            f = \sum_{i = 1}^n a_i\IndicatorFunc{A_i} = \sum_{i = 0}^N c_i\IndicatorFunc{C_i},\ \sum_{i = 1}^n a_i\mu(A_i) = \sum_{i = 0}^N c_i\mu(C_i)
+            $$
+            where $N \leqslant 2^n - 1$, $c_i > 0$, and sets in $(C_i)$ are pairwise disjoint. Similarly we also have
+            $$
+            f = \sum_{i = 1}^m b_i\IndicatorFunc{B_i} = \sum_{i = 0}^M d_i\IndicatorFunc{D_i},\ \sum_{j = 1}^m b_i\mu(B_i) = \sum_{j = 0}^M d_j\mu(D_j).
+            $$
+            \textbf{So we only need to show that}
+            $$
+            \sum_{i = 0}^N c_i\mu(C_i) = \sum_{j = 0}^M d_j\mu(D_j).
+            $$
+            with factors $c_i, d_j$ being positive and sets in both $(C_i), (D_j)$ being pairwise disjoint.
+            \bigskip
+            
+            Claim that $\bigsqcup_{i = 0}^N C_i = \bigsqcup_{j = 0}^M D_j$: if $x \in \bigsqcup_{i = 0}^N C_i$, then $f(x) > 0$ since $c_i > 0$ always holds, which means $x \in \bigsqcup_{j = 0}^M D_j$ as well, and vice versa.
+            
+            Then for every $C_i$, we have $C_i \subseteq \bigsqcup_{i = 0}^N C_i = \bigsqcup_{j = 0}^M D_j$, so $C_i = \bigsqcup_{j = 0}^M (D_j \cap C_i)$. Then we have
+            \begin{align*}
+            \sum_{i = 0}^N c_i\IndicatorFunc{C_i} &= \sum_{i = 0}^N c_i\IndicatorFunc{\bigsqcup_{j = 0}^M(D_j \cap C_i)} \\
+            &= \sum_{i = 0}^N c_i \sum_{j = 0}^M \IndicatorFunc{D_j \cap C_i} \\
+            &= \sum_{i = 0}^N \sum_{j = 0}^M c_i\IndicatorFunc{C_i \cap D_j}.
+            \end{align*}
+            Similarly, we also have
+            $$
+            \sum_{j = 0}^M d_j\IndicatorFunc{D_j} = \sum_{i = 0}^N \sum_{j = 0}^M d_j\IndicatorFunc{C_i \cap D_j}.
+            $$
+            So for any $i, j$, if $C_i \cap D_j \neq \emptyset$, then $c_i = d_j$ must be true.
+            
+            We perform the same operations to $\sum_{i = 0}^N c_i\mu(C_i)$ and $\sum_{j = 0}^M d_i\mu(D_i)$:
+            \begin{align*}
+            \sum_{i = 0}^N c_i\mu(C_i) &= \sum_{i = 0}^N c_i \mu(\bigsqcup_{j = 0}^M (D_j \cap C_i)) \\
+            &= \sum_{i = 0}^N c_i \sum_{j = 0}^M \mu(D_j \cap C_i) \\
+            &= \sum_{i = 0}^N \sum_{j = 0}^M c_i \mu(C_i \cap D_j), \\
+            \sum_{j = 0}^M d_j\mu(D_j) &= \sum_{i = 0}^N \sum_{j = 0}^M d_j \mu(C_i \cap D_j).
+            \end{align*}
+            Observe that if $C_i \cap D_j \neq \emptyset$, then we know that $c_i = d_j$. Otherwise if $C_i \cap D_j = \emptyset$, then $\mu(C_i \cap D_j) = 0$. So for any $i, j$,
+            $$
+            c_i \mu(C_i \cap D_j) = d_j \mu(C_i \cap D_j).
+            $$
+            Thus we have $\sum_{i = 0}^N \sum_{j = 0}^M c_i \mu(C_i \cap D_j) = \sum_{i = 0}^N \sum_{j = 0}^M d_j \mu(C_i \cap D_j)$, i.e.,
+            $$
+            \sum_{i = 0}^N c_i\mu(C_i) = \sum_{j = 0}^M d_j\mu(D_j).
+            $$
+        \end{proof}
+\end{document}
