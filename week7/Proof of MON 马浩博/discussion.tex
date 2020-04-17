@@ -1,0 +1,116 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Proof of MON}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+  \begin{lemma}
+	Suppose $A$ is a measurable set and $f_k(k\in N)$ is a nondecreasing sequence of non-negative measurable functions on $S$ such that
+	
+	$$\lim _{k}f_{k}(x)\geq 1$$
+	for almost all $x \in A.$ Then
+	
+	$$\lim _{k}\int f_{k}\,d\mu \geq \mu (A)$$
+  \end{lemma}
+\begin{proof}
+	Let's fix $\varepsilon > 0$ and define the sequence of measurable sets
+	
+	$$B_{k}=\{x\in A:f_{k}(x)\geq 1-\varepsilon \}$$
+	
+	By monotonicity of the integral, it follows that for any $k \in N$
+	
+	$$(1-\varepsilon )\mu (B_{k})=\int (1-\varepsilon )1_{B_{k}}\,d\mu \leq \int f_{k}\,d\mu$$
+	
+	Because almost every $x$ is in $B_k$ for large enough $k$, we have
+	
+	$$(\bigcup _{k}B_k) \cup C=A$$
+	with a set $C$ of measure 0. Thus by countable additivity of $\mu$, and because $B_k$ increases with $k$, we have
+	
+	$$\mu (A)=\lim _{k}\mu (B_{k})\leq \lim _{k}(1-\varepsilon )^{-1}\int f_{k}\,d\mu$$
+	
+	As this is true for any positive $\varepsilon$, then the result follows.
+	
+\end{proof}
+
+  \begin{theorem}[Lebesgue monotone-convergence theorem]
+  If $(f_n)$ is a sequence of elements of $(m\Sigma)^+$ such that $f_n \uparrow f$,
+  then
+  $$\mu(f_n)=\mu(f) \leq \infty$$
+  \end{theorem}
+    
+\begin{proof}
+
+By the monotonicity property of the integral, it is immediate that:
+
+$$\displaystyle \int f\,d\mu \geq \lim _{k}\int f_{k}\,d\mu$$
+and the limit on the right exists, because the sequence is monotonic. We now prove the inequality in the other direction. That is,
+$$\int fd\mu \leq \lim _{k}\int f_{k}d\mu$$
+
+It follows from the definition of integral that there is a non-decreasing sequence $(g_n)$ of non-negative simple functions such that $g_n \leq f$ and
+
+$$\displaystyle \lim _{n}\int g_{n}\,d\mu =\int f\,d\mu .$$
+
+Therefore, we just need to prove that for all $n \in N$,
+
+$$\displaystyle \int g_{n}\,d\mu \leq \lim _{k}\int f_{k}\,d\mu$$
+
+We know that
+
+$$\lim _{k}f_{k}(x)\geq g_n(x)$$
+almost everywhere, then we can break up the function $g_n$ into its constant value parts, this reduces to the case in which $g_n$ is the indicator function of a set. So we can use Lemma 1 and get that
+
+$$\lim _{k}\int f_{k}\,d\mu \geq \int g_n\,d\mu$$
+
+This result is for all $n \in N$, so we finish the proof.
+
+\end{proof} 
+
+\end{document}
