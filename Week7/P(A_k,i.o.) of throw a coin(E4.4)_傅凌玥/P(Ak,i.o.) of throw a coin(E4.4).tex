@@ -1,0 +1,52 @@
+\input{/Users/fulingyue/Desktop/def}
+
+\title{$P(A_k,i.o.)$ of Throw a Coin(E4.4)}
+\author{Fu Lingyue}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Throw a coin is a basic problem of probability, but mathematicians are not satisfied with the case where p is equal to $1/2$. In the textbook, the author puts forward a problem as follows.
+\begin{theorem}
+  Suppose that a coin with probability $p$ of heads is tossed repeatedly. Let $A_k$ be the event that a sequence of $k$ (or more) consecutive heads occurs amongst tosses numbered $2^k,2^{k+1},…,2^{k+1}-1$. Prove that
+  \begin{equation}
+  P(A_k,i.o) = 
+    \begin{cases}
+      1, & \text{if } p \geq 1/2,\\
+      0, & \text{otherwise.}
+
+    \end{cases}      
+  \end{equation}
+
+\end{theorem}
+  
+  
+  \begin{proof}
+1) When $p < \frac{1}{2}$, we use BC1 to prove. Let $E_n$ be the event that there are k heads starting from nth toss. Thus
+  $$A_k = \bigcup_{n=2^k}^{2^{k+1}-k}B_n.$$
+  
+In this way, we obtain(by inclusion-exclusion principle)
+$$
+P(A_k) \leq \Sigma_{n=2^k}^{2^{k+1}-k}P(B_n) \leq 2^kp^k.
+$$
+  For $p<1/2$, 
+  $$\Sigma_kP(A_k) \leq \frac{2p}{1-2p} \leq \infty.$$
+  
+  According BC1, we get $P(A_k,i.o.) = 0$ when $p<1/2.$
+   
+2) When $p\geq 1/2$, use BC2 to prove. According to hint, we can firstly let $E^k_i$ be the event that there are $k$ consecutive heads beginning at toss numbered $2^k+(i-1)k$. Then $i$ is between $1$ and $2^k/k$. That is, the beginning of $k$ consecutive heads are $2^k, 2^k + k, \dots ,2^{k} + 2^{k}-k(i.e.,2^{k+1}-k)$. These events $E_i^k$ are independent, and it is clear that 
+   $$\{E_i^k,i.o.\} \Rightarrow \{A^k,i.o.\}.$$
+   
+   For we have 
+   \begin{equation}
+   \begin{aligned}
+    \Sigma_k\Sigma_{i=1}^{2^k/k}P(E_i^k) &\geq \Sigma_k(2^k/k - 1)p^k \\
+    &= \Sigma_k\frac{1}{k}\frac{1}{2}^{k-1} - \frac{p}{1-p}\\
+    &\geq \Sigma_k\frac{1}{k} - \frac{p}{1-p} = +\infty
+   \end{aligned}
+ \end{equation} 
+ 
+   According BC2, we get $P(E_i^k,i.o.) =1$. Thus $P(A_k,i.o.) = 1$ when $p\geq 1/2.$
+  \end{proof}
+\end{document}
