@@ -1,0 +1,71 @@
+\input{def}
+
+\title{Independence of $\pi-$system}
+\author{Fu Lingyue X Tang Ze}
+\date{\today}
+
+\begin{document}
+\maketitle
+In the text book $E4.1$, the author put forward a theorem as follows:
+\section{E4.1 in textbook}
+\begin{theorem}
+  $\mathcal I_1,\mathcal I_2$ and $\mathcal I_3$ are three $\pi$-system that satisfy:
+  
+  (1) $\mathcal I_k\subseteq \mathcal F(k=1,2,3);$
+  
+  (2) $\Omega\in \mathcal I_k(k = 1,2,3).$
+  
+  If 
+  \begin{equation}
+    \forall I_i \in \mathcal I_i,P(I_1 \cap I_2\cap I_3) = P(I_1)P(I_2)P(I_3),
+  \end{equation}
+ then $\sigma(\mathcal I_1), \sigma(\mathcal I_2),\sigma(\mathcal I_3)$ are independent.
+\end{theorem}
+\begin{proof}
+Define $\mathcal J_i := \sigma(\mathcal I_i).$
+  Fix $I_1 \in \mathcal I_1$ and $I_2 \in \mathcal I_2$. Consider maps
+  $$ J_3\mapsto P(I_1\cap I_2\cap J_3) \text{ and }  J_3\mapsto P(I_1)P(I_2)P(J_3),$$
+  
+ then two mapping agree on $\mathcal I_3$. Also when $I_3 = \Omega$ in equation (1), we can conclude that 
+ $$P(I_1\cap I_2) = P(I_1\cap I_2\cap \Omega) = P(I_1)P(I_2)P(\Omega) = P(I_1)P(I_2),$$
+ 
+ which means, two mapping have the same total mass.Thus we can conclude that $P(I_1\cap I_2\cap J_3)=P(I_1)P(I_2)P(J_3)$ holds in the space $(\Omega,\mathcal J_3).$ 
+ 
+ Similarly, we can conclude the conclusion on both $\sigma(\mathcal I_1)$ and $\sigma(\mathcal I_2)$. Therefore, $\sigma(\mathcal I_1), \sigma(\mathcal I_2),\sigma(\mathcal I_3)$ are independent.
+\end{proof}
+
+\paragraph{Question} WHY we need the condition "$\Omega\in \mathcal I_i"$?
+
+\begin{solution}
+  In the lemma 1.6 in the  textbook, one of the premises is that $\mu_1$ and $\mu_2$ has the same mass on $S$. Then this condition guarantees that each pair of mapping in our prove has the same mass.
+\end{solution}
+
+\section{Further Discussion}
+Actually, we can strengthen this theorem:
+	\begin{theorem}
+		$\mathcal I_i(i = 1,2,3\dots,n)$ are independent  $\pi-$system, then $\sigma(\mathcal I_1), \sigma(\mathcal I_2),\dots,\sigma(\mathcal I_n)$ are independent.
+	\end{theorem}
+	\begin{proof}
+		We define $\mathcal J_i := \sigma(\mathcal I_i),\Omega\in \mathcal I_n(k = 1,2,\dots,n).$  
+		
+		(1)For fixed $I_1\in \mathcal I_1, I_2\in \mathcal I_2,\dots, I_{n-1}\in \mathcal I_{n-1}$, consider maps
+		$$J_{n}\mapsto P(I_1\cap I_2\cap \dots\cap I_{n-1}\cap J_{n}) \text{ and } J_{n}\mapsto P(I_1)P(I_2)\dots P(I_{n-1})P(J_{n}),$$
+		
+		with the same mass $P(I_1)P(I_2)\dots P(I_{n-1})$, and agree on $\mathcal I_{n}$. According to Lemma 1.6, they agree on $\sigma(\mathcal I_{n})$, i.e.$\mathcal J_{n}$.
+		
+		(2)For fixed $I_1\in \mathcal I_1, I_2\in \mathcal I_2,\dots, I_{n-2}\in \mathcal I_{n-2},J_{n}\in\mathcal J_{n}$, consider maps
+		$$J_{n-1}\mapsto P(I_1\cap I_2\cap \dots\cap I_{n-2}\cap J_{n-1}\cap J_{n}) \text{ and } I_{n-2}\cap J_{n-1}\mapsto P(I_1)P(I_2)\dots P(I_{n-2})P(J_{n-1})P(J_{n}),$$
+		
+		with the same mass $P(I_1)P(I_2)\dots P(I_{n-2})P(J_{n})$, and agree on $\mathcal I_{n-1}$. According to Lemma 1.6, they agree on $\sigma(\mathcal I_{n-1})$, i.e.$\mathcal J_{n-1}$.
+		
+		\dots
+		
+		(n)For fixed $J_2\in \mathcal J_2, J_3\in \mathcal I_3,\dots, J_{n}\in\mathcal J_{n}$, consider maps
+		$$J_{1}\mapsto P(J_2\cap J_3\cap \dots\cap J_{n}) \text{ and } J_{1}\mapsto P(J_2)P(J_3)\dots P(J_{n}),$$
+		
+		with the same mass $P(J_2)P(J_3)\dots P(J_{n})$, and agree on $\mathcal I_{1}$. According to Lemma 1.6, they agree on $\sigma(\mathcal I_{1})$, i.e.$\mathcal J_{1}$.
+		
+		Then we finish our proof.
+		
+	\end{proof}
+\end{document}
