@@ -1,0 +1,58 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Integrals over subsets}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    In measure space $(S, \Sigma, \mu)$, $A \in \Sigma$. Show that:
+    \begin{enumerate}
+        \item $(A, \Sigma\cap 2^A)$ is a $\sigma $-algebra.
+        \item $\forall f \in (m\Sigma)^+$, 
+            $$\mu_{\Sigma\cap 2^A}(f) = \mu(f\cdot 1_A).$$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}[Proof]
+    ~
+    \begin{enumerate}
+        \item We have:
+            \begin{itemize}
+                \item $A \in \Sigma \implies A \in \Sigma\cap 2^A$.
+                \item $\forall F \in \Sigma \cap 2^A$, let $H = F \cap 2^A \in \Sigma$, then $\Sigma \setminus F = \Sigma\setminus(F \cap 2^A) = (\Sigma \cap 2^A)\setminus F \in \Sigma \implies \Sigma\cap 2^A \in \Sigma\cap 2^A$.
+                \item $\forall (F_i)_{i\in \mathbb{N} }$ where $F_i \in \Sigma \cap 2^A \subseteq \Sigma$. Then $\bigcup_{i} F_i \in \Sigma$, and $\bigcup_{i} F_i \in 2^A$, thus, $\bigcup_{i} F_i \in \Sigma \cap 2^A$.
+            \end{itemize}
+
+            Therefore, $(A, \Sigma\cup 2^A)$ is a $\sigma $-algebra.
+        \item We will show this with the standard machine.
+            \begin{itemize}
+                \item Let $f = 1_B, B \in \Sigma \cap 2^A$. We have $\mu(f \cdot 1_A) = \mu(1_B \cdot 1_A) = \mu(A\cap B)$. Meanwhile, 
+                    $$\mu|_{\Sigma \cap 2^A}(1_B) = \mu|_{\Sigma \cap 2^A}((B\setminus A) \cup (B\cap A)) = \mu|_{\Sigma \cap 2^A}(B\cap A) + 0 = \mu(A \cap B).$$
+
+                    Thus $\mu(f\cdot 1_A) = \mu|_{\Sigma \cap 2^A}(f)$ for all $f = 1_B$.
+
+                \item Then we can let $f \in SF^+$. Let $f = \sum ^n b_i 1_{B_i}$. Then 
+                    \begin{math}
+                        \mu(f\cdot 1_A) = \mu((\sum ^n b_i 1_{B_i})1_A) &= \mu(\sum ^n b_i 1_{B_i \cap A}) \\
+                                                                        &= \sum ^n b_i\mu(1_{B_i \cap A}) \\
+                                                                        &= \sum ^n b_i \mu|_{\Sigma \cap 2^A}(1_{B_i}) =  \mu|_{\Sigma \cap 2^A}(\sum ^n b_i 1_{B_i})
+                    .\end{math}
+                \item Finally we let $f \in (m\Sigma)^+$, $\mu(f) = \sup \{\mu(h): h \in SF^+, h\le f\} $.
+
+                    \begin{math}
+                        \mu(f \cdot 1_A) &= \sup \{\mu(h): h \in SF^+, h \le f\cdot 1_A\} \\
+                                         &= \sup \{\mu(g\cdot 1_A): g \in SF^+, g \cdot 1_A \le f \cdot 1_A\}  \\
+                                         &= \sup \{\mu|_{\Sigma \cap 2^A}(g): g \in SF^+, g \cdot 1_A \le f \cdot 1_A\}  \\
+                                         &= \sup \{\mu|_{\Sigma \cap 2^A}(g): g \in SF^+, g\le f\}  = \mu|_{\Sigma \cap 2^A}(f)
+                    .\end{math}
+            \end{itemize}
+
+            Therefore, for all $f \in (m\Sigma)^+$, the result of integral over a subset is equal to the result of the integral in restricted measure space.
+    \end{enumerate}
+\end{proof}
+
+
+\end{document}
