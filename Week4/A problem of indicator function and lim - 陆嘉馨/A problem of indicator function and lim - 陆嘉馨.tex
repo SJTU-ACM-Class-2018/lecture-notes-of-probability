@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{cite}
+% \usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+% \CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbz}{\mathbb{Z}}
+\newcommand{\mbn}{\mathbb{N}}
+\newcommand{\mbp}{\mathbb{P}}
+\newcommand{\mbh}{\mathbb{H}}
+\newcommand{\mbq}{\mathbb{Q}}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\hp}{^\prime}
+\newcommand{\mca}{\mathcal{A}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcr}{\mathcal{R}}
+\newcommand{\mcf}{\mathcal{F}}
+\newcommand{\mfa}{\mathfrak{A}}
+\newcommand{\mfb}{\mathfrak{B}}
+\newcommand{\mfc}{\mathfrak{C}}
+\newcommand{\mfi}{\mathfrak{I}}
+\newcommand{\Iff}{\mbox{iff }}
+\newcommand{\AND}{\mbox{ and }}
+
+\title{A Problem of Indicator Function and $\lim$}
+\author{Lu Jiaxin\\
+Student ID: 518030910412}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+\begin{tcolorbox}
+
+\begin{definition}[\bf Indicator Function]
+    The indicator function of a subset $A$ of a set $X$ is a function
+    $$
+    1_A : X \rightarrow \{0, 1\}
+    $$
+    defined as
+    $$
+    1_A (x) := \left\{
+        \begin{aligned}
+            1 & \mbox{ if } x \in A, \\
+            0 & \mbox{ if } x \notin A.\\
+        \end{aligned}
+        \right.
+    $$
+\end{definition}
+\begin{exercise}
+    Show that 
+    \begin{align}
+        \limsup_{n\to \infty} 1_{E_n} &= 1_{\limsup_{n\to\infty} E_n}\\
+        \liminf_{n\to \infty} 1_{E_n} &= 1_{\liminf_{n\to\infty} E_n}
+    \end{align}
+    % $$\limsup_{n\to \infty} 1_{E_n} = 1_{\limsup_{n\to\infty} E_n}$$
+    % and 
+    % $$\liminf{n\to \infty} 1_{E_n} = 1_{\liminf_{n\to\infty} E_n}$$.
+\end{exercise}
+
+\end{tcolorbox}
+
+\begin{proof}
+    (1) By definition $\limsup E_n = \bigcap{m\in\mbn} \bigcup{l\geq m} E_l$. In other words, $x\in \limsup E_n$ if and only if for all $m\in\mbn$ such that $x\in E_l$ for some $l\geq m$.
+
+    Thus $1_{\limsup_{n\to\infty} E_n} (x) = 1$ if and only if for all $m\in\mbn$ such that for some $l \geq m$ we have $x\in E_l$.
+
+    Now consider a sequence of $(x_n \mid n\in\mbn)$ of real numbers $x_n$. By definition, we have $\limsup_{n\to\infty} x_n = \inf_{m\in\mbn}\sup_{l\geq m} x_l$. So $\limsup_{n\to\infty}1_{E_n}(x) = 1$ if and only if for all $m\in\mbn$ such that there is some $l\geq m$ we have that $\sup_{l\geq m}1_{E_n}(x) = 1$. This also holds if and only if for all $m\in\mbn$ such that there is some $l \geq m$ we have that $x\in E_l$.
+
+    By these, we have $1_{\limsup_{n\to\infty}E_n}(x) = 1$ if and only if $\limsup_{n\to\infty} 1_{E_n}(x) = 1$. And these also yields $1_{\limsup_{n\to\infty}E_n}(x) = 0$ if and only if $\limsup_{n\to\infty} 1_{E_n}(x) = 0$ and consequently $1_{\limsup_{n\to\infty}E_n}(x) = \limsup_{n\to\infty} 1_{E_n}(x)$.
+
+    Thus, $\limsup_{n\to \infty} 1_{E_n} = 1_{\limsup_{n\to\infty} E_n}$ holds.\\
+
+    (2) By definition $\liminf E_n = \bigcup_{m\in\mbn} \bigcap_{l\geq m} E_l$. In other words, $x\in \liminf E_n$ if and only if there is an $m\in\mbn$ such that $x\in E_l$ for all $l\geq m$.
+
+    Thus, $1_{\liminf_{n\to\infty} E_n} (x) = 1$ if and only if there is some $m\in\mbn$ such that for all $l\geq m$ we have $x\in E_l$.
+
+    Also, from (1) we can have $\liminf_{n\to\infty} x_n = \sup_{m\in\mbn}\inf_{l\geq m} x_l$. So $\liminf_{n\to\infty}1_{E_n}(x) = 1$ if and only if there is some $m\in\mbn$ such that for all $l\geq m$ we have that $\inf_{l\geq m}1_{E_n}(x) = 1$. This also holds if and only if there is some $m \in \mbn$ such that for all $l\geq m$ we have that $x\in E_l$.
+
+    By these, we have $1_{\liminf_{n\to\infty}E_n}(x) = 1$ if and only if $\liminf_{n\to\infty} 1_{E_n}(x) = 1$. And these also yields $1_{\liminf_{n\to\infty}E_n}(x) = 0$ if and only if $\liminf_{n\to\infty} 1_{E_n}(x) = 0$ and consequently $1_{\liminf_{n\to\infty}E_n}(x) = \liminf_{n\to\infty} 1_{E_n}(x)$.
+
+    Thus, $\liminf_{n\to \infty} 1_{E_n} = 1_{\liminf_{n\to\infty} E_n}$ holds.
+
+\end{proof}
+
+
+\end{document}
