@@ -1,7 +1,53 @@
-\input{def}
+\documentclass[12pt]{article}
+\usepackage[usenames]{color} %pour la couleur
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %utile pour taper directement les caractères accentués
+
+\usepackage[margin=1in]{geometry}
+\usepackage{
+    color,
+    clrscode,
+    amssymb,
+    amsmath,
+    listings,
+    xcolor,
+    multirow,
+    mathtools,
+    mathrsfs,
+    amsthm,
+    systeme,
+    amsfonts,
+    chngcntr,
+    subcaption,
+    adjustbox,
+    tikz-cd
+}
+\usepackage[
+    colorlinks,
+    linkcolor=red
+]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+
+
+
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+  
+\newcommand{\vep}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\hp}{^\prime}
 
 \title{Independence of $\pi-$system}
-\author{Fu Lingyue X Tang Ze}
+\author{Fu Lingyue, Tang Ze}
 \date{\today}
 
 \begin{document}
