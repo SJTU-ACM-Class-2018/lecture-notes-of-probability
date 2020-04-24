@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+%\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\N{\mathbb{N}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\bb{\mathcal{B}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\nn{\mathcal{N}}
+\newcommand\LL{\mathcal{L}^1(S,\Sigma,\mu)}
+\newcommand\one{\bm{1}}
+\newcommand\eps{\varepsilon}
+\newcommand\pr[1]{\mathcal{P} \left( #1\right)}
+\DeclareMathOperator{\leb}{Leb}   
+\DeclareMathOperator{\diff}{d}   
+
+\title{More to say on Scheffe's Lemma}
+\author{Xinyu Mao}
+\date{\today}
+\begin{document}
+\maketitle
+Scheffe's Lemma is proved in our textbook(see section 5.10):
+\begin{lemma}[Scheffe] \label{scheffe}
+    Suppose that $f_n, f \in \LL$ and $f_n \to f_n$ (a.e.), then
+    $$
+        \mu(|f_n|) \to \mu(|f|) \iff \mu(|f_n - f|) \to 0.
+    $$
+\end{lemma}
+
+Actually, we can get a more accurate result:
+\begin{theorem} \label{main}
+    Suppose that $f_n, f \in \LL^+$ and $f_n \to f_n$ (a.e.), then
+    $$
+        \mu(f_n) - \mu(f) - \mu(|f_n - f|) \to 0, \text{ as $n \to \infty $}.
+    $$
+\end{theorem}
+\begin{proof}
+    Let $g_n := \min(f_n,f), h_n := \max(f_n,f)$. 
+    Clearly, $g_n,h_n \in \LL^+$.
+    Since $|f - f_n| = h_n - g_n, f_n = h_n + g_n - f$, we have
+    \begin{equation} \label{eq1}
+        \begin{aligned}
+            \mu(f_n) - \mu(f) - \mu(|f_n - f|) 
+            &=\mu(h_n + g_n - f) - \mu(f)  - \mu(h_n - g_n) \\
+            &= 2[\mu(g_n) - \mu(f)].
+        \end{aligned}
+    \end{equation}
+    Note that $g_n \leq f, g_n \to f$,  
+    and thus $\mu(g_n) \to \mu(f)$ by DOM, that is, $\mu(g_n) - \mu(f) \to 0$.
+    On plugging this into \cref{eq1} we get what we set out to prove.
+\end{proof}
+
+Of course we also have the second part:
+\begin{theorem}
+    Suppose that $f_n, f \in \LL$ and $f_n \to f_n$ (a.e.), then
+    $$
+        \mu(|f_n|) - \mu(|f|) - \mu(|f_n - f|) \to 0, \text{ as $n \to \infty $}.
+    $$
+\end{theorem}
+\begin{proof}
+    Applying \cref{main} to $|f_n|,|f|$ yields
+    \begin{equation}\label{lowerbound}
+        \mu(|f_n|) - \mu(|f|) - \mu(||f_n| - |f||) \to 0.
+    \end{equation}
+    Note that $f_n^+ \to f^+, f_n^- \to f^-$, and by \cref{main}
+    \begin{equation} \label{part}
+        \mu(f_n^\pm) - \mu(f^\pm) - \mu(|f_n^\pm - f^\pm|) \to 0.
+    \end{equation}
+    Rewrite $|f|, |f_n|$ as $f^+ + f^-$ and $f_n^+ + f_n^-$, and by \cref{part} we have 
+    \begin{equation} \label{upperbound}
+        \mu(|f_n|) - \mu(|f|) - [\mu(|f_n^+ - f^+) + \mu(|f_n^- - f^-|)] \to 0.
+    \end{equation}
+    Since $||f_n| - |f|| \leq |f_n - f| \leq |f_n^+ - f^+| + |f_n^- - f^-|$, 
+    and the theorem follows from \cref{lowerbound} and \cref{upperbound}.
+\end{proof}
+
+\begin{remark}
+    \cref{scheffe} immediately follows from the theorem above.
+    Informally, the theorem says some mass is missing when taking limit 
+    and the loss (i.e. difference between $\mu(\lim_{n \to \infty}f_n)$ 
+    and $\lim_{n \to \infty} \mu(f_n)$) can be measured by $\lim_{n \to \infty} \mu(|f - f_n|)$.
+    I learned about \cref{main} while glancing over \cite{tao2011introduction}(see Exercise 1.4.48).
+\end{remark}
+
+\bibliographystyle{unsrt}
+\bibliography{ref.bib}
+\end{document}
