@@ -55,7 +55,7 @@
 \maketitle
 Scheffe's Lemma is proved in our textbook(see section 5.10):
 \begin{lemma}[Scheffe] \label{scheffe}
-    Suppose that $f_n, f \in \LL$ and $f_n \to f_n$ (a.e.), then
+    Suppose that $f_n, f \in \LL$ and $f_n \to f$ (a.e.), then
     $$
         \mu(|f_n|) \to \mu(|f|) \iff \mu(|f_n - f|) \to 0.
     $$
@@ -63,7 +63,7 @@ Scheffe's Lemma is proved in our textbook(see section 5.10):
 
 Actually, we can get a more accurate result:
 \begin{theorem} \label{main}
-    Suppose that $f_n, f \in \LL^+$ and $f_n \to f_n$ (a.e.), then
+    Suppose that $f_n, f \in \LL^+$ and $f_n \to f$ (a.e.), then
     $$
         \mu(f_n) - \mu(f) - \mu(|f_n - f|) \to 0, \text{ as $n \to \infty $}.
     $$
@@ -86,7 +86,7 @@ Actually, we can get a more accurate result:
 
 Of course we also have the second part:
 \begin{theorem}
-    Suppose that $f_n, f \in \LL$ and $f_n \to f_n$ (a.e.), then
+    Suppose that $f_n, f \in \LL$ and $f_n \to f$ (a.e.), then
     $$
         \mu(|f_n|) - \mu(|f|) - \mu(|f_n - f|) \to 0, \text{ as $n \to \infty $}.
     $$
@@ -105,7 +105,7 @@ Of course we also have the second part:
         \mu(|f_n|) - \mu(|f|) - [\mu(|f_n^+ - f^+) + \mu(|f_n^- - f^-|)] \to 0.
     \end{equation}
     Since $||f_n| - |f|| \leq |f_n - f| \leq |f_n^+ - f^+| + |f_n^- - f^-|$, 
-    and the theorem follows from \cref{lowerbound} and \cref{upperbound}.
+    the theorem follows from \cref{lowerbound} and \cref{upperbound}.
 \end{proof}
 
 \begin{remark}
