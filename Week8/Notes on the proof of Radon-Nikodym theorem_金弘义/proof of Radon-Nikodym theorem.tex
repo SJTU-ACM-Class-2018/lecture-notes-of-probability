@@ -1,0 +1,166 @@
+%! Author = jinho
+%! Date = 4/23/2020
+\documentclass[a4paper, linespread=1.5]{article}
+%\usepackage[UTF8]{ctex}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{ifplatform}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{ulem}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{2em}
+%\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{innercustom}{\customname}
+\providecommand{\customname}{}
+\newcommand{\newcustomtheorem}[2]{
+    \newenvironment{#1}[1]
+    {
+        \renewcommand\customname{#2}
+        \renewcommand\theinnercustom{##1}
+        \innercustom
+    }
+    {\endinnercustom}
+}
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customprop}{Proposition}
+\newcustomtheorem{customlemma}{Lemma}
+\newcustomtheorem{customcorollary}{Corollary}
+\newcustomtheorem{customdef}{Definition}
+\newcustomtheorem{customex}{Exercise}
+\newcustomtheorem{customremark}{Remark}
+
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\addbigcup}{\bigcup{\kern-1.12em{+}}\kern0.3em}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+% Document
+\begin{document}
+    \title{ Proof of Radon-Nikodym theorem}
+    \author{金弘义\ 518030910333}
+    \date{\today}
+    \maketitle
+    \begin{customthm}{}
+        If $\mu$ and $\lambda$ are $\sigma$-finite measures on $(S,\Sigma)$ such that for all $F\in\Sigma$ with $\mu(F)=0$, $\lambda(F)=0$, then $\lambda=f\mu$ for some $f\in(m\Sigma)^{+}$.
+    \end{customthm}
+    \begin{proof}
+        Let's first consider a simplified version of Radon–Nikodym theorem:
+        Let $\mu$ and $\lambda$ be finite measures on $(S,\Sigma)$ such that for all $F\in\Sigma$ with $\mu(F)=0$, $\lambda(F)=0$, then there exists a $\mu$-nullset $D$ and $f\in(m\Sigma)^{+}$ such that $\lambda(A)=\lambda(A\cap D)+f\mu(A)$ for all $A\in\Sigma$.
+
+        Let $H=\{h\in(m\Sigma)^{+}:h\mu(A)\le\lambda(A)\text{for all }A\in\Sigma \}$.
+        Then $H\ne \emptyset$, because it contains at least the zero function.
+        Now suppose $h_1,h_2\in H$.
+        Let $A_1=\{x\in A:h_1(x)\le h_2(x)\}$, $A_2=\{x\in A:h_1(x)> h_2(x)\}$.
+        Then
+        \begin{align*}
+            \max \{h_1,h_2\}\mu(A)&=\int_{S}\max \{h_1,h_2\}1_{A}d\mu\\
+                                    &=\int_{S}\max \{h_1,h_2\}1_{A_1}d\mu+\int_{S}\max \{h_1,h_2\}1_{A_2}d\mu \\
+                                    &=\int_{S}h_{2}1_{A_1}d\mu+\int_{S}h_{1}1_{A_2}d\mu \\
+                                    &=h_{2}\mu(A_{1})+h_{1}\mu(A_{2}) \\
+                                    &<\lambda(A_{1})+\lambda(A_{2}) \\
+                                    &=\lambda(A)
+        \end{align*}
+        So $\max{h_1,h_2}\in H$.
+
+        Now let $h_n$ be a sequence such that $\lim\limits_{n\to\infty}h_n\mu(A)=\sup\limits_{h\in H} h\mu(A)$.
+        Since $H$ is closed by taking the maximum, we can simply replace $h_n$ by $\max\limits_{i=1}^{n}h_i$, and this makes $h_n$ an increasing sequnece.
+        Assume $h_n\uparrow f$, then we have $h_n\mu(A)\uparrow f\mu(A)$ by MON.
+        So $f\mu(A)=\sup\limits_{h\in H} h\mu(A)\le \lambda(A)$.
+
+        Let $\tau(A)=\lambda(A)-f\mu(A)$.
+        It's obviously a non-negative function.
+        Define $\epsilon_n=\{E\in\Sigma:\mu(E)>n\tau(E)\}$.
+
+        \textbf{Claim 1.} There exists a countable disjoiont subfamily $F_n$ of $\epsilon_n$ such that $S\setminus \bigcup\limits_{F\in F_n}F$ does not contain any member of $\epsilon_n$.
+
+        \textbf{Proof.} By Zorn's lemma, we know there's a maximal element in disjoint subfamilies of $\epsilon_n$.
+        Let $F_n$ be such a subfamily.
+        If $S\setminus\bigcup\limits_{F\in F_n}F_n$ contains $\epsilon\in\epsilon_n$, then we can enlarge $F_n$ to be $F_n \cup \epsilon$, because $\epsilon$ is disjoint with all members in $F_n$.
+        This violates that $F_n$ is the maximal element.
+        So $S\setminus \bigcup\limits_{F\in F_n}F$ does not contain any member of $\epsilon_n$.
+
+        Since $\mu(S)<\infty$ and $\bigcup\limits_{F\in F_n}F \subseteq S$, we can know that $\forall k\in\mathbb{N} ,B_k:=\{F\in F_n:\mu(F)>\frac{1}{k}\}$ has finite elements.
+        $F_n=\{F\in F_n:\mu(F)>0\}=\bigcup_{k=1}^{\infty}B_k$, which means that $F_n$ is countable.
+
+        \textbf{Claim 2.} Let $D=\bigcup\limits_{n=1}^{\infty}(S\setminus E_n)$, where $E_n=\bigcup\limits_{F\in F_n}F$.
+        Then  $\tau(S\setminus D)=0$.
+
+        \textbf{Proof.}Using the $\sigma$-additivity, we know that $E_n\in\epsilon_n$.
+        \begin{align*}
+            \tau(S\setminus D)&\le \tau(E_n)   &(S\setminus D\subseteq E_n)\\
+                              &<\frac{\mu(E_n)}{n} &(E_n\in\epsilon_n)\\
+                              &\le \frac{\mu(S)}{n}\to 0&(\mu(S)<\infty)
+        \end{align*}
+
+        \textbf{Claim 3.} $\mu(D)=0$
+
+        \textbf{Proof.} It suffices to show that $\mu(S\setminus E_n)=0$.
+        Let $B=S\setminus E_n$.
+        If $\mu(B)>0$, then $(f+\frac{1_B}{n})\mu(S)=f\mu(S)+\frac{\mu(B)}{n}>f\mu(S)=\sup\limits_{h\in H} h\mu(S)$.
+        So $f+\frac{1_B}{n}\notin H$.
+        This means that $\exists A\in\Sigma,(f+\frac{1_B}{n})\mu(A)=f\mu(A)+\frac{\mu(A\cap B)}{n}>\lambda\mu(S) $.
+        Now we have $\mu(A\cap B) > n(\lambda(A)-f\mu(A))=n\tau(A)\ge n\tau(A\cap B)$.
+        So $A\cap B\in\epsilon_n$, which violates claim 1.
+        This finishes the proof of claim 3.
+
+        Finally, we gather the 3 claims together,
+        \begin{align*}
+            \tau(A)&=\tau(A\cap D)+\tau(A\setminus D) \\
+                   &=\tau(A\cap D)&(\text{by claim 2})\\
+                   &=\lambda(A\cap D)-f\mu(A\cap D)\\
+                   &=\lambda(A\cap D) &(f 1_{A\cap D}=0 \text{ a.e. by claim 3})
+        \end{align*}
+        Now we apply this simplified version: Since $\mu(D)=0$, then $\lambda(D)=0$, $\lambda(A\cap D)=0$.
+        So $\lambda(A)=\lambda(A\cap D)+f\mu(A)=f\mu(A)$.
+
+        Since now we have proved that if $\mu$ and $\lambda$ are finite measures on $(S,\Sigma)$ such that for all $F\in\Sigma$ with $\mu(F)=0$, $\lambda(F)=0$, then $\lambda=f\mu$ for some $f\in(m\Sigma)^{+}$.
+        Then we extend it to $\sigma$-finite measures.
+
+        Suppose $\mu,\lambda$ is $\sigma$-finite.
+        Then there exists a sequence $(A_n)\in\Sigma$ such that $\mu(A_n)<\infty$ and $\bigcup A_n=S$ and a sequence $(B_n)\in\Sigma$ such that $\lambda(B_n)<\infty$ and $\bigcup B_n=S$.
+        \begin{align*}
+            A_i=A_i \cap S &=A_i \cap \bigcup\limits_{j} B_j =\bigcup\limits_{j}A_i \cap B_j\\
+            S&=\bigcup\limits_{i} A_i=\bigcup\limits_{i,j}A_i\cap B_j
+        \end{align*}
+        Let $S_{i,j}=A_i \cap B_j$.
+        Then $S_{i,j}$ is a collection of disjoint sets whose union is $S$ and have finite measures under both $\mu$ and $\lambda$.
+        For each $S_{i,j}$, there is a $f_{i,j}\in(m\Sigma)^{+}$ such that $\lambda(A)=f_{i,j}\mu(A)$ for all $A\subseteq S_{i,j}$.
+        Let $f(x)=f_{i,j}(x)$ if $x\in S_{i,j}$ .
+        \begin{align*}
+            \lambda(A)&=\sum\limits_{i,j}\lambda(A\cap S_{i,j}) \\
+                    &=\sum\limits_{i,j}f_{i,j}\mu(A\cap S_{i,j}) \\
+                    &=\sum\limits_{i,j}f\mu(A\cap S_{i,j}) \\
+                    &=f\mu(A)
+        \end{align*}
+        This finishes the proof.
+
+    \end{proof}
+\end{document}
