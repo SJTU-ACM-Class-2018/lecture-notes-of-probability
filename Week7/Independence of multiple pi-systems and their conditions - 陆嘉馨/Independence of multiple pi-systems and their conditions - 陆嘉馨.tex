@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{cite}
+% \usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+% \CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbz}{\mathbb{Z}}
+\newcommand{\mbn}{\mathbb{N}}
+\newcommand{\mbp}{\mathbb{P}}
+\newcommand{\mbh}{\mathbb{H}}
+\newcommand{\mbq}{\mathbb{Q}}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\hp}{^\prime}
+\newcommand{\mca}{\mathcal{A}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcr}{\mathcal{R}}
+\newcommand{\mcf}{\mathcal{F}}
+\newcommand{\mcg}{\mathcal{G}}
+\newcommand{\mch}{\mathcal{H}}
+\newcommand{\mci}{\mathcal{I}}
+\newcommand{\mcj}{\mathcal{J}}
+\newcommand{\mcp}{\mathcal{P}}
+\newcommand{\mfa}{\mathfrak{A}}
+\newcommand{\mfb}{\mathfrak{B}}
+\newcommand{\mfc}{\mathfrak{C}}
+\newcommand{\mfi}{\mathfrak{I}}
+\newcommand{\mfp}{\mathfrak{P}}
+\newcommand{\Iff}{\mbox{iff }}
+\newcommand{\AND}{\mbox{ and }}
+
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{Independence of multiple $\pi$-systems and their conditions}
+\author{Lu Jiaxin\\
+Student ID: 518030910412}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+Here is an lemma in \textit{Probability with Martingales}.
+
+This lemma shows us the independence of two $\pi$-systems and its approach of proof is also used below.
+
+\begin{tcolorbox}
+\begin{lemma}[LEMMA 4.2(a)]\label{lemma4.2}
+    Suppose that $\mcg$ and $\mch$ are sub-$\sigma$-algebras of $\mcf$ and that $\mci$ and $\mcj$ are $\pi$-systems with
+    \[
+        \sigma(\mci) = \mcg, \quad \sigma(\mcj) = \mch
+    \]
+    Then $\mcg$ and $\mch$ are independent if and only if $\mci$ and $\mcj$ are independent in that
+    \[
+        P(I\cap J) = P(I) P(J), \quad I\in\mci, J\in\mcj.        
+    \]
+\end{lemma}
+\end{tcolorbox}
+
+\begin{proof}
+    Suppose that $\mci$ and $\mcj$ are independent. For fixed $I$ in $\mci$,
+    \[
+        H\mapsto P(I\cap H) \AND H\mapsto P(I)P(H)
+    \]
+    are measures(since they are maps $\mcf \to [0, \infty]$ on $(\Omega, \mcf)$ and by definition they are measures) on $(\Omega, \mch)$ have the same total mass $P(I)$, and agree on $\mcj$. By the uniqueness of extension(see in the same book \textbf{Lemma 1.6}), they therefore agree on $\sigma(\mcj) = \mch$. Hence,
+    \[
+        P(I\cap H) = P(I) P(H), \quad I\in\mci, H\in\mch.
+    \]
+    
+    Thus, for fixed $H$ in $\mch$, the measures
+    \[
+        G\mapsto P(G\cap H) \AND G\mapsto P(G)P(H)
+    \]
+    on $(\Omega, \mcg)$ have the same total mass $P(H)$, and agree on $\mci$. They therefore agree on $\sigma(\mci) = \mcg$.
+    
+    Thus we finish our proof.
+\end{proof}
+
+
+Now consider the case where there are three $\pi$-systems. This is the case in \textbf{Exercise 4.1}.
+
+This exercise requires us to prove the independence of three $\pi$-systems. We can prove it with the approach above. But we'll have to face a problem that to complete the proof, we must add a condition.
+
+I'll explain the reason in the remark below.
+
+\begin{tcolorbox}
+\begin{exercise}[E4.1]\label{E4.1}
+    Let $(\Omega, \mcf, P)$ be a probability triple. Let $\mci_1, \mci_2 and \mci_3$ be three $\pi$-systems on $\Omega$ such that, for $k=1,2,3,$
+    \begin{align*}
+        \mci_k \subseteq \mcf \\
+    \end{align*}
+    and
+    \begin{align*} \label{cond1}
+        \Omega \in \mci_k
+    \end{align*}
+    Prove that if
+    \[
+        P(I_1 \cap I_2 \cap I_3) = P(I_1) P(I_2) P(I_3)
+    \]
+    whenever $I_k\in \mci_k \, (k = 1,2,3)$ then $\sigma(\mci_1), \sigma(\mci_2), \sigma(\mci_3)$ are independent.
+\end{exercise}
+\end{tcolorbox}
+
+\begin{proof}
+    Let $\sigma(\mci_3) = \mcj_3$. Fix $I_1 \in \mci_1$ and $I_2 \in \mci_2$. Consider the maps
+    \[
+        J_3 \mapsto P(I_1\cap I_2 \cap J_3) \AND J_3\mapsto P(I_1)P(I_2)P(I_3),
+    \]
+    for $J_3 \in \sigma(\mci_3)$. We can verify that these are measures on the measure space $(\Omega, \sigma(\mci_3))$.
+
+    Note that since $\Omega \in \mci_3$, we derive
+    \begin{align}\label{eq2}
+        P(I_1 \cap I_2) = P(I_1 \cap I_2 \cap \Omega) = P(I_1) P(I_2) P(\Omega) = P(I_1) P(I_2),        
+    \end{align}
+    so these measures both have a total mass of 
+    \[
+        P(I_1 \cap I_2) \AND P(I_1)P(I_2),
+    \]
+    which are exactly the same, and agree on $\mci_3$.
+
+    By the uniqueness of extension(see in the same book \textbf{Lemma 1.6}), they therefore agree on $\sigma(\mci_3) = \mcj_3$.
+    Using this approach on $k = 1,2$ we naturally have $\sigma(\mci_1), \sigma(\mci_2), \sigma(\mci_3)$ are independent.
+\end{proof}
+
+\begin{remark}
+    Although the approachs used in both proofs look the exactly the same, the conditions of two statements are different.
+    
+    \cref{E4.1} requires the condition $\Omega \in \mci_k$ while \cref{lemma4.2} doesn't. Here's my thought.
+    
+    In the proof of \cref{lemma4.2}, the sentence \textit{'have the same total mass $P(I)$'} comes naturally since when there are two $\pi$-systems,
+    \[
+        P(I \cap \Omega) = P(I)P(\Omega)
+    \]
+    holds vacuously. So including the hypothesis would be unnecessary.
+    
+    While in the proof of \cref{E4.1}, we have to use \cref{eq2} to prove that
+    \[
+        P(I_1 \cap I_2) = P(I_1) P(I_2)
+    \]
+    under the condition $\Omega \in \mci_k$. Because if $\Omega \notin \mci_k$, we can't derive $P(I_1 \cap I_2) = P(I_1) P(I_2)$ from $P(I_1 \cap I_2 \cap I_3) = P(I_1) P(I_2) P(I_3)$.
+    
+    This condition is also required if we want to extend this theorem to arbitary $n\in \mbn (n \geq 3)$ $\pi$-systems. Otherwise, we won't be able to apply the uniqueness of extension(see in the same book \textbf{Lemma 1.6}) to verify two measures we create agree on $\sigma(\mci_k)$.
+    
+\end{remark}
+\end{document}
