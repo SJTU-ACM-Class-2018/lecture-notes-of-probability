@@ -7,23 +7,9 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{graphicx}
-\usepackage{keyval}
-\usepackage[dvipsnames,svgnames,x11names]{xcolor}
-\usepackage{float}
-\usepackage{ifthen}
-\usepackage{calc}
-\usepackage{ifplatform}
-\usepackage{fancyvrb}
-\usepackage{minted}
 \usepackage{hyperref}
 \usepackage{enumerate}
-\usepackage{multicol}
-\usepackage[all]{xy}
-\usepackage{ulem}
-\usepackage{epstopdf}
 \usepackage{mathrsfs}
-\usepackage{cancel}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{amsfonts}
@@ -31,6 +17,9 @@
 \setlength{\parindent}{2em}
 %\geometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}
 
+\newcommand\ee{\mathcal{E}}
+\newcommand\dd{\mathcal{D}}
+\newcommand\ff{\mathcal{F}}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -97,26 +86,31 @@
 
         Let $\tau(A)=\lambda(A)-f\mu(A)$.
         It's obviously a non-negative function.
-        Define $\epsilon_n=\{E\in\Sigma:\mu(E)>n\tau(E)\}$.
+        Define $\ee_n=\{E\in\Sigma:\mu(E)>n\tau(E)\}$.
 
-        \textbf{Claim 1.} There exists a countable disjoiont subfamily $F_n$ of $\epsilon_n$ such that $S\setminus \bigcup\limits_{F\in F_n}F$ does not contain any member of $\epsilon_n$.
+        \textbf{Claim 1.} There exists a countable disjoiont subfamily $\ff_n$ of $\ee_n$ 
+        such that $S\setminus \bigcup\limits_{F\in \ff_n} F$ does not contain any member of $\ee_n$.
 
-        \textbf{Proof.} By Zorn's lemma, we know there's a maximal element in disjoint subfamilies of $\epsilon_n$.
-        Let $F_n$ be such a subfamily.
-        If $S\setminus\bigcup\limits_{F\in F_n}F_n$ contains $\epsilon\in\epsilon_n$, then we can enlarge $F_n$ to be $F_n \cup \epsilon$, because $\epsilon$ is disjoint with all members in $F_n$.
-        This violates that $F_n$ is the maximal element.
-        So $S\setminus \bigcup\limits_{F\in F_n}F$ does not contain any member of $\epsilon_n$.
+        \textbf{Proof.} By Zorn's lemma, we know there's a maximal element in disjoint subfamilies of $\ee_n$.
+        Let $\ff_n$ be such a subfamily.
+        If $S\setminus\bigcup\limits_{F\in \ff_n}F$ contains $E \in\ee_n$,
+         then we can enlarge $\ff_n$ to be $\ff_n \cup \{E\}$,
+        because $E$ is disjoint with all members in $\ff_n$.
+        This violates that $\ff_n$ is the maximal element.
+        So $S\setminus \bigcup\limits_{F\in \ff_n}F$ does not contain any member of $\ee_n$.
 
-        Since $\mu(S)<\infty$ and $\bigcup\limits_{F\in F_n}F \subseteq S$, we can know that $\forall k\in\mathbb{N} ,B_k:=\{F\in F_n:\mu(F)>\frac{1}{k}\}$ has finite elements.
-        $F_n=\{F\in F_n:\mu(F)>0\}=\bigcup_{k=1}^{\infty}B_k$, which means that $F_n$ is countable.
+        Since $\mu(S)<\infty$ and $\bigcup\limits_{F\in \ff_n}F \subseteq S$, 
+        we can know that $\forall k\in\mathbb{N} ,B_k:=\{F\in \ff_n:\mu(F)>\frac{1}{k}\}$ has finite elements.
+        $\ff_n=\{F\in \ff_n:\mu(F)>0\}=\bigcup_{k=1}^{\infty}B_k$, which means that $\ff_n$ is at most countable.
 
-        \textbf{Claim 2.} Let $D=\bigcup\limits_{n=1}^{\infty}(S\setminus E_n)$, where $E_n=\bigcup\limits_{F\in F_n}F$.
+        \textbf{Claim 2.} Let $D=\bigcup\limits_{n=1}^{\infty}(S\setminus E_n)$, 
+        where $E_n=\bigcup\limits_{F\in \ff_n}F$.
         Then  $\tau(S\setminus D)=0$.
 
-        \textbf{Proof.}Using the $\sigma$-additivity, we know that $E_n\in\epsilon_n$.
+        \textbf{Proof.}Using the $\sigma$-additivity, we know that $E_n\in\ee_n$.
         \begin{align*}
             \tau(S\setminus D)&\le \tau(E_n)   &(S\setminus D\subseteq E_n)\\
-                              &<\frac{\mu(E_n)}{n} &(E_n\in\epsilon_n)\\
+                              &<\frac{\mu(E_n)}{n} &(E_n\in\ee_n)\\
                               &\le \frac{\mu(S)}{n}\to 0&(\mu(S)<\infty)
         \end{align*}
 
@@ -126,9 +120,9 @@
         Let $B=S\setminus E_n$.
         If $\mu(B)>0$, then $(f+\frac{1_B}{n})\mu(S)=f\mu(S)+\frac{\mu(B)}{n}>f\mu(S)=\sup\limits_{h\in H} h\mu(S)$.
         So $f+\frac{1_B}{n}\notin H$.
-        This means that $\exists A\in\Sigma,(f+\frac{1_B}{n})\mu(A)=f\mu(A)+\frac{\mu(A\cap B)}{n}>\lambda\mu(S) $.
-        Now we have $\mu(A\cap B) > n(\lambda(A)-f\mu(A))=n\tau(A)\ge n\tau(A\cap B)$.
-        So $A\cap B\in\epsilon_n$, which violates claim 1.
+        This means that $\exists A\in\Sigma,(f+\frac{1_B}{n})\mu(A)=f\mu(A)+\frac{\mu(A\cap B)}{n}>\lambda(A) $.
+        Now we have $\mu(A\cap B) = 1_{B}\mu(A) > n(\lambda(A)-f\mu(A))=n\tau(A)\ge n\tau(A\cap B)$.
+        So $A\cap B\in\ee_n$, which violates claim 1.
         This finishes the proof of claim 3.
 
         Finally, we gather the 3 claims together,
