@@ -1,0 +1,77 @@
+% This is a template for lecture notes.
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newenvironment{myproof}{\ignorespaces\paragraph{Proof:}}{\hfill $\square$\par\noindent}
+%this is how we define operators.
+\DeclareMathOperator{\rank}{rank} % rank
+
+\title{DOM's dominating function is necessary}
+\author{李孜睿 518030910424}
+\date{\today}
+
+
+\begin{document}
+	\maketitle
+	\begin{tcolorbox}
+	\begin{theorem}
+	\text{DOM(Lebesgue's Dominated Convergence Theorem)}
+	\end{theorem}
+	
+	$f_n \rightarrow f(\text{a.e.})$  and $|f_n(s)|\leq g(s),\forall s\in S,\forall n\in\mathbb{N}$, $\mu(g)<\infty$ $\Rightarrow$ $\mu(|f_n-f|)\rightarrow 0$ which also implies $\mu(f_n)\rightarrow\mu(f)$.
+	\end{tcolorbox}
+	
+	
+	
+	I will prove the necessity of the dominating function $g\in\mathcal{L}^1(S,\Sigma,\mu)$ by giving a counterexample.
+	
+	
+	
+	Assume $S=(0, 1]$,  $\Sigma=\mathcal{B}(S)$, and $\mu=\text{Leb}(S)$. Define $f=0$ and
+	
+	$$
+	f_n(s)=\left\{
+	\begin{array}{lr}
+	n, s\in(0,\frac1n]\\
+	0, s\in(\frac1n,1]
+	\end{array}
+	\right.
+	$$
+	
+	Clearly, $f_n\rightarrow f(\text{a.e.})$. But $\mu(|f_n-f|)=n\times\mu((0,\frac1n])=1\Rightarrow\mu(|f_n-f|)\rightarrow 1$, contradicting to DOM's conclusion $\mu(|f_n-f|)\rightarrow 0$.	
+\end{document}
