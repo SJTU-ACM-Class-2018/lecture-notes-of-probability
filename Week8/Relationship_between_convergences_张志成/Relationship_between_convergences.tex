@@ -1,0 +1,123 @@
+\documentclass[UTF8, 12pt]{article}
+\fontfamily{DENGL.TTF}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{remark*}{Remark}
+
+\title{Relationships between Convergences}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Almost sure convergence $\Longrightarrow$ Convergence in Probability. \\
+        Assume that $\mu: \Sigma \mapsto [0, \infty)$ and that we have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
+        i.e. $$ \mu(f_{n} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\}) = 0.$$ 
+        Prove that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 .$$
+    \end{problem}
+
+    \begin{proof}
+        \begin{align*}
+            f_{n} \not\rightarrow f &= \{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\} \\
+            &= \bigcup_{k=1}^{\infty}\bigcap_{m}\bigcup_{n = m}^{\infty}\ \{\omega \in S \ |\ |f_n(\omega) - f(\omega)| > \frac{1}{k} \} \\
+            &= \bigcup_{k=1}^{\infty}\bigcap_{m}\bigcup_{n = m}^{\infty}\ (|f_n- f| > \frac{1}{k}).
+        \end{align*}
+        For any $\epsilon > 0$,
+        since $\mu(f_{n} \not\rightarrow f) = 0$,
+        we can deduce that $$ \mu(\ \bigcap_{m}\bigcup_{n = m}^{\infty}\ |f_n- f| > \epsilon) = 0 ,$$ thus
+        \begin{align*}
+            \lim_{n\to\infty}\mu(|f_n-f| > \epsilon) &\leq \lim_{m\to\infty}\mu(\bigcup_{n = m}^{\infty}  |f_n-f| > \epsilon) \\
+            &= \mu(\lim_{m\to\infty}\bigcup_{n = m}^{\infty}  |f_n-f| > \epsilon)\quad \text{(MON of Measure)}\\
+            &= \mu(\bigcap_{m}\bigcup_{n = m}^{\infty}  |f_n-f| > \epsilon) \\
+            &= 0.
+        \end{align*}
+        Therefore $$ \lim_{n\to\infty}\mu(|f_n-f| > \epsilon) = 0 ,$$ i.e. $(f_n)$ converges to $f$ in probability.
+    \end{proof}
+
+    \begin{problem}
+        Convergence in Probability $\Longrightarrow$ Almost sure convergence of a subsequence. \\
+        We have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 $$ \\
+        Prove that there exists an increasing subsequence $(n_k)$ such that $$ f_{n_k} \overset{a.s.}{\longrightarrow} f ,$$ 
+        i.e. $$ \mu(f_{n_k} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n_k}(\omega) \not\rightarrow f(\omega)\}) = 0. $$ 
+        % or equivalently,$$ \mu(\{\omega\ |\ f_{n_k}(\omega) \not\rightarrow f(\omega)\}) = 0 $$
+    \end{problem}
+
+    \text{}
+
+    \begin{proof}
+        As a premise, we have $$ \mu(|f_n-f| > \epsilon) \to 0. $$ \\
+        For an arbitrarily fixed $\epsilon > 0$, we will have an increasing sequence $(n_k)$ such that
+        $$ \mu(|f_{n_k} - f| > \epsilon) < \frac{1}{2^k}.$$ \\
+        Taking the infinite sum on both sides yields, $$ \sum_{k=1}^{\infty} \mu(|f_{n_k} - f| > \epsilon) < \sum_{k=1}^{\infty} \frac{1}{2^k} = 1 < \infty .$$ \\
+        By the \textit{First Borel-Cantelli Lemma on general measure space}, we have
+        \begin{align*}
+            \mu(|f_{n_k} - f| > \epsilon, i.o.) &= 0.
+            % \Longleftrightarrow \mu(|f_{n_k} - f| \leq \epsilon, ev) &= 1.
+        \end{align*}
+        Based on the arbitrariness of $\epsilon$, we have proven the statement, $$ \mu(f_{n_k} \not\rightarrow f) = 0 .$$
+    \end{proof}
+
+    \begin{remark*}
+        The almost sure convergence might not hold for the whole sequence. \\
+        The construction I resort to is relatively complicated. Let $(S,\Sigma, \mu) = ([0,1], Leb[0,1], Leb)$. \\
+        Define $f_n$ and $f$ as following: For every $x \in [0,1]$
+        \begin{align*}
+            f_1(x) = x &+ I_{[0,1]} \cdot x \\
+            f_2(x) = x + I_{[0,\frac{1}{2}]} \cdot x ,&~ f_3(x) = x + I_{[\frac{1}{2}, 1]} \cdot x \\
+            f_4(x) = x + I_{[0,\frac{1}{3}]} \cdot x, ~ f_5(x) = x &+ I_{[\frac{1}{3}, \frac{2}{3}]} \cdot x, ~ f_6(x) = x + I_{[\frac{2}{3}, 1]} \cdot x
+        \end{align*}
+        and $$ f(x) = x. $$
+        Then we have $$ \mu(|f_n-f| > \epsilon) < \frac{1}{\sqrt{2n} + 1} \to 0, $$
+        however $$ \mu(f_n \not\rightarrow f) = Leb([0,1]) \neq 0. $$
+        Therefore, given convergence in probability, only a subsequence of $(f_n)$ converges almost surely.
+    \end{remark*}
+    
+    \text{}
+
+    \begin{problem}
+        Convergence in Probability of Monotone $(f_n)$ $\Longrightarrow$ Almost sure convergence. \\
+        We require $(f_n)$ to be \textbf{monotone} in the sense that $$ \forall \omega \in S\ f_{n+1}(\omega) > f_n(\omega) $$
+        And same with last problem, We have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 $$ \\
+        Prove that such that $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
+        i.e. $$ \mu(f_{n} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\}) = 0 .$$ 
+    \end{problem}
+
+    \text{}
+
+    \begin{proof}
+        Using the result of \textit{Problem 2}, we can obtain a subsequence $(n_k)$ such that  $$ \mu(f_{n_k} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n_k}(\omega) \not\rightarrow f(\omega)\}) = 0 .$$ \\
+        Consider any $\omega$ such that $f_{n_k}(\omega) \rightarrow f(\omega)$. \\
+        We prove that with monotonicity of $(f_n)$, $f_{n}(\omega) \rightarrow f(\omega)$. \\
+        \begin{align*}
+            f_{n_k}(\omega) \rightarrow f(\omega) \Longrightarrow &\forall \epsilon > 0\ \exists K\ \forall k > K\ |f_{n_k}(\omega) - f(\omega)| < \epsilon \\
+            \xRightarrow{\text{Monotone}} &\forall \epsilon > 0\ \exists K\ \forall n > n_K\  |f_{n}(\omega) - f(\omega)| < \epsilon \\
+            \Longrightarrow &f_{n}(\omega) \rightarrow f(\omega) 
+        \end{align*}
+        Therefore, $$ \mu(f_{n} \not\rightarrow f) \leq \mu(f_{n_k} \not\rightarrow f) = 0, $$
+        thus $$ f_{n} \overset{a.s.}{\longrightarrow} f .$$ 
+    \end{proof}
+\end{document}
