@@ -23,7 +23,7 @@
 \newtheorem{claim}{Claim}
 \newtheorem{problem}{Problem}
 \newtheorem{lemma}{Lemma}
-\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
 \newtheorem*{remark*}{Remark}
 
 \title{Relationships between Convergences}
@@ -33,16 +33,17 @@
 \begin{document}
     \maketitle
 
-    \begin{problem}
+    \begin{theorem}
         Almost sure convergence $\Longrightarrow$ Convergence in Probability. \\
-        Assume that $\mu: \Sigma \mapsto [0, \infty)$ and that we have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
-        i.e. $$ \mu(f_{n} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\}) = 0.$$ 
-        Prove that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 .$$
-    \end{problem}
+        Let $\mu$ be a measure $\Sigma \mapsto [0, \infty)$ and $(f_n) \in m\Sigma$, $f \in m\Sigma$.  \\
+        If $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
+        i.e. $$ \mu(f_{n} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\}) = 0, $$ 
+        then for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 .$$
+    \end{theorem}
 
     \begin{proof}
         \begin{align*}
-            f_{n} \not\rightarrow f &= \{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\} \\
+            (f_{n} \not\rightarrow f) &= \{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\} \\
             &= \bigcup_{k=1}^{\infty}\bigcap_{m}\bigcup_{n = m}^{\infty}\ \{\omega \in S \ |\ |f_n(\omega) - f(\omega)| > \frac{1}{k} \} \\
             &= \bigcup_{k=1}^{\infty}\bigcap_{m}\bigcup_{n = m}^{\infty}\ (|f_n- f| > \frac{1}{k}).
         \end{align*}
@@ -58,13 +59,13 @@
         Therefore $$ \lim_{n\to\infty}\mu(|f_n-f| > \epsilon) = 0 ,$$ i.e. $(f_n)$ converges to $f$ in probability.
     \end{proof}
 
-    \begin{problem}
+    \begin{theorem}
         Convergence in Probability $\Longrightarrow$ Almost sure convergence of a subsequence. \\
-        We have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 $$ \\
-        Prove that there exists an increasing subsequence $(n_k)$ such that $$ f_{n_k} \overset{a.s.}{\longrightarrow} f ,$$ 
+        Let $(f_n) \in m\Sigma$, $f \in m\Sigma$. If for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 ,$$ \\
+        then there exists an increasing subsequence $(n_k)$ such that $$ f_{n_k} \overset{a.s.}{\longrightarrow} f ,$$ 
         i.e. $$ \mu(f_{n_k} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n_k}(\omega) \not\rightarrow f(\omega)\}) = 0. $$ 
         % or equivalently,$$ \mu(\{\omega\ |\ f_{n_k}(\omega) \not\rightarrow f(\omega)\}) = 0 $$
-    \end{problem}
+    \end{theorem}
 
     \text{}
 
@@ -83,12 +84,12 @@
 
     \begin{remark*}
         The almost sure convergence might not hold for the whole sequence. \\
-        The construction I resort to is relatively complicated. Let $(S,\Sigma, \mu) = ([0,1], Leb[0,1], Leb)$. \\
-        Define $f_n$ and $f$ as following: For every $x \in [0,1]$
+        The construction I resorted to is relatively complicated. Let $(S,\Sigma, \mu) = ([0,1], Leb[0,1], Leb)$. \\
+        Define $f_n$ and $f$ as following: For every $x \in [0,1]$, 
         \begin{align*}
             f_1(x) = x &+ I_{[0,1]} \cdot x \\
             f_2(x) = x + I_{[0,\frac{1}{2}]} \cdot x ,&~ f_3(x) = x + I_{[\frac{1}{2}, 1]} \cdot x \\
-            f_4(x) = x + I_{[0,\frac{1}{3}]} \cdot x, ~ f_5(x) = x &+ I_{[\frac{1}{3}, \frac{2}{3}]} \cdot x, ~ f_6(x) = x + I_{[\frac{2}{3}, 1]} \cdot x
+            f_4(x) = x + I_{[0,\frac{1}{3}]} \cdot x, ~ f_5(x) = x &+ I_{[\frac{1}{3}, \frac{2}{3}]} \cdot x, ~ f_6(x) = x + I_{[\frac{2}{3}, 1]} \cdot x,
         \end{align*}
         and $$ f(x) = x. $$
         Then we have $$ \mu(|f_n-f| > \epsilon) < \frac{1}{\sqrt{2n} + 1} \to 0, $$
@@ -98,13 +99,13 @@
     
     \text{}
 
-    \begin{problem}
+    \begin{theorem}
         Convergence in Probability of Monotone $(f_n)$ $\Longrightarrow$ Almost sure convergence. \\
-        We require $(f_n)$ to be \textbf{monotone} in the sense that $$ \forall \omega \in S\ f_{n+1}(\omega) > f_n(\omega) $$
-        And same with last problem, We have $(f_n) \in m\Sigma$, $f \in m\Sigma$ such that for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 $$ \\
-        Prove that such that $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
+        We say $(f_n)$ is \textbf{monotone} in the sense that $$ \forall \omega \in S\ f_{n+1}(\omega) > f_n(\omega) .$$
+        Let $(f_n)$ be a monotone sequence of measurable functions. \\ If for any $\epsilon > 0$, $$ \mu(|f_n-f| > \epsilon) \to 0 ,$$ \\
+        then $$ f_{n} \overset{a.s.}{\longrightarrow} f ,$$ 
         i.e. $$ \mu(f_{n} \not\rightarrow f) = \mu(\{\omega\in S \ |\ f_{n}(\omega) \not\rightarrow f(\omega)\}) = 0 .$$ 
-    \end{problem}
+    \end{theorem}
 
     \text{}
 
