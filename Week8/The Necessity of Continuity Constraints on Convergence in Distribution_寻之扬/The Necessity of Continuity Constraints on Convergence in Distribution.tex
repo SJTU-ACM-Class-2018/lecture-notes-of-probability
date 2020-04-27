@@ -1,0 +1,142 @@
+\input{D:/template}
+
+\title{The Necessity of Continuity Constraints on Convergence in Distribution}
+\author{寻之扬}
+\begin{document}
+    \maketitle
+
+    \begin{tcolorbox}
+        \begin{definition}
+            A sequence of random variables $(f_n)$ converges in distribution towards random variable $f$ if
+            \[ \lim_{n \to \infty} P(f_n \leq t) = P(f \leq t) ,\]
+            for every number $t \in \R$ at which $P(f \leq t)$ is continuous.
+        \end{definition}
+    \end{tcolorbox}
+
+    Convergence in distribution is an important type of convergence of random variables. It is usually referred to as \[
+        P(f_n \leq t) \to P(f \leq t).    
+    \]
+
+    However, the strict definition only requires the convergence at the point where $P(f \leq t)$ is continuous. We are going to discuss the necessity to add this constraint in the definition with respect to the relationship between different types of convergence.
+
+    Before going any further, let's see what good properties does this constraint bring. With the continuity constraint, convergence in probability implies convergence in distribution.
+
+    \begin{definition}
+        A sequence of random variables $(f_n)$ converges in probability towards random variable $f$ if for all $\epsilon > 0$,
+        \[ \lim_{n \to \infty} P(\abs{f_n - f} > \epsilon) = 0.\]
+    \end{definition}
+
+    \begin{theorem}
+        If $(f_n)$ converges in probability towards $f$, then $(f_n)$ converges in distribution towards $f$.
+    \end{theorem}
+
+    \begin{proof}
+        We try to prove for all $t \in C(P(f \leq t))$ and for any $\epsilon > 0$, 
+        \begin{equation*}
+            P(f \leq t - \epsilon) \leq \lim_{n \to \infty} P(f_n \leq t) \leq P(f \leq t + \epsilon).
+        \end{equation*}
+        Then since $P(f \leq t)$ is continuous, $\lim_{n \to \infty} P(f_n \leq t) = P(f \leq t)$. This is exactly the result of the theorem.
+
+        For any $x$ satisfying $f_n(x) \leq t$, if $f(x) > t + \epsilon$, then $\abs{f - f_n}(x) > \epsilon$. Thus $\{f_n \leq t\} \subseteq \{f \leq t + \epsilon\} \cup \{\abs{f - f_n} > \epsilon\}$. It implies that 
+        \begin{equation}
+            \label{q}
+            P(f_n \leq t) \leq P(f \leq t + \epsilon) + P(\abs{f - f_n} > \epsilon).
+        \end{equation}
+
+        Using the same technique, when $f(x) \leq t - \epsilon$, either $f_n(x) \leq t$, or $\abs{f - f_n}(x) > \epsilon$. Thus we can see
+        \begin{equation}
+            \label{qq}
+            P(f \leq t - \epsilon) \leq P(f_n \leq t) + P(\abs{f - f_n} > \epsilon).
+        \end{equation}
+
+        Since $(f_n)$ converges in probability towards $f$, $P(\abs{f - f_n} > \epsilon) \to 0$. Taking the limit on both sides of \cref{q} and \cref{qq}, we have 
+        \begin{equation*}
+            P(f \leq t - \epsilon) \leq \lim_{n \to \infty} P(f_n \leq t) \leq P(f \leq t + \epsilon).
+        \end{equation*}
+        This is the inequality we want.
+    \end{proof}
+
+    If we remove the $t \in C(P(f \leq t))$ constraint, does convergence in probability imply convergence in distribution at every point? The answer is no.
+
+    \begin{example}
+        \label{4}
+        We work with a probability triple $(\Omega, \mathcal{F}, P)$. Let $(f_n)$ be a sequence of functions in $\Omega \to \R$. For all $x \in \Omega$, define \[
+            f_n(x) := \frac{1}{n}.
+        \]
+        It is easy to check that $(f_n)$ is a sequence of random variables. We can also define random variable $f$: for all $x \in \Omega$, \[
+            f(x) := 0.    
+        \]
+
+        $f_n(x)$ converges towards $f$ in probability, but it does not converge towards $f$ in distribution.
+    \end{example}
+
+    \begin{proof}
+        For any $\epsilon > 0$, let $N := \ceil{1 / \epsilon}$. For every $n > N$, \[
+            \abs{f_n(x) - f(x)} = \abs{\frac{1}{n} - 0} < \frac{1}{N} \leq \epsilon
+        \]
+        holds for all $x \in \Omega$. It implies $P(\abs{f_n - f} < \epsilon) = 1$. Thus, \[
+            \lim_{n \to \infty} P(\abs{f - f_n} > \epsilon) = 0.    
+        \]
+        $f_n(x)$ converges towards $f$ in probability.
+
+        By the definition of $(f_n)$, we can solve the distribution function $P(f_n \leq t)$: \[
+            P(f_n \leq t) = \left\{
+                \begin{array}{lcl}
+                    0 & & t < 1 / n \\
+                    1 & & t \geq 1 / n
+                \end{array}
+            \right.
+        \]
+
+        Similarly, we can solve the distribution function of $f$: \[
+            P(f \leq t) = \left\{
+                \begin{array}{lcl}
+                    0 & & t < 0  \\
+                    1 & & t \geq 0
+                \end{array}
+            \right.
+        \]
+
+        It is obvious that \[
+            \lim_{n \to \infty} P(f_n \leq 0) = 0 \neq 1 = P(f \leq 0).
+        \]
+        Hence, $f_n(x)$ does not converge towards $f$ in distribution at $0$, which is not a continuous point.
+    \end{proof}
+
+    The reason that the continuity constraint is necessary is that although every distribution function is right-continuous at every point, it might have a lot of jumps where the function is not left-continuous. When we talk about `convergence', we need some kind of stability to tolerate fluctuation. Continuity is exactly the stability we need.
+
+    Further scrutiny of \cref{4} reveals that $(f_n)$ converges towards $f$ not only in probability, but pointwise and in mean. Intuitively, $(f_n)$ perfectly converges towards $f$. Nevertheless, \[\
+        P(f_n \leq t) = \left\{
+            \begin{array}{lcl}
+                0 & & t \leq 0 \\
+                1 & & t > 0
+            \end{array}
+        \right.
+    \]
+    It is not right-continuous, so it is not a distribution function of any random variable. This means no matter which kind of definition of convergence we take, it is impossible to swap the order of taking limit and solving distribution function for $f_n$. What a pity! To make the definition agree with our intuition, the continuity constraint is necessary.
+
+    From another perspective, a distribution function is a monotonically increasing function in $\R \to \R$. All of its discontinuities are jump discontinuities and they are at most countable. Thus the continuity constraint is satisfied almost everywhere. This means our constraint only plays a role in negligible places but brings good properties for the definition.
+    
+    We can also deduce that if $(f_n)$ converges in probability towards $f$, \[
+        \Leb(\lim_{n \to \infty} P(f_n \leq t) \neq P(f \leq t)) = 0.
+    \]
+    On $(\R, \mathcal{B}, P)$, if we let $P := \Leb$, we can say\[
+        P(f_n \leq t) \to P(f \leq t) \ \ \ \ a.s.
+    \]
+
+    \begin{remark}
+        Although convergence on the discontinuities may cause problems, it doesn't mean a distribution function with discontinuities cannot be approached at its discontinuities by a sequence of random variables with continuous distribution functions.
+        
+        For instance, for $f$ in \cref{4}, we can define $f_n$ as random variable with the distribution function below: \[
+            P(f_n \leq t) = \left\{
+                \begin{array}{lcl}
+                    0 & & t \leq - 1 / n \\
+                    1 + nt & & - 1 / n < t \leq 0\\
+                    1 & & t > 0
+                \end{array}
+            \right.
+        \]
+    \end{remark}
+
+    $f_n$ converges towards $f$ both in probability and in distribution.
+\end{document}
