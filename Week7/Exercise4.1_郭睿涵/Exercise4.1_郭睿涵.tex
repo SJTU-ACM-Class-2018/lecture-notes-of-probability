@@ -1,0 +1,86 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{2ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+\usepackage{amsthm,amsmath,amssymb}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+\title{A Trivial Idea of Exercise 4.1}
+\date{Apr. 28, 2020}
+
+\maketitle
+\paragraph{}By imitating the method we used in the proof of Lemma 4.2, we can easily get the proof of this exercise.
+\paragraph{}By fixing $I_2\in \mathcal{I}_2$ and $I_3\in \mathcal{I}_3$, the two measures on $\sigma(\mathcal{I}_1)$ agree on $\mathcal{I}_1$, and they have the same total mass:
+\begin{align*}
+	&\mathbb{P}(I_2\cap I_3) \\&= \mathbb{P}(\Omega\cap I_2\cap I_3)\\ &=\mathbb{P}(\Omega)\mathbb{P}(I_2)\mathbb{P}(I_3)\\&=\mathbb{P}(I_2)\mathbb{P}(I_3)
+\end{align*}
+\paragraph{}Hence, they agree on $\sigma(\mathcal{I}_1)$
+\paragraph{}By fixing $H_1 \in \sigma(\mathcal{I}_1)$ and $I_3 \in \mathcal{I}_3$, the two measures on $\sigma(\mathcal{I}_2)$ agree on $\mathcal{I}_2$, and they have the same total mass:
+\begin{align*}
+	&\mathbb{P}(H_1\cap I_3) \\&=\mathbb{P}(H_1)\mathbb{P}(I_3)
+\end{align*}
+\paragraph{}Similarly, by fixing $H_1 \in \sigma(\mathcal{I}_1)$ and $H_2 \in \sigma(\mathcal{I}_2)$, the two measures agree on $\sigma(\mathcal{I}_3)$.
+\paragraph{}Then we conclude that $\sigma(\mathcal{I}_1)$ $\sigma(\mathcal{I}_1)$ $\sigma(\mathcal{I}_3)$ are independent.
+\\
+\paragraph{}We need $\Omega \in \mathcal{I}_k$ because we need the equation for the total mass in each case. Otherwise, consider one $\pi$-system being a set of measure 0.
+\end{document}
+
