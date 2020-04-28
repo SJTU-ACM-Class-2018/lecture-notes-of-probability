@@ -7,22 +7,22 @@
 
     \begin{tcolorbox}
         \begin{definition}
-            A sequence of random variables $(f_n)$ converges in distribution towards random variable $f$ if
-            \[ \lim_{n \to \infty} P(f_n \leq t) = P(f \leq t) ,\]
+            A sequence of random variables $(f_n)$ converges in distribution towards a random variable $f$ if
+            \[ \lim_{n \to \infty} P(f_n \leq t) = P(f \leq t) \]
             for every number $t \in \R$ at which $P(f \leq t)$ is continuous.
         \end{definition}
     \end{tcolorbox}
 
     Convergence in distribution is an important type of convergence of random variables. It is usually referred to as \[
         P(f_n \leq t) \to P(f \leq t).    
-    \]
+    \] 
 
     However, the strict definition only requires the convergence at the point where $P(f \leq t)$ is continuous. We are going to discuss the necessity to add this constraint in the definition with respect to the relationship between different types of convergence.
 
     Before going any further, let's see what good properties does this constraint bring. With the continuity constraint, convergence in probability implies convergence in distribution.
 
     \begin{definition}
-        A sequence of random variables $(f_n)$ converges in probability towards random variable $f$ if for all $\epsilon > 0$,
+        A sequence of random variables $(f_n)$ converges in probability towards a random variable $f$ if for all $\epsilon > 0$,
         \[ \lim_{n \to \infty} P(\abs{f_n - f} > \epsilon) = 0.\]
     \end{definition}
 
