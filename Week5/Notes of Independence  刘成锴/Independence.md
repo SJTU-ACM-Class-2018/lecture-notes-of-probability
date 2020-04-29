@@ -1,5 +1,7 @@
 # Independence
 
+## by 刘成锴
+
 Let $(\Omega, \mathcal F, \mathbf P)$ be a probability triple.
 
 ## Definitions of independence
