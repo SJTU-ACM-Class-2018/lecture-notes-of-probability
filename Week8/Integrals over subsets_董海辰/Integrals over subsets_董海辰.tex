@@ -22,7 +22,13 @@
         \item We have:
             \begin{itemize}
                 \item $A \in \Sigma \implies A \in \Sigma\cap 2^A$.
-                \item $\forall F \in \Sigma \cap 2^A$, let $H = F \cap 2^A \in \Sigma$, then $\Sigma \setminus F = \Sigma\setminus(F \cap 2^A) = (\Sigma \cap 2^A)\setminus F \in \Sigma \implies \Sigma\cap 2^A \in \Sigma\cap 2^A$.
+                \item $\forall F \in \Sigma \cap 2^A $,
+                    \begin{math}
+                        A \setminus F &= (S \setminus(S \setminus A )) \setminus F & \\
+                                      &= S \setminus (F \cup (S \setminus A)) \in \Sigma \\
+                                      &= (S \setminus F ) \cap A \in 2^A
+                    .\end{math}
+                    Thus $A \setminus F \in \Sigma \cap 2^A$.
                 \item $\forall (F_i)_{i\in \mathbb{N} }$ where $F_i \in \Sigma \cap 2^A \subseteq \Sigma$. Then $\bigcup_{i} F_i \in \Sigma$, and $\bigcup_{i} F_i \in 2^A$, thus, $\bigcup_{i} F_i \in \Sigma \cap 2^A$.
             \end{itemize}
 

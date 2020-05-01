@@ -1,0 +1,104 @@
+\input{/Users/oscar/Documents/LaTeX_Templates/HW.tex}
+
+\title{Pointwise convergence and convergence in probability}
+\date{\today}
+\author{董海辰 518030910417}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    In measure space $(S, \Sigma, \mu)$, consider function sequence $(f_n) \subseteq m\Sigma$ and $f \in m\Sigma$ :
+    \begin{itemize}
+        \item $(f_n)$ almost surely(pointwise) converges to $f_n$ if:
+            $$\mu(f_n \not\to f) = 0.$$
+            In probability space $(\Omega, \mathcal F, P)$, we can also say that $P(f_n \to f) = 1$.
+        \item $(f_n)$ converges to $f_n$ in probability if:
+            $$\forall \varepsilon >0, \mu(|f_n -f| > \varepsilon ) \to  0.$$
+    \end{itemize}
+\end{thm}
+
+To make the equations more readable, in the following discussion, let
+$$A_{n, \varepsilon } = (|f_n - f| > \varepsilon).$$
+
+\begin{thm}{}{}
+    If $f_n \to f$ almost surely, then $f_n \to f$ in probability.
+\end{thm}
+
+\begin{proof}[Proof]
+    $f_n \to f$ almost surely, thus 
+    \begin{math}
+        \mu (f_n \not \to f) 
+        &= \mu (\{x: \exists \varepsilon > 0, \forall m \in \mathbb{N} _+, \exists n \ge m, |f_n(x) - f(x)| > \varepsilon \} ) \\
+        &= \mu (\{x : \exists k \in \mathbb{N} _+, \forall m \in \mathbb{N} _+, \exists n \ge m, |f_n(x ) - f(x )| > \frac{1}{k} \} ) \\
+        &= \mu (\bigcup_{k = 1}^\infty \bigcap_{m} \bigcup_{n=m} ^\infty A_{n,\frac{1}{k}} ) = 0
+    .\end{math}
+
+    Then $\forall k > 0, \mu (\bigcap_{m}\bigcup_{n=m} A_{n,\frac{1}{k}}) = 0$ and therefore
+    $$\forall \varepsilon >0, \mu(\bigcap_{m} \bigcup_{n=m} A_{n,\varepsilon }) = 0.$$
+
+    Then by Reversed Fatou Lemma,
+    \begin{math}
+        \forall \varepsilon >0, \lim_{n \to \infty} \mu (A_{n,\varepsilon }) \le \bigcap_{m} \bigcup_{n=m} \mu (A_{n,\varepsilon }) \le \mu (\bigcap_{m}\bigcup_{n=m} A_{n,\varepsilon }) = 0  
+    .\end{math}
+
+    Therefore, $f_n \to f$ in probability.
+\end{proof}
+
+\begin{thm}{}{}
+    If $f_n \to f$ in probability, it is not necessary that $f_n \to f$ almost surely.
+\end{thm}
+\begin{proof}[Counter-example]
+    Let $(S, \mathcal F, \mu ) = ([0, 1), \mathcal B([0, 1), \text{Leb})$, $n = \sum _{j=1}^i j + d(1 \le d \le i)$,
+    \begin{math}
+        f_n(x) = \begin{cases}
+            1, x \in [\frac{d-1}{i}, \frac{d}{i})\\
+            0, \text{ otherwise }
+        \end{cases}
+    .\end{math}
+
+    Then, $\forall \varepsilon >0, \mu (A_{n, \varepsilon }) \le \frac{1}{i} \to 0$. 
+
+    But $\forall x \in [0, 1)$, $f_n(x)$ does not converge, thus $\mu (f_n \not\to f) = 1 \neq 0$.
+\end{proof}
+
+\begin{thm}{}{}
+    If $f_n \to f$ in probability, then there is a subsequence $(f_{n_i})$ such that $f_{n_i} \to f$ almost surely.
+\end{thm}
+
+\begin{proof}[Proof 1]
+    $f_n \to f$ in probability, thus
+    $$\forall k, \exists n_k, \mu(A_{n_k, \frac{1}{k}}) < \frac{1}{k^2} .$$
+
+    In this case, $\sum _k \mu(A_{n_k, \frac{1}{k}})$ converges. By BC1, we know that
+    $$\mu(\bigcap_{l}\bigcup_{i=l} A_{n_i, \frac{1}{i}}) = 0.$$
+
+    Assume that $x \in (f_n \not\to f)$, i.e., $\forall \varepsilon >0, x \in A_{n_i, \varepsilon }$ infinitely often. 
+
+    Let $n_{i_0} = 0$, and at every step we let $\varepsilon _j = \frac{1}{j}$, and choose an $n_{i_j}$ such that $n_{i_j} > \max(j, n_{i_{j-1}})$ and $x \in A_{n_{i_j}, \varepsilon _j} \subseteq A_{n_{i_j}, \frac{1}{i_j}}$, i.e., $x \in A_{n_i, \frac{1}{i}}$ infinitely often.
+
+    Thus $(f_{n_i} \not\to f) \subseteq \bigcap_{l}\bigcup_{i=l} A_{n_i, \frac{1}{i}} $.And we have $\mu(\bigcap_{l} \bigcup_{i=l} A_{n_i, \frac{1}{i}}) = 0$, so $\mu(f_{n_i} \not \to f) = 0$, $f_{n_i} \to f$ almost surely.
+
+\end{proof}
+
+\begin{proof}[Proof 2]
+
+    To show that there is a subsequence $(f_{n_k})$ such that $f_{n_k} \to f$ almost surely, i.e.,
+    \begin{math}
+        \forall \varepsilon >0, \mu (\bigcap_{l} \bigcup_{i=l} A_{n_i, \varepsilon }) = 0
+    .\end{math}
+
+    An idea is to get this via BC1, which needs us to prove that 
+    $$\forall \varepsilon >0, \sum _{i=1}^\infty \mu (A_{n_i, \frac{1}{k}}) < \infty.$$
+
+    And we know that $f_n \to f$ in probability. Let $n_0 = 0$, $\forall k$, there exists $n_k > n_{k-1}$, such that $\mu (A_{n_i,\frac{1}{i}}) < \frac{1}{i^2}$.  Therefore:
+    \begin{math}
+        \forall \varepsilon >0, \sum _{i=1}^\infty \mu (A_{n_i, \frac{1}{k}}) 
+        &= (\sum _{i=1}^{\left\lceil \frac{1}{\varepsilon } \right\rceil } + \sum _{i=\left\lceil \frac{1}{\varepsilon } \right\rceil  +1 }^\infty) \mu (A_{n_i, \varepsilon }) \\
+        &< \sum _{i=1}^{\left\lceil \frac{1}{\varepsilon } \right\rceil } \mu(A_{n_i, \varepsilon }) + \sum _{i=\left\lceil \frac{1}{\varepsilon } \right\rceil  +1 }^\infty \mu (A_{n_i, \frac{1}{i}}) \\
+        &< \sum _{i=1}^{\left\lceil \frac{1}{\varepsilon } \right\rceil } \mu(A_{n_i, \varepsilon }) + \sum _{i=\left\lceil \frac{1}{\varepsilon } \right\rceil  +1 }^\infty \frac{1}{i^2} < \infty
+    .\end{math}
+
+    Therefore, $f_{n_k} \to f$ almost surely.
+\end{proof}
+\end{document}
