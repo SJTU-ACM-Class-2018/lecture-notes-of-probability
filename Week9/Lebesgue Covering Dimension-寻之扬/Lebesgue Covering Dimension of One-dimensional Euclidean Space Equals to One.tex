@@ -1,0 +1,55 @@
+\input{D:/template}
+\title{Lebesgue Covering Dimension of One-dimensional Euclidean Space Equals to One}
+\author{Zhiyang Xun}
+\date{May 6, 2020}
+\begin{document}
+    \maketitle
+    \begin{tcolorbox}
+        \begin{problem}
+            Suppose real line is covered by a family of open intervals $(I_k)$. Is there always a family of open intervals $(J_k)$ satisfying $I_k\supseteq J_k$ such that every point on the real line is covered once or twice?
+        \end{problem}
+    \end{tcolorbox}
+
+    The answer is yes. We can prove a stronger result: We can always find a family of open intervals $(J_k)$ that covers every point once or twice. In addition, for each $J_k$, either $J_k = I_k$ or $J_k = \emptyset$. 
+    
+    For simplicity, we will regard a family of open intervals as a set consisting of open intervals. For example, $(J_k) \subseteq (I_k) \cup \{\emptyset\}$.
+
+    Suppose $F_j$ is a family of open intervals that covers the real line. Let $F_0 := (I_k)$. When $j > 0$, $F_j \subseteq F_{j-1}$ and every point in $[-j, +j]$ is covered by $F_j$ once or twice.
+
+    If for each $j \in \N$, such $F_j$ exists, then it is easy to check that \[
+        \bigcap_{j = 0}^{\infty} F_j \cup \{\emptyset\}
+    \]
+    is the $(J_k)$ we are looking for.
+
+    To verify the existence of $F_j$, we can give an inductive proof. 
+
+    {Basis Step:} $F_0 = (I_k)$, so $F_0$ exits.
+
+    {Inductive Hypothesis:} $F_{j-1}$ exists.
+
+    {Inductive Step:} Define 
+        \begin{align*}
+            S := &\{\alpha \in F_{j-1} | \alpha \cap [-j, +j] \neq \emptyset\} \\
+            T := &\bigcup_{I \in (F_{j-1} \setminus S)} I.
+        \end{align*}
+     Choose an interval $(l_1, r_1) \in S$ such that \[   \forall p \in (R \setminus T),\ l_1 \leq p.
+    \] 
+    Again, choose an interval $(l_2, r_2) \in S$ such that \[
+        \forall p \in (R \setminus T),\ r_2 \geq p.
+    \]
+    Since $S$ covers $[-j, +j]$, it has a finite subcover $S_f$ on $[-j, +j]$. Let \[
+        S' := S_f \cup \{[l_1, r_1] , [l_2, r_2]\}.
+    \]
+    Obviously $S'$ is also a finite subcover of $S$ on $[-j, +j]$.
+
+    Now we are going to remove some ``bad intervals'' from $S'$. Each time, we choose a bad interval and eliminate it. Since $S'$ has finite intervals, the elimination process will end after finite steps. We call an interval $I_r$ as a ``bad interval'' if and only if we can find two other intervals $I_s, I_t \in S'$ such that \[
+        I_r \subseteq I_s \cup I_t.
+    \] 
+    
+    Denote the $S'$ after the whole elimination process by $S^*$. Every point in $[-j, +j]$ is covered once or twice by $S^*$. That's because if one point is covered for more than twice, we can continue our elimination process.
+
+    $S^* \cup (F_{j-1} \setminus S)$ is the $F_j$ we want. Since every point in $[-j, +j]$ is only covered by intervals from $S^*$, every point is covered for no more than twice. From the construction of $S^*$, we know $S^* \cup (F_{j-1} \setminus S)$ covers the whole real line. Hence, we proved the existence $F_j$.
+
+    This finishes the proof.
+
+\end{document}
