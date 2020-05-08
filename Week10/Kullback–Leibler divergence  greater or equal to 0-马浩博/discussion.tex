@@ -19,7 +19,6 @@
 \usepackage[capitalise]{cleveref}
 \crefname{enumi}{}{}
 
-
 \newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
     {}{\parindent}{\bfseries}{}{1em}{} 
 \theoremstyle{mythm}
@@ -52,6 +51,19 @@
 \begin{document}
 \maketitle
 
+Kullback–Leibler divergence (also called relative entropy) is a measure of how one probability distribution is different from a second, reference probability distribution. 
+\section*{Definition}
+For discrete probability distributions $P$ and $Q$ defined on the same probability space, ${\mathcal {X}}$, the Kullback–Leibler divergence from $Q$ to $P$ is defined to be
+$$D_{\text{KL}}(P\parallel Q)=\sum _{x\in {\mathcal {X}}}P(x)\log \left({\frac {P(x)}{Q(x)}}\right)$$
+
+For distributions $P$ and $Q$ of a continuous random variable, the Kullback–Leibler divergence is defined to be the integral:
+
+$$D_{\text{KL}}(P\parallel Q)=\int _{-\infty }^{\infty }p(x)\log \left({\frac {p(x)}{q(x)}}\right)\,dx$$
+where $p$ and $q$ denote the probability densities of $P$ and $Q$.
+
+\section*{Applications}
+Applications include characterizing the relative (Shannon) entropy in information systems, randomness in continuous time-series, and information gain when comparing statistical models of inference. In the simple case, a Kullback–Leibler divergence of 0 indicates that the two distributions in question are identical. In simplified terms, it is a measure of surprise, with diverse applications such as applied statistics, fluid mechanics, neuroscience and machine learning.
+
 \begin{proof}
 	We shall prove that $D_{KL}(P||Q) \ge 0$, here $D_{KL}$ means Kullback–Leibler divergence and $D(P||Q)=-\sum_x P(x)\ln \frac{Q(x)}{P(x)}$. 
 	
@@ -80,5 +92,7 @@
 	
 	In the (7) step we use Jensen's inequality.
 \end{proof}
+\section*{Reference}
+[1] \url{https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence}
 
 \end{document}
