@@ -1,0 +1,84 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Kullback–Leibler divergence $\ge$ 0}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{proof}
+	We shall prove that $D_{KL}(P||Q) \ge 0$, here $D_{KL}$ means Kullback–Leibler divergence and $D(P||Q)=-\sum_x P(x)\ln \frac{Q(x)}{P(x)}$. 
+	
+	\begin{align}
+	-D(P||Q)&= \sum_x P(x)\ln \frac{Q(x)}{P(x)}\\
+	&\stackrel{}{\leq} \sum_x P(x)\left(\frac{Q(x)}{P(x)}-1\right)\\
+	&=\sum_x Q(x) - \sum_x P(x)\\
+	&= 1 - 1\\
+	&= 0
+	\end{align}
+	
+	In the (2) step we use the inequality $\ln x \leq x-1$.
+\end{proof}
+
+
+\begin{proof}[proof 2]
+	I recall Jensen's inequality in our textbook when I write the first proof. We can use it to get another proof.
+	
+	\begin{align}
+	-D(P||Q)&= \sum_x P(x)\ln \frac{Q(x)}{P(x)}\\
+	&\stackrel{}{\leq} \ln\sum_x P(x) \frac{Q(x)}{P(x)}\\
+	&=\ln\sum_x Q(x)\\
+	&=\ln 1\\
+	&=0
+	\end{align}
+	
+	In the (7) step we use Jensen's inequality.
+\end{proof}
+
+\end{document}
