@@ -62,8 +62,9 @@ written for the course on probability theory.
 - Week 9 (International Labor Day)
   
 - Week 10
-  - Jensen's inequality and Holder's inequality
+  - **Supporting hyperplane theorem** and Jensen's inequality 
+  - Holder's inequality
   - Monotonicity of $\mathcal{L}^p$: Lyapounov's inequality
-  - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality and completeness 
+  - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality (triangle inequality) and completeness 
   - $\mathcal{L}^2$ is a **Hilbert space**: orthogonal projection
-  - Variance, covariance, etc.
+  - Covariance matrix as a Gram matrix of an inner product space
