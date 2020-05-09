@@ -56,4 +56,14 @@ written for the course on probability theory.
   - Standard machine
   - **Radon-Nikodym Theorem**
   - Dominance-Convergence Theorem
+  - Modes of convergence
   - Scheffe's Lemma
+
+- Week 9 (International Labor Day)
+  
+- Week 10
+  - Jensen's inequality and Holder's inequality
+  - Monotonicity of $\mathcal{L}^p$: Lyapounov's inequality
+  - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality and completeness 
+  - $\mathcal{L}^2$ is a **Hilbert space**: orthogonal projection
+  - Variance, covariance, etc.
