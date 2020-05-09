@@ -1,0 +1,106 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, amsmath, enumerate, indentfirst}
+\usepackage{color, bm, extarrows, ulem}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\renewcommand{\proofname}{\indent \textbf {proof}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\usepackage{environ}
+\RenewEnviron{math}{%
+\begin{align*}
+\BODY
+\end{align*}
+}
+
+\title{Incomplete subspace of L\^2}
+\date{\today}
+\author{庄永昊}
+
+\begin{document}
+\maketitle
+    Here we give an example of an incomplete subspace of $L^2$: 
+
+    First we construct the subspace of $L^2$ that: 
+    $$l_2=\{(x_n):\sum_0^\infty x_n^2=0\}$$
+    Here the function $f$ corresponding to sequence $(x_n)$ is that: 
+    \begin{equation*}
+        f(x)=\left\{
+            \begin{aligned}
+                &x_n&n\leq x<n+1\\
+                &0&x<0\\
+            \end{aligned}
+            \right.
+    \end{equation*}
+    Then all such functions are in $L_2$ since they are continuous almost everywhere. 
+    And it is obviously a vector space(closed in addition and scalar multiplication). 
+
+    Now construct a Cauchy sequence $(S_N)$ in the subset that: for each element $S_N$, let $x_0=-1$, $x_{N,n}=\frac{1}{N}$ for any $N+1\leq n\leq 2N$, zero otherwise. 
+
+    For any two element in the sequence $S_N,S_M$ there is: 
+    $$\|S_N-S_M\|_2^2\leq \frac{1}{N}+\frac{1}{M}\leq \frac{2}{\min{N,M}}$$
+    So it is obvious that this sequence is a Cauchy sequence. 
+
+    However, there is no $\lim_{n\to\infty}S_N$ in $l_2$, since it is not a zero-sum sequence. 
+
+    The main idea of this example is that, the most trivial and intuitive elements in Hilbert space are those like a sequence. 
+    Giving the sequence a constraint(in this example is the sum of all elements) can easily form a vector subspace. 
+\end{document}
