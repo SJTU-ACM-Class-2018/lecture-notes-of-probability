@@ -64,7 +64,7 @@ written for the course on probability theory.
 - Week 10
   - **Supporting hyperplane theorem** and Jensen's inequality 
     - Fatou lemmas from (infinite-dimensional) Jensen's inequality.
-  - Monotonicity of $\mathcal{L}^p$: Lyapounov's inequality
+  - Monotonicity of $\mathcal{L}^p$: Lyapounov's inequality and truncation method
   - Holder's inequality
   - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality (triangle inequality) and completeness 
   - $\mathcal{L}^2$ is a **Hilbert space**: orthogonal projection
