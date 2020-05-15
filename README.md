@@ -69,3 +69,10 @@ written for the course on probability theory.
   - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality (triangle inequality) and completeness 
   - $\mathcal{L}^2$ is a **Hilbert space**: orthogonal projection
   - Covariance matrix as a Gram matrix of an inner product space
+
+- Week 11
+  - Calculate expectation from law  
+  - Probability density function(pdf)
+  - Gaussian distribution
+  - An introduction of Central Limit Theorem(CLT) and Berry-Esseen theorem
+  - Bernstein polynomials and Weierstrass approximation theorem  
