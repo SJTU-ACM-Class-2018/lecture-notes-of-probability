@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+%\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{hyperref} 
+\usepackage{tcolorbox}
+
+\geometry{a4paper, left = 2cm, right = 2cm, top = 2cm}
+
+\newcommand\problem[1]{\section*{Problem #1}}
+
+\newcommand\bE{\mathbb{E}}
+\newcommand\bF{\mathbb{F}}
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\fC{\mathbf{C}}
+\newcommand\fF{\mathbf{F}}
+\newcommand\fN{\mathbf{N}}
+\newcommand\fQ{\mathbf{Q}}
+\newcommand\fR{\mathbf{R}}
+\newcommand\fZ{\mathbf{Z}}
+\newcommand\cF{\mathcal{F}}
+\newcommand\cU{\mathcal{U}}
+\newcommand\N{\mathcal{N}}
+
+\newcommand\pro{\mathbf{P}}
+\newcommand\expt{\mathbf{E}}
+\newcommand\ce{\coloneqq}
+\newcommand\lproof{\item ``$\Leftarrow$'' :}
+\newcommand\rproof{\item ``$\Rightarrow$'' :}
+
+\newcommand{\leb}{\text{Leb}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\ord}{\text{ord}}
+\newcommand{\floor}[1]{\lfloor {#1}\rfloor}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\ms}{\rm{m}\Sigma}
+
+\newtheorem{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem*{exercise}{Exercise}
+
+\title{The Distribution Function of X1 Divided by X2}
+\author{WU Runzhe\\
+	Student ID : 518030910432}
+\date{}
+
+\setlength{\parskip}{1em}
+
+\begin{document}
+	\maketitle \large
+	
+	\begin{tcolorbox}
+		\begin{exercise}
+			Given $(X_1,X_2)^T\sim \N(\mu,V)$ where 
+			$$
+			\mu = 
+			\left(
+			\begin{matrix}
+			0\\
+			0
+			\end{matrix}
+			\right),
+			V=
+			\left(
+			\begin{matrix}
+			1&0\\
+			0&1
+			\end{matrix}
+			\right)
+			$$
+			then what's the distribution function of $X_1\over X_2$?
+		\end{exercise}
+	\end{tcolorbox}
+	
+	Let's first recall the definition of multivariate normal distribution.
+	
+	\begin{definition}\label{d1}
+		A random vector $\textbf{X}=(X_1,X_2,\dots,X_n)^T$ is called a normal random vector, which means $\textbf{X}\sim \N(\mu,V)$ for some $\mu,V$, if it has the probability density function for $x\in \bR^n$
+		$$f(x)=\frac{\sqrt{|V^{-1}|}}{(2\pi)^{n\over 2}}e^{-\frac{1}{2}(x-\mu)^TV^{-1}(x-\mu)}$$
+	\end{definition}
+	
+	It remains to check some important properties like $\int_{x\in\bR^n}f(x)\dif x=1$ and so on. However, the following definition is equivalent to the above, but the proof of equivalence seems to be complicated.
+	
+	\begin{definition}\label{d2}
+		A random vector $\textbf{X}=(X_1,X_2,\dots,X_n)^T$ is called a normal random vector if  $\sum_{i=1}^{n}r_i X_i$ is normal for any $r_i\in \bR$.
+	\end{definition}
+
+	Now let's get back to the exercise. Consider the following general theorem.
+	
+	\begin{theorem}\label{t1}
+		Let $(X,Y)^T$ be a random vector with probability density function $f(x,y)$. Then the probability density function of $\frac{Y}{X}$ is given by
+		$$f_{Y/X}(z)=\int_{-\infty}^{+\infty}|x|f(x,xz)\dif x.$$
+	\end{theorem}
+
+	\begin{proof}[Proof of theorem \ref{t1}]
+		Let $G=\{(x,y):\frac{y}{x}\le z\}$ for some $z$. And then the distribution function of $\frac{Y}{X}$ is
+		\begin{align*}
+			F_{Y/X}(z)&=P\{Y/X\le z\}=\iint_{G} f(x,y) \dif x\dif y\\
+			&=(\int_{y/x\le z,x<0}+\int_{y/x\le x,x>0}) f(x,y)\dif x\dif y\\
+			&=\int_{-\infty}^0\left[\int_{xz}^{\infty}f(x,y)\dif y\right]\dif x+\int_{0}^{\infty}\left[\int_{-\infty}^{xz}f(x,y)\dif y\right]\dif x\\
+			&=\int_{-\infty}^{z}\left[\int_{-\infty}^{\infty}|x|f(x,xw)\right]\dif w
+		\end{align*}
+		Since typing formulas in \LaTeX{} is tough and despairing, I omit some intermediate step and give the final expression directly. By the definition of pdf, we conclude $$f_{Y/X}(z)=\int_{-\infty}^{+\infty}|x|f(x,xz)\dif x.$$
+	\end{proof}
+	
+	Suppose $(X_1,X_2)^T\sim \N(\mu,V)$ where 
+	$$	\mu = 	\left(	\begin{matrix}	0\\	0	\end{matrix}	\right),
+	V=	\left(	\begin{matrix}	1&0\\	0&1	\end{matrix}	\right)	.$$
+	
+	By definition \ref{d1}, it has probability density function 
+	$$f(x_1,x_2)=\frac{1}{2\pi}e^{-\frac{x_1^2+x_2^2}{2}}$$
+	
+	Applying theorem \ref{t1}, all we need to do is computing 
+	
+	\begin{align*}
+		f_{X_1/X_2}(z)&=\int_{-\infty}^{+\infty}|x|f(xz,x)\dif x\\
+		&=2\int_{0}^{+\infty}xf(xz,x)\dif x\\
+		&=\int_{0}^{+\infty}f(xz,x)\dif x^2\\
+		&=\frac{1}{2\pi}\int_{0}^{+\infty}e^{-\frac{x^2(1+z^2)}{2}}\dif x^2\\
+		&=-\frac{1}{\pi(1+z^2)} \left.e^{-\frac{t(1+z^2)}{2}}\right|^{+\infty}_0\\
+		&=\frac{1}{\pi(1+z^2)}
+	\end{align*}
+	
+	Thus, the distribution function of $\frac{X_1}{X_2}$ is
+	
+	$$F_{X_1/X_2}(x)=\int_{-\infty}^{x}\frac{1}{\pi(1+z^2)}\dif z=\frac{\arctan(x)}{\pi}+\frac{1}{2}$$
+
+	
+\end{document}
