@@ -1,0 +1,186 @@
+\documentclass{article}
+\usepackage{cite}
+% \usepackage[UTF8]{ctex}
+% \usepackage{amssymb}
+\usepackage{amsmath}
+% \usepackage{amsthm}
+% \usepackage{geometry}
+% \usepackage{booktabs}
+% \usepackage{bm}
+% \usepackage{enumerate}
+\usepackage{tcolorbox}
+% \CTEXoptions[today=old]
+%Some commonly used notations
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\usepackage{graphicx}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{reference.bib}
+
+%for reference
+% \usepackage{hyperref}
+% \usepackage[capitalise]{cleveref}
+
+\newtheorem{introduction}{Introduction}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newtheorem{observation}[theorem]{Observation}
+
+%to use newcommand for convenience
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbz}{\mathbb{Z}}
+\newcommand{\mbn}{\mathbb{N}}
+\newcommand{\mbp}{\mathbb{P}}
+\newcommand{\mbh}{\mathbb{H}}
+\newcommand{\mbq}{\mathbb{Q}}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\hp}{^\prime}
+\newcommand{\mca}{\mathcal{A}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcr}{\mathcal{R}}
+\newcommand{\mcf}{\mathcal{F}}
+\newcommand{\mfa}{\mathfrak{A}}
+\newcommand{\mfb}{\mathfrak{B}}
+\newcommand{\mfc}{\mathfrak{C}}
+\newcommand{\mfi}{\mathfrak{I}}
+\newcommand{\Iff}{\mbox{iff }}
+\newcommand{\AND}{\mbox{ and }}
+
+\title{A History of Independence\\
+\\[0.5em]\large From Classical to Modern Probability Theory}
+\author{Zhang Yangtian 518021911262}
+\date{}
+
+\begin{document}
+    \maketitle
+\begin{tcolorbox}
+\section*{Introduction}
+Due to my limited mathematical ability, I have little expertise in solving abstract mathematical problems. Besides, just copying the theorem and proof from the textbook to form a 'note' like some of my classmates is not my style. So I decided to write something interesting for me, mainly about the development of concept 'Independence' before probability theory is strictly axiomatized.
+\end{tcolorbox}
+
+\section{The Germ of Independence}
+As we have already learned,  the theory of probability can be regarded from the mathematical point of view as a special application of the general theory of additive set functions. However, before probability theory is strictly axiomatized, the concept 'Independence' is kind of ambiguous for a long time. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{1.PNG}
+    \caption{\textit{The Doctrine of Chances}}
+    \label{fig:my_label}
+\end{figure}
+
+The earliest discussion about independence of events goes back to the 1738 second edition of \textit{The Doctrine of Chances}\cite{doctrine}.
+
+In the chapters above de Moivre writes, 
+
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+1. Two Events are independent, when they have no connexion one with the other, and that the happening of one neither forwards nor obstructs the happening of the other.\newline
+2. Two Events are dependent, when they are so connected together as that the Probability of either's happening is altered by the happening of the other.
+\end{tcolorbox}
+
+He also pointed out the most well-known formula measuring the probability of two independent events in a precise way,
+\begin{equation*}
+P(A,B) = P(A)\times P(B)
+\end{equation*}
+
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+The Probability of the happening of two Events dependent, is the product of the Probability of the happening of one of them, by the Probability which the other will have of happening, when the first shall be considered as having happened; and the same Rule will extend to the happening of as many Events as may be assigned.
+\end{tcolorbox}
+
+However, what is worth mentioning is that his recognition about probability is not completely precise in today's view. For example, he gives a rather curious remark just after a few paragraphs.
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+We had seen before how to determine the Probability of the happening or failing of as many Events independent as may be assigned; we have seen likewise in the preceding Article how to determine the Probability of the happening of as many Events dependent as may be assigned: \bfseries but in the case of Events dependent, how to determine the Probability of the happening of some of them, and at the same time the Probability of the failing of some others, is a disquisition of a greater degree of difficulty; which for that reason will be more conveniently transferred to another place.
+\end{tcolorbox}
+The curious point is that for we moderns it is naturally to regard the failing of an event to happen as nothing other than the happening of the complement event.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Abraham_de_moivre.jpg}
+    \caption{Abraham de Moivre}
+    \label{fig:my_label}
+\end{figure}
+
+After all, De Moivre's description of independence is almost exactly as it is usually introduced to beginning students today. Therefore it can be regarded as the germ of independence in my viewpoint.
+
+\section{Deeper Research in Independence}
+The further remarkable work about independence and independnce variable is done by Pierre-Simon de Laplace. In 1812, Pierre-Simon de Laplace (1749–1827) published the ﬁrst edition of his \textit{Théorie analytique des probabilités}\cite{laplace1820theorie}. In this book Laplace set out a mathematical system of inductive reasoning based on probability, which we would today recognise as Bayesian. He begins the text with a series of principles of probability, the first six being:
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+1. Probability is the ratio of the "favored events" to the total possible events.\\
+2. The first principle assumes equal probabilities for all events. When this is not true, we must first determine the probabilities of each event. Then, the probability is the sum of the probabilities of all possible favoured events.\\
+3. For independent events, the probability of the occurrence of all is the probability of each multiplied together.\\
+4. For events not independent, the probability of event B following event $A$ (or event $A$ causing $B$) is the probability of $A$ multiplied by the probability that, given $A$, $B$ will occur.\\
+5. The probability that $A$ will occur, given that $B$ has occurred, is the probability of $A$ and $B$ occurring divided by the probability of $B$.\\
+6. Three corollaries are given for the sixth principle, which amount to Bayesian probability. Where event $A_i \in \{A_1, A_2, ... A_n\} $exhausts the list of possible causes for event $B$, $\Pr(B) = \Pr(A_1, A_2, ..., A_n)$. Then
+$\Pr(A_{i}\mid B)=\Pr(A_{i}){\frac {\Pr(B\mid A_{i})}{\sum _{j}\Pr(A_{j})\Pr(B\mid A_{j})}}$.
+\end{tcolorbox}
+
+The third and fourth principles actually reveal the essential place of independence in Laplace's view.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.3]{Laplace,_Pierre-Simon,_marquis_de.jpg}
+    \caption{Pierre-Simon Laplace}
+    \label{fig:my_label}
+\end{figure}
+What is also worth mentioning is that with the emergence of problem involving games of chances(e.g., with regard to sums of dice rolls) and theory of errors in the 18th century, Laplace began to work further about independent variables, casting his eyes on the work calculating sums of independent random variables. Laplace finally introduced a general method to solve such questions. In the most simple case, each of the $n$ variables had the same rectangular distributions between $0$ and $h$. For the probability $P$ that the sum of those variables was between $a$ and $b$ with $0 \leq a \leq b \leq nh$, Laplace obtained(in modern notation)
+\begin{equation*}
+P=\frac{1}{h^n n!}\left(\sum_{i=0}^{N}\left(
+\begin{array}{l}
+n \\
+i
+\end{array}
+\right)(-1)^{i}(b-ih)^{n}-\sum_{i=0}^{M}\left(\begin{array}{l}
+n \\
+i
+\end{array}\right)(-1)^{i}(a-i h)^{n}\right)
+\end{equation*}
+
+The formula above and further research on the usable approximations actually introduced a new focus in probablity theory——CLT(Central Limit Theorem), which deals with the asymptotic equality of distributions of sums of independent random variables and of a normal distribution.
+
+\section{Axiomatized Independence}
+In 1933 A.N. Kolmogorov’s famous essay \textit{Grundbegriﬀe der Wahrscheinlichkeitsrechnung} was published by the publisher Julius Springer in Berlin. It contained an axiomatization of probability theory and led to an unimagined upturn of probability theory and its application.
+
+From then, the theory of probability can be regarded from the mathematical point of view as a special application of the general theory of additive set functions. Independent random variable and independent events can both be regarded as a specialization of independent $\sigma$-algebras,
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+1. Two events are independent (in the old sense) if and only if the $\sigma$-algebras that they generate are independent (in the new sense). The $\sigma$-algebra generated by an event $E\in \Sigma$  is, by definition,
+$\sigma (\{E\})=\{\emptyset ,E,\Omega \setminus E,\Omega \}$.\\
+2. Two random variables $X$ and $Y$ defined over $\Omega$ are independent (in the old sense) if and only if the $\sigma$-algebras that they generate are independent (in the new sense). The $\sigma$-algebra generated by a random variable $X$ taking values in some measurable space $S$ consists, by definition, of all subsets of $\Omega$  of the form $X^{-1}(U)$, where $U$ is any measurable subset of $S$.
+\end{tcolorbox}
+
+Hence the definitions above are both generalized by the definition of independence $\sigma$-algebras.
+
+\section{Weakly Dependence}
+During research in many fields of probability theory(e.g. Central Limit Theorem), people find there is a sufficient substitute for independence in many theorems. 
+
+Inspired by such problems, Doukhan and Louhichi (1999) introduced  the alternative notions of weak dependence\cite{doukhan2008notion}, which can thus be considered as a generalization of independence in many cases,
+\begin{tcolorbox}[colback=black!0!white,colframe=red!75!black]
+\slshape
+A sequence of random variables is \textbf{weakly dependent} if distinct portions of the sequence have a covariance that asymptotically decreases to 0 as the blocks are further separated in time. 
+\end{tcolorbox}
+
+Weak dependence primarily appears as a technical condition in various probabilistic limit theorems. However, I'm not fully acquainted in this area yet. Maybe I'll complete some examples in this document next time.
+\printbibliography
+
+
+
+\end{document}
