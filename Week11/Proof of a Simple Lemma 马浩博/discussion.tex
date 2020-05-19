@@ -1,0 +1,72 @@
+% This is a template for lecture notes.
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{cite}
+%\usepackage{CJK}
+\usepackage[many]{tcolorbox}
+%\tcbuselibrary{listingsutf8}
+%\tcbuselibrary{skins, breakable, theorems, most}
+%\geometry{a4paper,bottom = 3cm,left = 3cm, right = 3cm}
+\CTEXoptions[today=old]
+%for reference
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\crefname{enumi}{}{}
+
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex} 
+    {}{\parindent}{\bfseries}{}{1em}{} 
+\theoremstyle{mythm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+%to use newcommand for convenience
+\newcommand\field{\mathbb{F}}
+\newcommand\Real{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\complex{\mathbb{C}}
+\newcommand\cc{\mathcal{C}}
+\newcommand\uu{\mathcal{U}}
+\newcommand\pp{\mathcal{P}}
+\newcommand\ff{\mathcal{F}}
+\renewcommand\refname{Reference}
+\renewcommand{\proofname}{Proof}
+\DeclareMathOperator{\range}{range}   
+
+\title{Proof of a Simple Lemma}
+\author{马浩博 518030910428}
+\date{\today}
+\begin{document}
+\maketitle
+
+This is an easy exercise arranged in class. Nobody did it last week, so I give out a simple proof.
+
+\begin{lemma}
+	 Suppose that $h$ is a Borel measurable function from $R$ to $R$. Then
+	 $$h(X) \in \mathcal{L}^1(\Omega,\mathcal{F},P) \ if \ and \ only \ if \ h \in \mathcal{L}^1(R,\mathcal{B},\Lambda_X )$$
+	 and then
+	 $$Eh(X) = \Lambda_X(h) = \int_{R} h(x) \Lambda_X\, (dx).$$
+\end{lemma}
+
+\begin{proof}
+	Proof is simple cause we can just feed everything into the standard machine.
+	First if $h = I_B (B \in \mathcal{B})$, by the definition of $\Lambda_X$ we know that $$Eh(X) = \Lambda_X(h) = \int_{R} h(x) \Lambda_X\, (dx).$$
+	Then use linearity to tell that the conclusion is still true when $h$ is a simple function on $(R,\mathcal{B})$. 
+	Next, when $h$ is a non-negative function, by MON we can also get that 
+	$$Eh(X) = \Lambda_X(h) = \int_{R} h(x) \Lambda_X\, (dx).$$
+	Use linearity again and we finish the proof.
+\end{proof}
+
+\end{document}
