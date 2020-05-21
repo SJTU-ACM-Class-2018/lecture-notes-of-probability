@@ -1,0 +1,84 @@
+\documentclass[UTF8, 12pt]{article}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+\usepackage{lipsum}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\theoremstyle{break}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Symmetry Conditional Expectation}
+\author{于峥 518030910437}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}[\textbf{Exercise 9.2} of \textit{Chapter E}]
+        Suppose that $X, Y \in \mathcal{L}^1(\Omega, \mathcal{F}, P)$ and that
+        $$
+        E(X|Y) =Y ,a.s., ~~~ E(Y|X) =X ,a.s.
+        $$
+        
+        Prove that $P(X=Y)=1$.
+
+        Hint, consider $E(X-Y; X > c, Y \leq c) + E(X - Y; X \leq c, Y \leq c)$
+    \end{problem}
+
+    \begin{proof}
+        Because of $E(X|Y)=Y$, we have $E(X ; Y \leq c) = E(Y; Y \leq c)$ for every $c$
+        by the definition of conditional expectation. Because $X, Y \in \mathcal{L}^1(\Omega, \mathcal{F}, P)$, so
+        
+        \begin{align*}
+            0 
+            &= E(X - Y; Y \leq c) \\
+            &=E(X-Y; X > c, Y \leq c) + E(X - Y; X \leq c, Y \leq c)
+        \end{align*}
+
+        Consider $P(X < Y)$, note that event $\{ X < Y \} = \bigcup_{c} \{ X < c < Y\}$, and
+            $$
+            \{ X  < c - \frac 1 n < c + \frac 1 n < Y\} \uparrow \{ X < c < Y \}
+            $$
+
+        If $P(X < Y) > 0$, $\exists c, n$, s.t.
+            $P(X  < c - \frac 1 n < c + \frac 1 n < Y) = p > 0$, hence, 
+            $$
+            E(X-Y; X > c, Y \leq c) \geq \frac 2 n P(X  < c - \frac 1 n < c + \frac 1 n < Y) = \frac {2p} {n} > 0
+            $$
+
+        And the $E(X - Y; X \leq c, Y \leq c)$ must be zero because the symmetric in $X, Y$,
+        we get $E(X - Y; Y \leq c) > 0$, it is impossible. Therefore $P(X < Y) = 0$.
+
+        We can prove $P(X > Y) = 0$ from $E(Y|X)=X$ use the same way. Hence
+        $P(X=Y)=1$.
+
+
+
+
+
+    \end{proof}
+\end{document}
