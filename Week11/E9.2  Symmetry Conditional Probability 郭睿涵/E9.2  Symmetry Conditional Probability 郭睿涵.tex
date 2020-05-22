@@ -1,0 +1,107 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+\usepackage{amsthm,amsmath,amssymb}
+
+\usepackage{mathrsfs}
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{2ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+\usepackage{amsthm,amsmath,amssymb}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+\title{E9.2 Symmetry Conditional Probability}
+\date{May. 22, 2020}
+
+\maketitle
+\paragraph{E9.2 } Suppose $X,Y \in \mathcal{L}^1(\Omega,\mathcal{F},P)$, and $E(X|Y) = Y,a.s.,$  $E(Y|X) = X,a.x..$ To proof $P(X=Y)=1$
+\paragraph{Solution}
+As the hint said,
+\begin{align*}
+	E((X-Y)I_{Y\leq c}) = E((X-Y)I_{Y\leq c}I_{X\leq c}) + E((X-Y)I_{Y\leq c}I_{X>c})\\
+	E((X-Y)I_{X\leq c}) = E((X-Y)I_{Y\leq c}I_{X\leq c}) + E((X-Y)I_{X\leq c}I_{Y>c})
+\end{align*}
+At the same time,
+\begin{align*}
+	E((X-Y)I_{X\leq c}) &= E((X-E(X|Y))I_{X\leq c})\\&= E(XI_{X\leq c}) - E((X|Y)I_{X\leq c})\\&= E(XI_{X\leq c}) - E(XI_{X\leq c}) = 0
+\end{align*}
+So that
+
+\begin{align*}
+	 E((X-Y)I_{Y\leq c}I_{X>c}) = E((X-Y)I_{X\leq c}I_{Y>c})
+\end{align*}
+Because the left side is non-negative and the right side is non-positive, both of them equal to 0. Then we can present the following events:
+\begin{align*}
+	(X<Y) = \bigcup_{c\in \mathbb{Q}}(X\leq c)\cap (Y > c)\\
+	(X>Y) = \bigcup_{c\in \mathbb{Q}}(X > c)\cap (Y \leq c)
+\end{align*}
+They are all null events, which leads to the event$(X\neq Y)$ is a null event. Then we got $P(X = Y) = 1$.
+\subparagraph{Question} Is the union of infinite null-set is also a null-set?
+\paragraph{Another way to proof} 
+\begin{align*}
+	E(X^2) = E(X E(Y|X)) = E(E(XY|X)) = E(XY)\\
+	E(Y^2) = E(Y E(X|Y)) = E(E(XY|Y)) = E(XY)\\
+\end{align*}
+So that
+\begin{align*}
+	E((X-Y)^2) = E(X^2 + Y^2 - 2XY) = 0
+\end{align*}
+Which means X and Y is different on a null-set.
+\end{document}
+
