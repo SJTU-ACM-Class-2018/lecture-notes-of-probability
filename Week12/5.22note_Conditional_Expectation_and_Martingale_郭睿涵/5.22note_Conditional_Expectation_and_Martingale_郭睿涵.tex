@@ -1,0 +1,122 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{CJK}
+\usepackage{float}
+\usepackage{mdframed}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\ud}[1]{\underline{#1}}
+
+\newmdtheoremenv{thm}{Theorem}
+\newmdtheoremenv{lemma}[thm]{Lemma}
+\newmdtheoremenv{fact}[thm]{Fact}
+\newmdtheoremenv{cor}[thm]{Corollary}
+\newtheorem{eg}{Example}
+\newtheorem{ex}{Exercise}
+\newmdtheoremenv{defi}{Definition}
+\newenvironment{sol}
+  {\par\vspace{3mm}\noindent{\it Solution}.}
+  {\qed \\ \medskip}
+
+\newcommand{\ov}{\overline}
+\newcommand{\ca}{{\cal A}}
+\newcommand{\cb}{{\cal B}}
+\newcommand{\cc}{{\cal C}}
+\newcommand{\cd}{{\cal D}}
+\newcommand{\ce}{{\cal E}}
+\newcommand{\cf}{{\cal F}}
+\newcommand{\ch}{{\cal H}}
+\newcommand{\cl}{{\cal L}}
+\newcommand{\cm}{{\cal M}}
+\newcommand{\cp}{{\cal P}}
+\newcommand{\cs}{{\cal S}}
+\newcommand{\cz}{{\cal Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\dist}{\mbox{\rm dist}}
+\newcommand{\bn}{{\mathbb N}}
+\newcommand{\bz}{{\mathbb Z}}
+
+\newcommand{\expe}{{\mathsf E}}
+\newcommand{\pr}{{\mathsf{Pr}}}
+\usepackage{amsthm,amsmath,amssymb}
+
+\usepackage{mathrsfs}
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{2ex}
+\newenvironment{proofof}[1]{\bigskip\noindent{\itshape #1. }}{\hfill$\Box$\medskip}
+\usepackage{amsthm,amsmath,amssymb}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+\title{课堂笔记}
+\date{May. 22, 2020}
+
+\maketitle
+\paragraph{课程内容}A list of properties of conditional expectations
+\subparagraph{}Martingale,filtration,optional time
+\subparagraph{}Discrete stochastic integral\\
+
+\subparagraph{Exercise}$X\in \mathcal{L}^1(\Omega,\mathcal{F},P)$ $\mathcal{G} \subseteq \mathcal{F}$. If Y is any version of $E(X|\mathcal{G})$ then $EY=EX$\\
+\subparagraph{Proof} By definition\\
+\paragraph{Linearity} $E(a_1X_1 + a_2X_2 | \mathcal{G}) = a_1E(X_1|\mathcal{G}) + a_2E(X_2|\mathcal{G})$\\
+证明方法：回到随机变量$X_1|\mathcal{G},X_2|\mathcal{G}$，利用线性性。\\
+\paragraph{全期望公式(Tower property)} If $\mathcal{H}$ is a sub-$\sigma$-algebra of $\mathcal{G}$, then $E[E[X|\mathcal{G}]|\mathcal{H}] = E[X|\mathcal{H}]$\\
+\subparagraph{Proof} Y:a version of $E(X|\mathcal{G}$)\\
+Z: a version of $E(Y|\mathcal{H})$\\
+$\int_H ZdP = \int_H YdP = \int_H XdP ,\forall H\in \mathcal{H}$
+\paragraph{Taking out what is known} $X\in \mathcal{L}^1(\Omega,\mathcal{F},P),\mathcal{G}\subseteq\mathcal{F}$.If $Z$ is $\mathcal{G}-measurable$ and bounded, then 
+\begin{align*}
+	E[ZX|\mathcal{G}] = ZE[X|\mathcal{G}],a.s.
+\end{align*}
+\subparagraph{Proof}$Z=I_U \rightarrow Z\in SF^+ \rightarrow Z\in(mG)^+$(standard machine)
+\paragraph{Independence} If $\mathcal{H}$ is independent of $\sigma(X,\mathcal{G})$, then $E[X|\sigma(\mathcal{G},\mathcal{H})] = E[X|\mathcal{G}],a.s.$
+\subparagraph{Proof} 在$\forall W\in \sigma(\mathcal{G},\mathcal{H})$上面一样，可以用在$\pi-system$上面一样来延拓。\\
+\paragraph{Chapter 10. Martingale}
+\subparagraph{Filtration} $(\Omega,\mathcal{F},P)$ and $\{ \mathcal{F}_n \}_{n\geq 0}$ with $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \dots \subseteq \mathcal{F}$\\
+$\mathcal{F}_{\infty} = \lim\mathcal{F}_n = \bigcup \mathcal{F}_n$\\
+\subparagraph{Adapted}A process $X = (X_n:n\geq 0)$ is adapted to the filtration $(\mathcal{F}_n)$ if for each n, $X_n$ is $\mathcal{F}_n$-measurable.\\
+\subparagraph{Martingale}A process X is a martingale relative to $(\Omega,\mathcal{F},(\mathcal{F}_n),P)$ if\\
+(1) X is adapted\\
+(2) $E(|X_n) < \infty$\\
+(3)$E[X_n|\mathcal{F}_{n-1}] = X_{n-1}$\\
+X:每个单位赌注值多少钱\\
+第三条等价于$E[X_n - X_{n-1}|\mathcal{F}_{n-1}] =0$\\
+\paragraph{Doob-martingale(An Example)} $\xi \in \mathcal{L}^1(\Omega,\mathcal{F},P) $\\
+通过对一列$\mathcal{F}_n$的观察，得到最佳的逼近：\\
+\begin{align*}
+	M_n = E(\xi|\mathcal{F}_n)
+\end{align*}
+$E(M_n|\mathcal{F}_{n-1}) = E(E(\xi|\mathcal{F}_{n})|\mathcal{F}_{n-1}) \overset{\text{Tower}}{=} E(\xi|\mathcal{F}_{n-1}) \overset{\text{def}}{=}  M_{n-1} $\\
+
+\paragraph{赌博过程}过程 $C = (C_n: n\geq1)$ is previsible if $C_n$ is $\mathcal{F}_{n-1}$ measurable.\\
+$\int_0^nCdX = \sum_{1\leq k \leq n}C_k(X_k-X_{k-1})$\\
+\begin{align*}
+&C_iX_i |_0^n \\&= \int_0^nCdX + \int_0^nXdC \\&= \sum_{1\leq k \leq n}C_k(X_k-X_{k-1}) + \sum_{i=0}^{n-1}X_i(C_{i+1}-C_i)
+\end{align*}
+\subparagraph{}定义$(C\cdot X)$,$(C\cdot X) = \int_0^n CdX$ If C is a bounded previsible process and X is a martingale, then $(C\cdot X)$ is a martingale null at 0.\\
+\subparagraph{Proof} 记$(C\cdot X)$为$Y$,$Y_n = \int_0^nCdX$
+\begin{align*}
+&E[Y_n - Y_{n-1}|\mathcal{F}_{n-1}]\\& = E[C_n(X_n - X_{n-1})|\mathcal{F}_{n-1}] \\&= C_nE(X_n-X_{n-1}|\mathcal{F}_{n-1}) = 0
+\end{align*}
+\end{document}
+
+
+
