@@ -76,3 +76,12 @@ written for the course on probability theory.
   - Gaussian distribution
   - An introduction of Central Limit Theorem(CLT) and Berry-Esseen theorem
   - Bernstein polynomials and Weierstrass approximation theorem  
+
+- Week 12
+  - Definition and existence of conditional expectation: Fundamental Theorem (Kolmogorov) 
+    - proof from Radon-Nikodym theorem
+    - proof as least-squares-best predicator 
+  - Properties of conditional expectation 
+  - Definitions: filtration, adapted process, martingale
+    - e.g. Doob's martingale
+  - Martingale transformation and (discrete) stochastic integral  
