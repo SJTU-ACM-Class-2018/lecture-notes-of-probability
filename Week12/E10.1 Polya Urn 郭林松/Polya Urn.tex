@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{observation}[theorem]{Observation}
+%\newtheorem*{solution}{Solution}
+
+\title{A Discussion About Pólya Urn}
+\author{Guo Linsong 518030910419}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{tcolorbox}
+    \begin{problem}
+    The following exercise is E10.1 of the textbook.
+
+      At time $0,$ an urn contains 1 black ball and 1 white ball. At each time $1,2,3, \ldots,$ a ball is chosen at random from the urn and is replaced together with a new ball of the same colour. Just after time $n,$ there are therefore $n+2$ balls in the urn, of which $B_{n}+1$ are black, where $B_{n}$ is the number of black balls chosen by time $n$.  Let $M_{n}=\left(B_{n}+1\right) /(n+2),$ the proportion of black balls in the urn just after time $n .$
+   \end{problem}
+\end{tcolorbox}
+
+\begin{question}
+Prove that (relative to a natural filtration which you should specify $) M$ is a martingale.
+\end{question}
+
+\begin{solution}
+Let $\mathcal{F}_{n}:=\sigma(B_i,0\le i \le n)$ be the natural filtration, then $M=(M_n:n\ge 0)$ is adapted and integrable. Next we prove that $\mathbb{E}[M_n|\mathcal{F}_{n-1}]=M_{n-1},\text{a.s.}(n\ge 1)$.
+\begin{equation*}
+    \begin{array}{rl}
+        & \mathbb{E}\left[M_n|\mathcal{F}_{n-1}\right] \\
+     =  & \mathbb{E}\left[\frac{B_n+1}{n+2}\big|\mathcal{F}_{n-1}\right] \\
+     =  & \frac{1}{n+2}\mathbb{E}\left[B_{n}+1\big|\mathcal{F}_{n-1}\right] \\
+     =  & \frac{1}{n+2}\mathbb{E}\left[B_{n-1}+\frac{B_{n-1}+1}{n+1}+1\big|\mathcal{F}_{n-1}\right] \\
+     =  & \mathbb{E}\left[\frac{B_{n-1}+1}{(n-1)+2}\big|\mathcal{F}_{n-1}\right] \\
+     = & M_{n-1}
+    \end{array}
+\end{equation*}
+Therefore, $M$ is a martingale relative to $\{\{\mathcal{F}_n\},\mathbf{P}\}$.
+\end{solution}
+
+
+\begin{question}
+Prove that $\mathbf{P}\left(B_{n}=k\right)=(n+1)^{-1}$  for $0 \leq k \leq n$.
+\end{question}
+
+\begin{solution}
+
+\begin{equation*}
+    \begin{array}{cc}
+        & \mathbf{P}(B_n=k)\\
+        = &{n \choose k} \frac{(1\times\cdots\times k)\times(1\times\cdots\times(n-k))}{2\times3\times\cdots\times(n+1)}\\
+        = &\frac{n!}{k!(n-k)!} \cdot\frac{k!(n-k)!}{(n+1)!}\\
+        = & \frac{1}{n+1}\\
+    \end{array}
+\end{equation*}
+\end{solution}
+
+\begin{question}
+What is the distribution of $\Theta$, where
+$\Theta:=\lim M_{n} ?$
+\end{question}
+
+\begin{solution}
+We have known that $P(B_n=k)=\frac{1}{n+1}$, so $M_n$ is uniform in $\{\frac{1}{n+2},\frac{2}{n+2},\cdots,\frac{n+2}{n+2}\}$. Thus we have
+\begin{equation*}
+    \begin{array}{rl}
+         & P(\Theta\le t) (t\in[0,1])\\
+       = & P(\lim_{n\rightarrow\infty}M_n \le t) \\
+       = & \lim_{n\rightarrow\infty}P(M_n \le t) \\
+     %  = & \lim_{n\rightarrow\infty}P(\frac{B_n+1}{n+2} \le t) \\
+      % = & \lim_{n\rightarrow\infty}P(B_n \le t(n+2)-1) \\
+       = & t
+    \end{array}
+\end{equation*}
+Therefore, $\Theta$ satisfies the uniform distribution.
+\end{solution}
+
+\end{document}
