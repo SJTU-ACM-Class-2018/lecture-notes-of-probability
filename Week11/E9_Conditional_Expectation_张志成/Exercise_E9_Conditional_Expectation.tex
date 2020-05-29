@@ -1,0 +1,97 @@
+\documentclass[UTF8, 12pt]{article}
+\fontfamily{DENGL.TTF}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{remark*}{Remark}
+
+\title{E9. Conditional Expectation}
+\author{张志成 518030910439}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Prove that if $\mathcal{G}$ is a sub-$\sigma$-algebra of $\mathcal{F}$ and if $X \in \mathcal{L}^1(\Omega, \mathcal{F}, \mathbf{P})$ and if $Y \in \mathcal{L}^1(\Omega, \mathcal{G}, \mathbf{P})$ and 
+        \begin{equation}
+        E(X;G) = E(Y;G)
+        \end{equation}
+        for every $G$ in a $\pi$-system which contains $\Omega$ and generates $\mathcal{G}$, then $(1)$ holds for every $G$ in $\mathcal{G}$.
+    \end{problem}
+
+    \begin{solution}
+        Denote the $\pi$-system as $I$. And WLOG, we assume that $X \geq 0$, which is neccesary in the construction of the measures.
+
+        We consider two measures:
+        \begin{align*}
+            \mu_0: G&\mapsto E(X;G) \\
+            \mu_1: G&\mapsto E(Y;G) .
+        \end{align*}
+        Then $\mu_0$ and $\mu_1$ agree on the $\pi$-system $I$, and therefore must agree on on the $\sigma$-algebra it generates, namely $\sigma(I) = \mathcal{G}$.
+        
+        Thus, for every $G \in \mathcal{G}$,
+        $$
+        E(X;G) = E(Y;G) ,
+        $$
+        which finishes the proof.
+    \end{solution}
+
+    \begin{problem}
+        Suppose that $X,Y \in \mathcal{L}^1(\Omega, \mathcal{F}, \mathbf{P})$ and that
+        \begin{align*}
+            &E(X|Y) = Y,\quad a.s., \\
+            &E(Y|X) = X,\quad a.s.
+        \end{align*}
+        Prove that $P(X = Y) = 1$.
+    \end{problem}
+
+    \begin{solution}
+        We first consider $E(X-Y;Y\leq c) = E(X;Y\leq c) - E(Y;Y\leq c)$.
+
+        Since $E(X|Y) = Y, a.s.$, for every $G \in \sigma(Y)$, 
+        \begin{align*}
+            E(X;G) = E(Y;G)
+        \end{align*}
+        and therefore
+        \begin{align*} 
+            &E(X;Y\leq c) = E(Y;Y\leq c) \\
+            \Longrightarrow &E(X-Y; Y\leq c) = 0.
+        \end{align*}
+
+        Since $$E(X-Y; Y\leq c) = E(X-Y; X > c, Y \leq c) + E(X-Y; X \leq c, Y \leq c), $$
+        and because $$E(X-Y; X > c, Y \leq c) \geq 0 ,$$
+        we have $$ E(X-Y; X \leq c, Y \leq c) \leq 0 .$$
+        Similarly, we have $$ E(Y-X; X \leq c, Y \leq c) \leq 0 .$$
+        Thus, 
+        \begin{align*} 
+            &E(X-Y; X \leq c, Y \leq c) = E(Y-X; X \leq c, Y \leq c) = 0 \\
+            \Longrightarrow \quad &E(X-Y; X > c, Y \leq c) = 0 = E((X-Y)I_{\{X > c, Y \leq c\}}) \\
+            \Longrightarrow \quad &E(I_{\{X > c, Y \leq c\}}) = 0
+        \end{align*}
+        Since $X > Y \Longleftrightarrow \exists c\in\mathbb{Q}\ X > c, Y \leq c$, and by countably additivity of $P$, 
+        $$ P(X > Y) = P(\bigcup_{c\in\mathbb{Q}} \{X > c\} \cap \{Y \leq c\})\leq \sum_{c\in\mathbb{Q}} P(X > c, Y \leq c) = \sum E(I_{\{X > c, Y \leq c\}}) = 0. $$
+        Similarly $ P(X < Y) = 0$ and thus, $$ P(X = Y) = 1. $$
+    \end{solution}
+\end{document}
