@@ -1,0 +1,58 @@
+\documentclass[UTF8, 12pt]{article}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+\usepackage{lipsum}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\theoremstyle{break}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Optional Time Operation}
+\author{于峥 518030910437}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}[\textbf{Exercise 10.3} of \textit{Chapter E}]
+        Suppose that S and T are stopping times 
+        (relative to ($\Omega, \mathcal{F}, \{ \mathcal{F}_n \}$)).         
+        Prove that $S \land T , S \lor T, S + T$
+        are stopping time.
+    \end{problem}
+
+    \begin{proof}
+        Proof it by definition, $\{S \leq n \}, \{ T \leq n \}, \{S = n \}, \{ T = n \}$ all in $\mathcal{F}_n$, 
+        \begin{align*}
+            \{ S \land T \leq n \} &= \{ S \leq n \} \cup \{ T \leq n \} \\
+            \{ S \lor T \leq n \} &= \{ S \leq n \} \cap \{ T \leq n \} \\
+            \{ S + T \leq n \} &= \bigcup_{k=0}^n \{ S = k \} \cap \{T = n-k \} \\
+        \end{align*}
+
+        Hence the r.h.s of these equations are $\mathcal{F}_n$-measurable.
+    \end{proof}
+\end{document}
