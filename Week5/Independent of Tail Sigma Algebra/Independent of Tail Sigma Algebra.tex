@@ -1,0 +1,96 @@
+\documentclass[UTF8, 12pt]{article}
+\usepackage{xeCJK}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{ntheorem}
+\usepackage{lipsum}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\pagestyle{fancy}
+
+\newenvironment{proof}{\noindent\ignorespaces\textbf{Proof:}}{\hfill $\square$\par\noindent}
+\newenvironment{solution}{\noindent\ignorespaces\textbf{Solution:}}{\hfill $\square$\par\noindent}
+
+\theoremstyle{break}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem*}{Theorem}
+
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+
+\title{Independent of Tail Sigma Algebra}
+\author{于峥 518030910437}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}[\textbf{Exercise 4.9} of \textit{Chapter E}]
+        Let $Y_0, Y_1, Y_2, \dots$ be independent random variables with
+        $$
+        P(Y_n = +1) = P(Y_n = -1) = \frac 1 2, ~~ \forall n
+        $$
+
+        For n $n \in \mathbb{N}$, define
+        $$
+        X_n := Y_0Y_1\dots Y_n
+        $$
+
+        Prove that the variables $X_1, X_2, \dots$ are independent. define
+        $$
+        \mathcal{Y} := \sigma(Y_1,Y_2,\dots), ~~ \mathcal{T}_n := \sigma(X_r : r > n)
+        $$
+
+        Prove that
+        $$
+        \mathcal{L} := \bigcup _n \sigma(\mathcal{Y}, \mathcal{T}_n) \not= \sigma \left( \mathcal{Y}, \bigcup_n \mathcal{T}_n \right) =: \mathcal{R}
+        $$
+    \end{problem}
+        
+    \begin{proof}
+        (a)
+        
+        For $i < j$, let $Y_{ij} = Y_{i+1}Y_{i+2}\dots Y_j$, then we can know 
+        $P(Y_{ij} = +1) = P(Y_{ij} = -1) = \frac 1 2$ by symmetry. 
+        
+        And we can easily get for $j > i$, $X_i, Y_{ij}$ be independent variable.
+        Hence
+
+        \begin{align*}
+            P(X_i = 1, X_j = 1) &= P(X_i = 1, Y_{in}=1) = P(X_i=1)P(Y_{in}=1) = \frac 1 4 \\
+            P(X_i = 1, X_j = -1) &= P(X_i = 1, Y_{in}=-1) = P(X_i=1)P(Y_{in}=-1) = \frac 1 4 \\
+            P(X_i = -1, X_j = 1) &= P(X_i = -1, Y_{in}=-1) = P(X_i=-1)P(Y_{in}=-1) = \frac 1 4 \\
+            P(X_i = -1, X_j = -1) &= P(X_i = -1, Y_{in}=1) = P(X_i=-1)P(Y_{in}=1) = \frac 1 4 \\
+        \end{align*}
+
+        Therefore $X_i$ and $X_j$ are independent for all $i \not= j$.
+
+        \newpage
+        (b) Obviously, $Y_0$ is independent of $\mathcal{Y}$. $X_0 = Y_0$, so 
+        $Y_0$ is independent of $X_n$ for $n > 0$. Therefore $Y_0$ is independent of
+        $\mathcal{T}_n$ for all $n$. So $Y_0$ is independent of $\mathcal{R}$.
+
+        Then we can proof $Y_0 \in m\mathcal{L}$, it means $Y_0$ is measurable in 
+        $\mathcal{L}$. And we know that $Y_0 = X_{n+1}/Y_{1,n+1}$, $X_{n+1}$ is measurable
+        in $\mathcal{T}_n$, and $Y_{1,n+1}$ is measurable in $\mathcal{Y}$. It means that
+        $X_{n+1}$ and $Y_1, Y_2, \dots, Y_{n+1}$ enables us to solve $Y_0$. Hence $Y_0$ ignorespaces
+        measurable in $\sigma(\mathcal{F}, \mathcal{T}_n)$ for all $n$. It implies that
+        $Y_0$ is measurable in $\mathcal{L}$.
+
+        Because $Y_0$ is independent of $\mathcal{R}$ and $Y_0$ is measurable in $\mathcal{L}$,
+        we conlude that $\mathcal{L} \not= \mathcal{R}$.
+    \end{proof}
+\end{document}
