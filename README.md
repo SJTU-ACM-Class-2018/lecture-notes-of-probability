@@ -83,5 +83,23 @@ written for the course on probability theory.
     - proof as least-squares-best predicator 
   - Properties of conditional expectation 
   - Definitions: filtration, adapted process, martingale
-    - e.g. Doob's martingale
+    - e.g. Doob martingale
   - Martingale transformation and (discrete) stochastic integral  
+
+
+- Week 13
+  - Simple examples of martingales
+    - Simple random walk: sum (or product) of I.I.D random variables
+    - "ABRACAADABRA" (c.f. E10.6. of the textbook)
+    - Make a submartingale from a martingale with Jensen's inequality 
+  - Stopping time (or Optional time)
+  - An characterization of martingale using stopping time
+  
+- Week 14
+  - More examples: Polya's Urn, branching process(c.f. Chapter 0), quadratic variation
+  - Doob's maximal inequalities:
+    - Doob's submartingale inequality
+    - $\mathcal{L}^p$ maximal inequality
+  - Upcrossing and Doob's upcrossing Lemma
+  - Doob's 'Forward' Convergence Theorem
+    - e.g. 1D drunkard's walk
