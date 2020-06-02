@@ -1,9 +1,12 @@
+<font face="Times New Roman" font size = 4>
+
 # Lecture Notes of Probability Theory
 
 This is a repository for materials
 written for the course on probability theory.
 
 # Our Progress
+
 - Week 0
   - Introduction
 - Week 1
@@ -99,7 +102,9 @@ written for the course on probability theory.
   - More examples: Polya's Urn, branching process(c.f. Chapter 0), quadratic variation
   - Doob's maximal inequalities:
     - Doob's submartingale inequality
-    - $\mathcal{L}^p$ maximal inequality
+    - Doob's norm inequality
   - Upcrossing and Doob's upcrossing Lemma
   - Doob's 'Forward' Convergence Theorem
     - e.g. 1D drunkard's walk
+
+</font>
