@@ -89,14 +89,13 @@ written for the course on probability theory.
     - e.g. Doob martingale
   - Martingale transformation and (discrete) stochastic integral  
 
-
 - Week 13
   - Simple examples of martingales
     - Simple random walk: sum (or product) of I.I.D random variables
     - "ABRACAADABRA" (c.f. E10.6. of the textbook)
     - Make a submartingale from a martingale with Jensen's inequality 
   - Stopping time (or Optional time)
-  - An characterization of martingale using stopping time
+  - A characterization of martingale using stopping time
   
 - Week 14
   - More examples: Polya's Urn, branching process(c.f. Chapter 0), quadratic variation
