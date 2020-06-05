@@ -87,10 +87,10 @@ written for the course on probability theory.
   - Properties of conditional expectation 
   - Definitions: filtration, adapted process, martingale
     - e.g. Doob martingale
-  - Martingale transformation and (discrete) stochastic integral  
+  - Previsible process, martingale transform and (discrete) stochastic integral  
 
 - Week 13
-  - Simple examples of martingales
+  - Simple examples of martingale
     - Simple random walk: sum (or product) of I.I.D random variables
     - "ABRACAADABRA" (c.f. E10.6. of the textbook)
     - Make a submartingale from a martingale with Jensen's inequality 
@@ -102,8 +102,13 @@ written for the course on probability theory.
   - Doob's maximal inequalities:
     - Doob's submartingale inequality
     - Doob's norm inequality
-  - Upcrossing and Doob's upcrossing Lemma
-  - Doob's 'Forward' Convergence Theorem
+  - Upcrossings and Doob's upcrossing lemma
+  - Doob's 'forward' convergence theorem
     - e.g. 1D drunkard's walk
+  - Doob decomposition 
+  - Uniform integrability
+    - UI property: bridge between different modes of convergence  
+    - Sufficient conditions for UI property
+    - UI property of conditional expectations
 
 </font>
