@@ -68,7 +68,7 @@ written for the course on probability theory.
   - **Supporting hyperplane theorem** and Jensen's inequality 
     - Fatou lemmas from (infinite-dimensional) Jensen's inequality.
   - Monotonicity of $\mathcal{L}^p$: Lyapounov's inequality and truncation method
-  - Holder's inequality
+  - Hölder's inequality
   - $\mathcal{L}^p / \sim$ is a **Banach space**: Minkowski's inequality (triangle inequality) and completeness 
   - $\mathcal{L}^2$ is a **Hilbert space**: orthogonal projection
   - Covariance matrix as a Gram matrix of an inner product space
@@ -101,7 +101,7 @@ written for the course on probability theory.
   - More examples: Polya's Urn, branching process(c.f. Chapter 0), quadratic variation
   - Doob's maximal inequalities:
     - Doob's submartingale inequality
-    - Doob's norm inequality
+    - Doob's $\mathcal{L}^p$ inequality
   - Upcrossings and Doob's upcrossing lemma
   - Doob's 'forward' convergence theorem
     - e.g. 1D drunkard's walk
@@ -111,4 +111,10 @@ written for the course on probability theory.
     - Sufficient conditions for UI property
     - UI property of conditional expectations
 
+- Week 15
+  - Bounded Convergence Theorem
+  - Convergence in probability + UI property $\iff \mathcal{L}^1$ convergence
+  - Lévy's 'Upward' Theorem
+  - Lévy's 0-1 law
+  - Martingale proof of Kolmogorov's 0-1 law
 </font>
