@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{euler,amsthm,amsmath,amsfonts,graphicx,epigraph,indentfirst,enumerate,comment,listings,fontspec,color,subcaption,listings}
+\usepackage{xeCJK}
+\usepackage{hw}
+\usepackage{pythonhighlight}
+
+\renewcommand{\hwtitle} {Martingale Formulation of Bellman's Optimality Principle}
+\renewcommand{\hwauthor}{Wang Yi - 518030910413}
+\renewcommand{\hwdate}{\today}
+
+\begin{document}
+\title{\hwtitle}
+\author{\hwauthor}
+\date{\hwdate}
+\maketitle
+
+\section*{Martingale Formulation of Bellman's Optimality Principle(Ex10.2)}
+\begin{problem}{1}
+	\statement
+    Your winnings per unit stake on game $n$ are $\varepsilon_n$, where the $\varepsilon_n$ are IID RVs with 
+    \[
+        P(\epsilon_n = +1) = p,P(\epsilon_n = -1) = q, \textrm{where} \; \frac{1}{2} < p = 1 - q < 1
+    \]
+    Your stake $C_n$ on game $n$ must lie between $0$ and $Z_{n-1}$, where $Z_{n-1}$ is your fortune at time $n - 1$. Your object is to maximize the expected 'interest rate' $E\log (Z_N/Z_0)$, where $N$ is a given integer representing the length of the game, and $Z_0$, your fortune at time $0$ is a given constant. Let $\mathcal{F}_n = \sigma(\epsilon_1, \dots, \epsilon_n)$ be your 'history' up to time $n$. Show that if $C$ is any previsible strategy, the $\log Z_n - n\alpha$ is a supermartingale, where $\alpha$ denotes the 'entropy'
+    \[
+        \alpha = p \log p + q \log q + \log 2,
+    \]
+    so that $E\log (Z_n/Z_0) \leq N\alpha$, but that, for a certain strategy, $\log Z_n - n\alpha$ is a martingale. What is the best strategy?
+    \solution
+    \begin{proof}
+        We can get $Z_n = Z_{n-1} + C_n \cdot \epsilon_n$ by definition of this game. Then we will get
+        \[
+            \begin{split}
+            E[(\log Z_n - n\alpha) - (\log Z_{n-1} - (n - 1)\alpha)| \mathcal{F}_{n-1}] &= E[\log Z_n - \log Z_{n-1}| \mathcal{F}_{n-1}] - \alpha\\
+            &= E[\log (1 + \frac{C_n \cdot \epsilon_n}{Z_{n-1}})| \mathcal{F}_{n-1}] - \alpha \\
+            &= p\log (1 + \frac{C_n }{Z_{n-1}}) + q\log (1 - \frac{C_n }{Z_{n-1}}) - \alpha
+            \end{split}
+        \]
+    $p\log (1 + \frac{C_n }{Z_{n-1}}) + q\log (1 - \frac{C_n }{Z_{n-1}}) - \alpha$ reaches the maximum $\alpha$, when $\frac{C_n }{Z_{n-1}} = \frac{p-q}{p + q} = p - q$. The maximium is $p\log (1 + p - q) + q\log (1 - (p - q)) - \alpha = \alpha - \alpha = 0$. Thus
+    \[
+        E[(\log Z_n - n\alpha) - (\log Z_{n-1} - (n - 1)\alpha)| \mathcal{F}_{n-1}] \leq 0.
+    \]
+    Therefore $\log Z_n - n\alpha$ is a supermartingale.\\
+    When $C_n = (p - q)Z_{n - 1}$, it is a martingale, so the best strategy is $C_n = (p - q)Z_{n - 1}$.
+    \end{proof}
+\end{problem}
+\end{document}

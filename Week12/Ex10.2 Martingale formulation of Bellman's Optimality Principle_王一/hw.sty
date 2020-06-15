@@ -1,0 +1,249 @@
+\newcommand{\thehomeworkname}{Olympiad in Informatics}
+\newcommand{\thehomeworklocation}{Somewhere}
+\newcommand{\thehomeworkdate}{Once upon a time}
+
+\DeclareRobustCommand{\homeworkname}{\thehomeworkname\par\thehomeworklocation\unskip, \thehomeworkdate}
+
+\DeclareRobustCommand{\homework}[3]{
+    \renewcommand{\thehomeworkname}{#1}
+    \renewcommand{\thehomeworklocation}{#2}
+    \renewcommand{\thehomeworkdate}{#3}
+}
+
+
+
+\newif\if@landscape\@landscapefalse
+\newif\if@russian\@russianfalse
+\newif\if@arabic\@arabicfalse
+
+\DeclareOption{landscape}{
+    \@landscapetrue
+}
+\DeclareOption{russian}{
+    \@russiantrue
+}
+\DeclareOption{arabic}{
+    \@arabictrue
+}
+\ProcessOptions\relax
+
+
+% -- Setup margins --
+%
+% Tex defines to large margins for our purposes.
+% So we redefine this to use paper more efficiently
+%
+
+\newlength{\thelinewidth}
+
+\if@landscape
+    \if@twocolumn
+    \else
+        \error Landscape is only supported for two column mode
+    \fi
+
+    \ifcase\@ptsize % 10 pt
+        \hoffset=-15mm
+        \voffset=-35mm
+        \textheight=165mm
+        \textwidth=272mm
+    \or % 11 pt
+        \hoffset=-13mm
+        \voffset=-35mm
+        \textheight=165mm
+        \textwidth=272mm
+    \or % 12 pt
+        \hoffset=-12mm
+        \voffset=-35mm
+        \textheight=162mm
+        \textwidth=268mm
+    \fi
+\else
+    \ifcase\@ptsize % 10 pt
+        \hoffset=-26.5mm
+        \voffset=-35mm
+        \textheight=250mm
+        \textwidth=175mm
+    \or % 11 pt
+        \hoffset=-25mm
+        \voffset=-35mm
+        \textheight=250mm
+        \textwidth=175mm
+    \or % 12 pt
+        \hoffset=-20mm
+        \voffset=-35mm
+        \textheight=245mm
+        \textwidth=175mm
+    \fi
+
+    \if@twocolumn
+        \hoffset=-14.3mm
+        \voffset=-38mm
+        \textheight=255mm
+        \textwidth=188mm
+    \fi
+\fi
+
+\if@twocolumn
+    \thelinewidth=0.47\textwidth
+\else
+    \thelinewidth=\textwidth
+\fi
+
+% -- End of setup margins --
+
+%---------- From package "lastpage" ------------------
+\def\lastpage@putlabel{\addtocounter{page}{-1}%
+   \immediate\write\@auxout{\string\newlabel{LastPage}{{}{\thepage}}}%
+   \addtocounter{page}{1}}
+\AtEndDocument{\clearpage\lastpage@putlabel}%
+%---------- end of "lastpage" ------------------
+
+% -- Setup sizes --
+\newlength{\exmpwidinf}
+\newlength{\exmpwidouf}
+\newlength{\exmpwidewid}
+
+\exmpwidinf=0.43\thelinewidth
+\exmpwidouf=0.43\thelinewidth
+\exmpwidewid=0.9\thelinewidth
+
+\newlength{\afterproblemhead}
+\newlength{\afterconstraints}
+\afterproblemhead=3mm
+\afterconstraints=2mm
+
+\newcommand{\problemheadfont}{\LARGE}
+\newcommand{\problemsectionfont}{\Large}
+\newcommand{\problemend}{\clearpage}
+\newcommand{\problemtextfont}{\normalsize}
+\newcommand{\beforeproblemsectioncaption}{\smallbreak\smallskip}
+\newcommand{\afterproblemsectioncaption}{\smallskip}
+
+\if@twocolumn
+    \afterproblemhead=1mm
+    \afterconstraints=1mm
+    \renewcommand{\problemheadfont}{\large}
+    \renewcommand{\problemsectionfont}{\normalsize}
+    \renewcommand{\problemend}{\par\medskip}
+    \renewcommand{\problemtextfont}{\footnotesize}
+    \renewcommand{\beforeproblemsectioncaption}{\smallbreak\smallskip}
+    \renewcommand{\afterproblemsectioncaption}{}
+\fi
+
+\def\kw@Problem{Problem}
+\def\kw@InputFileName{Input file:}
+\def\kw@OutputFileName{Output file:}
+\def\kw@TimeLimit{Time limit:}
+\def\kw@MemoryLimit{Memory limit:}
+\def\kw@stdin{standard input}
+\def\kw@stdout{standard output}
+\def\kw@Input{Input}
+\def\kw@Output{Output}
+\def\kw@Example{Example}
+\def\kw@Examples{Examples}
+\def\kw@Notes{Notes}
+\def\kw@page{Page}
+\def\kw@of{of}
+
+% -- End of setup sizes --
+% -- Declare "shortitems" environment: it's a "compact itemize" --
+%\def\shortitems{\vspace{-3mmplus2mm}\itemize\itemsep-5.618mmplus0.5mm\relax}%
+%\def\endshortitems{\vspace{-3mmplus2mm}\enditemize}%
+\def\shortitems{\setlength{\parskip}{-5ex}\itemize\setlength{\parskip}{-1ex}\relax}%
+\def\endshortitems{\vspace{0mmplus2mm}\enditemize\unskip}%
+\def\shortitemsS{\setlength{\parskip}{-5ex}\itemize\setlength{\parskip}{-0.4ex}\relax}%
+\def\endshortitemsS{\vspace{0mmplus2mm}\enditemize\unskip}%
+\def\shortenum{\setlength{\parskip}{-5ex}\enumerate\setlength{\parskip}{-1ex}\relax}%
+\def\endshortenum{\vspace{0mmplus2mm}\endenumerate\unskip}%
+\def\shortdesc{\setlength{\parskip}{-5ex}\description\setlength{\parskip}{-1ex}\relax}%
+\def\endshortdesc{\vspace{0mmplus2mm}\enddescription\unskip}%
+% -- end of shortitems declaration --
+
+\makeatletter
+
+\renewcommand{\@oddhead}{%
+\parbox{\textwidth}{%
+\sffamily%
+\begin{center}%
+\protect\homeworkname%
+\\[2pt]%
+\hrule%
+\end{center}%
+}%
+}
+
+\renewcommand{\@oddfoot}{%
+\parbox{\textwidth}{%
+\hrule%
+\vspace{6pt}%
+\sffamily%
+{{\hfil}\kw@page\ \thepage\ \kw@of\ \pageref{LastPage}\hfil}%
+}%
+}
+
+\makeatother
+
+\headheight=2cm
+\headsep=6mm
+
+\hfuzz=0.5pt
+
+\sloppy
+\setlength{\parindent}{0em}
+\binoppenalty=10000
+\relpenalty=10000
+\lstset{
+    breaklines=true,
+    numbers=left,
+	basicstyle = \fontspec{Consolas},
+    commentstyle=\color{gray},
+    frame=shadowbox
+}
+
+\setCJKmainfont[BoldFont={黑体-简}, ItalicFont={华文楷体}, BoldItalicFont={黑体-简}]{华文宋体}
+\setCJKmonofont{苹方-简}
+\setCJKsansfont{华文宋体}
+\renewcommand{\baselinestretch}{1.14}
+\setmainfont{Helvetica}
+\newcommand{\hwtitle} {
+CS217 Homework 1
+}
+\newcommand{\hwauthor}{
+Akina
+}
+\newcommand{\hwdate}{
+\today
+}
+\renewcommand{\homeworkname}{
+\hwtitle, \hwauthor, \hwdate
+}
+\newenvironment{problem} [1] {
+    \renewcommand\thesection{Problem \arabic{section}}
+    \newcommand{\statement}{\paragraph*{Statement}}
+    \newcommand{\solution}{\paragraph*{Solution} \ }
+    \setcounter{section}{#1}
+    \addtocounter{section}{-1}
+    \section{}
+}{}
+
+\newtheorem{thmraw}{Theorem}[section]
+\newtheorem{defnraw}[thmraw]{Definition}
+\newtheorem{lemmaraw}[thmraw]{Lemma}
+\newtheorem{stepraw}[thmraw]{Step}
+\newenvironment{thm}{
+    \renewcommand\thesection{\arabic{section}}
+    \thmraw
+}{}
+\newenvironment{defn}{
+    \renewcommand\thesection{\arabic{section}}
+    \defnraw
+}{}
+\newenvironment{lemma}{
+    \renewcommand\thesection{\arabic{section}}
+    \lemmaraw
+}{}
+\newenvironment{step}{
+    \renewcommand\thesection{\arabic{section}}
+    \stepraw
+}{}
