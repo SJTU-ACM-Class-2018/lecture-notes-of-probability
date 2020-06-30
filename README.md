@@ -120,7 +120,7 @@ written for the course on probability theory.
   
 - Week 16
   - Radon-Nikodym derivative revisited
-    - $\{\frac{dP|_{\mathcal{F_n}}}{dQ|_{\mathcal{F}_n}}\}$ is a martingale
+    - $\{\frac{dP_n}{dQ_n}\}$ is a martingale
     - Conditional expectation of $\frac{dP}{dQ}$
     - Calculate Radon-Nikodym derivative from pdf
     - Martingale proof of Radon-Nikodym Theorem (Meyer 1966)
