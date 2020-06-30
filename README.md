@@ -46,7 +46,7 @@ written for the course on probability theory.
   - Kolmogorov Existence Theorem (This guarantees the existence of random process.)
   - Borel's 0-1 Law
   - Kolmogorov's 0-1 Law
-  - Hewitt-Savage's 0-1 Law
+  - Hewitt-Savage 0-1 Law
 
 - Week 7
   - Definition: Lebesgue integration for $(m\Sigma)^+$
@@ -117,4 +117,19 @@ written for the course on probability theory.
   - Lévy's 'Upward' Theorem
   - Lévy's 0-1 law
   - Martingale proof of Kolmogorov's 0-1 law
+  
+- Week 16
+  - Radon-Nikodym derivative revisited
+    - $\{\frac{dP|_{\mathcal{F_n}}}{dQ|_{\mathcal{F}_n}}\}$ is a martingale
+    - Conditional expectation of $\frac{dP}{dQ}$
+    - Calculate Radon-Nikodym derivative from pdf
+    - Martingale proof of Radon-Nikodym Theorem (Meyer 1966)
+  - Back to starting point: various interpretations of probability
+    - Linear expectation
+    - Sublinear expectation and its connection with linear expectation
+    - Quantum expectation
+    - An example from high-dimensional probability
+  - Subadditive functions and rooted trees
+  
+  
 </font>
